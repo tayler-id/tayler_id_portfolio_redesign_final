@@ -2,60 +2,53 @@
 
 ## 1. What Works / Completed Tasks
 
-*   **Backend API Deployed:**
+*   **Backend API Deployed & Enhanced:**
     *   The Node.js backend server (`backend/server.js`) is successfully deployed to Fly.io.
     *   Live API endpoint: `https://backend-polished-glitter-7421.fly.dev/api/chat`.
     *   Deployment managed via `fly.toml` and `Dockerfile`.
-*   **RAG System Functional (Initial Version):**
+    *   `backend/server.js` updated with improved system prompt (specifying Tayler's gender as male, guiding context usage) and logic for handling RAG results, significantly improving AI assistant responses. Backend re-deployed.
+*   **RAG System Functional & Personalized:**
     *   The RAG pipeline (embedding, vector storage with LanceDB, augmented prompting, response generation) is operational.
-    *   Currently ingests a hardcoded list of Markdown files from `backend/documentation/` (which were copied from the root `documentation/` folder).
+    *   `backend/ingest_docs.js` updated to dynamically scan for `.md` and `.pdf` files (using `pdf-parse` for PDFs).
+    *   User added personal MD and PDF documents to `backend/documentation/`.
+    *   Ingestion script re-run on Fly.io, successfully processing new documents (except one problematic PDF: `Tayler_Ramsay_Resume_Moonvalley.pdf`).
     *   Uses OpenAI `text-embedding-3-small` and `gpt-3.5-turbo`.
-    *   Ingestion script: `backend/ingest_docs.js`.
+*   **Frontend Site Deployed to Netlify:**
+    *   User chose Netlify as the hosting platform.
+    *   Frontend files in `src/` confirmed ready.
+    *   Local project directory `/Users/tramsay/Desktop/tayler_id_portfolio_redesign_final` initialized as a Git repository.
+    *   New GitHub repository `tayler-id/tayler_id_portfolio_redesign_final` created and local project pushed.
+    *   Netlify site (`symphonious-naiad-9dcf23.netlify.app`) connected to GitHub, deploying `main` branch from `src/`.
+    *   Custom domain `tayler.id` configured on Netlify using Netlify DNS; user updated nameservers at Namecheap. Netlify dashboard shows domain and SSL ready.
 *   **Frontend API Integration:**
-    *   The main JavaScript file for the frontend (`src/js/main.js`) has been updated to point to the live Fly.io backend API endpoint.
+    *   The main JavaScript file for the frontend (`src/js/main.js`) correctly points to the live Fly.io backend API endpoint.
 *   **Memory Bank Initialized:**
-    *   Core Memory Bank files (`projectbrief.md`, `productContext.md`, `systemPatterns.md`, `techContext.md`, `activeContext.md`, `progress.md`) created on May 20, 2025.
+    *   Core Memory Bank files created and updated (May 20, 2025).
 
-## 2. What's Left to Build / Pending Tasks (User Request: "train RAG on me and host site live")
+## 2. What's Left to Build / Pending Tasks
 
-### A. "Train RAG on me" (Personalize Chatbot Knowledge)
-
-*   **User Task:** Create new Markdown (`.md`) files with personal information about "Tayler."
-*   **User Task:** Place these new `.md` files into the `backend/documentation/` directory.
-*   **Cline Task (Recommended):** Modify `backend/ingest_docs.js` to dynamically scan and process all `.md` files in `backend/documentation/`.
-    *   *Status: Pending. This is the next technical step.*
-*   **Cline Task (Guided):** Guide user to re-deploy the backend to Fly.io to include new documents and script changes.
-    *   *Status: Pending.*
-*   **Cline Task (Guided):** Guide user to re-run the ingestion script on the Fly.io instance to update LanceDB.
-    *   *Status: Pending.*
-
-### B. "Host site live" (Deploy Frontend)
-
-*   **Cline Task:** Clarify user's preferred static hosting platform (e.g., GitHub Pages, Netlify, Vercel).
-    *   *Status: Pending.*
-*   **Cline Task (Guided):** Ensure all necessary frontend files are correctly organized for deployment.
-    *   *Status: Pending.*
-*   **Cline Task:** Provide step-by-step deployment instructions for the chosen platform.
-    *   *Status: Pending.*
-*   **Cline Task (Guided, Optional):** Guide on DNS configuration if a custom domain is desired.
-    *   *Status: Pending.*
+*   **User Verification:** User to verify full functionality of `tayler.id` custom domain after DNS propagation completes.
+*   **Optional:** Address the unparsed PDF (`Tayler_Ramsay_Resume_Moonvalley.pdf`) if the user wishes to.
 
 ## 3. Current Overall Status
 
-*   The backend infrastructure for the AI chatbot is in place and functional with initial documentation.
-*   The frontend is ready to communicate with the live backend.
-*   The immediate next steps involve enhancing the RAG system's knowledge base with personalized content and then deploying the frontend to make the entire portfolio accessible live.
+*   The backend AI chatbot is trained with personal documents and deployed.
+*   The frontend website is deployed to Netlify and connected to the custom domain `tayler.id`.
+*   The primary request "train RAG on me and host site live" is functionally complete, pending final DNS propagation for the custom domain.
 
 ## 4. Known Issues / Blockers
 
-*   **Hardcoded File List in `ingest_docs.js`:** The current ingestion script is not scalable for easily adding new documents. This is the first technical issue to address for the "Train RAG on me" task.
-*   **User Content Creation:** The "Train RAG on me" task is blocked until the user provides the Markdown files with their personal information.
-*   **Hosting Platform Choice:** The "Host site live" task is blocked until the user specifies their preferred hosting platform.
+*   **DNS Propagation:** Full functionality of `tayler.id` is dependent on global DNS propagation, which can take time.
+*   **Unparsed PDF:** One PDF document (`Tayler_Ramsay_Resume_Moonvalley.pdf`) could not be ingested due to a parsing error ("bad XRef entry"). This means its content is not currently in the RAG knowledge base.
 
 ## 5. Evolution of Project Decisions & Learnings
 
-*   **Initial RAG Scope:** The RAG system was first populated with project-specific technical documentation. The current request shifts its focus to also include personal information about Tayler, making it a more versatile portfolio tool.
-*   **Deployment Strategy:** The project uses a hybrid deployment model: dynamic backend on Fly.io and (soon) static frontend on a dedicated static hosting provider. This is a common and effective pattern.
-*   **Importance of Dynamic Ingestion:** The limitation of the current `ingest_docs.js` highlights the need for more flexible data ingestion mechanisms in RAG systems.
+*   **RAG Personalization:** Successfully personalized the RAG system with Tayler's documents, enhancing the chatbot's utility.
+*   **Dynamic Ingestion:** Implemented dynamic scanning for `.md` and `.pdf` files in `ingest_docs.js`, improving knowledge base maintainability. Added `pdf-parse` for PDF content.
+*   **Prompt Engineering:** Refined system prompts and context handling in `backend/server.js` to improve AI response quality and accuracy (including gender-specific pronouns).
+*   **Deployment Strategy:** Successfully executed a hybrid deployment: dynamic backend on Fly.io and static frontend on Netlify.
+*   **Git & GitHub for Deployment:** Established a local Git repository, pushed to a new GitHub remote, and integrated with Netlify for CI/CD of the frontend.
+*   **Custom Domain Setup:** Navigated Netlify and Namecheap settings to configure `tayler.id` with Netlify DNS.
+*   **PDF Parsing Challenges:** Encountered an issue with one PDF, highlighting that PDF parsing can sometimes be problematic depending on file structure/corruption.
 
 This document tracks the project's progress and current state. It will be updated as tasks are completed and new information becomes available.

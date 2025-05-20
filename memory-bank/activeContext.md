@@ -2,30 +2,29 @@
 
 ## 1. Current Work Focus
 
-The immediate focus is on fulfilling the user's request: **"train RAG on me and host site live."** This breaks down into two main streams of work:
+The user's request **"train RAG on me and host site live"** has been addressed.
+*   The RAG system has been trained with personal documents (MD and PDF).
+*   The frontend site has been deployed to Netlify, with the custom domain `tayler.id` configured (pending final DNS propagation verification by the user).
 
-*   **A. Train RAG on "Tayler":**
-    1.  **User Action Required:** The user needs to create new Markdown (`.md`) files containing information about themselves ("Tayler").
-    2.  **File Placement:** These new `.md` files must be placed in the `backend/documentation/` directory on their local machine.
-    3.  **Improve `ingest_docs.js` (Cline Task - Recommended):** Modify `backend/ingest_docs.js` to dynamically scan and process all `.md` files in the `backend/documentation/` directory, instead of using the current hardcoded `filesToProcess` array.
-    4.  **Re-deploy Backend (Cline Task - Guided):** Guide the user to re-deploy the backend to Fly.io after new documents are added and `ingest_docs.js` is (potentially) updated. Command:
-        ```bash
-        cd backend
-        flyctl deploy -a backend-polished-glitter-7421
-        ```
-    5.  **Re-run Ingestion on Fly.io (Cline Task - Guided):** Guide the user to execute the ingestion script on the Fly.io machine to update LanceDB. Command:
-        ```bash
-        flyctl ssh console -a backend-polished-glitter-7421 -C "node /app/ingest_docs.js"
-        ```
-
-*   **B. Host Frontend Site Live:**
-    1.  **Clarify User Preference (Cline Task):** Ask the user their preferred platform for hosting the static frontend (e.g., GitHub Pages, Netlify, Vercel).
-    2.  **Prepare Files (Cline Task - Guided):** Ensure all necessary frontend files (`src/` directory and any root assets/css/js if directly referenced by `src/index.html`) are correctly organized for deployment.
-    3.  **Guide Deployment (Cline Task):** Provide step-by-step instructions for the chosen platform.
-    4.  **DNS (Optional - Cline Task - Guided):** If a custom domain is desired, guide on DNS configuration.
+There are no immediate pending work items from this request, aside from the user's final check of the custom domain.
 
 ## 2. Recent Changes & Decisions
 
+*   **RAG System Enhanced (May 20, 2025):**
+    *   `backend/ingest_docs.js` updated to dynamically scan for `.md` and `.pdf` files.
+    *   `pdf-parse` library added as a dependency for PDF text extraction.
+    *   User added personal MD and PDF documents to `backend/documentation/`.
+    *   Backend re-deployed to Fly.io with these changes.
+    *   Ingestion script re-run on Fly.io, successfully processing new documents (except one problematic PDF).
+    *   `backend/server.js` updated with improved system prompt (specifying Tayler's gender as male, guiding context usage) and logic for handling RAG results, significantly improving AI assistant responses. Backend re-deployed.
+*   **Frontend Site Deployed (May 20, 2025):**
+    *   User chose Netlify as the hosting platform.
+    *   Frontend files in `src/` confirmed ready for deployment.
+    *   Local project directory `/Users/tramsay/Desktop/tayler_id_portfolio_redesign_final` initialized as a Git repository.
+    *   A new GitHub repository `tayler-id/tayler_id_portfolio_redesign_final` was created and local project pushed to it.
+    *   Netlify site connected to the GitHub repository, configured to deploy the `main` branch from the `src/` directory.
+    *   Custom domain `tayler.id` (and `www.tayler.id`) configured on Netlify using Netlify DNS. User updated nameservers at Namecheap.
+    *   Netlify dashboard confirms domain and SSL are set up. User will verify `tayler.id` functionality after DNS propagation.
 *   **Backend Deployed:** The Node.js backend with the RAG system is live on Fly.io at `https://backend-polished-glitter-7421.fly.dev`.
 *   **Frontend API Endpoint Updated:** `src/js/main.js` now correctly points to the live Fly.io API.
 *   **Ingestion Path Fixed:** `backend/ingest_docs.js` was previously corrected to look for documentation within `backend/documentation/` (which becomes `/app/documentation/` inside the Docker container on Fly.io).
@@ -33,18 +32,8 @@ The immediate focus is on fulfilling the user's request: **"train RAG on me and 
 
 ## 3. Next Immediate Steps (Cline's Plan)
 
-1.  **Complete Memory Bank Initialization:** Create `progress.md`.
-2.  **Address "Train RAG on me":**
-    *   **Task Manager:** Use the Task Manager MCP to plan the sub-tasks for "Train RAG on me".
-    *   **Exa Search (Optional):** If needed for best practices on dynamic file reading in Node.js for `ingest_docs.js`.
-    *   **Propose `ingest_docs.js` modification:** Suggest and implement the change to dynamically read all `.md` files from `backend/documentation/`.
-    *   **Instruct User:** Guide the user on creating their personal `.md` files and placing them in `backend/documentation/`.
-    *   **Guide Re-deployment & Re-ingestion:** Walk through the `flyctl deploy` and `flyctl ssh console ... node /app/ingest_docs.js` commands.
-3.  **Address "Host site live":**
-    *   **Task Manager:** Use the Task Manager MCP to plan the sub-tasks for "Host site live".
-    *   **Ask User Preference:** Use `ask_followup_question` for the hosting platform.
-    *   **Exa Search (Optional):** If specific deployment steps for the chosen platform need to be researched.
-    *   **Guide Deployment:** Provide instructions.
+*   Await user confirmation on `tayler.id` custom domain functionality after DNS propagation.
+*   Address the unparsed PDF (`Tayler_Ramsay_Resume_Moonvalley.pdf`) if the user wishes to pursue it.
 
 ## 4. Important Patterns & Preferences (from `.clinerules` and initial context)
 
@@ -66,8 +55,12 @@ The immediate focus is on fulfilling the user's request: **"train RAG on me and 
 
 ## 5. Learnings & Project Insights (So Far)
 
-*   The RAG system's knowledge is currently limited to the project's technical documentation. Personalizing it with "Tayler's" information is a key step to making it a true portfolio chatbot.
-*   The hardcoded file list in `ingest_docs.js` is a point of friction for knowledge base updates. Making it dynamic is a valuable improvement.
-*   The separation of frontend and backend allows for independent deployment strategies, which is good.
+*   The RAG system's knowledge is now personalized with "Tayler's" information, making it a more effective portfolio chatbot.
+*   Dynamically scanning for both `.md` and `.pdf` files in `ingest_docs.js` (using `pdf-parse` for PDFs) significantly improves the ease of updating the knowledge base.
+*   Explicitly defining gender in the AI's system prompt and refining context handling logic in `server.js` are crucial for accurate and relevant AI responses.
+*   The separation of frontend (Netlify) and backend (Fly.io) allows for independent deployment and scaling.
+*   Initializing a local Git repository correctly and connecting it to a remote (GitHub) is essential before integrating with Git-based deployment services like Netlify.
+*   DNS propagation requires patience; Netlify's dashboard provides good indicators of its own setup status.
+*   One PDF (`Tayler_Ramsay_Resume_Moonvalley.pdf`) encountered parsing errors ("bad XRef entry"), indicating potential issues with the PDF file itself or limitations of `pdf-parse` with that specific file.
 
 This document reflects the current state of active work and thinking. It will be updated frequently as tasks progress.
