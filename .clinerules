@@ -1,0 +1,19 @@
+# Workspace Rules for tayler_id_portfolio_redesign_final
+
+## Project Focus
+- This project involves understanding and potentially modifying a portfolio website with a complex 3D logo particle animation.
+- Key technologies: JavaScript, Three.js, HTML, CSS.
+
+## Coding Style & Patterns (Initial Observations)
+- The `LogoParticleSystem.js` uses ES6 classes.
+- Three.js is a core dependency for the animation.
+- Custom shaders are used for particle effects.
+- Pay attention to performance considerations mentioned in `documentation/3d_logo_system.md`.
+
+## Task Approach
+1. **Always consult relevant documentation first** (e.g., project `documentation/`, `backend/documentation/` for RAG-specifics, or Memory Bank files) for high-level understanding before diving into specific code modules (e.g., `src/js/`, `backend/` scripts).
+2. When analyzing JavaScript (frontend or backend):
+    - Identify core modules, classes, and their responsibilities.
+    - Trace event handling, data flows, and key operational loops (e.g., animation, request-response cycles).
+    - Understand how different states or modes are managed within the code.
+3. **Memory Bank:** Prioritize updating `activeContext.md` and `progress.md` with significant findings, decisions, and progress related to any major component or workflow being actively developed or modified (e.g., particle system, RAG system, data ingestion, deployment processes).

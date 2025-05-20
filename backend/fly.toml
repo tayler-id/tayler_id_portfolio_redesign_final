@@ -1,0 +1,29 @@
+# fly.toml app configuration file generated for backend-polished-glitter-7421 on 2025-05-19T16:43:19-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'backend-polished-glitter-7421'
+primary_region = 'iad'
+
+# [build] section removed to attempt Dockerfile auto-detection
+# If a Dockerfile is present in the project root, flyctl should use it by default.
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  # auto_stop_machines = 'stop' # Removed this line; defaults to 'off' if min_machines_running >= 1
+  auto_start_machines = true
+  min_machines_running = 1 # Explicitly set to 1
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+# Mounts for persistent storage (e.g., for LanceDB)
+[[mounts]]
+  source = "lancedb_data" # Must match the volume name created with 'flyctl volumes create'
+  destination = "/app/data/lancedb" # Absolute path inside the container where the volume is mounted
+  processes = ["app"] # Explicitly associate with the 'app' process group
