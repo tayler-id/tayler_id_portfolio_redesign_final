@@ -18,7 +18,7 @@
     *   Frontend files in `src/` confirmed ready.
     *   Local project directory `/Users/tramsay/Desktop/tayler_id_portfolio_redesign_final` initialized as a Git repository.
     *   New GitHub repository `tayler-id/tayler_id_portfolio_redesign_final` created and local project pushed.
-    *   Netlify site (`symphonious-naiad-9dcf23.netlify.app`) connected to GitHub, deploying `main` branch from `src/`.
+    *   Netlify site (`symphonious-naiad-9dcf23.netlify.app`) connected to GitHub, deploying `main` branch from `src/`. **The default Netlify URL is confirmed working.**
     *   Custom domain `tayler.id` configured on Netlify using Netlify DNS; user updated nameservers at Namecheap. Netlify dashboard shows domain and SSL ready.
 *   **Frontend API Integration:**
     *   The main JavaScript file for the frontend (`src/js/main.js`) correctly points to the live Fly.io backend API endpoint.
@@ -33,8 +33,8 @@
 ## 3. Current Overall Status
 
 *   The backend AI chatbot is trained with personal documents and deployed.
-*   The frontend website is deployed to Netlify and connected to the custom domain `tayler.id`.
-*   The primary request "train RAG on me and host site live" is functionally complete, pending final DNS propagation for the custom domain.
+*   The frontend website is deployed to Netlify (default URL `symphonious-naiad-9dcf23.netlify.app` confirmed working) and connected to the custom domain `tayler.id`.
+*   The primary request "train RAG on me and host site live" is functionally complete, pending final DNS propagation for the custom domain `tayler.id`.
 
 ## 4. Known Issues / Blockers
 
@@ -49,6 +49,7 @@
 *   **Deployment Strategy:** Successfully executed a hybrid deployment: dynamic backend on Fly.io and static frontend on Netlify.
 *   **Git & GitHub for Deployment:** Established a local Git repository, pushed to a new GitHub remote, and integrated with Netlify for CI/CD of the frontend.
 *   **Custom Domain Setup:** Navigated Netlify and Namecheap settings to configure `tayler.id` with Netlify DNS.
+*   **Netlify Deployment Quirks:** Confirmed that changing Netlify build settings (like Publish Directory) might require a new Git push to reliably take effect, rather than just a UI-triggered deploy.
 *   **PDF Parsing Challenges:** Encountered an issue with one PDF, highlighting that PDF parsing can sometimes be problematic depending on file structure/corruption.
 
 This document tracks the project's progress and current state. It will be updated as tasks are completed and new information becomes available.

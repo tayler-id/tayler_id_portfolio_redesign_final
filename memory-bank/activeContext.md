@@ -22,9 +22,9 @@ There are no immediate pending work items from this request, aside from the user
     *   Frontend files in `src/` confirmed ready for deployment.
     *   Local project directory `/Users/tramsay/Desktop/tayler_id_portfolio_redesign_final` initialized as a Git repository.
     *   A new GitHub repository `tayler-id/tayler_id_portfolio_redesign_final` was created and local project pushed to it.
-    *   Netlify site connected to the GitHub repository, configured to deploy the `main` branch from the `src/` directory.
+    *   Netlify site connected to the GitHub repository, configured to deploy the `main` branch from the `src/` directory. The default Netlify URL (`symphonious-naiad-9dcf23.netlify.app`) is confirmed working.
     *   Custom domain `tayler.id` (and `www.tayler.id`) configured on Netlify using Netlify DNS. User updated nameservers at Namecheap.
-    *   Netlify dashboard confirms domain and SSL are set up. User will verify `tayler.id` functionality after DNS propagation.
+    *   Netlify dashboard confirms domain and SSL are set up. User will verify `tayler.id` functionality after DNS propagation is fully complete.
 *   **Backend Deployed:** The Node.js backend with the RAG system is live on Fly.io at `https://backend-polished-glitter-7421.fly.dev`.
 *   **Frontend API Endpoint Updated:** `src/js/main.js` now correctly points to the live Fly.io API.
 *   **Ingestion Path Fixed:** `backend/ingest_docs.js` was previously corrected to look for documentation within `backend/documentation/` (which becomes `/app/documentation/` inside the Docker container on Fly.io).
@@ -59,8 +59,8 @@ There are no immediate pending work items from this request, aside from the user
 *   Dynamically scanning for both `.md` and `.pdf` files in `ingest_docs.js` (using `pdf-parse` for PDFs) significantly improves the ease of updating the knowledge base.
 *   Explicitly defining gender in the AI's system prompt and refining context handling logic in `server.js` are crucial for accurate and relevant AI responses.
 *   The separation of frontend (Netlify) and backend (Fly.io) allows for independent deployment and scaling.
-*   Initializing a local Git repository correctly and connecting it to a remote (GitHub) is essential before integrating with Git-based deployment services like Netlify.
-*   DNS propagation requires patience; Netlify's dashboard provides good indicators of its own setup status.
+*   Initializing a local Git repository correctly and connecting it to a remote (GitHub) is essential before integrating with Git-based deployment services like Netlify. Forcing a redeploy by pushing a trivial commit can be necessary if UI-triggered deploys don't pick up settings changes.
+*   DNS propagation requires patience; Netlify's dashboard provides good indicators of its own setup status. The default Netlify URL should be checked first to confirm deployment success before troubleshooting custom domain DNS.
 *   One PDF (`Tayler_Ramsay_Resume_Moonvalley.pdf`) encountered parsing errors ("bad XRef entry"), indicating potential issues with the PDF file itself or limitations of `pdf-parse` with that specific file.
 
 This document reflects the current state of active work and thinking. It will be updated frequently as tasks progress.

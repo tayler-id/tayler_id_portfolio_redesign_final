@@ -21,17 +21,46 @@ const TABLE_NAME = 'portfolio_docs';
 // Simple text chunker (e.g., by paragraphs or fixed size)
 // For markdown, splitting by paragraphs (double newlines) can be effective.
 // Or, more robustly, parse markdown to text then chunk.
+
+function stripHtml(html) {
+  // Basic stripper: replace block elements that imply newlines, then strip all other tags.
+  let text = html
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(h[1-6]|p|div|li)>/gi, (match, tag) => {
+      if (tag.startsWith('h') || tag === 'p' || tag === 'div') {
+        return '\n\n';
+      }
+      return '\n';
+    })
+    .replace(/<hr\s*\/?>/gi, '\n---\n'); // Handle horizontal rules
+
+  // Strip all remaining HTML tags
+  text = text.replace(/<[^>]+>/g, '');
+
+  // Decode common HTML entities
+  text = text.replace(/&nbsp;/g, ' ')
+             .replace(/&/g, '&')
+             .replace(/</g, '<')
+             .replace(/>/g, '>')
+             .replace(/"/g, '"')
+             .replace(/&#39;/g, "'")
+             .replace(/&#x27;/g, "'"); // Another form of apostrophe
+
+  // Normalize multiple newlines to a maximum of two (for paragraph separation)
+  text = text.replace(/\n\s*\n+/g, '\n\n');
+  return text.trim();
+}
+
 function chunkText(text, chunkSize = 500, overlap = 50) {
-  // This is a very basic chunker, can be improved
   const chunks = [];
   let i = 0;
   while (i < text.length) {
-    chunks.push(text.substring(i, Math.min(i + chunkSize, text.length)));
+    const end = Math.min(i + chunkSize, text.length);
+    chunks.push(text.substring(i, end));
+    if (end === text.length) break; // Reached the end
     i += (chunkSize - overlap);
-    if (i + overlap >= text.length && i < text.length) { // Ensure last part is captured
-        chunks.push(text.substring(i));
-        break;
-    }
+    // Ensure that if i is already near the end, the loop condition handles it.
+    // e.g. if i becomes very close to text.length, the next chunk will be short.
   }
   return chunks.filter(chunk => chunk.trim() !== '');
 }
@@ -57,19 +86,10 @@ async function processFile(filePath) {
 
   if (fileExtension === '.md') {
     const fileContent = await fs.readFile(filePath, 'utf-8');
-    // Convert markdown to plain text using marked
-    const renderer = new marked.Renderer();
-    renderer.heading = (text) => `${text}\n`;
-    renderer.paragraph = (text) => `${text}\n\n`;
-    renderer.listitem = (text) => `* ${text}\n`;
-    renderer.code = (code, language) => `\n\`\`\`${language || ''}\n${code}\n\`\`\`\n\n`; // Keep code blocks somewhat distinct
-    renderer.html = () => ''; // Strip HTML
-    renderer.hr = () => '\n---\n';
-    renderer.blockquote = (quote) => `> ${quote}\n\n`;
-    renderer.link = (href, title, text) => text; // Just keep link text
-    renderer.image = (href, title, text) => text || title || ''; // Just keep alt text or title
-    marked.setOptions({ renderer });
-    plainText = marked.parse(fileContent);
+    // Convert markdown to HTML first
+    const htmlOutput = marked.parse(fileContent);
+    // Then strip HTML to get plain text
+    plainText = stripHtml(htmlOutput);
   } else if (fileExtension === '.pdf') {
     const dataBuffer = await fs.readFile(filePath);
     try {
@@ -85,7 +105,40 @@ async function processFile(filePath) {
     return [];
   }
   
-  const chunks = chunkText(plainText); // Chunk the plain text
+  let chunks;
+  if (fileExtension === '.md') {
+    // For Markdown, try to split by paragraphs first
+    const paragraphs = plainText.split(/\n\s*\n+/); // Split by one or more blank lines
+    chunks = [];
+    for (const para of paragraphs) {
+      const trimmedPara = para.trim();
+      if (trimmedPara.length === 0) continue;
+      // If a paragraph is too long, use the character-based chunker for that paragraph
+      // Max typical paragraph length for good context might be around 100-200 words (e.g. 500-1000 chars)
+      // Let's set a threshold, e.g., 700 characters.
+      if (trimmedPara.length > 700) { 
+        chunks.push(...chunkText(trimmedPara, 500, 50)); // Use existing chunkText for very long paragraphs
+      } else {
+        chunks.push(trimmedPara);
+      }
+    }
+  } else {
+    // For PDF (and potentially other future plain text types if plainText is populated)
+    // Try to split by paragraphs first
+    const paragraphs = plainText.split(/\n\s*\n+/); // Split by one or more blank lines
+    chunks = [];
+    for (const para of paragraphs) {
+      const trimmedPara = para.trim();
+      if (trimmedPara.length === 0) continue;
+      // If a paragraph is too long, use the character-based chunker for that paragraph
+      if (trimmedPara.length > 700) { // Threshold for "too long"
+        chunks.push(...chunkText(trimmedPara, 500, 50)); 
+      } else {
+        chunks.push(trimmedPara);
+      }
+    }
+  }
+  
   const data = [];
 
   for (const chunk of chunks) {
@@ -152,6 +205,16 @@ async function main() {
 
   console.log(`Total chunks to ingest: ${allDocsData.length}`);
 
+  // Define the schema explicitly
+  // Assuming lancedb.vector and lancedb.schema are available helpers
+  // For text-embedding-3-small, the dimension is 1536.
+  const vectorType = lancedb.vector(1536); 
+  const schema = lancedb.schema([
+    { name: 'text', type: new lancedb.StringType() },
+    { name: 'source', type: new lancedb.StringType() },
+    { name: 'embedding', type: vectorType }
+  ]);
+
   try {
     // Check if table exists, delete if it does for a fresh ingest
     const tableNames = await db.tableNames();
@@ -170,10 +233,11 @@ async function main() {
     //   source: "string",
     //   embedding: lancedb.vector(1536) // Specify vector dimension
     // };
-    // const table = await db.createTable(TABLE_NAME, schema, allDocsData);
+    // const table = await db.createTable(TABLE_NAME, schema, allDocsData); // Old thought
     
-    const table = await db.createTable(TABLE_NAME, allDocsData);
-    console.log(`Table '${TABLE_NAME}' created and ${allDocsData.length} records ingested.`);
+    // Create table with explicit schema and overwrite mode
+    const table = await db.createTable(TABLE_NAME, allDocsData, { schema: schema, mode: 'overwrite' });
+    console.log(`Table '${TABLE_NAME}' created with explicit schema and ${allDocsData.length} records ingested.`);
   } catch (error) {
     console.error('Error during LanceDB table creation or ingestion:', error);
   }
