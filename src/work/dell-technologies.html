@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Dell Technologies Dell Pay Waterfall - Tayler.id</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="loading">
+    <div id="password-overlay" class="password-overlay">
+        <div class="password-prompt">
+            <h2>Enter Password</h2>
+            <p>This portfolio is password protected.</p>
+            <input type="password" id="password-input" placeholder="Password">
+            <button id="password-submit" class="btn btn--primary">Submit</button>
+            <p id="password-error" class="password-error-message" style="display:none; color: var(--color-primary); margin-top: var(--spacing-sm);">Incorrect password. Please try again.</p>
+        </div>
+    </div>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader__logo" id="preloader-logo"></div>
+        <div class="preloader__text">Loading Experience</div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__logo">
+                <a href="../index.html#hero" class="logo">
+                    <img src="../assets/images/logo.png" alt="Tayler.id Logo" class="logo__image">
+                    <span class="logo__text">tayler.id</span>
+                </a>
+            </div>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="../index.html#about" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="../index.html#skills" class="nav__link">Skills</a></li>
+                    <li class="nav__item"><a href="../index.html#projects" class="nav__link">Projects</a></li>
+                    <li class="nav__item"><a href="../index.html#case-studies" class="nav__link">Case Studies</a></li>
+                    <li class="nav__item"><a href="../index.html#ux-mirror" class="nav__link">UX Mirror</a></li>
+                    <li class="nav__item"><a href="../index.html#contact" class="nav__link">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <span class="menu-toggle__line"></span>
+                <span class="menu-toggle__line"></span>
+                <span class="menu-toggle__line"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Case Study Hero Section: Dell Technologies -->
+        <section id="hero" class="case-study-hero">
+            <div class="container">
+                <div class="case-study-hero__logo">
+                    <img src="../assets/images/Dell_Logo.svg.png" alt="Dell Technologies Logo">
+                </div>
+                <h1 class="case-study-hero__tagline">Bread Pay → Waterfall API integration</h1>
+                <div class="kpi-counters">
+                    <div class="kpi-item animate-on-view">
+                        <div class="kpi-item__value">+11%</div>
+                        <div class="kpi-item__label">Incremental Financed Sales</div>
+                    </div>
+                    <div class="kpi-item animate-on-view">
+                        <div class="kpi-item__value">-26%</div>
+                        <div class="kpi-item__label">Decline Bounce</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenge Section: Dell Technologies -->
+        <section id="challenge" class="case-study-section">
+            <div class="container">
+                <h2 class="section-title case-study-section__title">1. The Challenge</h2>
+                <p>Bread handled BNPL, but 30% of value died at decline—no prime fallback.</p>
+                <p><a href="https://d.comenity.net" target="_blank" rel="noopener noreferrer">d.comenity.net</a>, <a href="https://dell.com" target="_blank" rel="noopener noreferrer">dell.com</a></p>
+            </div>
+        </section>
+
+        <!-- Our Approach Section: Dell Technologies -->
+        <section id="approach" class="case-study-section">
+            <div class="container">
+                <h2 class="section-title case-study-section__title">2. Our Approach</h2>
+                <ul>
+                    <li>Phase 1 – wrap Bread in Versatile reporting.</li>
+                    <li>Phase 2 – add Fortiva & Progressive server-side; no UI change to Dell.com.</li>
+                    <li>Partial-void logic – agents can void accessories, preserve financed laptop line.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Key UX & Product Decisions Section: Dell Technologies -->
+        <section id="ux-decisions" class="case-study-section">
+            <div class="container">
+                <h2 class="section-title case-study-section__title">3. Key UX & Product Decisions</h2>
+                <ul>
+                    <li><strong>Invisible handshake:</strong> customer sees only Dell; lenders swap via JSON.</li>
+                    <li><strong>Unified nightly settlement file:</strong> to Azure.</li>
+                    <li><strong>Auto FTC credit-inquiry messaging:</strong> to stay compliant.</li>
+                </ul>
+                 <!-- Placeholder for Screens -->
+                <!-- 
+                <div class="key-decision__callout">
+                    <img src="../assets/images/dell-checkout-screen.png" alt="Dell waterfall invisible UI">
+                </div>
+                <div class="key-decision__callout">
+                    <img src="../assets/images/dell-sankey-flow.png" alt="Server-side lender routing">
+                </div>
+                -->
+            </div>
+        </section>
+
+        <!-- Outcome Section: Dell Technologies -->
+        <section id="outcome" class="case-study-section">
+            <div class="container">
+                <h2 class="section-title case-study-section__title">4. Outcome (60 days)</h2>
+                <div class="outcome__metrics">
+                    <div class="outcome__metric-item animate-on-view">
+                        <div class="outcome__metric-value">+$48M</div>
+                        <div class="outcome__metric-label">Incremental financed GMV</div>
+                    </div>
+                    <div class="outcome__metric-item animate-on-view">
+                        <div class="outcome__metric-value">8%</div>
+                        <div class="outcome__metric-label">Decline-bounce rate (from 34%)</div>
+                    </div>
+                    <div class="outcome__metric-item animate-on-view">
+                        <div class="outcome__metric-value">92%</div>
+                        <div class="outcome__metric-label">Settlement ticket FCR (from 71%)</div>
+                    </div>
+                </div>
+                <blockquote class="outcome__quote">
+                    <p>“Zero pixel changes, eight-figure upside—that’s my kind of sprint.”</p>
+                    <footer>- Luis M., Dell.com Sr. E-commerce PM</footer>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Retrospective / Next Section: Dell Technologies -->
+        <section id="retrospective" class="case-study-section">
+            <div class="container">
+                <h2 class="section-title case-study-section__title">5. Retrospective & Next Steps</h2>
+                <p><strong>Learnings:</strong> [TODO: Add Learnings]</p>
+                <p><strong>Roadmap / Future Enhancements:</strong></p>
+                <ul>
+                    <li>Add Affirm for high-AOV gaming rigs; test APR-vs-Pay-in-4 copy on cart.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="cta" class="case-study-cta">
+            <div class="container">
+                <h2 class="case-study-cta__title">Let’s build your waterfall</h2>
+                <a href="../index.html#contact" class="btn btn--primary">Get in Touch</a>
+            </div>
+        </section>
+
+        <!-- Pagination -->
+        <section class="case-study-pagination-section">
+            <div class="container">
+                <a href="aspen-dental.html" class="btn btn--secondary">&larr; Previous: Aspen Dental</a>
+                <a href="helzberg-diamonds.html" class="btn btn--secondary">Next: Helzberg Diamonds &rarr;</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__logo">
+                     <a href="../index.html#hero" class="logo" style="display: flex; align-items: center;">
+                        <img src="../assets/images/logo.png" alt="Tayler.id Logo" class="footer__logo-image">
+                        <span class="footer__logo-text">tayler.id</span>
+                    </a>
+                </div>
+                <div class="footer__copyright">
+                    <p>&copy; 2025 Tayler. All rights reserved.</p>
+                </div>
+                <div class="footer__social">
+                    <a href="#" class="footer__social-link" aria-label="LinkedIn">
+                        <svg class="footer__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="Twitter">
+                        <svg class="footer__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.184 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="GitHub">
+                        <svg class="footer__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="ai-assistant">
+        <div class="ai-assistant__toggle">
+            <div id="ai-assistant-avatar" class="ai-assistant__avatar"></div>
+        </div>
+        <div class="ai-assistant__panel">
+            <div class="ai-assistant__header">
+                <h3 class="ai-assistant__title">AI Assistant</h3>
+                <button class="ai-assistant__close" aria-label="Close AI Assistant">×</button>
+            </div>
+            <div class="ai-assistant__messages">
+                <div class="ai-assistant__message ai-assistant__message--assistant">
+                    <p>Hi there! I'm Tayler's AI assistant. How can I help you today?</p>
+                </div>
+            </div>
+            <div class="ai-assistant__input">
+                <input type="text" class="ai-assistant__input-field" placeholder="Ask me anything about Tayler's work...">
+                <button class="ai-assistant__send" aria-label="Send Message">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="../js/logoParticleSystem.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

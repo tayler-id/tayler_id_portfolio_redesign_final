@@ -1,0 +1,21 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+# yarn.lock
+
+# LanceDB data
+backend/data/lancedb/
+
+# macOS
+.DS_Store
+
+# Environment files
+.env
+backend/.env
+
+# IDE/Editor specific
+.vscode/
+
+# Local Netlify folder
+.netlify
