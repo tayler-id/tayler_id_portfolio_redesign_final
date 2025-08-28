@@ -16,6 +16,18 @@ export function PasswordProtection({ children }: PasswordProtectionProps) {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    // Check for bypass URL parameter
+    const urlParams = new URLSearchParams(window.location.search)
+    const bypassKey = urlParams.get('access')
+    
+    // Special bypass key - change this to any key you want
+    if (bypassKey === 'preview2025') {
+      localStorage.setItem('portfolio-auth', 'authenticated')
+      setIsAuthenticated(true)
+      return
+    }
+    
+    // Normal authentication check
     const stored = localStorage.getItem('portfolio-auth')
     if (stored === 'authenticated') {
       setIsAuthenticated(true)

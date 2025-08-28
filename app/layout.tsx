@@ -48,9 +48,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // Toggle password protection easily - set to false to disable
-  const enablePasswordProtection = false
-  
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable}`} suppressHydrationWarning>
       <body className="font-body antialiased">
@@ -60,13 +57,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {enablePasswordProtection ? (
-            <PasswordProtection>
-              {children}
-            </PasswordProtection>
-          ) : (
-            children
-          )}
+          <PasswordProtection>
+            {children}
+          </PasswordProtection>
         </ThemeProvider>
         
         <script dangerouslySetInnerHTML={{
