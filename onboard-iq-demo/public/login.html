@@ -169,8 +169,12 @@
         
         <div class="demo-credentials">
             <div class="credential-item"><strong>Demo Access:</strong> Any username and password combination will work</div>
-            <div class="credential-item"><strong>Admin Features:</strong> Use username "admin" to see admin-only features</div>
-            <div class="credential-item"><strong>Regular User:</strong> Use any other username for standard user experience</div>
+            <div class="credential-item"><strong>Try these examples:</strong></div>
+            <div class="credential-examples" style="margin-left: 20px; margin-top: 8px;">
+                <div>• Username: <code>admin</code> | Password: <code>demo</code> (admin features)</div>
+                <div>• Username: <code>demo</code> | Password: <code>user</code> (standard user)</div>
+                <div>• Username: <code>taylor</code> | Password: <code>test</code> (or any combo!)</div>
+            </div>
         </div>
     </div>
 
@@ -197,7 +201,7 @@
                 hideError();
                 
                 try {
-                    const response = await fetch('/api/auth/login', {
+                    const response = await fetch('/.netlify/functions/api/auth/login', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

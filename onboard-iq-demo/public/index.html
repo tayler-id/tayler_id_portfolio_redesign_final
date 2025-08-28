@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnboardIQ Demo - Portfolio Showcase</title>
+    <link rel="stylesheet" href="css/onboard-iq.css">
+    <style>
+        .demo-landing {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        .demo-content {
+            max-width: 800px;
+        }
+        .demo-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .demo-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .demo-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .demo-metric {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        .demo-metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #10b981;
+        }
+        .demo-navigation {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .demo-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        .demo-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .demo-status {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-landing">
+        <div class="demo-content">
+            <div class="demo-status">
+                <span class="status-dot"></span>
+                Live Demo Available
+            </div>
+            
+            <h1 class="demo-title">OnboardIQ Platform</h1>
+            <p class="demo-subtitle">
+                Experience the complete enterprise B2B automation platform that transformed 6-month manual processes into 2-3 month automated workflows.
+            </p>
+            
+            <div class="demo-metrics">
+                <div class="demo-metric">
+                    <div class="demo-metric-value">$2.1M</div>
+                    <div>Revenue Impact</div>
+                </div>
+                <div class="demo-metric">
+                    <div class="demo-metric-value">65%</div>
+                    <div>Process Improvement</div>
+                </div>
+                <div class="demo-metric">
+                    <div class="demo-metric-value">15+</div>
+                    <div>Stakeholder Interviews</div>
+                </div>
+                <div class="demo-metric">
+                    <div class="demo-metric-value">156</div>
+                    <div>Active Clients</div>
+                </div>
+            </div>
+            
+            <div class="demo-navigation">
+                <a href="login.html" class="demo-btn">🔐 Login Demo</a>
+                <a href="dashboard.html" class="demo-btn">📊 Dashboard</a>
+                <a href="contacts.html" class="demo-btn">👥 Contact Management</a>
+                <a href="platform-features.html" class="demo-btn">⚡ Platform Features</a>
+            </div>
+            
+            <p style="margin-top: 2rem; opacity: 0.8; font-size: 0.875rem;">
+                Built with JavaScript, CSS3, Node.js/Express, and PostgreSQL<br>
+                Use any username/password to explore the demo
+            </p>
+        </div>
+    </div>
+    
+    <script src="js/demo-common.js"></script>
+    <script>
+        // Test API connection on load
+        fetch('/health')
+            .then(response => response.json())
+            .then(data => {
+                console.log('OnboardIQ Demo Server:', data);
+            })
+            .catch(error => {
+                console.log('Demo running in static mode');
+            });
+    </script>
+</body>
+</html>
