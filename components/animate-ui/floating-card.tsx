@@ -51,7 +51,7 @@ export function FloatingCard({
   return (
     <motion.div
       className={cn(
-        "relative rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-xl",
+        "relative rounded-2xl backdrop-blur-md bg-card/80 border border-border shadow-xl",
         tilt && "transform-gpu",
         className
       )}
