@@ -6,9 +6,9 @@ import { Heart, Linkedin, Github, Twitter, Mail } from 'lucide-react'
 
 export function Footer() {
   const socialLinks = [
-    { icon: Linkedin, href: '#', label: 'LinkedIn', color: 'hover:text-blue-500' },
-    { icon: Github, href: '#', label: 'GitHub', color: 'hover:text-gray-400' },
-    { icon: Twitter, href: '#', label: 'Twitter', color: 'hover:text-blue-400' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/tayler-ramsay/', label: 'LinkedIn', color: 'hover:text-blue-500' },
+    { icon: Github, href: 'https://github.com/tayler-ramsay', label: 'GitHub', color: 'hover:text-gray-400' },
+    { icon: Twitter, href: 'https://twitter.com/tayler_ramsay', label: 'Twitter', color: 'hover:text-blue-400' },
     { icon: Mail, href: 'mailto:hello@tayler.id', label: 'Email', color: 'hover:text-green-500' }
   ]
 

@@ -51,7 +51,7 @@ export function ContactSection() {
       icon: Linkedin,
       title: 'LinkedIn',
       value: 'Connect with me',
-      href: '#',
+      href: 'https://www.linkedin.com/in/tayler-ramsay/',
       description: 'Professional network'
     }
   ]
