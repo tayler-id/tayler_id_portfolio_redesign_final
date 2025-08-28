@@ -91,15 +91,7 @@ export function ProjectCaseStudyModal({
         <div className="sticky top-0 bg-background/80 backdrop-blur-sm border-b border-border/50 z-10">
           <div className="container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Button
-                  variant="ghost"
-                  onClick={onClose}
-                  className="flex items-center gap-2"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Back to Projects
-                </Button>
+              <div className="flex items-center">
                 <Button
                   variant="ghost"
                   onClick={() => {
