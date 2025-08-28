@@ -9,6 +9,7 @@ import { FloatingCard } from './animate-ui/floating-card'
 import { ScrollReveal } from './animate-ui/scroll-reveal'
 import { GradientBlob } from './animate-ui/gradient-blob'
 import { Button } from './ui/button'
+import Image from 'next/image'
 
 export function HeroSection() {
   const containerVariants = {
@@ -65,27 +66,28 @@ export function HeroSection() {
             animate="visible"
             className="text-center lg:text-left"
           >
-            <motion.div variants={itemVariants} className="mb-6">
-              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium text-sm mb-4">
+            <motion.div variants={itemVariants} className="mb-8">
+              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium text-sm mb-6">
                 ✨ Available for new projects
               </span>
-              <div className="space-y-2">
+              <div className="space-y-4">
                 <TypewriterText
                   text="Hello, I'm Tayler"
-                  className="text-xl text-muted-foreground font-medium"
+                  className="text-2xl text-foreground/80 font-medium"
                   speed={80}
                   delay={500}
                 />
-                <h1 className="text-5xl lg:text-7xl font-bold font-display leading-tight">
-                  <span className="block text-foreground">Senior UX Designer &</span>
-                  <span className="block gradient-text mt-2">Frontend Developer</span>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
+                  <span className="block text-foreground">Senior UX Designer</span>
+                  <span className="block text-foreground">&</span>
+                  <span className="block gradient-text">Frontend Developer</span>
                 </h1>
               </div>
             </motion.div>
 
             <motion.p
               variants={itemVariants}
-              className="text-xl text-muted-foreground leading-relaxed mb-10 max-w-2xl mx-auto lg:mx-0"
+              className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-2xl mx-auto lg:mx-0"
             >
               With 25+ years of experience, I create human-centered digital experiences 
               that combine beautiful design with powerful functionality. Specializing in 
@@ -144,28 +146,34 @@ export function HeroSection() {
               <FloatingCard tilt className="p-8 max-w-md mx-auto">
                 <div className="space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                      <span className="text-white font-bold text-xl">TR</span>
+                    <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg border-2 border-white/20 backdrop-blur-sm overflow-hidden">
+                      <Image
+                        src="/assets/images/logo.png"
+                        alt="Tayler Ramsay Logo"
+                        width={64}
+                        height={64}
+                        className="w-16 h-16 object-contain"
+                      />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg text-white">Tayler Ramsay</h3>
-                      <p className="text-white/70">Senior UX Designer</p>
+                      <h3 className="font-bold text-xl text-foreground">Tayler Ramsay</h3>
+                      <p className="text-foreground/70 font-medium">Senior UX Designer</p>
                     </div>
                   </div>
                   
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                      <span className="text-white/90 text-sm">Available for projects</span>
+                      <span className="text-foreground/90 text-sm">Available for projects</span>
                     </div>
                     
                     <div className="grid grid-cols-3 gap-4">
                       {['UX', 'Frontend', 'AI/ML'].map((skill, index) => (
                         <div key={skill} className="text-center">
-                          <div className="w-12 h-12 mx-auto mb-2 rounded-lg bg-white/10 flex items-center justify-center border border-white/20">
-                            <span className="text-xs font-medium text-white">{skill}</span>
+                          <div className="w-12 h-12 mx-auto mb-2 rounded-lg bg-foreground/10 flex items-center justify-center border border-foreground/20">
+                            <span className="text-xs font-medium text-foreground">{skill}</span>
                           </div>
-                          <div className="text-xs text-white/70">Expert</div>
+                          <div className="text-xs text-muted-foreground">Expert</div>
                         </div>
                       ))}
                     </div>
@@ -181,7 +189,7 @@ export function HeroSection() {
                 distance={15}
                 duration={4}
               >
-                <div className="flex items-center gap-2 text-white">
+                <div className="flex items-center gap-2 text-foreground">
                   <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
                   <span className="text-xs font-medium">Online</span>
                 </div>
@@ -194,9 +202,9 @@ export function HeroSection() {
                 distance={12}
                 duration={5}
               >
-                <div className="text-white text-center">
+                <div className="text-foreground text-center">
                   <div className="font-bold text-lg">$2.1M</div>
-                  <div className="text-xs opacity-70">Revenue Impact</div>
+                  <div className="text-xs text-muted-foreground">Revenue Impact</div>
                 </div>
               </FloatingCard>
             </div>
