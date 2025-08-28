@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { User, Briefcase, Code, Play, CheckCircle } from 'lucide-react'
 import { ScrollReveal } from './animate-ui/scroll-reveal'
@@ -8,37 +8,79 @@ import { FloatingCard } from './animate-ui/floating-card'
 import Image from 'next/image'
 
 export function AboutSection() {
+  const [isPhotoSticky, setIsPhotoSticky] = useState(false)
+  const timelineRef = useRef<HTMLDivElement>(null)
+  const skillsRef = useRef<HTMLDivElement>(null)
+  const photoRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!timelineRef.current || !skillsRef.current || !photoRef.current) return
+
+      const timelineRect = timelineRef.current.getBoundingClientRect()
+      const skillsRect = skillsRef.current.getBoundingClientRect()
+      
+      // Make photo sticky when timeline is in view and before skills section
+      const timelineInView = timelineRect.top < window.innerHeight && timelineRect.bottom > 0
+      const skillsAboveViewport = skillsRect.top > window.innerHeight * 0.3
+      
+      setIsPhotoSticky(timelineInView && skillsAboveViewport)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   const timelineItems = [
     {
-      year: '2020 - Present',
-      role: 'Senior UX Designer',
-      company: 'Leading design systems and AI interface development',
+      year: '2019 - Present',
+      role: 'Senior UX Research & Designer',
+      company: 'Versatile Credit - Financial Tech Solutions for Wells Fargo & Synchrony Bank',
       icon: Briefcase,
       color: 'from-blue-500 to-purple-600'
     },
     {
-      year: '2018 - 2020',
+      year: '2017 - 2019',
       role: 'Frontend Developer',
-      company: 'Building responsive web applications and design systems',
+      company: 'Pavone Marketing Group - Interactive web components & CI/CD workflows',
       icon: Code,
       color: 'from-purple-500 to-pink-600'
+    },
+    {
+      year: '2016 - 2017',
+      role: 'Contract Senior Designer / Developer',
+      company: 'Lebo Skin Care - Full brand refresh & WordPress CMS development',
+      icon: User,
+      color: 'from-green-500 to-blue-600'
+    },
+    {
+      year: '2010 - 2016',
+      role: 'Web / Graphic Designer',
+      company: 'Quad Graphics & Menasha Packaging - Print & digital design systems',
+      icon: Briefcase,
+      color: 'from-orange-500 to-red-600'
     }
   ]
 
   const skills = [
-    { name: 'React', level: 95 },
-    { name: 'TypeScript', level: 90 },
-    { name: 'Design Systems', level: 98 },
-    { name: 'User Research', level: 92 },
-    { name: 'Prototyping', level: 88 },
-    { name: 'AI/ML Integration', level: 85 }
+    { name: 'Vue.js', level: 95 },
+    { name: 'React', level: 90 },
+    { name: 'TypeScript', level: 88 },
+    { name: 'Figma', level: 98 },
+    { name: 'Adobe Creative Suite', level: 95 },
+    { name: 'UX Research', level: 92 },
+    { name: 'Financial Tech UI', level: 95 },
+    { name: 'AI/ML Integration', level: 85 },
+    { name: 'Design Systems', level: 90 },
+    { name: 'HTML/CSS/JS', level: 98 }
   ]
 
   const achievements = [
-    '$2.1M+ Revenue Impact Generated',
-    '300% Process Improvement Achieved', 
-    '15+ Stakeholder Research Sessions',
-    '100+ Projects Successfully Delivered'
+    '6+ Years at Versatile Credit',
+    'Wells Fargo & Synchrony Bank Solutions',
+    'Waterfall Financing UI/UX Design',
+    '25+ Years Design & Development Experience',
+    'WCAG Accessibility Standards Expert'
   ]
 
   return (
@@ -77,14 +119,23 @@ export function AboutSection() {
                 <h3 className="text-3xl font-bold font-display">Hi, I'm Tayler</h3>
                 <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    I'm a Senior UX Designer and Frontend Developer with over 8 years of experience 
-                    creating intuitive, accessible, and engaging digital experiences. My approach 
-                    combines user-centered design principles with clean, efficient code.
+                    I'm a Senior UI/UX Designer and Frontend Developer with 25+ years of experience 
+                    creating intuitive, user-friendly interfaces that align with company objectives. 
+                    Specializing in Financial Tech Solutions, I've designed UI for Versatile Credit's 
+                    products and waterfall financing solutions for major lenders like Wells Fargo and Synchrony Bank.
                   </p>
                   <p>
-                    I specialize in designing and developing complex applications, with a particular 
-                    focus on AI-driven interfaces, design systems, and health applications. My passion 
-                    lies in creating digital experiences that are not just functional, but delightful.
+                    My technical skillset includes proficiency in HTML, CSS, JavaScript, and I'm particularly 
+                    experienced in all modern frontend technologies including React, Vue.js, and TypeScript. 
+                    I'm highly skilled in Figma, Adobe Creative Suite, and adept with Git and VS Code for seamless 
+                    collaboration. I'm committed to accessibility and adhere to WCAG guidelines, ensuring designs 
+                    are universally enjoyable regardless of abilities.
+                  </p>
+                  <p>
+                    My design philosophy focuses on creating flexible, theme-able UI designs that provide 
+                    excellent user experiences while simplifying complex functionalities through intuitive interfaces. 
+                    I also work extensively with AI/ML integration projects, creating interfaces for LLM-powered 
+                    applications and building intelligent automation tools that enhance user workflows.
                   </p>
                 </div>
               </div>
@@ -113,7 +164,7 @@ export function AboutSection() {
 
             {/* Timeline */}
             <ScrollReveal direction="left" delay={0.4}>
-              <div className="space-y-6">
+              <div ref={timelineRef} className="space-y-6">
                 <h4 className="text-xl font-semibold font-display">Experience Timeline</h4>
                 <div className="space-y-4">
                   {timelineItems.map((item, index) => (
@@ -143,7 +194,15 @@ export function AboutSection() {
           <ScrollReveal direction="right" delay={0.3}>
             <div className="relative">
               {/* Main Image Card */}
-              <FloatingCard tilt className="relative overflow-hidden aspect-[4/5] max-w-md mx-auto">
+              <div 
+                ref={photoRef}
+                className={`transition-all duration-300 ${
+                  isPhotoSticky 
+                    ? 'fixed top-20 right-8 z-30 max-w-sm' 
+                    : 'relative'
+                }`}
+              >
+                <FloatingCard tilt className="relative overflow-hidden aspect-[4/5] max-w-md mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
                 <Image
                   src="/assets/images/headshout.jpg"
@@ -165,10 +224,11 @@ export function AboutSection() {
                     <span className="font-semibold text-lg">Watch My Story</span>
                   </motion.div>
                 </div>
-              </FloatingCard>
+                </FloatingCard>
+              </div>
 
               {/* Floating Skill Cards */}
-              <div className="absolute inset-0 pointer-events-none">
+              <div className={`absolute inset-0 pointer-events-none ${isPhotoSticky ? 'hidden' : ''}`}>
                 {/* Top Right */}
                 <FloatingCard 
                   className="absolute -top-4 -right-4 p-4 pointer-events-auto"
@@ -193,7 +253,7 @@ export function AboutSection() {
                 >
                   <div className="text-center text-foreground">
                     <div className="font-bold text-lg gradient-text">25+</div>
-                    <div className="text-xs text-muted-foreground">Years</div>
+                    <div className="text-xs text-muted-foreground">Years Experience</div>
                   </div>
                 </FloatingCard>
 
@@ -209,7 +269,7 @@ export function AboutSection() {
                     <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
                       <Code className="w-4 h-4" />
                     </div>
-                    <span className="text-sm font-medium">React Expert</span>
+                    <span className="text-sm font-medium">Modern Frontend</span>
                   </div>
                 </FloatingCard>
               </div>
@@ -219,7 +279,7 @@ export function AboutSection() {
 
         {/* Skills Grid */}
         <ScrollReveal delay={0.6}>
-          <div className="mt-20">
+          <div ref={skillsRef} className="mt-20">
             <h4 className="text-2xl font-bold font-display text-center mb-12">
               Core Skills & Expertise
             </h4>
