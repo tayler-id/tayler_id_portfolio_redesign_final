@@ -167,13 +167,13 @@ export function HeroSection() {
                       <span className="text-foreground/90 text-sm">Available for projects</span>
                     </div>
                     
-                    <div className="grid grid-cols-3 gap-4">
-                      {['UX', 'Frontend', 'AI/ML'].map((skill, index) => (
+                    <div className="grid grid-cols-3 gap-3">
+                      {['UX', 'React', 'AI'].map((skill, index) => (
                         <div key={skill} className="text-center">
-                          <div className="w-12 h-12 mx-auto mb-2 rounded-lg bg-foreground/10 flex items-center justify-center border border-foreground/20">
-                            <span className="text-xs font-medium text-foreground">{skill}</span>
+                          <div className="w-14 h-14 mx-auto mb-2 rounded-lg bg-foreground/10 flex items-center justify-center border border-foreground/20">
+                            <span className="text-sm font-semibold text-foreground">{skill}</span>
                           </div>
-                          <div className="text-xs text-muted-foreground">Expert</div>
+                          <div className="text-xs text-muted-foreground font-medium">Expert</div>
                         </div>
                       ))}
                     </div>
