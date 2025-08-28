@@ -120,6 +120,7 @@ export function ReactAppDemoTemplate(props: ReactAppDemoProps) {
   const [showCredentials, setShowCredentials] = useState(false)
   const [isPlaying, setIsPlaying] = useState(true)
   const iframeRef = useRef<HTMLIFrameElement>(null)
+  const [iframeError, setIframeError] = useState(false)
 
   const devices = {
     desktop: { width: '100%', height: '100%', icon: Monitor },
@@ -211,6 +212,14 @@ export function ReactAppDemoTemplate(props: ReactAppDemoProps) {
                     title="Refresh Demo"
                   >
                     <RefreshCw className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => window.open(currentUrl, '_blank', 'width=1200,height=800')}
+                    title="Open in New Window"
+                  >
+                    <ExternalLink className="w-4 h-4" />
                   </Button>
                   {allowFullscreen && (
                     <Button
@@ -365,14 +374,45 @@ export function ReactAppDemoTemplate(props: ReactAppDemoProps) {
                     maxHeight: '100%'
                   }}
                 >
-                  <iframe
-                    ref={iframeRef}
-                    src={currentUrl}
-                    className="w-full h-full border-0"
-                    title={`${title} Demo`}
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                    loading="lazy"
-                  />
+                  {iframeError ? (
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-muted/20 p-8">
+                      <Shield className="w-16 h-16 text-muted-foreground mb-4" />
+                      <h3 className="text-xl font-semibold mb-2">Demo Blocked</h3>
+                      <p className="text-muted-foreground text-center mb-6">
+                        This demo can't be embedded due to security settings.
+                      </p>
+                      <MagneticButton
+                        onClick={() => window.open(currentUrl, '_blank', 'width=1200,height=800')}
+                        className="bg-primary text-primary-foreground hover:bg-primary/90"
+                      >
+                        <ExternalLink className="w-4 h-4 mr-2" />
+                        Open Demo in New Window
+                      </MagneticButton>
+                    </div>
+                  ) : (
+                    <iframe
+                      ref={iframeRef}
+                      src={currentUrl}
+                      className="w-full h-full border-0"
+                      title={`${title} Demo`}
+                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                      loading="lazy"
+                      onError={() => setIframeError(true)}
+                      onLoad={() => {
+                        setIsLoading(false)
+                        // Check if iframe actually loaded or was blocked
+                        setTimeout(() => {
+                          try {
+                            if (iframeRef.current?.contentWindow?.location.href === 'about:blank') {
+                              setIframeError(true)
+                            }
+                          } catch (e) {
+                            // Cross-origin error means it loaded successfully
+                          }
+                        }, 1000)
+                      }}
+                    />
+                  )}
                 </div>
               </div>
 

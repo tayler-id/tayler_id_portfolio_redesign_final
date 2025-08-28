@@ -43,7 +43,8 @@ export function ProjectsSection() {
     { id: 'all', label: 'All Projects', icon: Briefcase },
     { id: 'ui-ux', label: 'UI/UX', icon: Palette },
     { id: 'frontend', label: 'Frontend', icon: Code },
-    { id: 'full-stack', label: 'Full-Stack', icon: Layers }
+    { id: 'full-stack', label: 'Full-Stack', icon: Layers },
+    { id: 'ai-ml', label: 'AI/ML', icon: Zap }
   ]
 
   const projects = [
@@ -102,7 +103,7 @@ export function ProjectsSection() {
       category: ['ui-ux'],
       description: 'Lease approvals +28% • App time -57%.',
       tags: ['Retail', 'Fintech'],
-      image: '/assets/images/helzberg.svg',
+      image: '/assets/images/helzburg.svg',
       gradient: 'from-purple-500 to-pink-600'
     },
     {
@@ -113,6 +114,33 @@ export function ProjectsSection() {
       tags: ['Health & Wellness', 'Fintech'],
       image: '/assets/images/ifit.svg',
       gradient: 'from-orange-500 to-red-600'
+    },
+    {
+      id: 'ai-chat-interface',
+      title: 'AI Chat Interface & LLM Integration',
+      category: ['ai-ml', 'frontend'],
+      description: 'Custom chat interface with streaming responses, context management, and LLM API integration.',
+      tags: ['AI/ML', 'React', 'OpenAI'],
+      gradient: 'from-violet-500 to-purple-600',
+      demoUrl: 'https://your-ai-chat-demo.netlify.app'
+    },
+    {
+      id: 'automation-workflow',
+      title: 'Intelligent Automation Workflows',
+      category: ['ai-ml', 'full-stack'],
+      description: 'AI-powered automation tools that enhance user workflows and business processes.',
+      tags: ['Automation', 'Machine Learning', 'Node.js'],
+      gradient: 'from-emerald-500 to-teal-600',
+      demoUrl: 'https://your-automation-demo.netlify.app'
+    },
+    {
+      id: 'llm-powered-app',
+      title: 'LLM-Powered Business Application',
+      category: ['ai-ml', 'ui-ux'],
+      description: 'Enterprise application integrating Large Language Models for enhanced user experiences.',
+      tags: ['LLM', 'Enterprise', 'AI/UX'],
+      gradient: 'from-pink-500 to-rose-600',
+      demoUrl: 'https://your-llm-demo.netlify.app'
     }
   ]
 
@@ -361,7 +389,7 @@ export function ProjectsSection() {
           viewport={{ once: true, amount: 0.2 }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             {filteredProjects
               .filter(p => !p.featured)
               .map((project, index) => (
