@@ -121,6 +121,17 @@ export function ReactAppDemoTemplate(props: ReactAppDemoProps) {
   const [isPlaying, setIsPlaying] = useState(true)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [iframeError, setIframeError] = useState(false)
+  
+  // Check if URL is external (likely to be blocked by X-Frame-Options)
+  const isExternalUrl = demoUrl.startsWith('https://') && !demoUrl.includes('localhost')
+  
+  useEffect(() => {
+    // For external URLs, automatically show fallback to avoid iframe blocking
+    if (isExternalUrl) {
+      setIframeError(true)
+      setIsLoading(false)
+    }
+  }, [isExternalUrl])
 
   const devices = {
     desktop: { width: '100%', height: '100%', icon: Monitor },
@@ -375,19 +386,24 @@ export function ReactAppDemoTemplate(props: ReactAppDemoProps) {
                   }}
                 >
                   {iframeError ? (
-                    <div className="w-full h-full flex flex-col items-center justify-center bg-muted/20 p-8">
-                      <Shield className="w-16 h-16 text-muted-foreground mb-4" />
-                      <h3 className="text-xl font-semibold mb-2">Demo Blocked</h3>
-                      <p className="text-muted-foreground text-center mb-6">
-                        This demo can't be embedded due to security settings.
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-primary/5 to-secondary/5 p-8">
+                      <div className="bg-primary/10 p-4 rounded-full mb-6">
+                        <ExternalLink className="w-16 h-16 text-primary" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-3">Interactive Demo Available</h3>
+                      <p className="text-muted-foreground text-center mb-8 max-w-md">
+                        Experience the full OnboardIQ application with real data and interactions in a dedicated window.
                       </p>
                       <MagneticButton
-                        onClick={() => window.open(currentUrl, '_blank', 'width=1200,height=800')}
-                        className="bg-primary text-primary-foreground hover:bg-primary/90"
+                        onClick={() => window.open(currentUrl, '_blank', 'width=1400,height=900,scrollbars=yes,resizable=yes')}
+                        className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-3"
                       >
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        Open Demo in New Window
+                        <ExternalLink className="w-5 h-5 mr-2" />
+                        Launch Interactive Demo
                       </MagneticButton>
+                      <p className="text-sm text-muted-foreground mt-4">
+                        Opens in a new window • Full functionality available
+                      </p>
                     </div>
                   ) : (
                     <iframe
