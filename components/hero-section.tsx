@@ -12,6 +12,11 @@ import { Button } from './ui/button'
 import Image from 'next/image'
 
 export function HeroSection() {
+  const handleScrollToSection = (sectionId: string) => {
+    const element = document.querySelector(sectionId)
+    element?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -98,12 +103,20 @@ export function HeroSection() {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
             >
-              <MagneticButton className="group">
+              <MagneticButton 
+                className="group" 
+                onClick={() => handleScrollToSection('#projects')}
+              >
                 <span>View My Work</span>
                 <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
               </MagneticButton>
               
-              <Button variant="outline" size="lg" className="bg-background/50 backdrop-blur-sm">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="bg-background/50 backdrop-blur-sm"
+                onClick={() => handleScrollToSection('#contact')}
+              >
                 <MessageCircle className="w-4 h-4" />
                 Get in Touch
               </Button>
