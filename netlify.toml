@@ -1,6 +1,6 @@
 [build]
   publish = "out"
-  command = "npm ci && npm run build && ls -la"
+  command = "npm ci && npm run build && ls -la out/ && ls -la out/assets/"
   base = "/"
 
 [build.environment]
