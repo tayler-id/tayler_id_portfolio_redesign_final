@@ -116,14 +116,18 @@ export function ReactAppDemoTemplate(props: ReactAppDemoProps) {
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [currentDevice, setCurrentDevice] = useState(defaultDevice)
   const [isLoading, setIsLoading] = useState(true)
-  const [currentUrl, setCurrentUrl] = useState(demoUrl)
+  // Force production URL for OnboardIQ demo (override any localhost URLs)
+  const productionUrl = demoUrl.includes('onboard-iq') && demoUrl.includes('localhost') 
+    ? 'https://onboard-iq-demo.netlify.app' 
+    : demoUrl
+  const [currentUrl, setCurrentUrl] = useState(productionUrl)
   const [showCredentials, setShowCredentials] = useState(false)
   const [isPlaying, setIsPlaying] = useState(true)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [iframeError, setIframeError] = useState(false)
   
   // Check if URL is external (likely to be blocked by X-Frame-Options)
-  const isExternalUrl = demoUrl.startsWith('https://') && !demoUrl.includes('localhost')
+  const isExternalUrl = productionUrl.startsWith('https://') && !productionUrl.includes('localhost')
   
   useEffect(() => {
     // For external URLs, automatically show fallback to avoid iframe blocking
