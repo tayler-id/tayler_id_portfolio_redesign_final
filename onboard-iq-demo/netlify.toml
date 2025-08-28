@@ -1,0 +1,96 @@
+[build]
+  publish = "public"
+  command = "echo 'Static site - no build needed'"
+
+[functions]
+  directory = "netlify/functions"
+
+# API routes
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# Health check endpoint
+[[redirects]]
+  from = "/health"
+  to = "/.netlify/functions/api/health"
+  status = 200
+
+# Auth endpoints
+[[redirects]]
+  from = "/login"
+  to = "/.netlify/functions/api/login"
+  status = 200
+
+[[redirects]]
+  from = "/auth/login"
+  to = "/.netlify/functions/api/auth/login"
+  status = 200
+
+# Dashboard API
+[[redirects]]
+  from = "/dashboard"
+  to = "/.netlify/functions/api/dashboard"
+  status = 200
+
+# Contacts API
+[[redirects]]
+  from = "/contacts"
+  to = "/.netlify/functions/api/contacts"
+  status = 200
+
+# Platform features API
+[[redirects]]
+  from = "/platform-features"
+  to = "/.netlify/functions/api/platform-features"
+  status = 200
+
+# Static pages - serve HTML files without .html extension
+[[redirects]]
+  from = "/login"
+  to = "/login.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/dashboard.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/contacts"
+  to = "/contacts.html"
+  status = 200
+  force = false
+
+[[redirects]]
+  from = "/platform-features"
+  to = "/platform-features.html"
+  status = 200
+  force = false
+
+# SPA fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for iframe embedding
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = "frame-ancestors 'self' localhost:* *.netlify.app *.vercel.app"
+
+# Cache static assets
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
