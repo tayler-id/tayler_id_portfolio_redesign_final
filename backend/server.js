@@ -16,6 +16,9 @@ const port = process.env.PORT || 3000; // Align default with fly.toml internal_p
 app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Parse JSON bodies
 
+// Serve static files from the parent directory (portfolio files)
+app.use(express.static(path.join(__dirname, '..')));
+
 // Initialize OpenAI client
 let openai;
 if (process.env.OPENAI_API_KEY) {

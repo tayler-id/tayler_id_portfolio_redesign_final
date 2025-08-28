@@ -574,3 +574,124 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+// OnboardIQ Demo Launcher Function (Global)
+function launchOnboardIQDemo() {
+  const btn = document.getElementById('onboard-iq-demo-btn');
+  const originalText = btn.innerHTML;
+  
+  // Set loading state
+  btn.innerHTML = '⏳ Checking demo server...';
+  btn.disabled = true;
+  
+  // Check if demo server is running
+  fetch('http://localhost:3333/health')
+    .then(response => {
+      if (response.ok) {
+        // Server is running, open demo
+        btn.innerHTML = '🚀 Launching demo...';
+        setTimeout(() => {
+          window.open('http://localhost:3333', '_blank');
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+        }, 1000);
+      } else {
+        showDemoServerError(btn, originalText);
+      }
+    })
+    .catch(error => {
+      // Server likely not running
+      showDemoServerError(btn, originalText);
+    });
+}
+
+function showDemoServerError(btn, originalText) {
+  // Create modal for demo server instructions
+  const modal = document.createElement('div');
+  modal.id = 'demo-server-modal';
+  modal.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+  `;
+  
+  modal.innerHTML = `
+    <div style="
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    ">
+      <h3 style="color: #ef4444; margin-bottom: 1rem; font-size: 1.5rem;">
+        ⚠️ Demo Server Required
+      </h3>
+      <p style="margin-bottom: 1.5rem; color: #666; line-height: 1.6;">
+        The OnboardIQ demo server needs to be running to experience the live platform.
+        This showcases the actual working implementation with contact management and platform features.
+      </p>
+      <div style="
+        background: #f8fafc;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        text-align: left;
+        border-left: 4px solid #1D976C;
+      ">
+        <strong style="color: #1D976C;">To start the demo server:</strong><br>
+        <code style="
+          background: #e2e8f0;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-family: monospace;
+          font-size: 0.875rem;
+          display: block;
+          margin: 0.5rem 0;
+        ">cd onboard-iq-demo && npm start</code>
+        <small style="color: #666;">Then refresh and try again</small>
+      </div>
+      <div style="display: flex; gap: 1rem; justify-content: center;">
+        <button onclick="launchOnboardIQDemo(); closeDemoModal();" style="
+          background: linear-gradient(135deg, #1D976C, #059669);
+          color: white;
+          border: none;
+          padding: 0.75rem 1.5rem;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+        ">🔄 Try Again</button>
+        <button onclick="closeDemoModal()" style="
+          background: transparent;
+          color: #1D976C;
+          border: 2px solid #1D976C;
+          padding: 0.75rem 1.5rem;
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+        ">Close</button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(modal);
+  
+  // Reset button
+  btn.innerHTML = originalText;
+  btn.disabled = false;
+}
+
+function closeDemoModal() {
+  const modal = document.getElementById('demo-server-modal');
+  if (modal) {
+    modal.remove();
+  }
+}
