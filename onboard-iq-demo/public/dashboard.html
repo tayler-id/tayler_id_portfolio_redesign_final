@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnboardIQ Demo - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/onboard-iq.css">
+    <style>
+        .demo-banner {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: var(--spacing-md);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .demo-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .hero-section {
+            background: var(--color-background-alt);
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-subtitle {
+            font-size: var(--font-size-xl);
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .demo-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .demo-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--color-gray-200);
+            transition: all var(--timing-normal) ease;
+            text-align: left;
+        }
+        
+        .demo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--color-primary);
+        }
+        
+        .demo-card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .demo-card-title {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text);
+        }
+        
+        .demo-card-description {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-xs);
+            font-size: var(--font-size-sm);
+            color: var(--color-text);
+        }
+        
+        .feature-list li::before {
+            content: "✓";
+            color: var(--color-success);
+            font-weight: bold;
+            width: 16px;
+        }
+        
+        .stats-section {
+            background: var(--color-white);
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .process-section {
+            padding: var(--spacing-2xl) 0;
+            background: var(--color-background-alt);
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .process-step {
+            text-align: center;
+            padding: var(--spacing-lg);
+        }
+        
+        .process-step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            margin: 0 auto var(--spacing-md);
+        }
+        
+        .process-step-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .process-step-description {
+            color: var(--color-text-light);
+            font-size: var(--font-size-sm);
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Banner -->
+    <div class="demo-banner">
+        <div class="container">
+            <strong>Portfolio Demo</strong> • This is a working demonstration of the OnboardIQ platform for showcasing UX→UI→Frontend→Backend development skills
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="flex justify-between items-center">
+                <a href="/" class="nav-brand">OnboardIQ Demo</a>
+                <div class="nav-links">
+                    <a href="/" class="nav-link active">Dashboard</a>
+                    <a href="/contacts" class="nav-link">Contacts</a>
+                    <a href="/platform-features" class="nav-link">Platform Features</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="text-sm text-gray-600">Welcome, <span id="user-name">Demo User</span></span>
+                    <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">OnboardIQ Platform</h1>
+            <p class="hero-subtitle">
+                Experience the comprehensive merchant onboarding automation platform that reduced processing time by 65% 
+                and enabled 300% capacity scaling without additional staff.
+            </p>
+            
+            <!-- Metrics Dashboard -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">$2.1M</div>
+                    <div class="metric-label">Revenue Acceleration</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">65%</div>
+                    <div class="metric-label">Process Improvement</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15+</div>
+                    <div class="metric-label">Stakeholder Interviews</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">300%</div>
+                    <div class="metric-label">Capacity Scaling</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Features -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-xl);">Interactive Demo Features</h2>
+            
+            <div class="demo-cards">
+                <div class="demo-card">
+                    <div class="demo-card-icon">👥</div>
+                    <h3 class="demo-card-title">Contact Management System</h3>
+                    <p class="demo-card-description">
+                        Advanced filtering system for managing provider contacts with real-time search and multi-dimensional filtering capabilities.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Multi-filter system (Partner, Vertical, Status, Response)</li>
+                        <li>Real-time filtering with smooth animations</li>
+                        <li>Contact cards with provider relationships</li>
+                        <li>Responsive design with mobile optimization</li>
+                    </ul>
+                    <a href="/contacts" class="btn btn-primary">Explore Contacts</a>
+                </div>
+                
+                <div class="demo-card">
+                    <div class="demo-card-icon">📊</div>
+                    <h3 class="demo-card-title">Platform Features Matrix</h3>
+                    <p class="demo-card-description">
+                        Comprehensive feature-provider compatibility matrix with advanced filtering and admin management capabilities.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Spreadsheet-style matrix (Providers × Features)</li>
+                        <li>Advanced filtering with visual pills</li>
+                        <li>Support indicators with real-time updates</li>
+                        <li>Admin interface with inline editing</li>
+                    </ul>
+                    <a href="/platform-features" class="btn btn-primary">View Matrix</a>
+                </div>
+                
+                <div class="demo-card">
+                    <div class="demo-card-icon">⚡</div>
+                    <h3 class="demo-card-title">Performance Optimized</h3>
+                    <p class="demo-card-description">
+                        Built with performance-first approach using hardware-accelerated animations and efficient data structures.
+                    </p>
+                    <ul class="feature-list">
+                        <li>60fps animations with hardware acceleration</li>
+                        <li>Set-based filtering for O(1) performance</li>
+                        <li>Efficient DOM manipulation</li>
+                        <li>Progressive loading and caching</li>
+                    </ul>
+                    <button onclick="showPerformanceDetails()" class="btn btn-primary">View Technical Details</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Development Process -->
+    <section class="process-section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: var(--spacing-lg);">Complete UX→UI→Frontend→Backend Process</h2>
+            <p style="text-align: center; color: var(--color-text-light); max-width: 600px; margin: 0 auto;">
+                This demo showcases the end-to-end development process from user research through production implementation.
+            </p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-step-number">1</div>
+                    <h4 class="process-step-title">UX Research</h4>
+                    <p class="process-step-description">15+ stakeholder interviews, user personas, journey mapping, and pain point analysis</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-step-number">2</div>
+                    <h4 class="process-step-title">UI Design</h4>
+                    <p class="process-step-description">Enterprise design system, component library, responsive layouts, and accessibility compliance</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-step-number">3</div>
+                    <h4 class="process-step-title">Frontend Engineering</h4>
+                    <p class="process-step-description">Performance-optimized JavaScript, custom animation framework, responsive CSS architecture</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-step-number">4</div>
+                    <h4 class="process-step-title">Backend Integration</h4>
+                    <p class="process-step-description">Node.js API, PostgreSQL database, RESTful endpoints, authentication, and security</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="js/demo-common.js"></script>
+    <script>
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserInfo();
+            animateMetrics();
+        });
+        
+        function animateMetrics() {
+            const metricValues = document.querySelectorAll('.metric-value');
+            metricValues.forEach(metric => {
+                metric.style.opacity = '0';
+                metric.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    metric.style.transition = 'all 0.6s ease';
+                    metric.style.opacity = '1';
+                    metric.style.transform = 'translateY(0)';
+                }, Math.random() * 500);
+            });
+        }
+        
+        function showPerformanceDetails() {
+            showToast('Technical Details: 60fps animations, Set-based filtering (O(1) lookup), Hardware acceleration with transform/opacity, Efficient DOM batching', 'info');
+        }
+    </script>
+</body>
+</html>

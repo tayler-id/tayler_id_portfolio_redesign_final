@@ -1,0 +1,6 @@
+id,businessName,contactName,requestedAmount,businessType,businessState,status,priority,submittedAt
+APP-2024-005,NAPA Auto Parts #7890,Robert Thompson,150000,automotive,TX,approved,standard,2024-01-19
+APP-2024-004,NAPA Auto Parts #4521,Jennifer Wilson,125000,automotive,AZ,under_review,high,2024-01-18
+APP-2024-003,NAPA Auto Parts #2847,Carlos Martinez,85000,automotive,CA,pending,standard,2024-01-17
+APP-2024-002,MMIS TEST DBA,Jon Consumer,100000,restaurant,CA,under_review,high,2024-01-15
+APP-2024-001,NAPA Auto Parts #1542,Mike Johnson,75000,automotive,CA,submitted,standard,2024-01-12

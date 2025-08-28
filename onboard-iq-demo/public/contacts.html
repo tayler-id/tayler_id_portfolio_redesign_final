@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnboardIQ Demo - Contact Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/onboard-iq.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .page-subtitle {
+            opacity: 0.9;
+            font-size: var(--font-size-lg);
+        }
+        
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .contact-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            transition: all var(--timing-normal) ease;
+            animation: slideInUp var(--timing-normal) ease;
+        }
+        
+        .contact-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+        
+        .contact-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .contact-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: var(--font-size-lg);
+        }
+        
+        .contact-info h3 {
+            margin: 0;
+            color: var(--color-text);
+            font-weight: 600;
+        }
+        
+        .contact-email {
+            color: var(--color-text-light);
+            font-size: var(--font-size-sm);
+            margin-top: var(--spacing-xs);
+        }
+        
+        .contact-provider {
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .contact-details {
+            border-top: 1px solid var(--color-gray-200);
+            padding-top: var(--spacing-md);
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+            font-size: var(--font-size-sm);
+        }
+        
+        .detail-label {
+            color: var(--color-text-light);
+            font-weight: 500;
+        }
+        
+        .detail-value {
+            color: var(--color-text);
+            font-weight: 600;
+        }
+        
+        .contact-roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+        }
+        
+        .role-tag {
+            background: var(--color-gray-100);
+            color: var(--color-gray-700);
+            padding: 2px var(--spacing-xs);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+        }
+        
+        .vertical-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+        }
+        
+        .vertical-tag {
+            background: var(--color-success-bg);
+            color: var(--color-success);
+            padding: 2px var(--spacing-xs);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-xs);
+            font-weight: 500;
+        }
+        
+        .search-container {
+            position: relative;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: var(--spacing-md);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-gray-400);
+        }
+        
+        .search-input {
+            padding-left: 40px;
+            font-size: var(--font-size-base);
+        }
+        
+        .results-summary {
+            background: var(--color-background-alt);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .results-count {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--color-text-light);
+        }
+        
+        .no-results-icon {
+            font-size: 48px;
+            margin-bottom: var(--spacing-md);
+            opacity: 0.5;
+        }
+        
+        .clear-filters-btn {
+            margin-top: var(--spacing-md);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="flex justify-between items-center">
+                <a href="/" class="nav-brand">OnboardIQ Demo</a>
+                <div class="nav-links">
+                    <a href="/" class="nav-link">Dashboard</a>
+                    <a href="/contacts" class="nav-link active">Contacts</a>
+                    <a href="/platform-features" class="nav-link">Platform Features</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="text-sm text-gray-600">Welcome, <span id="user-name">Demo User</span></span>
+                    <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Contact Management</h1>
+            <p class="page-subtitle">Advanced filtering system for managing provider contacts</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl);">
+        <!-- Filter System -->
+        <div class="filter-container">
+            <div class="filter-row">
+                <!-- Search -->
+                <div class="form-group search-container">
+                    <label class="form-label">Search Contacts</label>
+                    <div class="search-container">
+                        <span class="search-icon">🔍</span>
+                        <input 
+                            type="text" 
+                            id="search-input" 
+                            class="form-input search-input" 
+                            placeholder="Search by name, email, role, or provider..."
+                        >
+                    </div>
+                </div>
+                
+                <!-- Partner Filter -->
+                <div class="form-group">
+                    <label class="form-label">Partner</label>
+                    <div class="dropdown" id="partner-dropdown">
+                        <div class="dropdown-toggle">
+                            <span id="partner-selected">All Partners</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="dropdown-menu" id="partner-menu">
+                            <div class="dropdown-item" data-value="">All Partners</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Vertical Filter -->
+                <div class="form-group">
+                    <label class="form-label">Vertical</label>
+                    <div class="dropdown" id="vertical-dropdown">
+                        <div class="dropdown-toggle">
+                            <span id="vertical-selected">All Verticals</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="dropdown-menu" id="vertical-menu">
+                            <div class="dropdown-item" data-value="">All Verticals</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Role Filter -->
+                <div class="form-group">
+                    <label class="form-label">Role</label>
+                    <div class="dropdown" id="role-dropdown">
+                        <div class="dropdown-toggle">
+                            <span id="role-selected">All Roles</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="dropdown-menu" id="role-menu">
+                            <div class="dropdown-item" data-value="">All Roles</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Active Filter Pills -->
+            <div class="filter-pills" id="filter-pills"></div>
+        </div>
+        
+        <!-- Results Summary -->
+        <div class="results-summary" id="results-summary">
+            Loading contacts...
+        </div>
+        
+        <!-- Contacts Grid -->
+        <div class="contacts-grid" id="contacts-grid">
+            <!-- Contacts will be loaded here -->
+        </div>
+        
+        <!-- No Results State -->
+        <div class="no-results" id="no-results" style="display: none;">
+            <div class="no-results-icon">👥</div>
+            <h3>No contacts found</h3>
+            <p>Try adjusting your filters to see more results</p>
+            <button onclick="clearAllFilters()" class="btn btn-primary clear-filters-btn">Clear All Filters</button>
+        </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="js/demo-common.js"></script>
+    <script>
+        // Contact Management System - Performance Optimized
+        let allContacts = [];
+        let filteredContacts = [];
+        let currentFilters = {
+            search: '',
+            partner: '',
+            vertical: '',
+            role: ''
+        };
+        
+        // Filter manager for O(1) performance
+        const filterManager = new FilterManager();
+        let partnerDropdown, verticalDropdown, roleDropdown;
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                showToast('Loading contact management system...', 'info');
+                
+                // Initialize dropdowns
+                partnerDropdown = new DropdownManager(document.getElementById('partner-dropdown'));
+                verticalDropdown = new DropdownManager(document.getElementById('vertical-dropdown'));
+                roleDropdown = new DropdownManager(document.getElementById('role-dropdown'));
+                
+                // Load contacts data
+                await loadContacts();
+                
+                // Setup event listeners
+                setupEventListeners();
+                
+                // Initial render
+                renderContacts();
+                
+                showToast('Contact management system loaded successfully', 'success');
+                
+            } catch (error) {
+                console.error('Failed to initialize contacts page:', error);
+                showToast('Failed to load contact management system', 'error');
+            }
+        });
+        
+        // Load contacts from API
+        async function loadContacts() {
+            const data = await apiRequest('/api/contacts');
+            allContacts = data.contacts || [];
+            filteredContacts = [...allContacts];
+            
+            // Extract unique values for dropdowns
+            populateDropdowns();
+        }
+        
+        // Populate dropdown menus with unique values
+        function populateDropdowns() {
+            const partners = [...new Set(allContacts.map(c => c.provider_name))].sort();
+            const verticals = [...new Set(
+                allContacts.flatMap(c => 
+                    c.platform_vertical_market_ids ? 
+                    c.platform_vertical_market_ids.split(',').map(v => v.trim()) : 
+                    []
+                )
+            )].sort();
+            const roles = [...new Set(
+                allContacts.flatMap(c => 
+                    c.roles ? 
+                    c.roles.split(',').map(r => r.trim()) : 
+                    []
+                )
+            )].sort();
+            
+            // Populate partner dropdown
+            const partnerMenu = document.getElementById('partner-menu');
+            partners.forEach(partner => {
+                const item = document.createElement('div');
+                item.className = 'dropdown-item';
+                item.dataset.value = partner;
+                item.textContent = partner;
+                item.addEventListener('click', () => setFilter('partner', partner));
+                partnerMenu.appendChild(item);
+            });
+            
+            // Populate vertical dropdown
+            const verticalMenu = document.getElementById('vertical-menu');
+            verticals.forEach(vertical => {
+                const item = document.createElement('div');
+                item.className = 'dropdown-item';
+                item.dataset.value = vertical;
+                item.textContent = vertical;
+                item.addEventListener('click', () => setFilter('vertical', vertical));
+                verticalMenu.appendChild(item);
+            });
+            
+            // Populate role dropdown
+            const roleMenu = document.getElementById('role-menu');
+            roles.forEach(role => {
+                const item = document.createElement('div');
+                item.className = 'dropdown-item';
+                item.dataset.value = role;
+                item.textContent = role;
+                item.addEventListener('click', () => setFilter('role', role));
+                roleMenu.appendChild(item);
+            });
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Search input with debouncing for performance
+            const searchInput = document.getElementById('search-input');
+            searchInput.addEventListener('input', debounce((e) => {
+                setFilter('search', e.target.value);
+            }, 300));
+            
+            // Clear filter buttons on dropdown items
+            document.querySelectorAll('.dropdown-item[data-value=""]').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const dropdown = e.target.closest('.dropdown');
+                    const filterType = dropdown.id.replace('-dropdown', '');
+                    setFilter(filterType, '');
+                });
+            });
+        }
+        
+        // Set filter value and update display
+        function setFilter(type, value) {
+            currentFilters[type] = value;
+            
+            // Update dropdown display
+            if (type !== 'search') {
+                const selectedSpan = document.getElementById(`${type}-selected`);
+                selectedSpan.textContent = value || `All ${type.charAt(0).toUpperCase() + type.slice(1)}s`;
+                
+                // Close dropdown
+                const dropdown = eval(`${type}Dropdown`);
+                dropdown.closeMenu();
+            }
+            
+            // Apply filters and render
+            applyFilters();
+            renderContacts();
+            updateFilterPills();
+        }
+        
+        // Apply all filters with Set-based optimization
+        function applyFilters() {
+            filteredContacts = allContacts.filter(contact => {
+                // Search filter
+                if (currentFilters.search) {
+                    const searchTerm = currentFilters.search.toLowerCase();
+                    const searchFields = [
+                        contact.name,
+                        contact.email,
+                        contact.provider_name,
+                        contact.roles || '',
+                        contact.platform_vertical_market_ids || ''
+                    ].join(' ').toLowerCase();
+                    
+                    if (!searchFields.includes(searchTerm)) {
+                        return false;
+                    }
+                }
+                
+                // Partner filter
+                if (currentFilters.partner && contact.provider_name !== currentFilters.partner) {
+                    return false;
+                }
+                
+                // Vertical filter
+                if (currentFilters.vertical) {
+                    const verticals = contact.platform_vertical_market_ids || '';
+                    if (!verticals.toLowerCase().includes(currentFilters.vertical.toLowerCase())) {
+                        return false;
+                    }
+                }
+                
+                // Role filter
+                if (currentFilters.role) {
+                    const roles = contact.roles || '';
+                    if (!roles.toLowerCase().includes(currentFilters.role.toLowerCase())) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            });
+        }
+        
+        // Render contacts grid
+        function renderContacts() {
+            const grid = document.getElementById('contacts-grid');
+            const summary = document.getElementById('results-summary');
+            const noResults = document.getElementById('no-results');
+            
+            // Update summary
+            summary.innerHTML = `
+                <span class="results-count">${filteredContacts.length}</span> contact${filteredContacts.length !== 1 ? 's' : ''} found
+                ${allContacts.length !== filteredContacts.length ? ` (filtered from ${allContacts.length} total)` : ''}
+            `;
+            
+            if (filteredContacts.length === 0) {
+                grid.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            grid.style.display = 'grid';
+            noResults.style.display = 'none';
+            
+            grid.innerHTML = filteredContacts.map(contact => `
+                <div class="contact-card">
+                    <div class="contact-header">
+                        <div class="contact-avatar">
+                            ${getInitials(contact.name)}
+                        </div>
+                        <div class="contact-info">
+                            <h3>${escapeHtml(contact.name)}</h3>
+                            <div class="contact-email">${escapeHtml(contact.email || 'No email provided')}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-provider">${escapeHtml(contact.provider_name)}</div>
+                    
+                    <div class="contact-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Status</span>
+                            <span class="detail-value ${contact.active ? 'status-active' : 'status-inactive'}">
+                                ${contact.active ? 'Active' : 'Inactive'}
+                            </span>
+                        </div>
+                        
+                        ${contact.roles ? `
+                            <div class="detail-row">
+                                <span class="detail-label">Roles</span>
+                                <div class="contact-roles">
+                                    ${contact.roles.split(',').map(role => 
+                                        `<span class="role-tag">${escapeHtml(role.trim())}</span>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        ${contact.platform_vertical_market_ids ? `
+                            <div class="detail-row">
+                                <span class="detail-label">Verticals</span>
+                                <div class="vertical-tags">
+                                    ${contact.platform_vertical_market_ids.split(',').map(vertical => 
+                                        `<span class="vertical-tag">${escapeHtml(vertical.trim())}</span>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="detail-row">
+                            <span class="detail-label">Added</span>
+                            <span class="detail-value">${formatDate(contact.created_date)}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Animate cards in
+            requestAnimationFrame(() => {
+                document.querySelectorAll('.contact-card').forEach((card, index) => {
+                    card.style.animationDelay = `${index * 50}ms`;
+                });
+            });
+        }
+        
+        // Update filter pills display
+        function updateFilterPills() {
+            const pillsContainer = document.getElementById('filter-pills');
+            const activePills = [];
+            
+            Object.entries(currentFilters).forEach(([type, value]) => {
+                if (value && type !== 'search') {
+                    activePills.push({ type, value });
+                }
+            });
+            
+            if (currentFilters.search) {
+                activePills.push({ type: 'search', value: currentFilters.search });
+            }
+            
+            pillsContainer.innerHTML = activePills.map(pill => `
+                <div class="filter-pill">
+                    ${pill.type === 'search' ? '🔍' : ''} ${pill.type}: ${escapeHtml(pill.value)}
+                    <button class="pill-remove" onclick="removeFilter('${pill.type}')">×</button>
+                </div>
+            `).join('');
+        }
+        
+        // Remove specific filter
+        function removeFilter(type) {
+            setFilter(type, '');
+            if (type === 'search') {
+                document.getElementById('search-input').value = '';
+            }
+        }
+        
+        // Clear all filters
+        function clearAllFilters() {
+            currentFilters = { search: '', partner: '', vertical: '', role: '' };
+            document.getElementById('search-input').value = '';
+            document.getElementById('partner-selected').textContent = 'All Partners';
+            document.getElementById('vertical-selected').textContent = 'All Verticals';
+            document.getElementById('role-selected').textContent = 'All Roles';
+            
+            applyFilters();
+            renderContacts();
+            updateFilterPills();
+        }
+        
+        // Utility function to get initials
+        function getInitials(name) {
+            return name.split(' ').map(part => part[0]).join('').toUpperCase().slice(0, 2);
+        }
+    </script>
+</body>
+</html>

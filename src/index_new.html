@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tayler.id - Senior UX Designer & Frontend Developer</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Modern font stack -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Animate UI inspired styles -->
+    <link rel="stylesheet" href="css/animate-ui-styles.css">
+</head>
+<body class="loading" data-theme="light">
+    
+    <!-- Password Protection Overlay -->
+    <div id="password-overlay" class="password-overlay">
+        <div class="password-prompt animate-slide-up">
+            <div class="password-icon">
+                <i data-lucide="lock" class="animate-pulse"></i>
+            </div>
+            <h2>Portfolio Access</h2>
+            <p>This portfolio is password protected for confidential client work.</p>
+            <div class="password-form">
+                <input type="password" id="password-input" placeholder="Enter password..." class="animate-focus">
+                <button id="password-submit" class="btn btn-primary animate-hover">
+                    <span>Access Portfolio</span>
+                    <i data-lucide="arrow-right" class="btn-icon"></i>
+                </button>
+            </div>
+            <p id="password-error" class="error-message animate-shake" style="display:none;">
+                <i data-lucide="alert-circle"></i>
+                Incorrect password. Please try again.
+            </p>
+        </div>
+    </div>
+
+    <!-- Modern Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="logo-animation">
+                <svg viewBox="0 0 100 100" class="logo-svg">
+                    <circle cx="50" cy="50" r="40" class="logo-circle animate-draw" />
+                    <path d="M30 35 L50 55 L70 35" class="logo-check animate-draw-delay" />
+                </svg>
+            </div>
+            <div class="loading-text animate-typewriter">
+                <span>Loading Experience</span>
+                <div class="loading-dots">
+                    <span class="dot animate-bounce-1">.</span>
+                    <span class="dot animate-bounce-2">.</span>
+                    <span class="dot animate-bounce-3">.</span>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill animate-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Glass Header -->
+    <header class="glass-header" id="header">
+        <div class="container">
+            <div class="header-content">
+                
+                <!-- Logo with particles -->
+                <div class="logo-container animate-slide-in">
+                    <a href="#hero" class="logo">
+                        <div class="logo-icon">
+                            <canvas id="logo-particles" width="40" height="40"></canvas>
+                        </div>
+                        <span class="logo-text">tayler.id</span>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item animate-slide-down">
+                            <a href="#about" class="nav-link magnetic">
+                                <i data-lucide="user" class="nav-icon"></i>
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li class="nav-item animate-slide-down">
+                            <a href="#skills" class="nav-link magnetic">
+                                <i data-lucide="code" class="nav-icon"></i>
+                                <span>Skills</span>
+                            </a>
+                        </li>
+                        <li class="nav-item animate-slide-down">
+                            <a href="#projects" class="nav-link magnetic">
+                                <i data-lucide="briefcase" class="nav-icon"></i>
+                                <span>Projects</span>
+                            </a>
+                        </li>
+                        <li class="nav-item animate-slide-down">
+                            <a href="#contact" class="nav-link magnetic">
+                                <i data-lucide="mail" class="nav-icon"></i>
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Header Actions -->
+                <div class="header-actions">
+                    <button class="theme-toggle animate-hover" id="theme-toggle" aria-label="Toggle Theme">
+                        <div class="theme-icon-container">
+                            <i data-lucide="sun" class="theme-icon theme-icon-light"></i>
+                            <i data-lucide="moon" class="theme-icon theme-icon-dark"></i>
+                        </div>
+                    </button>
+                    <button class="menu-toggle animate-hover" id="menu-toggle" aria-label="Toggle Menu">
+                        <span class="menu-line"></span>
+                        <span class="menu-line"></span>
+                        <span class="menu-line"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Header progress indicator -->
+        <div class="scroll-progress">
+            <div class="scroll-progress-fill"></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section - Animate UI Style -->
+        <section id="hero" class="hero">
+            <div class="hero-background">
+                <canvas id="hero-particles" class="hero-canvas"></canvas>
+                <div class="gradient-mesh animate-float"></div>
+            </div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="hero-intro animate-fade-up">
+                            <span class="hero-greeting animate-typewriter">Hello, I'm Tayler</span>
+                            <h1 class="hero-title">
+                                <span class="hero-title-line animate-slide-up">Senior UX Designer &</span>
+                                <span class="hero-title-highlight animate-slide-up-delay">Frontend Developer</span>
+                            </h1>
+                        </div>
+                        
+                        <p class="hero-description animate-fade-up-delay">
+                            With 25+ years of experience, I create human-centered digital experiences 
+                            that combine beautiful design with powerful functionality. Specializing in 
+                            AI-driven interfaces and scalable design systems.
+                        </p>
+                        
+                        <div class="hero-actions animate-fade-up-more">
+                            <a href="#projects" class="btn btn-primary animate-pulse-hover">
+                                <span>View My Work</span>
+                                <i data-lucide="arrow-down" class="btn-icon animate-bounce-subtle"></i>
+                            </a>
+                            <a href="#contact" class="btn btn-secondary animate-hover">
+                                <span>Get in Touch</span>
+                                <i data-lucide="message-circle" class="btn-icon"></i>
+                            </a>
+                        </div>
+                        
+                        <!-- Animated Stats -->
+                        <div class="hero-stats animate-slide-up-stagger">
+                            <div class="stat-item animate-counter">
+                                <div class="stat-icon">
+                                    <i data-lucide="calendar" class="animate-pulse-soft"></i>
+                                </div>
+                                <strong class="stat-number" data-count="25">0</strong>
+                                <span class="stat-label">Years Experience</span>
+                            </div>
+                            <div class="stat-item animate-counter">
+                                <div class="stat-icon">
+                                    <i data-lucide="rocket" class="animate-pulse-soft"></i>
+                                </div>
+                                <strong class="stat-number" data-count="100">0</strong>
+                                <span class="stat-label">Projects Delivered</span>
+                            </div>
+                            <div class="stat-item animate-counter">
+                                <div class="stat-icon">
+                                    <i data-lucide="zap" class="animate-pulse-soft"></i>
+                                </div>
+                                <strong class="stat-value">AI</strong>
+                                <span class="stat-label">Powered Solutions</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Interactive Visual -->
+                    <div class="hero-visual animate-float-delayed">
+                        <div class="hero-card glass-effect animate-tilt">
+                            <div class="card-content">
+                                <div class="skill-rings">
+                                    <div class="skill-ring animate-draw-circle" data-progress="95">
+                                        <span class="skill-label">UX</span>
+                                    </div>
+                                    <div class="skill-ring animate-draw-circle" data-progress="90">
+                                        <span class="skill-label">Frontend</span>
+                                    </div>
+                                    <div class="skill-ring animate-draw-circle" data-progress="85">
+                                        <span class="skill-label">AI/ML</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about section-padding">
+            <div class="container">
+                <div class="section-header animate-fade-up">
+                    <div class="section-badge">
+                        <i data-lucide="user" class="badge-icon"></i>
+                        <span>About Me</span>
+                    </div>
+                    <h2 class="section-title">Crafting Digital Experiences</h2>
+                    <p class="section-subtitle">Where design meets technology</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-text animate-slide-up-stagger">
+                        <h3 class="about-heading">Hi, I'm Tayler</h3>
+                        <p class="about-paragraph">
+                            I'm a Senior UX Designer and Frontend Developer with over 8 years of experience 
+                            creating intuitive, accessible, and engaging digital experiences. My approach 
+                            combines user-centered design principles with clean, efficient code.
+                        </p>
+                        <p class="about-paragraph">
+                            I specialize in designing and developing complex applications, with a particular 
+                            focus on AI-driven interfaces, design systems, and health applications.
+                        </p>
+                        
+                        <!-- Experience Timeline -->
+                        <div class="timeline">
+                            <div class="timeline-item animate-slide-right">
+                                <div class="timeline-marker">
+                                    <i data-lucide="briefcase"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Senior UX Designer</h4>
+                                    <span class="timeline-date">2020 - Present</span>
+                                    <p>Leading design systems and AI interface development</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item animate-slide-right-delay">
+                                <div class="timeline-marker">
+                                    <i data-lucide="code"></i>
+                                </div>
+                                <div class="timeline-content">
+                                    <h4>Frontend Developer</h4>
+                                    <span class="timeline-date">2018 - 2020</span>
+                                    <p>Building responsive web applications and design systems</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-visual animate-float">
+                        <div class="image-container glass-effect animate-tilt">
+                            <img src="assets/images/headshout.jpg" alt="Tayler Ramsay" class="about-image">
+                            <div class="image-overlay">
+                                <div class="overlay-content">
+                                    <i data-lucide="play-circle" class="play-icon animate-pulse"></i>
+                                    <span>Watch My Story</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating skill badges -->
+                        <div class="floating-badges">
+                            <div class="skill-badge animate-float-1" data-tooltip="React Expert">
+                                <i data-lucide="react"></i>
+                            </div>
+                            <div class="skill-badge animate-float-2" data-tooltip="Design Systems">
+                                <i data-lucide="layers"></i>
+                            </div>
+                            <div class="skill-badge animate-float-3" data-tooltip="AI/ML Integration">
+                                <i data-lucide="brain"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills section-padding">
+            <div class="container">
+                <div class="section-header animate-fade-up">
+                    <div class="section-badge">
+                        <i data-lucide="code" class="badge-icon"></i>
+                        <span>Skills</span>
+                    </div>
+                    <h2 class="section-title">Core Competencies</h2>
+                    <p class="section-subtitle">Technologies and methodologies I excel in</p>
+                </div>
+                
+                <div class="skills-grid">
+                    <div class="skill-category glass-effect animate-slide-up">
+                        <div class="category-icon">
+                            <i data-lucide="palette" class="animate-pulse-soft"></i>
+                        </div>
+                        <h3 class="category-title">UX Design</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">User Research & Testing</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress animate-progress" data-progress="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Information Architecture</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress animate-progress" data-progress="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Interaction Design</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress animate-progress" data-progress="92"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category glass-effect animate-slide-up-delay">
+                        <div class="category-icon">
+                            <i data-lucide="monitor" class="animate-pulse-soft"></i>
+                        </div>
+                        <h3 class="category-title">Frontend Development</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">React/Next.js</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress animate-progress" data-progress="88"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">TypeScript</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress animate-progress" data-progress="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">CSS/Tailwind</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress animate-progress" data-progress="93"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category glass-effect animate-slide-up-more">
+                        <div class="category-icon">
+                            <i data-lucide="zap" class="animate-pulse-soft"></i>
+                        </div>
+                        <h3 class="category-title">AI Integration</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">AI-Driven UI/UX</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress animate-progress" data-progress="87"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Machine Learning</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress animate-progress" data-progress="78"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Conversational UI</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress animate-progress" data-progress="82"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects section-padding">
+            <div class="container">
+                <div class="section-header animate-fade-up">
+                    <div class="section-badge">
+                        <i data-lucide="briefcase" class="badge-icon"></i>
+                        <span>Portfolio</span>
+                    </div>
+                    <h2 class="section-title">Featured Projects</h2>
+                    <p class="section-subtitle">Real-world solutions with measurable impact</p>
+                </div>
+                
+                <!-- Project Filter Tabs -->
+                <div class="project-filters animate-slide-up">
+                    <button class="filter-btn active" data-filter="all">
+                        <span>All Projects</span>
+                    </button>
+                    <button class="filter-btn" data-filter="ui-ux">
+                        <i data-lucide="palette"></i>
+                        <span>UI/UX</span>
+                    </button>
+                    <button class="filter-btn" data-filter="frontend">
+                        <i data-lucide="code"></i>
+                        <span>Frontend</span>
+                    </button>
+                    <button class="filter-btn" data-filter="full-stack">
+                        <i data-lucide="layers"></i>
+                        <span>Full-Stack</span>
+                    </button>
+                </div>
+                
+                <div class="projects-grid">
+                    <!-- OnboardIQ - Hero Project -->
+                    <article class="project-card featured-card glass-effect animate-slide-up" data-category="full-stack">
+                        <div class="project-image">
+                            <div class="image-overlay gradient-mesh"></div>
+                            <div class="project-badge">
+                                <i data-lucide="rocket"></i>
+                                <span>Featured</span>
+                            </div>
+                            <div class="project-status live">
+                                <div class="status-dot animate-pulse"></div>
+                                <span>Live Demo</span>
+                            </div>
+                        </div>
+                        
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3 class="project-title">OnboardIQ Automation Platform</h3>
+                                <div class="project-category">
+                                    <span class="category-tag">B2B Platform</span>
+                                    <span class="category-tag">Full-Stack</span>
+                                </div>
+                            </div>
+                            
+                            <p class="project-description">
+                                Complete UX→UI→Frontend→Backend development. Transformed 6-month manual 
+                                processes into 2-3 month automated workflows through comprehensive stakeholder 
+                                research and technical implementation.
+                            </p>
+                            
+                            <div class="project-metrics">
+                                <div class="metric">
+                                    <div class="metric-icon">
+                                        <i data-lucide="trending-up"></i>
+                                    </div>
+                                    <div class="metric-content">
+                                        <strong>$2.1M</strong>
+                                        <span>Revenue Impact</span>
+                                    </div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-icon">
+                                        <i data-lucide="clock"></i>
+                                    </div>
+                                    <div class="metric-content">
+                                        <strong>65%</strong>
+                                        <span>Process Improvement</span>
+                                    </div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-icon">
+                                        <i data-lucide="users"></i>
+                                    </div>
+                                    <div class="metric-content">
+                                        <strong>15+</strong>
+                                        <span>Stakeholder Interviews</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-story">
+                                <h4>Development Journey</h4>
+                                <div class="story-phases">
+                                    <div class="phase">
+                                        <i data-lucide="search"></i>
+                                        <strong>UX Research:</strong> 15+ stakeholder interviews revealed 6-month onboarding bottlenecks
+                                    </div>
+                                    <div class="phase">
+                                        <i data-lucide="palette"></i>
+                                        <strong>UI Design:</strong> Enterprise design system with 60fps performance optimization
+                                    </div>
+                                    <div class="phase">
+                                        <i data-lucide="code"></i>
+                                        <strong>Frontend:</strong> Set-based O(1) filtering with hardware-accelerated animations
+                                    </div>
+                                    <div class="phase">
+                                        <i data-lucide="server"></i>
+                                        <strong>Backend:</strong> Node.js/Express API with PostgreSQL and authentication
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-actions">
+                                <button class="btn btn-primary animate-pulse-hover" onclick="launchOnboardIQDemo()">
+                                    <i data-lucide="external-link"></i>
+                                    <span>Experience Live Demo</span>
+                                </button>
+                                <a href="work/onboard-iq.html" class="btn btn-secondary animate-hover">
+                                    <i data-lucide="file-text"></i>
+                                    <span>Case Study</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Other Project Cards -->
+                    <article class="project-card glass-effect animate-slide-up" data-category="ui-ux frontend">
+                        <div class="project-image">
+                            <img src="assets/Ashley_logo_2022.svg.png" alt="Ashley Furniture" class="project-img">
+                            <div class="image-overlay"></div>
+                            <div class="hover-content">
+                                <i data-lucide="external-link" class="hover-icon"></i>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Ashley Furniture Console</h3>
+                            <p class="project-description">+12% incremental approvals in 18-store pilot</p>
+                            <div class="project-tags">
+                                <span class="tag">Retail</span>
+                                <span class="tag">Fintech</span>
+                            </div>
+                            <a href="work/ashley-furniture.html" class="project-link">
+                                <span>View Case Study</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                    
+                    <article class="project-card glass-effect animate-slide-up" data-category="ui-ux frontend">
+                        <div class="project-image">
+                            <img src="assets/images/aspen-dental-logo-png_seeklogo-333502.png" alt="Aspen Dental" class="project-img">
+                            <div class="image-overlay"></div>
+                            <div class="hover-content">
+                                <i data-lucide="external-link" class="hover-icon"></i>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Aspen Dental Portal</h3>
+                            <p class="project-description">Instant approvals at 1,100+ clinics</p>
+                            <div class="project-tags">
+                                <span class="tag">Healthcare</span>
+                                <span class="tag">Fintech</span>
+                            </div>
+                            <a href="work/aspen-dental.html" class="project-link">
+                                <span>View Case Study</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                    
+                    <!-- More projects... -->
+                    <article class="project-card glass-effect animate-slide-up" data-category="frontend">
+                        <div class="project-image">
+                            <img src="assets/images/Dell_Logo.svg.png" alt="Dell Technologies" class="project-img">
+                            <div class="image-overlay"></div>
+                            <div class="hover-content">
+                                <i data-lucide="external-link" class="hover-icon"></i>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Dell Pay Waterfall</h3>
+                            <p class="project-description">Bread Pay → Waterfall API integration</p>
+                            <div class="project-tags">
+                                <span class="tag">E-commerce</span>
+                                <span class="tag">API</span>
+                            </div>
+                            <a href="work/dell-technologies.html" class="project-link">
+                                <span>View Case Study</span>
+                                <i data-lucide="arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section-padding">
+            <div class="container">
+                <div class="section-header animate-fade-up">
+                    <div class="section-badge">
+                        <i data-lucide="mail" class="badge-icon"></i>
+                        <span>Contact</span>
+                    </div>
+                    <h2 class="section-title">Let's Work Together</h2>
+                    <p class="section-subtitle">Ready to bring your ideas to life</p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info animate-slide-up">
+                        <h3 class="contact-heading">Get in Touch</h3>
+                        <p class="contact-text">
+                            Interested in working together? I'm always open to discussing new projects, 
+                            creative ideas, or opportunities to be part of your vision.
+                        </p>
+                        
+                        <div class="contact-methods">
+                            <a href="mailto:hello@tayler.id" class="contact-method animate-hover">
+                                <div class="method-icon">
+                                    <i data-lucide="mail"></i>
+                                </div>
+                                <div class="method-content">
+                                    <h4>Email</h4>
+                                    <span>hello@tayler.id</span>
+                                </div>
+                                <i data-lucide="external-link" class="method-arrow"></i>
+                            </a>
+                            
+                            <a href="#" class="contact-method animate-hover">
+                                <div class="method-icon">
+                                    <i data-lucide="linkedin"></i>
+                                </div>
+                                <div class="method-content">
+                                    <h4>LinkedIn</h4>
+                                    <span>Connect with me</span>
+                                </div>
+                                <i data-lucide="external-link" class="method-arrow"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container animate-slide-up-delay">
+                        <form class="contact-form glass-effect" id="contact-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Name *</label>
+                                    <input type="text" id="name" name="name" class="form-input animate-focus" required>
+                                    <div class="form-border"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" id="email" name="email" class="form-input animate-focus" required>
+                                    <div class="form-border"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject" class="form-label">Subject *</label>
+                                <input type="text" id="subject" name="subject" class="form-input animate-focus" required>
+                                <div class="form-border"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="form-label">Message *</label>
+                                <textarea id="message" name="message" class="form-textarea animate-focus" rows="5" required></textarea>
+                                <div class="form-border"></div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-full-width animate-pulse-hover">
+                                <span class="btn-text">Send Message</span>
+                                <i data-lucide="send" class="btn-icon"></i>
+                                <div class="btn-loader">
+                                    <div class="loader-spinner"></div>
+                                </div>
+                            </button>
+                            
+                            <div class="form-status" id="form-status"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modern Footer -->
+    <footer class="footer glass-effect">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo-icon">
+                        <canvas id="footer-particles" width="30" height="30"></canvas>
+                    </div>
+                    <span class="logo-text">tayler.id</span>
+                </div>
+                
+                <div class="footer-social">
+                    <a href="#" class="social-link animate-hover" aria-label="LinkedIn">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="social-link animate-hover" aria-label="GitHub">
+                        <i data-lucide="github"></i>
+                    </a>
+                    <a href="#" class="social-link animate-hover" aria-label="Twitter">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                </div>
+                
+                <div class="footer-copyright">
+                    <p>&copy; 2025 Tayler Ramsay. Crafted with <i data-lucide="heart" class="heart-icon animate-pulse"></i></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modern AI Assistant -->
+    <div class="ai-assistant" id="ai-assistant">
+        <button class="ai-toggle glass-effect animate-float" id="ai-toggle">
+            <div class="ai-avatar">
+                <i data-lucide="bot" class="ai-icon animate-pulse-soft"></i>
+            </div>
+            <div class="ai-indicator animate-pulse"></div>
+        </button>
+        
+        <div class="ai-panel glass-effect" id="ai-panel">
+            <div class="ai-header">
+                <div class="ai-info">
+                    <h3 class="ai-title">AI Assistant</h3>
+                    <span class="ai-status">Online</span>
+                </div>
+                <button class="ai-close" id="ai-close">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <div class="ai-messages" id="ai-messages">
+                <div class="ai-message ai-message-assistant animate-slide-in">
+                    <div class="message-avatar">
+                        <i data-lucide="bot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Hi! I'm Tayler's AI assistant. How can I help you learn more about his work and experience?</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ai-input-container">
+                <div class="ai-input-wrapper">
+                    <input type="text" class="ai-input animate-focus" placeholder="Ask about Tayler's work..." id="ai-input">
+                    <button class="ai-send" id="ai-send">
+                        <i data-lucide="send"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/animate-ui.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/main-animate.js"></script>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        
+        // Initialize animations after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeAnimations();
+            initializeParticles();
+        });
+    </script>
+</body>
+</html>

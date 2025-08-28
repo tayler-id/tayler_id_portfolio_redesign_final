@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnboardIQ Demo - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/onboard-iq.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-lg);
+        }
+        
+        .login-container {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            padding: var(--spacing-2xl);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .login-header {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .login-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .login-subtitle {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .demo-notice {
+            background: var(--color-info-bg);
+            color: var(--color-info);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-lg);
+            font-size: var(--font-size-sm);
+            border-left: 4px solid var(--color-info);
+        }
+        
+        .login-form {
+            text-align: left;
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .login-btn {
+            width: 100%;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .demo-credentials {
+            background: var(--color-gray-50);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-sm);
+            color: var(--color-text-light);
+        }
+        
+        .credential-item {
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .credential-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .error-message {
+            color: var(--color-error);
+            font-size: var(--font-size-sm);
+            margin-top: var(--spacing-sm);
+            display: none;
+        }
+        
+        .portfolio-link {
+            position: absolute;
+            top: var(--spacing-lg);
+            right: var(--spacing-lg);
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.9;
+            transition: opacity var(--timing-fast) ease;
+        }
+        
+        .portfolio-link:hover {
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .login-container {
+                margin: var(--spacing-lg);
+                padding: var(--spacing-xl);
+            }
+            
+            .portfolio-link {
+                position: static;
+                display: block;
+                text-align: center;
+                margin-top: var(--spacing-lg);
+                color: var(--color-primary);
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../src/work/onboard-iq.html" class="portfolio-link">← Back to Portfolio</a>
+    
+    <div class="login-container">
+        <div class="login-header">
+            <h1 class="login-title">OnboardIQ Demo</h1>
+            <p class="login-subtitle">Portfolio demonstration of the OnboardIQ platform</p>
+        </div>
+        
+        <div class="demo-notice">
+            <strong>Portfolio Demo:</strong> This is a working demonstration showcasing the complete UX→UI→Frontend→Backend development process. Use any username/password to explore the platform.
+        </div>
+        
+        <form class="login-form" id="login-form">
+            <div class="form-group">
+                <label class="form-label" for="username">Username</label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    class="form-input" 
+                    placeholder="Enter any username"
+                    required
+                >
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    class="form-input" 
+                    placeholder="Enter any password"
+                    required
+                >
+            </div>
+            
+            <button type="submit" class="btn btn-primary login-btn" id="login-btn">
+                Access Demo
+            </button>
+            
+            <div class="error-message" id="error-message"></div>
+        </form>
+        
+        <div class="demo-credentials">
+            <div class="credential-item"><strong>Demo Access:</strong> Any username and password combination will work</div>
+            <div class="credential-item"><strong>Admin Features:</strong> Use username "admin" to see admin-only features</div>
+            <div class="credential-item"><strong>Regular User:</strong> Use any other username for standard user experience</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('login-form');
+            const loginBtn = document.getElementById('login-btn');
+            const errorMessage = document.getElementById('error-message');
+            
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                if (!username || !password) {
+                    showError('Please enter both username and password');
+                    return;
+                }
+                
+                // Set loading state
+                loginBtn.textContent = 'Accessing Demo...';
+                loginBtn.disabled = true;
+                hideError();
+                
+                try {
+                    const response = await fetch('/api/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ username, password })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        // Redirect to dashboard
+                        window.location.href = '/';
+                    } else {
+                        showError(data.message || 'Login failed');
+                    }
+                } catch (error) {
+                    console.error('Login error:', error);
+                    showError('Network error. Please try again.');
+                } finally {
+                    loginBtn.textContent = 'Access Demo';
+                    loginBtn.disabled = false;
+                }
+            });
+            
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+            }
+            
+            function hideError() {
+                errorMessage.style.display = 'none';
+            }
+            
+            // Auto-focus username field
+            document.getElementById('username').focus();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+
+> portfolio-chat-backend@1.0.0 start
+> node server.js
+
+Backend server listening on host 0.0.0.0, port 3000
+LanceDB table 'portfolio_docs' not found. RAG will not function until ingestion script is run.

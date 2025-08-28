@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: OnboardIQ - Enterprise Merchant Onboarding Platform - Tayler.id</title>
+    <meta name="description" content="How I led the complete UX→UI→Frontend→Backend development of OnboardIQ, transforming 6-month manual processes into 2-3 month automated workflows with $2.1M revenue impact.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* OnboardIQ Specific Styles */
+        .onboard-iq-hero {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            color: white;
+            padding: var(--spacing-xl) 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .onboard-iq-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .onboard-iq-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .impact-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .impact-metric {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: var(--spacing-md);
+            text-align: center;
+        }
+        
+        .impact-metric__value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fbbf24;
+            display: block;
+        }
+        
+        .impact-metric__label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-top: var(--spacing-xs);
+        }
+        
+        .demo-launcher {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--color-text);
+            border-radius: 16px;
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .demo-launcher__title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .demo-launcher__description {
+            font-size: 1rem;
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-md);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-sm);
+            margin: var(--spacing-md) 0;
+        }
+        
+        .demo-feature {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            color: var(--color-text);
+        }
+        
+        .demo-feature::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: var(--spacing-xs);
+        }
+        
+        .btn--demo {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            padding: var(--spacing-md) var(--spacing-lg);
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn--demo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+        
+        .process-section {
+            background: var(--color-background-alt);
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .process-step {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .process-step__number {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 600;
+            margin-right: var(--spacing-sm);
+        }
+        
+        .process-step__title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .stakeholder-quotes {
+            background: #f8fafc;
+            padding: var(--spacing-lg);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 0 8px 8px 0;
+            margin: var(--spacing-md) 0;
+        }
+        
+        .quote {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--color-text);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .quote-author {
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 0.9rem;
+        }
+        
+        .tech-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .tech-card {
+            background: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tech-card__title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .tech-tag {
+            display: inline-block;
+            background: #e0e7ff;
+            color: var(--color-primary);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0 var(--spacing-xs) var(--spacing-xs) 0;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border-radius: 12px;
+            padding: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .result-card__value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .result-card__label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .impact-metrics {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .tech-showcase {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="loading">
+    <div id="password-overlay" class="password-overlay">
+        <div class="password-prompt">
+            <h2>Enter Password</h2>
+            <p>This portfolio is password protected.</p>
+            <input type="password" id="password-input" placeholder="Password">
+            <button id="password-submit" class="btn btn--primary">Submit</button>
+            <p id="password-error" class="password-error-message" style="display:none; color: var(--color-primary); margin-top: var(--spacing-sm);">Incorrect password. Please try again.</p>
+        </div>
+    </div>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader__logo" id="preloader-logo"></div>
+        <div class="preloader__text">Loading Experience</div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__logo">
+                <a href="../index.html#hero" class="logo">
+                    <img src="../assets/images/logo.png" alt="Tayler.id Logo" class="logo__image">
+                    <span class="logo__text">tayler.id</span>
+                </a>
+            </div>
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="../index.html#about" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="../index.html#skills" class="nav__link">Skills</a></li>
+                    <li class="nav__item"><a href="../index.html#projects" class="nav__link">Projects</a></li>
+                    <li class="nav__item"><a href="../index.html#case-studies" class="nav__link">Case Studies</a></li>
+                    <li class="nav__item"><a href="../index.html#contact" class="nav__link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header__actions">
+                <button class="theme-toggle" aria-label="Toggle Theme" id="theme-toggle">
+                    <div class="theme-toggle__icon">
+                        <div class="theme-toggle__sun">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 1v2m0 18v2M4.2 4.2l1.4 1.4m12.8 12.8l1.4 1.4M1 12h2m18 0h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="theme-toggle__moon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </button>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                    <span class="menu-toggle__line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- OnboardIQ Hero Section -->
+        <section class="onboard-iq-hero">
+            <div class="container">
+                <div class="onboard-iq-content">
+                    <div style="text-align: center; margin-bottom: var(--spacing-lg);">
+                        <div style="display: inline-block; background: rgba(255,255,255,0.1); padding: var(--spacing-xs) var(--spacing-sm); border-radius: 20px; font-size: 0.9rem; margin-bottom: var(--spacing-md);">
+                            <span style="color: #fbbf24;">●</span> Enterprise B2B Platform
+                        </div>
+                    </div>
+                    
+                    <h1 style="font-size: 3rem; font-weight: 700; text-align: center; margin-bottom: var(--spacing-md); line-height: 1.1;">
+                        OnboardIQ
+                        <span style="display: block; font-size: 1.5rem; font-weight: 400; opacity: 0.9; margin-top: var(--spacing-sm);">
+                            Complete UX→UI→Frontend→Backend Process
+                        </span>
+                    </h1>
+                    
+                    <p style="font-size: 1.25rem; text-align: center; max-width: 600px; margin: 0 auto var(--spacing-lg); opacity: 0.9;">
+                        How I transformed Versatile Credit's 6-month manual merchant onboarding into a 2-3 month automated platform through comprehensive user research, enterprise UI design, and full-stack implementation.
+                    </p>
+
+                    <div class="impact-metrics">
+                        <div class="impact-metric">
+                            <span class="impact-metric__value">$2.1M</span>
+                            <div class="impact-metric__label">Revenue Acceleration</div>
+                        </div>
+                        <div class="impact-metric">
+                            <span class="impact-metric__value">65%</span>
+                            <div class="impact-metric__label">Process Improvement</div>
+                        </div>
+                        <div class="impact-metric">
+                            <span class="impact-metric__value">15+</span>
+                            <div class="impact-metric__label">Stakeholder Interviews</div>
+                        </div>
+                        <div class="impact-metric">
+                            <span class="impact-metric__value">300%</span>
+                            <div class="impact-metric__label">Capacity Scaling</div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Demo Launcher -->
+                    <div class="demo-launcher">
+                        <h2 class="demo-launcher__title">🎯 Experience OnboardIQ Live</h2>
+                        <p class="demo-launcher__description">
+                            See how I transformed complex manual processes into an elegant automated platform. 
+                            Choose your perspective and explore the complete solution.
+                        </p>
+                        
+                        <div class="demo-features">
+                            <div class="demo-feature">Real merchant onboarding flow</div>
+                            <div class="demo-feature">Multi-stakeholder dashboards</div>
+                            <div class="demo-feature">Custom animation framework</div>
+                            <div class="demo-feature">Enterprise constraint navigation</div>
+                        </div>
+                        
+                        <div style="margin-top: var(--spacing-md);">
+                            <button class="btn--demo" onclick="launchDemo()" id="demo-btn">
+                                💻 Launch Interactive Demo
+                            </button>
+                            <p style="font-size: 0.875rem; color: var(--color-text-light); margin-top: var(--spacing-xs);">
+                                ⏱️ 3-minute guided experience
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Executive Summary Section -->
+        <section class="case-study-section">
+            <div class="container">
+                <h2 class="section-title">Executive Summary</h2>
+                <div class="process-step">
+                    <h3 class="process-step__title">
+                        <span class="process-step__number">1</span>
+                        The Challenge
+                    </h3>
+                    <p>OnboardIQ is a comprehensive B2B automation platform that transforms Versatile Credit's manual merchant onboarding process from a 6-month ordeal into a streamlined 2-3 month digital experience. As UX/UI Engineer, I led the complete product development lifecycle—from stakeholder interviews and user journey mapping through full-stack implementation—to solve critical scalability and visibility challenges affecting revenue generation.</p>
+                    
+                    <div class="stakeholder-quotes">
+                        <div class="quote">
+                            "Manual merchant onboarding processes created a 6-month average timeline, preventing scaling beyond current capacity and causing unpredictable revenue forecasting."
+                        </div>
+                        <div class="quote-author">Research Finding - 15+ Stakeholder Interviews</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Process Section -->
+        <section class="process-section">
+            <div class="container">
+                <h2 class="section-title">UX Research Foundation</h2>
+                <p style="text-align: center; font-size: 1.1rem; color: var(--color-text-light); max-width: 600px; margin: 0 auto var(--spacing-lg);">
+                    Comprehensive stakeholder research across 15+ participants, revealing critical business processes and user pain points.
+                </p>
+
+                <div class="process-step">
+                    <h3 class="process-step__title">
+                        <span class="process-step__number">1</span>
+                        User Interview Sessions
+                    </h3>
+                    <ul>
+                        <li><strong>Maxwell Rieck (CFO)</strong> - Financial metrics, ROI requirements, and business impact assessment</li>
+                        <li><strong>Chris Herndon (Sales)</strong> - Customer relationship management and timeline commitment challenges</li>
+                        <li><strong>Amanda/Melissa (Operations)</strong> - Daily workflow pain points and manual process documentation</li>
+                        <li><strong>Lisa Simmers (Domain Expert)</strong> - Tribal knowledge capture and lender relationship complexities</li>
+                        <li><strong>Shianne Murphy (Project Management)</strong> - Cross-departmental coordination and resource planning</li>
+                    </ul>
+                </div>
+
+                <div class="process-step">
+                    <h3 class="process-step__title">
+                        <span class="process-step__number">2</span>
+                        Research Methods Applied
+                    </h3>
+                    <div class="tech-showcase">
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Structured Interviews</h4>
+                            <p>60-minute sessions with role-specific question sets tailored to each stakeholder's domain expertise</p>
+                            <div class="tech-tag">User Research</div>
+                            <div class="tech-tag">Stakeholder Analysis</div>
+                        </div>
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Workflow Mapping</h4>
+                            <p>Current-state process documentation identifying bottlenecks and dependencies</p>
+                            <div class="tech-tag">Process Analysis</div>
+                            <div class="tech-tag">Journey Mapping</div>
+                        </div>
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Card Sorting</h4>
+                            <p>Pain point prioritization and feature importance ranking across stakeholder groups</p>
+                            <div class="tech-tag">Information Architecture</div>
+                            <div class="tech-tag">Priority Matrix</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <h3 class="process-step__title">
+                        <span class="process-step__number">3</span>
+                        Key User Personas Discovered
+                    </h3>
+                    <div class="tech-showcase">
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Amanda (Internal Operations)</h4>
+                            <p>Experienced onboarding coordinators managing 130+ foundation plans manually, requiring 8 hours per lender configuration.</p>
+                            <div class="tech-tag">Primary User</div>
+                            <div class="tech-tag">High Impact</div>
+                        </div>
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Snap (Lender Partners)</h4>
+                            <p>Financial institutions providing credit services, struggling with manual credential exchange and unclear status visibility.</p>
+                            <div class="tech-tag">External Stakeholder</div>
+                            <div class="tech-tag">Integration Critical</div>
+                        </div>
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Ashel (Merchants)</h4>
+                            <p>Business owners completing 40+ field applications with unpredictable 6-month timelines affecting business planning.</p>
+                            <div class="tech-tag">End User</div>
+                            <div class="tech-tag">Revenue Impact</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Implementation Section -->
+        <section class="case-study-section">
+            <div class="container">
+                <h2 class="section-title">Technical Architecture & Implementation</h2>
+                <p style="text-align: center; font-size: 1.1rem; color: var(--color-text-light); max-width: 600px; margin: 0 auto var(--spacing-lg);">
+                    Sophisticated brownfield enhancement within enterprise constraints, demonstrating advanced full-stack development skills.
+                </p>
+
+                <div class="process-step">
+                    <h3 class="process-step__title">
+                        <span class="process-step__number">90%</span>
+                        Frontend Engineering Focus
+                    </h3>
+                    <div class="tech-showcase">
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Custom Animation Framework</h4>
+                            <p>Hardware-accelerated CSS animations with 60fps performance targets and comprehensive accessibility support</p>
+                            <div class="tech-tag">Performance Optimization</div>
+                            <div class="tech-tag">Accessibility</div>
+                            <div class="tech-tag">Hardware Acceleration</div>
+                        </div>
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Modular CSS Architecture</h4>
+                            <p>Tailwind CSS 3.4.16 with organized component system, 150KB compressed bundle budget</p>
+                            <div class="tech-tag">Tailwind CSS</div>
+                            <div class="tech-tag">Component System</div>
+                            <div class="tech-tag">Performance Budget</div>
+                        </div>
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Enterprise Component Library</h4>
+                            <p>30+ enhanced Pebble macro components with backward compatibility and theme management</p>
+                            <div class="tech-tag">Design System</div>
+                            <div class="tech-tag">Backward Compatibility</div>
+                            <div class="tech-tag">Theme Support</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <h3 class="process-step__title">
+                        <span class="process-step__number">10%</span>
+                        Backend Integration
+                    </h3>
+                    <div class="tech-showcase">
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Enterprise Framework Navigation</h4>
+                            <p>Kotlin 1.9+ with Spring Boot 3.x, constrained by Versatile ServiceKit dependency (v2.1.17-2.2.0)</p>
+                            <div class="tech-tag">Kotlin</div>
+                            <div class="tech-tag">Spring Boot</div>
+                            <div class="tech-tag">Enterprise Constraints</div>
+                        </div>
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Database Strategy</h4>
+                            <p>PostgreSQL 17+ with minimal schema changes, preserving existing provider/contact relationships</p>
+                            <div class="tech-tag">PostgreSQL</div>
+                            <div class="tech-tag">Schema Preservation</div>
+                            <div class="tech-tag">Flyway Migrations</div>
+                        </div>
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Critical Constraints</h4>
+                            <p>Pebble Templates, Google SSO integration, ServiceKit compatibility - all non-negotiable requirements</p>
+                            <div class="tech-tag">Template Engine</div>
+                            <div class="tech-tag">SSO Integration</div>
+                            <div class="tech-tag">Legacy Compatibility</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business Results Section -->
+        <section class="process-section">
+            <div class="container">
+                <h2 class="section-title">Measurable Business Impact</h2>
+                <p style="text-align: center; font-size: 1.1rem; color: var(--color-text-light); max-width: 600px; margin: 0 auto var(--spacing-lg);">
+                    Quantified improvements across efficiency, capacity, and revenue generation.
+                </p>
+
+                <div class="results-grid">
+                    <div class="result-card">
+                        <span class="result-card__value">65%</span>
+                        <div class="result-card__label">Process Time Reduction<br>(6 months → 2-3 months)</div>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-card__value">300%</span>
+                        <div class="result-card__label">Capacity Scaling<br>Without Staff Increases</div>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-card__value">90%</span>
+                        <div class="result-card__label">Error Reduction<br>Through Automation</div>
+                    </div>
+                    <div class="result-card">
+                        <span class="result-card__value">$2.1M</span>
+                        <div class="result-card__label">Revenue Acceleration<br>Annual Impact</div>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <h3 class="process-step__title">Success Metrics Achieved</h3>
+                    <ul>
+                        <li><strong>Revenue Acceleration:</strong> Faster merchant-to-revenue conversion for $70/location SaaS fee structure across enterprise clients (600+ locations)</li>
+                        <li><strong>Operational Scalability:</strong> Platform handles volume increases (like Heartland's 800 locations) through automated workflows</li>
+                        <li><strong>Process Efficiency:</strong> Elimination of 8-hour manual promotional plan configurations through automated bulk import capabilities</li>
+                        <li><strong>Knowledge Preservation:</strong> Captured tribal knowledge from domain experts into documented workflows, reducing single-point-of-failure dependencies by 90%</li>
+                        <li><strong>Communication Consolidation:</strong> Replaced fragmented multi-channel communications with centralized platform, reducing coordination overhead by 60%</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Reflection Section -->
+        <section class="case-study-section">
+            <div class="container">
+                <h2 class="section-title">Process Reflection & Key Learnings</h2>
+                
+                <div class="process-step">
+                    <h3 class="process-step__title">What Made This Project Successful</h3>
+                    <div class="tech-showcase">
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Comprehensive User Research</h4>
+                            <p>15+ stakeholder interviews across all user types revealed systemic issues that surface-level analysis would miss. Card sorting and journey mapping provided actionable insights for platform design.</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Enterprise Constraint Navigation</h4>
+                            <p>Working within ServiceKit framework, Pebble templates, and Google SSO constraints while delivering modern UX demonstrates sophisticated enterprise development skills.</p>
+                        </div>
+                        <div class="tech-card">
+                            <h4 class="tech-card__title">Business Impact Focus</h4>
+                            <p>Every technical decision connected to measurable business outcomes: $2.1M revenue impact, 65% process improvement, 300% capacity scaling.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <h3 class="process-step__title">Technical Innovations</h3>
+                    <ul>
+                        <li><strong>Performance-First Animation Framework:</strong> Custom hardware-accelerated system with 60fps targets and comprehensive accessibility support</li>
+                        <li><strong>Brownfield Enhancement Strategy:</strong> Modernizing legacy systems while maintaining full backward compatibility and enterprise stability</li>
+                        <li><strong>Multi-Stakeholder UX Design:</strong> Single platform serving three distinct user types (Amanda, Snap, Ashel) with competing needs and success metrics</li>
+                        <li><strong>Enterprise Integration Patterns:</strong> Seamless Salesforce sync, Worth API utilization, and lender system coordination</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Steps Section -->
+        <section class="case-study-section" style="background: var(--color-background-alt);">
+            <div class="container" style="text-align: center;">
+                <h2 class="section-title">Interested in Similar Results?</h2>
+                <p style="font-size: 1.1rem; color: var(--color-text-light); max-width: 600px; margin: 0 auto var(--spacing-md);">
+                    This project demonstrates my complete UX→UI→Frontend→Backend process for enterprise B2B platforms. 
+                    Let's discuss how I can apply this approach to your complex business challenges.
+                </p>
+                
+                <div style="margin-top: var(--spacing-lg);">
+                    <a href="../index.html#contact" class="btn btn--primary" style="margin-right: var(--spacing-sm);">Start a Conversation</a>
+                    <a href="../index.html#projects" class="btn btn--secondary">View More Projects</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__logo">
+                    <img src="../assets/images/logo.png" alt="Tayler.id Logo" class="footer__logo-image">
+                    <span class="footer__logo-text">tayler.id</span>
+                </div>
+                <div class="footer__copyright">
+                    <p>&copy; 2025 Tayler. All rights reserved.</p>
+                </div>
+                <div class="footer__social">
+                    <a href="#" class="footer__social-link" aria-label="LinkedIn">
+                        <svg class="footer__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="GitHub">
+                        <svg class="footer__social-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Launch Modal -->
+    <div id="demo-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; display: flex; align-items: center; justify-content: center;">
+        <div style="background: white; border-radius: 12px; padding: var(--spacing-lg); max-width: 600px; text-align: center;">
+            <h3 style="color: var(--color-primary); margin-bottom: var(--spacing-md);">🚀 Launch OnboardIQ Demo</h3>
+            <p style="margin-bottom: var(--spacing-md); color: var(--color-text-light);">
+                Experience the complete OnboardIQ platform with working contact management, platform features matrix, 
+                and real-time filtering. This demo showcases the actual implementation built for the portfolio.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-sm); margin-bottom: var(--spacing-lg);">
+                <div style="background: #f8fafc; padding: var(--spacing-sm); border-radius: 8px; border-left: 4px solid var(--color-primary);">
+                    <strong>👥 Contact Management</strong><br>
+                    <small>Advanced filtering with 10 provider contacts</small>
+                </div>
+                <div style="background: #f8fafc; padding: var(--spacing-sm); border-radius: 8px; border-left: 4px solid var(--color-primary);">
+                    <strong>📊 Features Matrix</strong><br>
+                    <small>33+ features across 4 categories</small>
+                </div>
+            </div>
+            <div style="display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap;">
+                <button onclick="launchLiveDemo()" class="btn btn--primary" style="min-width: 180px;">
+                    🎯 Launch Live Demo
+                </button>
+                <button onclick="closeDemo()" class="btn" style="background: #f1f5f9; color: var(--color-text);">
+                    Close
+                </button>
+            </div>
+            <p style="font-size: 0.75rem; color: var(--color-text-light); margin-top: var(--spacing-sm);">
+                Demo runs on localhost:3333 • Use any username/password to login
+            </p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="../js/logoParticleSystem.js"></script>
+    <script src="../js/main.js"></script>
+    
+    <script>
+        // Demo launcher functionality
+        function launchDemo() {
+            document.getElementById('demo-modal').style.display = 'flex';
+        }
+        
+        function launchLiveDemo() {
+            // Check if demo server is running
+            fetch('http://localhost:3333/health')
+                .then(response => {
+                    if (response.ok) {
+                        // Server is running, open demo
+                        window.open('http://localhost:3333', '_blank');
+                        closeDemo();
+                    } else {
+                        showDemoError('Demo server not responding. Please ensure the OnboardIQ demo server is running on port 3333.');
+                    }
+                })
+                .catch(error => {
+                    // Server likely not running
+                    showDemoError('Demo server not available. Please start the OnboardIQ demo server first.');
+                });
+        }
+        
+        function showDemoError(message) {
+            const modal = document.getElementById('demo-modal');
+            const modalContent = modal.querySelector('div');
+            modalContent.innerHTML = `
+                <h3 style="color: #ef4444; margin-bottom: var(--spacing-md);">⚠️ Demo Server Required</h3>
+                <p style="margin-bottom: var(--spacing-md); color: var(--color-text-light);">
+                    ${message}
+                </p>
+                <div style="background: #f8fafc; padding: var(--spacing-md); border-radius: 8px; margin-bottom: var(--spacing-lg); text-align: left;">
+                    <strong style="color: var(--color-primary);">To start the demo server:</strong><br>
+                    <code style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.875rem;">
+                        cd onboard-iq-demo && npm start
+                    </code><br>
+                    <small style="color: var(--color-text-light);">Then refresh this page and try again</small>
+                </div>
+                <div style="display: flex; gap: var(--spacing-sm); justify-content: center;">
+                    <button onclick="launchLiveDemo()" class="btn btn--primary">
+                        🔄 Try Again
+                    </button>
+                    <button onclick="closeDemo()" class="btn" style="background: #f1f5f9; color: var(--color-text);">
+                        Close
+                    </button>
+                </div>
+            `;
+        }
+        
+        function closeDemo() {
+            document.getElementById('demo-modal').style.display = 'none';
+            // Reset modal content for next time
+            setTimeout(() => {
+                location.reload();
+            }, 300);
+        }
+        
+        // Add smooth scrolling for internal links
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('a[href^="#"]');
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

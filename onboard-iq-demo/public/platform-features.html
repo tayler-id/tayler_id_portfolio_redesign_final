@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnboardIQ Demo - Platform Features Matrix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/onboard-iq.css">
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .page-subtitle {
+            opacity: 0.9;
+            font-size: var(--font-size-lg);
+        }
+        
+        .matrix-wrapper {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+        
+        .matrix-controls {
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-gray-200);
+            background: var(--color-gray-50);
+        }
+        
+        .matrix-table-container {
+            overflow: auto;
+            max-height: 70vh;
+            position: relative;
+        }
+        
+        .matrix-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: var(--font-size-sm);
+        }
+        
+        .matrix-header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: var(--color-white);
+        }
+        
+        .matrix-header th {
+            background: var(--color-gray-50);
+            padding: var(--spacing-sm) var(--spacing-md);
+            text-align: center;
+            font-weight: 600;
+            border-bottom: 2px solid var(--color-gray-200);
+            white-space: nowrap;
+            position: sticky;
+            top: 0;
+        }
+        
+        .feature-name-col {
+            min-width: 250px;
+            text-align: left !important;
+            position: sticky;
+            left: 0;
+            z-index: 15;
+            background: var(--color-white);
+            border-right: 2px solid var(--color-gray-200);
+        }
+        
+        .provider-col {
+            min-width: 80px;
+            writing-mode: vertical-lr;
+            text-orientation: mixed;
+        }
+        
+        .category-row {
+            background: var(--color-primary-light) !important;
+        }
+        
+        .category-row td {
+            background: var(--color-primary-light);
+            color: var(--color-primary);
+            font-weight: 700;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-bottom: 1px solid var(--color-primary);
+        }
+        
+        .feature-row {
+            transition: background-color var(--timing-fast) ease;
+        }
+        
+        .feature-row:hover {
+            background-color: var(--color-gray-50);
+        }
+        
+        .feature-row:hover .feature-name-col {
+            background-color: var(--color-gray-50);
+        }
+        
+        .feature-cell {
+            padding: var(--spacing-sm);
+            text-align: center;
+            border-bottom: 1px solid var(--color-gray-100);
+            border-right: 1px solid var(--color-gray-100);
+            vertical-align: middle;
+            background: var(--color-white);
+        }
+        
+        .feature-name-cell {
+            text-align: left;
+            padding: var(--spacing-md);
+            position: sticky;
+            left: 0;
+            background: var(--color-white);
+            border-right: 2px solid var(--color-gray-200);
+        }
+        
+        .feature-name {
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 2px;
+            line-height: 1.3;
+        }
+        
+        .feature-description {
+            color: var(--color-text-light);
+            font-size: var(--font-size-xs);
+            line-height: 1.2;
+        }
+        
+        .support-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            font-size: var(--font-size-xs);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all var(--timing-fast) ease;
+            border: 1px solid transparent;
+        }
+        
+        .support-indicator:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .support-true {
+            background: var(--color-success);
+            color: var(--color-white);
+        }
+        
+        .support-false {
+            background: var(--color-error);
+            color: var(--color-white);
+        }
+        
+        .support-unknown {
+            background: var(--color-gray-300);
+            color: var(--color-gray-600);
+        }
+        
+        .matrix-legend {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-lg);
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: var(--font-size-sm);
+        }
+        
+        .legend-indicator {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+        }
+        
+        .matrix-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .stat-card {
+            background: var(--color-white);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid var(--color-gray-200);
+        }
+        
+        .stat-number {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .stat-label {
+            color: var(--color-text-light);
+            font-size: var(--font-size-sm);
+        }
+        
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+        
+        .category-chip {
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-300);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-xl);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            transition: all var(--timing-fast) ease;
+            user-select: none;
+        }
+        
+        .category-chip:hover {
+            border-color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+        
+        .category-chip.active {
+            background: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+        
+        .provider-filter {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        
+        .loading-spinner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        @media (max-width: 768px) {
+            .provider-col {
+                writing-mode: horizontal-tb;
+                text-orientation: unset;
+                min-width: 100px;
+            }
+            
+            .matrix-controls {
+                padding: var(--spacing-md);
+            }
+            
+            .matrix-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .category-filter {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .category-filter > div:first-child {
+                margin-bottom: var(--spacing-sm);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="flex justify-between items-center">
+                <a href="/" class="nav-brand">OnboardIQ Demo</a>
+                <div class="nav-links">
+                    <a href="/" class="nav-link">Dashboard</a>
+                    <a href="/contacts" class="nav-link">Contacts</a>
+                    <a href="/platform-features" class="nav-link active">Platform Features</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="text-sm text-gray-600">Welcome, <span id="user-name">Demo User</span></span>
+                    <button onclick="logout()" class="btn btn-secondary btn-sm">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Platform Features Matrix</h1>
+            <p class="page-subtitle">Comprehensive feature-provider compatibility matrix with advanced filtering</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container" style="padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl);">
+        <!-- Matrix Statistics -->
+        <div class="matrix-stats" id="matrix-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-features">-</div>
+                <div class="stat-label">Total Features</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="total-providers">-</div>
+                <div class="stat-label">Active Providers</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="supported-count">-</div>
+                <div class="stat-label">Supported Integrations</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="coverage-percent">-%</div>
+                <div class="stat-label">Platform Coverage</div>
+            </div>
+        </div>
+
+        <!-- Matrix Container -->
+        <div class="matrix-wrapper">
+            <!-- Matrix Controls -->
+            <div class="matrix-controls">
+                <div class="category-filter">
+                    <div>
+                        <label class="form-label" style="margin-bottom: var(--spacing-xs);">Filter by Category:</label>
+                        <div class="flex flex-wrap gap-2" id="category-chips">
+                            <div class="category-chip active" data-category="">All Categories</div>
+                        </div>
+                    </div>
+                    <div class="provider-filter">
+                        <label class="form-label" style="margin-bottom: var(--spacing-xs);">Search Providers:</label>
+                        <input 
+                            type="text" 
+                            id="provider-search" 
+                            class="form-input" 
+                            placeholder="Search providers..."
+                        >
+                    </div>
+                </div>
+                
+                <!-- Legend -->
+                <div class="matrix-legend" style="margin-top: var(--spacing-md);">
+                    <div class="legend-item">
+                        <div class="legend-indicator support-true"></div>
+                        <span>Supported</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-indicator support-false"></div>
+                        <span>Not Supported</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-indicator support-unknown"></div>
+                        <span>Unknown/TBD</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matrix Table Container -->
+            <div class="matrix-table-container" id="matrix-container">
+                <div class="loading-overlay" id="loading-overlay">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                        <div>Loading platform features matrix...</div>
+                    </div>
+                </div>
+                <table class="matrix-table" id="matrix-table">
+                    <!-- Table will be generated here -->
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="js/demo-common.js"></script>
+    <script>
+        // Platform Features Matrix System
+        let allFeatures = [];
+        let allProviders = [];
+        let featureProviderMatrix = new Map();
+        let currentCategoryFilter = '';
+        let currentProviderSearch = '';
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                showToast('Loading platform features matrix...', 'info');
+                
+                // Load data
+                await loadMatrixData();
+                
+                // Setup event listeners
+                setupEventListeners();
+                
+                // Initial render
+                renderMatrix();
+                updateStatistics();
+                
+                showToast('Platform features matrix loaded successfully', 'success');
+                
+            } catch (error) {
+                console.error('Failed to initialize platform features matrix:', error);
+                showToast('Failed to load platform features matrix', 'error');
+            } finally {
+                document.getElementById('loading-overlay').style.display = 'none';
+            }
+        });
+        
+        // Load matrix data from API
+        async function loadMatrixData() {
+            const [featuresData, providersData, matrixData] = await Promise.all([
+                apiRequest('/api/platform-features'),
+                apiRequest('/api/providers'),
+                apiRequest('/api/feature-matrix')
+            ]);
+            
+            allFeatures = featuresData.features || [];
+            allProviders = providersData.providers || [];
+            
+            // Build feature-provider support matrix
+            featureProviderMatrix.clear();
+            (matrixData.matrix || []).forEach(item => {
+                const key = `${item.feature_id}-${item.provider_id}`;
+                featureProviderMatrix.set(key, item.supported);
+            });
+            
+            // Setup category filters
+            setupCategoryFilters();
+        }
+        
+        // Setup category filter chips
+        function setupCategoryFilters() {
+            const categories = [...new Set(allFeatures.map(f => f.category))].sort();
+            const chipsContainer = document.getElementById('category-chips');
+            
+            // Clear existing chips except "All Categories"
+            const allCategoriesChip = chipsContainer.querySelector('[data-category=""]');
+            chipsContainer.innerHTML = '';
+            chipsContainer.appendChild(allCategoriesChip);
+            
+            // Add category chips
+            categories.forEach(category => {
+                const chip = document.createElement('div');
+                chip.className = 'category-chip';
+                chip.dataset.category = category;
+                chip.textContent = category;
+                chip.addEventListener('click', () => setCategoryFilter(category));
+                chipsContainer.appendChild(chip);
+            });
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Category filter
+            document.getElementById('category-chips').addEventListener('click', (e) => {
+                if (e.target.classList.contains('category-chip')) {
+                    setCategoryFilter(e.target.dataset.category);
+                }
+            });
+            
+            // Provider search
+            document.getElementById('provider-search').addEventListener('input', debounce((e) => {
+                currentProviderSearch = e.target.value.toLowerCase();
+                renderMatrix();
+            }, 300));
+        }
+        
+        // Set category filter
+        function setCategoryFilter(category) {
+            currentCategoryFilter = category;
+            
+            // Update active chip
+            document.querySelectorAll('.category-chip').forEach(chip => {
+                chip.classList.toggle('active', chip.dataset.category === category);
+            });
+            
+            renderMatrix();
+            updateStatistics();
+        }
+        
+        // Get filtered features
+        function getFilteredFeatures() {
+            return allFeatures.filter(feature => {
+                if (currentCategoryFilter && feature.category !== currentCategoryFilter) {
+                    return false;
+                }
+                return true;
+            });
+        }
+        
+        // Get filtered providers
+        function getFilteredProviders() {
+            return allProviders.filter(provider => {
+                if (currentProviderSearch && 
+                    !provider.name.toLowerCase().includes(currentProviderSearch)) {
+                    return false;
+                }
+                return provider.active;
+            });
+        }
+        
+        // Render matrix table
+        function renderMatrix() {
+            const filteredFeatures = getFilteredFeatures();
+            const filteredProviders = getFilteredProviders();
+            
+            // Group features by category
+            const featuresByCategory = {};
+            filteredFeatures.forEach(feature => {
+                if (!featuresByCategory[feature.category]) {
+                    featuresByCategory[feature.category] = [];
+                }
+                featuresByCategory[feature.category].push(feature);
+            });
+            
+            const table = document.getElementById('matrix-table');
+            
+            // Generate table HTML
+            let html = `
+                <thead class="matrix-header">
+                    <tr>
+                        <th class="feature-name-col">Feature</th>
+                        ${filteredProviders.map(provider => `
+                            <th class="provider-col">${escapeHtml(provider.name)}</th>
+                        `).join('')}
+                    </tr>
+                </thead>
+                <tbody>
+            `;
+            
+            // Generate rows by category
+            Object.keys(featuresByCategory).sort().forEach(category => {
+                // Category header row
+                html += `
+                    <tr class="category-row">
+                        <td colspan="${filteredProviders.length + 1}" class="category-header">
+                            ${escapeHtml(category)} (${featuresByCategory[category].length} features)
+                        </td>
+                    </tr>
+                `;
+                
+                // Feature rows
+                featuresByCategory[category].forEach(feature => {
+                    html += `
+                        <tr class="feature-row">
+                            <td class="feature-name-cell">
+                                <div class="feature-name">${escapeHtml(feature.name)}</div>
+                                <div class="feature-description">${escapeHtml(feature.description || '')}</div>
+                            </td>
+                            ${filteredProviders.map(provider => {
+                                const key = `${feature.id}-${provider.id}`;
+                                const supported = featureProviderMatrix.get(key);
+                                const supportClass = supported === true ? 'support-true' : 
+                                                   supported === false ? 'support-false' : 'support-unknown';
+                                const supportSymbol = supported === true ? '✓' : 
+                                                     supported === false ? '✗' : '?';
+                                
+                                return `
+                                    <td class="feature-cell">
+                                        <div class="support-indicator ${supportClass}" 
+                                             data-tooltip="${provider.name}: ${feature.name} - ${
+                                                 supported === true ? 'Supported' : 
+                                                 supported === false ? 'Not Supported' : 'Unknown'
+                                             }">
+                                            ${supportSymbol}
+                                        </div>
+                                    </td>
+                                `;
+                            }).join('')}
+                        </tr>
+                    `;
+                });
+            });
+            
+            html += '</tbody>';
+            table.innerHTML = html;
+            
+            // Reinitialize tooltips for new elements
+            initializeTooltips();
+        }
+        
+        // Update matrix statistics
+        function updateStatistics() {
+            const filteredFeatures = getFilteredFeatures();
+            const filteredProviders = getFilteredProviders();
+            
+            let supportedCount = 0;
+            let totalPossible = filteredFeatures.length * filteredProviders.length;
+            
+            filteredFeatures.forEach(feature => {
+                filteredProviders.forEach(provider => {
+                    const key = `${feature.id}-${provider.id}`;
+                    if (featureProviderMatrix.get(key) === true) {
+                        supportedCount++;
+                    }
+                });
+            });
+            
+            const coveragePercent = totalPossible > 0 ? Math.round((supportedCount / totalPossible) * 100) : 0;
+            
+            document.getElementById('total-features').textContent = filteredFeatures.length;
+            document.getElementById('total-providers').textContent = filteredProviders.length;
+            document.getElementById('supported-count').textContent = supportedCount;
+            document.getElementById('coverage-percent').textContent = `${coveragePercent}%`;
+        }
+    </script>
+</body>
+</html>
