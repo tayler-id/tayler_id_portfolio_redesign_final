@@ -28,23 +28,42 @@ export function ContactSection() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsSubmitting(false)
-    setSubmitStatus('success')
-    setFormData({ name: '', email: '', subject: '', message: '' })
-    
-    // Reset status after 3 seconds
-    setTimeout(() => setSubmitStatus('idle'), 3000)
+    try {
+      // Submit to Netlify Forms
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          'form-name': 'contact',
+          'name': formData.name,
+          'email': formData.email,
+          'subject': formData.subject,
+          'message': formData.message,
+        }).toString()
+      })
+      
+      if (response.ok) {
+        setSubmitStatus('success')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        throw new Error('Form submission failed')
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+      // Reset status after 3 seconds
+      setTimeout(() => setSubmitStatus('idle'), 3000)
+    }
   }
 
   const contactMethods = [
     {
       icon: Mail,
       title: 'Email',
-      value: 'hello@tayler.id',
-      href: 'mailto:hello@tayler.id',
+      value: 'ramsay.tayler@gmail.com',
+      href: 'mailto:ramsay.tayler@gmail.com',
       description: 'Drop me a line anytime'
     },
     {
@@ -138,7 +157,20 @@ export function ContactSection() {
           {/* Contact Form */}
           <ScrollReveal direction="right" delay={0.2}>
             <div className="bg-background/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form 
+                onSubmit={handleSubmit} 
+                className="space-y-6"
+                name="contact"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+              >
+                {/* Hidden Netlify form field */}
+                <input type="hidden" name="form-name" value="contact" />
+                {/* Honeypot field for spam protection */}
+                <p style={{ display: 'none' }}>
+                  <label>Don't fill this out: <input name="bot-field" /></label>
+                </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-sm font-medium text-foreground">
