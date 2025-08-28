@@ -1,10 +1,10 @@
 [build]
   publish = "out"
-  command = "npm ci && npm run build"
+  command = "npm ci && npm run build && ls -la"
   base = "/"
 
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
 
 # Next.js specific configuration
 [[redirects]]
