@@ -19,3 +19,12 @@ backend/.env
 
 # Local Netlify folder
 .netlify
+
+# Next.js
+.next/
+out/
+dist/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
