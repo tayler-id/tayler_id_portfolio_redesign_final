@@ -135,7 +135,7 @@ export function HeroSection() {
                 <motion.div
                   key={stat.label}
                   variants={statVariants}
-                  className="flex items-center gap-3 p-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20"
+                  className="flex items-center gap-3 p-4 rounded-2xl bg-card/80 backdrop-blur-sm border border-border"
                 >
                   <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-primary to-purple-600 flex items-center justify-center">
                     <stat.icon className="w-5 h-5 text-white" />
