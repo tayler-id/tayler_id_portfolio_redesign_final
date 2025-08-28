@@ -155,7 +155,7 @@ export function AboutSection() {
                 {/* Overlay Content */}
                 <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <motion.div
-                    className="text-center text-white"
+                    className="text-center text-foreground"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -177,7 +177,7 @@ export function AboutSection() {
                   duration={4}
                   delay={1}
                 >
-                  <div className="text-center text-white">
+                  <div className="text-center text-foreground">
                     <div className="w-2 h-2 bg-green-500 rounded-full mx-auto mb-2 animate-pulse" />
                     <div className="text-xs font-semibold">Available</div>
                   </div>
@@ -191,9 +191,9 @@ export function AboutSection() {
                   duration={5}
                   delay={1.5}
                 >
-                  <div className="text-center text-white">
+                  <div className="text-center text-foreground">
                     <div className="font-bold text-lg gradient-text">25+</div>
-                    <div className="text-xs opacity-70">Years</div>
+                    <div className="text-xs text-muted-foreground">Years</div>
                   </div>
                 </FloatingCard>
 
@@ -205,7 +205,7 @@ export function AboutSection() {
                   duration={6}
                   delay={2}
                 >
-                  <div className="flex items-center gap-2 text-white">
+                  <div className="flex items-center gap-2 text-foreground">
                     <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
                       <Code className="w-4 h-4" />
                     </div>
