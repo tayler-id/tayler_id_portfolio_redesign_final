@@ -155,7 +155,7 @@ export function AboutSection() {
                 {/* Overlay Content */}
                 <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <motion.div
-                    className="text-center text-foreground"
+                    className="text-center text-white"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
