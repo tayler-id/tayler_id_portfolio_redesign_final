@@ -123,7 +123,7 @@ export function BlueMoonCaseStudy({ onBack }: BlueMoonCaseStudyProps) {
       ]
     },
     videoDemo: {
-      src: '/videos/goldlink-demo.mp4',
+      src: '/videos/goldlink-demo.mp4?v=2',
       title: 'Blue Moon Telehealth Platform Demo'
     },
     nextSteps: {

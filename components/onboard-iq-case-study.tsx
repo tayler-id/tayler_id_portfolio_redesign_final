@@ -138,7 +138,7 @@ export function OnboardIQCaseStudy({ onBack }: OnboardIQCaseStudyProps) {
       buttonText: '💻 Launch Interactive Demo'
     },
     videoDemo: {
-      src: '/videos/onboard-iq-demo.mp4',
+      src: '/videos/onboard-iq-demo.mp4?v=2',
       title: 'OnboardIQ Workflow Engine Demo'
     },
     nextSteps: {
