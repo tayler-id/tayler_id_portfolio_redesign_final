@@ -23,14 +23,14 @@ const jetBrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Tayler.id - Senior UX Designer & Frontend Developer',
-  description: 'With 25+ years of experience, I create human-centered digital experiences that combine beautiful design with powerful functionality.',
-  keywords: ['UX Designer', 'Frontend Developer', 'React', 'TypeScript', 'Design Systems'],
+  title: 'Tayler.id - Senior Full-Stack UX Engineer',
+  description: 'With 20+ years bridging design and development. Building production systems for a $16B+ FinTech platform. Expertise in React, Kotlin/Spring, AI/ML integration.',
+  keywords: ['Full-Stack Engineer', 'UX Engineer', 'React', 'Kotlin', 'TypeScript', 'AI/ML', 'LangGraph', 'Design Systems'],
   authors: [{ name: 'Tayler Ramsay' }],
   creator: 'Tayler Ramsay',
   openGraph: {
-    title: 'Tayler.id - Senior UX Designer & Frontend Developer',
-    description: 'Creating human-centered digital experiences with AI-driven interfaces',
+    title: 'Tayler.id - Senior Full-Stack UX Engineer',
+    description: '20+ years bridging design and development. Building $16B+ FinTech systems with React, Kotlin, and AI/ML.',
     url: 'https://tayler.id',
     siteName: 'Tayler.id',
     locale: 'en_US',

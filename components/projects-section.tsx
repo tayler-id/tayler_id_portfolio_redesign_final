@@ -67,15 +67,66 @@ export function ProjectsSection() {
         { icon: Monitor, phase: 'Backend', description: 'Node.js/Express API with PostgreSQL, authentication, and RESTful endpoints supporting real-time data operations.' }
       ],
       tags: ['B2B Platform', 'Full-Stack'],
-      gradient: 'from-blue-500 to-purple-600',
-      demoAction: 'launchOnboardIQDemo'
+      gradient: 'from-blue-500 to-purple-600'
+    },
+    {
+      id: 'rayni-platform',
+      title: 'Rayni AI Document Intelligence Platform',
+      category: ['ai-ml', 'full-stack'],
+      status: 'live',
+      description: 'AI-powered instrument knowledge management for scientific research labs. Built 360K+ lines of code solo using AI-augmented workflows. Hybrid RAG system with LangGraph agents.',
+      metrics: [
+        { icon: Code, value: '360K+', label: 'Lines of Code' },
+        { icon: Layers, value: '98K', label: 'Frontend LOC' },
+        { icon: Monitor, value: '260K', label: 'Backend LOC' }
+      ],
+      story: [
+        { icon: Search, phase: 'Architecture', description: 'Hybrid RAG system combining tree-based document navigation with semantic vector search (pgvector, 1536-dim embeddings).' },
+        { icon: Zap, phase: 'AI/ML', description: 'LangGraph stateful agents with human-in-the-loop gap detection and conversation checkpointing.' },
+        { icon: Code, phase: 'Frontend', description: 'SSE streaming chat with optimistic UI, real-time token rendering, and citation deep-linking to PDF locations.' },
+        { icon: Palette, phase: 'Design', description: 'Custom "no borders needed" Tailwind design system using color layering and dual-layer shadows.' }
+      ],
+      tags: ['AI/ML', 'LangGraph', 'RAG'],
+      gradient: 'from-violet-500 to-indigo-600',
+      demoUrl: 'https://rayni.ai'
+    },
+    {
+      id: 'blue-moon-telehealth',
+      title: 'Blue Moon Senior Counseling - Telehealth Platform',
+      category: ['full-stack', 'ui-ux'],
+      status: 'live',
+      description: 'Premium telehealth video therapy platform for Medicare-covered geriatric counseling. WebRTC video conferencing, Three.js animations, comprehensive accessibility suite.',
+      metrics: [
+        { icon: Users, value: 'HIPAA', label: 'Compliant' },
+        { icon: Clock, value: 'CPT', label: 'Auto-Billing' },
+        { icon: Zap, value: 'WCAG', label: 'Accessible' }
+      ],
+      story: [
+        { icon: Monitor, phase: 'Video', description: 'WebRTC video conferencing supporting 1-on-1 PIP and adaptive multi-participant grid layouts.' },
+        { icon: TrendingUp, phase: 'Billing', description: 'Automatic CPT medical billing code detection (90832/90834/90837) with session timer.' },
+        { icon: Palette, phase: 'Design', description: 'Premium gold-on-black design system with Three.js particle morphing loader (1000+ particles).' },
+        { icon: Users, phase: 'Accessibility', description: 'Live captions (Web Speech API), background blur, high contrast, reduced motion, 6-level font sizing.' }
+      ],
+      tags: ['Healthcare', 'WebRTC', 'Accessibility'],
+      gradient: 'from-amber-500 to-orange-600',
+      demoUrl: 'https://bluemoonseniorcounseling.com'
     },
     {
       id: 'ashley-furniture',
       title: 'Ashley Furniture Financing Console',
       category: ['ui-ux', 'frontend'],
-      description: '+12% incremental approvals in 18-store pilot.',
-      tags: ['Retail', 'Fintech'],
+      description: 'Redesigned in-store financing experience for sales associates. Led UX research with store managers to identify approval bottlenecks, then designed and built a streamlined console that increased approval rates.',
+      metrics: [
+        { icon: TrendingUp, value: '+12%', label: 'Approval Rate' },
+        { icon: Users, value: '18', label: 'Store Pilot' },
+        { icon: Clock, value: '-40%', label: 'App Time' }
+      ],
+      story: [
+        { icon: Search, phase: 'Research', description: 'Conducted contextual inquiry at 5 retail locations, shadowing sales associates through financing workflows.' },
+        { icon: Palette, phase: 'Design', description: 'Created progressive disclosure UI reducing cognitive load - associates see only relevant fields per customer segment.' },
+        { icon: Code, phase: 'Development', description: 'Vue.js components with real-time Synchrony Bank API integration and instant credit decisioning.' }
+      ],
+      tags: ['Retail', 'Fintech', 'Vue.js'],
       image: '/assets/Ashley_logo_2022.svg.png',
       gradient: 'from-green-500 to-emerald-600'
     },
@@ -83,26 +134,56 @@ export function ProjectsSection() {
       id: 'aspen-dental',
       title: 'Aspen Dental Patient Financing Portal',
       category: ['ui-ux', 'frontend'],
-      description: 'Instant approvals at 1,100+ clinics.',
-      tags: ['Healthcare', 'Fintech'],
+      description: 'Patient-facing financing portal deployed across 1,100+ dental clinics. Designed for anxious patients needing treatment financing - focused on clarity, trust signals, and instant decisioning.',
+      metrics: [
+        { icon: Users, value: '1,100+', label: 'Clinics' },
+        { icon: Clock, value: '<30s', label: 'Decision Time' },
+        { icon: TrendingUp, value: '+15%', label: 'Conversion' }
+      ],
+      story: [
+        { icon: Search, phase: 'UX Research', description: 'Interviewed dental office managers to understand patient anxiety points around unexpected treatment costs.' },
+        { icon: Palette, phase: 'UI Design', description: 'Calming color palette, clear cost breakdowns, and trust badges. Mobile-first for tablet use at chairside.' },
+        { icon: Code, phase: 'Frontend', description: 'React application with HIPAA-compliant form handling and multi-lender waterfall integration.' }
+      ],
+      tags: ['Healthcare', 'Fintech', 'React'],
       image: '/assets/images/aspen-dental-logo-png_seeklogo-333502.png',
       gradient: 'from-blue-500 to-indigo-600'
     },
     {
       id: 'dell-technologies',
       title: 'Dell Technologies Dell Pay Waterfall',
-      category: ['frontend'],
-      description: 'Bread Pay → Waterfall API integration.',
-      tags: ['E-commerce', 'API'],
+      category: ['frontend', 'full-stack'],
+      description: 'Integrated Bread Pay into Dell\'s existing checkout as a waterfall financing option. Built the frontend integration layer connecting Dell\'s e-commerce platform to multiple lender APIs.',
+      metrics: [
+        { icon: Layers, value: '4', label: 'Lender APIs' },
+        { icon: Clock, value: '99.9%', label: 'Uptime' },
+        { icon: TrendingUp, value: '+$2M', label: 'Monthly Volume' }
+      ],
+      story: [
+        { icon: Code, phase: 'Architecture', description: 'Designed waterfall logic: primary lender → secondary → tertiary, with graceful degradation and retry handling.' },
+        { icon: Monitor, phase: 'Integration', description: 'Built adapter layer translating Dell checkout data to each lender\'s unique API schema requirements.' },
+        { icon: Zap, phase: 'Performance', description: 'Implemented response caching and parallel API calls to maintain sub-2-second checkout experience.' }
+      ],
+      tags: ['E-commerce', 'API', 'TypeScript'],
       image: '/assets/images/Dell_Logo.svg.png',
       gradient: 'from-cyan-500 to-blue-600'
     },
     {
       id: 'helzberg-diamonds',
       title: 'Helzberg Diamonds Digital Flex-Pay Kiosk',
-      category: ['ui-ux'],
-      description: 'Lease approvals +28% • App time -57%.',
-      tags: ['Retail', 'Fintech'],
+      category: ['ui-ux', 'frontend'],
+      description: 'In-store kiosk enabling customers to self-serve financing applications. Reduced associate involvement while dramatically improving approval rates through optimized form flow.',
+      metrics: [
+        { icon: TrendingUp, value: '+28%', label: 'Lease Approvals' },
+        { icon: Clock, value: '-57%', label: 'App Time' },
+        { icon: Users, value: '200+', label: 'Stores' }
+      ],
+      story: [
+        { icon: Search, phase: 'Problem', description: 'Associates struggled explaining lease-to-own options. Customers abandoned due to complexity and stigma.' },
+        { icon: Palette, phase: 'Solution', description: 'Self-service kiosk with jewelry-appropriate luxury aesthetic. Private, judgment-free financing exploration.' },
+        { icon: Code, phase: 'Implementation', description: 'Touch-optimized Vue.js app with large tap targets, progress indicators, and instant pre-qualification.' }
+      ],
+      tags: ['Retail', 'Fintech', 'Kiosk'],
       image: '/assets/images/helzburg.svg',
       gradient: 'from-purple-500 to-pink-600'
     },
@@ -110,38 +191,21 @@ export function ProjectsSection() {
       id: 'ifit-health',
       title: 'iFit Health Spend Checkout',
       category: ['ui-ux', 'frontend'],
-      description: '8% of DTC revenue now HSA/FSA.',
-      tags: ['Health & Wellness', 'Fintech'],
+      description: 'Added HSA/FSA payment option to iFit\'s direct-to-consumer checkout. Positioned fitness equipment as health expense, opening new customer segment.',
+      metrics: [
+        { icon: TrendingUp, value: '8%', label: 'DTC Revenue' },
+        { icon: Users, value: 'New', label: 'Customer Segment' },
+        { icon: Clock, value: 'Instant', label: 'Card Validation' }
+      ],
+      story: [
+        { icon: Search, phase: 'Opportunity', description: 'Identified that fitness equipment qualifies for HSA/FSA spending - untapped market for iFit\'s premium products.' },
+        { icon: Palette, phase: 'UX Design', description: 'Clear eligibility messaging, HSA/FSA card detection, and itemized receipts for reimbursement claims.' },
+        { icon: Code, phase: 'Integration', description: 'Health Spend API integration with real-time card BIN validation and automatic receipt generation.' }
+      ],
+      tags: ['Health & Wellness', 'Fintech', 'E-commerce'],
       image: '/assets/images/ifit.svg',
       gradient: 'from-orange-500 to-red-600'
     },
-    {
-      id: 'ai-chat-interface',
-      title: 'AI Chat Interface & LLM Integration',
-      category: ['ai-ml', 'frontend'],
-      description: 'Custom chat interface with streaming responses, context management, and LLM API integration.',
-      tags: ['AI/ML', 'React', 'OpenAI'],
-      gradient: 'from-violet-500 to-purple-600',
-      demoUrl: 'https://your-ai-chat-demo.netlify.app'
-    },
-    {
-      id: 'automation-workflow',
-      title: 'Intelligent Automation Workflows',
-      category: ['ai-ml', 'full-stack'],
-      description: 'AI-powered automation tools that enhance user workflows and business processes.',
-      tags: ['Automation', 'Machine Learning', 'Node.js'],
-      gradient: 'from-emerald-500 to-teal-600',
-      demoUrl: 'https://your-automation-demo.netlify.app'
-    },
-    {
-      id: 'llm-powered-app',
-      title: 'LLM-Powered Business Application',
-      category: ['ai-ml', 'ui-ux'],
-      description: 'Enterprise application integrating Large Language Models for enhanced user experiences.',
-      tags: ['LLM', 'Enterprise', 'AI/UX'],
-      gradient: 'from-pink-500 to-rose-600',
-      demoUrl: 'https://your-llm-demo.netlify.app'
-    }
   ]
 
   const filteredProjects = activeFilter === 'all' 
@@ -352,27 +416,13 @@ export function ProjectsSection() {
 
                     {/* Actions */}
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <MagneticButton 
-                        onClick={() => {
-                          // Call demo function if available
-                          if (featuredProject.demoAction && window[featuredProject.demoAction as any]) {
-                            (window as any)[featuredProject.demoAction]()
-                          }
-                        }}
+                      <MagneticButton
+                        onClick={() => openCaseStudy(featuredProject.id)}
                         className="flex-1 justify-center group"
                       >
-                        <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        Experience Live Demo
+                        <FileText className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        View Full Case Study
                       </MagneticButton>
-                      <Button 
-                        variant="outline" 
-                        size="lg" 
-                        className="flex-1 bg-background/50"
-                        onClick={() => openCaseStudy(featuredProject.id)}
-                      >
-                        <FileText className="w-4 h-4" />
-                        Case Study
-                      </Button>
                     </div>
                   </div>
                 </div>
@@ -397,10 +447,11 @@ export function ProjectsSection() {
                 key={project.id}
                 variants={projectVariants}
                 layout
-                className="group"
+                className="group cursor-pointer"
+                onClick={() => openCaseStudy(project.id)}
               >
-                <FloatingCard 
-                  className="h-full overflow-hidden bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 cursor-pointer transition-all duration-300"
+                <FloatingCard
+                  className="h-full overflow-hidden bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300"
                   delay={index * 0.1}
                   distance={15}
                   duration={5 + index}

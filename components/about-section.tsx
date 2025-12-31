@@ -33,9 +33,16 @@ export function AboutSection() {
 
   const timelineItems = [
     {
+      year: '2024 - Present',
+      role: 'Independent Consultant',
+      company: 'Rayni Inc, Blue Moon Senior Counseling - AI platforms & telehealth systems',
+      icon: Code,
+      color: 'from-violet-500 to-indigo-600'
+    },
+    {
       year: '2019 - Present',
-      role: 'Senior UX Research & Designer',
-      company: 'Versatile Credit - Financial Tech Solutions for Wells Fargo & Synchrony Bank',
+      role: 'Senior UX Engineer (Full-Stack)',
+      company: 'Versatile Credit → Synchrony Bank - $16B+ FinTech platform, 120+ API endpoints',
       icon: Briefcase,
       color: 'from-blue-500 to-purple-600'
     },
@@ -47,40 +54,33 @@ export function AboutSection() {
       color: 'from-purple-500 to-pink-600'
     },
     {
-      year: '2016 - 2017',
-      role: 'Contract Senior Designer / Developer',
-      company: 'Lebo Skin Care - Full brand refresh & WordPress CMS development',
-      icon: User,
-      color: 'from-green-500 to-blue-600'
-    },
-    {
-      year: '2010 - 2016',
-      role: 'Web / Graphic Designer',
-      company: 'Quad Graphics & Menasha Packaging - Print & digital design systems',
+      year: '2010 - 2017',
+      role: 'Designer / Developer',
+      company: 'Quad Graphics, Menasha, Lebo Skin Care - Print, digital & web systems',
       icon: Briefcase,
       color: 'from-orange-500 to-red-600'
     }
   ]
 
   const skills = [
+    { name: 'React/Next.js', level: 95 },
     { name: 'Vue.js', level: 95 },
-    { name: 'React', level: 90 },
-    { name: 'TypeScript', level: 88 },
+    { name: 'TypeScript', level: 92 },
+    { name: 'Kotlin/Spring Boot', level: 88 },
+    { name: 'Python/Django', level: 85 },
+    { name: 'LangGraph/RAG', level: 90 },
+    { name: 'PostgreSQL/pgvector', level: 88 },
     { name: 'Figma', level: 98 },
-    { name: 'Adobe Creative Suite', level: 95 },
-    { name: 'UX Research', level: 92 },
-    { name: 'Financial Tech UI', level: 95 },
-    { name: 'AI/ML Integration', level: 85 },
-    { name: 'Design Systems', level: 90 },
-    { name: 'HTML/CSS/JS', level: 98 }
+    { name: 'Design Systems', level: 95 },
+    { name: 'WCAG Accessibility', level: 92 }
   ]
 
   const achievements = [
-    '6+ Years at Versatile Credit',
-    'Wells Fargo & Synchrony Bank Solutions',
-    'Waterfall Financing UI/UX Design',
-    '25+ Years Design & Development Experience',
-    'WCAG Accessibility Standards Expert'
+    '$16B+ Annual Financing Platform (Synchrony Bank)',
+    '6M+ Applications Processed Annually',
+    '13,000+ Retail Locations Served',
+    'Design + Engineering: End-to-End Ownership',
+    'AI-Native: LangGraph, RAG, Vector Databases'
   ]
 
   return (
@@ -119,23 +119,21 @@ export function AboutSection() {
                 <h3 className="text-3xl font-bold font-display">Hi, I'm Tayler</h3>
                 <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    I'm a Senior UI/UX Designer and Frontend Developer with 25+ years of experience 
-                    creating intuitive, user-friendly interfaces that align with company objectives. 
-                    Specializing in Financial Tech Solutions, I've designed UI for Versatile Credit's 
-                    products and waterfall financing solutions for major lenders like Wells Fargo and Synchrony Bank.
+                    I'm a rare combination—a trained designer who can also architect enterprise
+                    systems. I don't hand off designs to engineers; I build them myself, from stakeholder
+                    research through production deployment.
                   </p>
                   <p>
-                    My technical skillset includes proficiency in HTML, CSS, JavaScript, and I'm particularly 
-                    experienced in all modern frontend technologies including React, Vue.js, and TypeScript. 
-                    I'm highly skilled in Figma, Adobe Creative Suite, and adept with Git and VS Code for seamless 
-                    collaboration. I'm committed to accessibility and adhere to WCAG guidelines, ensuring designs 
-                    are universally enjoyable regardless of abilities.
+                    Currently at Synchrony Bank (acquired Versatile Credit 2025), I own the UX and
+                    full-stack engineering for a $16B+ FinTech platform processing 6M applications
+                    annually across 13,000+ retail locations. I work with 35 lending partners including
+                    Wells Fargo, GreenSky, and Snap Finance.
                   </p>
                   <p>
-                    My design philosophy focuses on creating flexible, theme-able UI designs that provide 
-                    excellent user experiences while simplifying complex functionalities through intuitive interfaces. 
-                    I also work extensively with AI/ML integration projects, creating interfaces for LLM-powered 
-                    applications and building intelligent automation tools that enhance user workflows.
+                    I'm an AI-native developer—not just using AI tools, but building production AI systems.
+                    LangGraph agents, RAG pipelines with pgvector, and intelligent document processing.
+                    I leverage Claude Code and systematic AI workflows to ship enterprise-scale projects
+                    that would otherwise require full teams.
                   </p>
                 </div>
               </div>
@@ -252,7 +250,7 @@ export function AboutSection() {
                   delay={1.5}
                 >
                   <div className="text-center text-foreground">
-                    <div className="font-bold text-lg gradient-text">25+</div>
+                    <div className="font-bold text-lg gradient-text">20+</div>
                     <div className="text-xs text-muted-foreground">Years Experience</div>
                   </div>
                 </FloatingCard>

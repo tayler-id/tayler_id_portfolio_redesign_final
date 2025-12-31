@@ -83,9 +83,8 @@ export function HeroSection() {
                   delay={500}
                 />
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
-                  <span className="block text-foreground">Senior UX Designer</span>
-                  <span className="block text-foreground">&</span>
-                  <span className="block gradient-text">Frontend Developer</span>
+                  <span className="block text-foreground">Senior Full-Stack</span>
+                  <span className="block gradient-text">UX Engineer</span>
                 </h1>
               </div>
             </motion.div>
@@ -94,9 +93,9 @@ export function HeroSection() {
               variants={itemVariants}
               className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-2xl mx-auto lg:mx-0"
             >
-              With 25+ years of experience, I create human-centered digital experiences 
-              that combine beautiful design with powerful functionality. Specializing in 
-              AI-driven interfaces and scalable design systems.
+              Rare combination: trained designer who codes at production scale. I ship
+              enterprise systems from research through deployment—currently building the platform
+              processing $16B+ in annual financing at Synchrony Bank (acquired 2025).
             </motion.p>
 
             <motion.div
@@ -128,9 +127,9 @@ export function HeroSection() {
               className="flex flex-wrap gap-6 justify-center lg:justify-start"
             >
               {[
-                { icon: Calendar, number: "25+", label: "Years Experience" },
-                { icon: Rocket, number: "100+", label: "Projects Delivered" },
-                { icon: Zap, number: "AI", label: "Powered Solutions" }
+                { icon: Calendar, number: "20+", label: "Years Experience" },
+                { icon: Rocket, number: "$16B+", label: "Platform Scale" },
+                { icon: Zap, number: "AI", label: "Native Developer" }
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -170,7 +169,7 @@ export function HeroSection() {
                     </div>
                     <div>
                       <h3 className="font-bold text-xl text-foreground">Tayler Ramsay</h3>
-                      <p className="text-foreground/70 font-medium">Senior UX Designer</p>
+                      <p className="text-foreground/70 font-medium">Full-Stack UX Engineer</p>
                     </div>
                   </div>
                   
@@ -181,12 +180,16 @@ export function HeroSection() {
                     </div>
                     
                     <div className="grid grid-cols-3 gap-3">
-                      {['UX', 'React', 'AI'].map((skill, index) => (
-                        <div key={skill} className="text-center">
+                      {[
+                        { skill: 'Design', label: 'UX/UI' },
+                        { skill: 'Code', label: 'Full-Stack' },
+                        { skill: 'AI/ML', label: 'LangGraph' }
+                      ].map((item) => (
+                        <div key={item.skill} className="text-center">
                           <div className="w-14 h-14 mx-auto mb-2 rounded-lg bg-foreground/10 flex items-center justify-center border border-foreground/20">
-                            <span className="text-sm font-semibold text-foreground">{skill}</span>
+                            <span className="text-sm font-semibold text-foreground">{item.skill}</span>
                           </div>
-                          <div className="text-xs text-muted-foreground font-medium">Expert</div>
+                          <div className="text-xs text-muted-foreground font-medium">{item.label}</div>
                         </div>
                       ))}
                     </div>

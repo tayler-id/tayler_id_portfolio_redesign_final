@@ -8,7 +8,7 @@ import { SkillsSection } from '@/components/skills-section'
 import { ProjectsSection } from '@/components/projects-section'
 import { ContactSection } from '@/components/contact-section'
 import { Footer } from '@/components/footer'
-import { AIAssistant } from '@/components/ai-assistant'
+// import { AIAssistant } from '@/components/ai-assistant'
 import { AnimatedBackground } from '@/components/animated-background'
 import { ScrollProgress } from '@/components/scroll-progress'
 
@@ -33,7 +33,7 @@ export default function HomePage() {
       </main>
       
       <Footer />
-      <AIAssistant />
+      {/* <AIAssistant /> */}
     </div>
   )
 }

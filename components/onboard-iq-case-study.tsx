@@ -1,25 +1,18 @@
 'use client'
 
 import React, { useState } from 'react'
-import { 
-  TrendingUp, 
-  Clock, 
-  Users, 
-  Search, 
-  Palette, 
-  Code, 
+import {
+  TrendingUp,
+  Clock,
+  Users,
+  Search,
+  Palette,
+  Code,
   Monitor,
-  MessageSquare,
-  Target,
-  Layers,
   Database,
-  Zap,
-  CheckCircle,
-  ExternalLink,
-  Play
+  Zap
 } from 'lucide-react'
 import { ProjectDetailTemplate } from './project-detail-template'
-import { UXUIShowcaseTemplate } from './ux-ui-showcase-template'
 import { ReactAppDemoTemplate } from './react-app-demo-template'
 
 interface OnboardIQCaseStudyProps {
@@ -32,8 +25,8 @@ export function OnboardIQCaseStudy({ onBack }: OnboardIQCaseStudyProps) {
   // Project data
   const projectData = {
     title: 'OnboardIQ',
-    subtitle: 'Complete UX→UI→Frontend→Backend Process',
-    description: 'How I transformed Versatile Credit\'s 6-month manual merchant onboarding into a 2-3 month automated platform through comprehensive user research, enterprise UI design, and full-stack implementation.',
+    subtitle: 'Workflow Instance Management Platform',
+    description: 'Enterprise workflow orchestration platform built on Kotlin/Spring Boot with ServiceKit. Enables teams to launch, configure, monitor, and manage live workflow instances with cascading configuration, SLA tracking, and role-based assignments across 5 deployment environments.',
     category: 'Enterprise B2B Platform',
     status: 'live' as const,
     gradient: 'bg-gradient-to-br from-blue-500 to-purple-600',
@@ -41,79 +34,94 @@ export function OnboardIQCaseStudy({ onBack }: OnboardIQCaseStudyProps) {
     metrics: [
       { icon: TrendingUp, value: '$2.1M', label: 'Revenue Impact' },
       { icon: Clock, value: '65%', label: 'Process Improvement' },
-      { icon: Users, value: '15+', label: 'Stakeholder Interviews' },
-      { icon: Zap, value: '300%', label: 'Capacity Scaling' }
+      { icon: Database, value: '49', label: 'Flyway Migrations' },
+      { icon: Zap, value: '5', label: 'Environments' }
     ],
     challenge: {
       title: 'The Challenge',
-      description: 'OnboardIQ is a comprehensive B2B automation platform that transforms Versatile Credit\'s manual merchant onboarding process from a 6-month ordeal into a streamlined 2-3 month digital experience. As UX/UI Engineer, I led the complete product development lifecycle—from stakeholder interviews and user journey mapping through full-stack implementation—to solve critical scalability and visibility challenges affecting revenue generation.',
+      description: 'Operations teams could design workflows in OnboardIQ but lacked the ability to operationalize them. No launch capability from workflow designs, no instance-specific configuration for merchants, zero visibility into running instances, and no control to pause, resume, or reassign work. The PM spent entire days tracking onboardings in spreadsheets—with merchants like Heartland bringing 800+ locations, scaling was impossible without a complete workflow instance management system.',
       quote: {
-        text: 'Manual merchant onboarding processes created a 6-month average timeline, preventing scaling beyond current capacity and causing unpredictable revenue forecasting.',
-        author: 'Research Finding - 15+ Stakeholder Interviews'
+        text: 'I can see all my active onboardings at a glance and know exactly what needs attention. No more spreadsheet hunting or status inquiry emails.',
+        author: 'PM - Process Manager'
       }
     },
     process: {
       title: 'Development Journey',
-      description: 'A comprehensive approach covering every aspect from user research to technical implementation.',
+      description: 'Full-stack implementation on Kotlin/Spring Boot with ServiceKit enterprise framework.',
       phases: [
         {
           icon: Search,
-          phase: 'UX Research',
-          description: '15+ stakeholder interviews revealed 6-month onboarding bottlenecks affecting $70/location SaaS revenue across 600+ merchant locations.'
+          phase: 'Workflow Instance Architecture',
+          description: 'Designed 4 core capabilities: Launch Workflow (select, configure, override), Instance List (filter by status/workflow/date/assignee), Instance View (progress bar, step timeline, real-time status), and Instance Edit (modify NOT_STARTED instances). Implemented cascading configuration: Policies flow from workflow → version → step → instance with each level able to override.'
         },
         {
           icon: Palette,
-          phase: 'UI Design',
-          description: 'Enterprise design system with performance-optimized animations targeting 60fps for complex data interactions.'
+          phase: 'Enterprise UI System',
+          description: 'Built 35+ Pebble macro components with Tailwind CSS 3.4.16. Created layouts matching existing patterns: new.peb (drag-drop builder), list.peb (card grid with filters), preview.peb (animated execution timeline). Maintained strict backward compatibility with ServiceKit brownfield constraints.'
         },
         {
           icon: Code,
-          phase: 'Frontend Development',
-          description: 'JavaScript filtering system with Set-based O(1) performance, hardware-accelerated CSS animations, responsive architecture.'
+          phase: 'Backend Architecture',
+          description: 'Kotlin/Spring Boot layered architecture: 25+ Controllers (Web + REST dual API), 12 Services (business logic with transactions), 20+ DAOs (JDBC Template with named parameters). Implemented role-based access control, Google SSO + password auth, and comprehensive audit logging.'
         },
         {
           icon: Monitor,
-          phase: 'Backend Integration',
-          description: 'Node.js/Express API with PostgreSQL, authentication, and RESTful endpoints supporting real-time data operations.'
+          phase: 'Database & Deployment',
+          description: 'PostgreSQL with UUID primary keys and 49 Flyway migrations. Multi-tenant schema with soft-delete support. CI/CD via GitLab Auto-DevOps deploying to 5 environments: Test, UAT, Pentest, Demo, and Production on AWS East.'
         }
       ]
     },
     technical: {
-      title: 'Technical Architecture & Implementation',
-      description: 'Sophisticated brownfield enhancement within enterprise constraints, demonstrating advanced full-stack development skills.',
+      title: 'Workflow Engine & UI Implementation',
+      description: 'Complete workflow execution system with visual designer, instance management, and real-time step tracking.',
       cards: [
         {
-          title: 'Custom Animation Framework',
-          description: 'Hardware-accelerated CSS animations with 60fps performance targets and comprehensive accessibility support',
-          tags: ['Performance Optimization', 'Accessibility', 'Hardware Acceleration']
+          title: 'Workflow Designer UI',
+          description: 'Drag-and-drop workflow builder (workflows/new.peb) with step configuration panels. Add steps, configure role assignments, set SLA days, and define notification policies. Version management with automatic unpublishing of previous versions on publish.',
+          tags: ['Drag-Drop Builder', 'Step Config', 'Version Control']
         },
         {
-          title: 'Enterprise Component Library',
-          description: '30+ enhanced Pebble macro components with backward compatibility and theme management',
-          tags: ['Design System', 'Backward Compatibility', 'Theme Support']
+          title: 'Instance Management UI',
+          description: 'Launch page (select workflow, configure overrides), Instance List (filter by status/workflow/date/assignee with summary stats), Instance View (progress bar, step timeline with real-time status). My Tasks dashboard for assignee workload.',
+          tags: ['Launch Flow', 'Filter System', 'Progress Tracking']
         },
         {
-          title: 'Database Strategy',
-          description: 'PostgreSQL 17+ with minimal schema changes, preserving existing provider/contact relationships',
-          tags: ['PostgreSQL', 'Schema Preservation', 'Flyway Migrations']
+          title: 'Step Action System',
+          description: '7 instance APIs (launch, start, pause, resume, cancel, refresh) + 7 step APIs (start, complete, skip, block, unblock, escalate, deescalate). Button visibility based on step status state machine.',
+          tags: ['14 REST APIs', 'Status State Machine', 'Action Buttons']
+        },
+        {
+          title: 'Workflow Domain Model',
+          description: 'workflow → workflow_version → workflow_step template hierarchy. workflow_instance → workflow_instance_step execution tracking with metrics tables for status changes and assignment history.',
+          tags: ['53 Migrations', 'Entity Hierarchy', 'Audit Trail']
+        },
+        {
+          title: 'Assignment & SLA System',
+          description: 'Role-based assignment with cascading defaults: Step → Role → Instance override. SLA days with breach notifications. Status progression: not-ready → ready → active → completed with block/escalate support.',
+          tags: ['Role Cascade', 'SLA Tracking', 'Escalation Flow']
+        },
+        {
+          title: 'Animated Preview',
+          description: 'workflows/preview.peb with animated execution timeline showing step progression. Real-time step updates via AJAX. ToastManager notifications for API feedback. GSAP-style animations for state transitions.',
+          tags: ['Animated Timeline', 'Real-time Updates', 'Toast Feedback']
         }
       ]
     },
     results: {
-      title: 'Measurable Business Impact',
-      description: 'Quantified improvements across efficiency, capacity, and revenue generation.',
+      title: 'Workflow Engine Delivery',
+      description: 'Complete workflow orchestration system from design to production.',
       cards: [
-        { value: '65%', label: 'Process Time Reduction', description: '6 months → 2-3 months' },
-        { value: '300%', label: 'Capacity Scaling', description: 'Without Staff Increases' },
-        { value: '90%', label: 'Error Reduction', description: 'Through Automation' },
-        { value: '$2.1M', label: 'Revenue Acceleration', description: 'Annual Impact' }
+        { value: '14', label: 'REST APIs', description: 'Instance + Step actions' },
+        { value: '53', label: 'Migrations', description: 'Schema evolution' },
+        { value: '6', label: 'UI Pages', description: 'Designer → Instance' },
+        { value: '5', label: 'Environments', description: 'Test → Production' }
       ],
       achievements: [
-        'Revenue Acceleration: Faster merchant-to-revenue conversion for $70/location SaaS fee structure across enterprise clients (600+ locations)',
-        'Operational Scalability: Platform handles volume increases (like Heartland\'s 800 locations) through automated workflows',
-        'Process Efficiency: Elimination of 8-hour manual promotional plan configurations through automated bulk import capabilities',
-        'Knowledge Preservation: Captured tribal knowledge from domain experts into documented workflows, reducing single-point-of-failure dependencies by 90%',
-        'Communication Consolidation: Replaced fragmented multi-channel communications with centralized platform, reducing coordination overhead by 60%'
+        'Workflow Designer: Drag-drop builder with step configuration, role assignments, SLA settings, and notification policies',
+        'Instance Lifecycle: Launch → Start → Pause/Resume → Cancel with full status state machine and prior_status tracking',
+        'Step Actions: Start, Complete, Skip, Block/Unblock, Escalate/Deescalate with visibility rules based on status',
+        'My Tasks Dashboard: User-centric view of assigned steps with escalation modals and real-time status updates',
+        'Animated Preview: Step-by-step execution timeline with GSAP animations and ToastManager feedback'
       ]
     },
     demoConfig: {
@@ -144,164 +152,6 @@ export function OnboardIQCaseStudy({ onBack }: OnboardIQCaseStudyProps) {
           document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })
         }
       }
-    }
-  }
-
-  // UX Research data
-  const uxResearchData = {
-    title: 'UX Research Foundation',
-    subtitle: 'Comprehensive Stakeholder Research',
-    description: 'Deep user research across 15+ participants, revealing critical business processes and user pain points that informed every design decision.',
-    research: {
-      title: 'Research & Discovery',
-      description: 'Comprehensive stakeholder research across 15+ participants, revealing critical business processes and user pain points.',
-      methods: [
-        {
-          icon: MessageSquare,
-          title: 'Structured Interviews',
-          description: '60-minute sessions with role-specific question sets tailored to each stakeholder\'s domain expertise',
-          insights: [
-            'Maxwell Rieck (CFO) - Financial metrics and ROI requirements',
-            'Chris Herndon (Sales) - Customer relationship challenges',
-            'Amanda/Melissa (Operations) - Daily workflow pain points'
-          ]
-        },
-        {
-          icon: Target,
-          title: 'Workflow Mapping',
-          description: 'Current-state process documentation identifying bottlenecks and dependencies',
-          insights: [
-            'Identified 6-month average onboarding timeline',
-            'Documented 8-hour manual configuration processes',
-            'Mapped cross-departmental coordination issues'
-          ]
-        },
-        {
-          icon: Layers,
-          title: 'Card Sorting',
-          description: 'Pain point prioritization and feature importance ranking across stakeholder groups',
-          insights: [
-            'Revenue impact ranked as highest priority',
-            'Process visibility crucial for planning',
-            'Automation needed for scalability'
-          ]
-        }
-      ],
-      personas: [
-        {
-          name: 'Amanda',
-          role: 'Internal Operations Coordinator',
-          age: '28-35',
-          goals: [
-            'Reduce 8-hour manual configurations',
-            'Increase process visibility',
-            'Scale beyond current capacity'
-          ],
-          painPoints: [
-            'Manual lender configuration complexity',
-            'No visibility into bottlenecks',
-            'Unpredictable timeline commitments'
-          ],
-          quote: 'I spend entire days just configuring promotional plans manually. There has to be a better way.'
-        },
-        {
-          name: 'Snap',
-          role: 'Lender Partner Representative',
-          age: '35-45',
-          goals: [
-            'Clear status visibility',
-            'Streamlined credential exchange',
-            'Predictable integration timelines'
-          ],
-          painPoints: [
-            'Manual credential exchange processes',
-            'Unclear status updates',
-            'Unpredictable go-live dates'
-          ],
-          quote: 'We need better visibility into where we are in the process and what\'s needed from us.'
-        },
-        {
-          name: 'Ashel',
-          role: 'Merchant Business Owner',
-          age: '40-55',
-          goals: [
-            'Predictable launch timelines',
-            'Clear process expectations',
-            'Minimal business disruption'
-          ],
-          painPoints: [
-            '6-month unpredictable timelines',
-            '40+ field application complexity',
-            'Business planning uncertainty'
-          ],
-          quote: 'Six months is too long to wait. I need to plan my business around predictable timelines.'
-        }
-      ]
-    },
-    process: {
-      title: 'Research to Design Process',
-      description: 'From insights to actionable design requirements.',
-      phases: [
-        {
-          phase: 'Discovery',
-          icon: Search,
-          description: 'Stakeholder interviews and process mapping',
-          deliverables: ['Interview transcripts', 'Process maps', 'Pain point analysis'],
-          duration: '2 weeks'
-        },
-        {
-          phase: 'Synthesis',
-          icon: Target,
-          description: 'Pattern identification and persona development',
-          deliverables: ['User personas', 'Journey maps', 'Requirements matrix'],
-          duration: '1 week'
-        },
-        {
-          phase: 'Ideation',
-          icon: Palette,
-          description: 'Solution concepts and wireframing',
-          deliverables: ['Wireframes', 'User flows', 'Feature specifications'],
-          duration: '2 weeks'
-        },
-        {
-          phase: 'Validation',
-          icon: CheckCircle,
-          description: 'Concept testing and refinement',
-          deliverables: ['Validated designs', 'Technical requirements', 'Implementation plan'],
-          duration: '1 week'
-        }
-      ]
-    },
-    designs: {
-      title: 'Design Assets & Wireframes',
-      description: 'Key screens and user flows that solved the core business challenges.',
-      assets: [
-        // Note: These would be real design files in production
-        {
-          id: 'onboarding-dashboard',
-          title: 'Merchant Onboarding Dashboard',
-          type: 'mockup' as const,
-          device: 'desktop' as const,
-          image: '/assets/images/onboard-iq-dashboard-mockup.png',
-          description: 'Main dashboard showing onboarding progress with real-time status updates'
-        },
-        {
-          id: 'lender-config',
-          title: 'Automated Lender Configuration',
-          type: 'wireframe' as const,
-          device: 'desktop' as const,
-          image: '/assets/images/onboard-iq-config-wireframe.png',
-          description: 'Wireframe of the automated configuration system that replaced 8-hour manual processes'
-        },
-        {
-          id: 'mobile-status',
-          title: 'Mobile Status Tracking',
-          type: 'mockup' as const,
-          device: 'mobile' as const,
-          image: '/assets/images/onboard-iq-mobile-mockup.png',
-          description: 'Mobile interface for stakeholders to track progress on-the-go'
-        }
-      ]
     }
   }
 
@@ -376,11 +226,6 @@ export function OnboardIQCaseStudy({ onBack }: OnboardIQCaseStudyProps) {
         {...projectData}
         onBack={onBack}
       />
-
-      {/* UX/UI Research Showcase - This would be a separate section */}
-      <div className="border-t border-border/20">
-        <UXUIShowcaseTemplate {...uxResearchData} />
-      </div>
 
       {/* Demo Modal */}
       {showDemo && (

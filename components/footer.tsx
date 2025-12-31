@@ -92,21 +92,6 @@ export function Footer() {
           </motion.div>
         </div>
 
-        {/* Additional Footer Content */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-8 pt-8 border-t border-border/30 text-center"
-        >
-          <div className="flex flex-wrap justify-center items-center gap-6 text-xs text-muted-foreground">
-            <span>Built with Next.js & Animate UI</span>
-            <span className="w-1 h-1 bg-muted-foreground rounded-full" />
-            <span>Powered by React & Framer Motion</span>
-            <span className="w-1 h-1 bg-muted-foreground rounded-full" />
-            <span>Designed in California</span>
-          </div>
-        </motion.div>
 
         {/* Animated Particles */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">

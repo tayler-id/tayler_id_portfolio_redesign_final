@@ -1,14 +1,17 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ArrowLeft, Home } from 'lucide-react'
 import { Button } from './ui/button'
 import { OnboardIQCaseStudy } from './onboard-iq-case-study'
-
-// Import other case study components as they're created
-// import { AshleyFurnitureCaseStudy } from './ashley-furniture-case-study'
-// import { AspenDentalCaseStudy } from './aspen-dental-case-study'
+import { RayniCaseStudy } from './rayni-case-study'
+import { BlueMoonCaseStudy } from './blue-moon-case-study'
+import { AshleyCaseStudy } from './ashley-case-study'
+import { AspenCaseStudy } from './aspen-case-study'
+import { DellCaseStudy } from './dell-case-study'
+import { HelzbergCaseStudy } from './helzberg-case-study'
+import { IfitCaseStudy } from './ifit-case-study'
 
 interface ProjectCaseStudyModalProps {
   projectId: string | null
@@ -16,60 +19,66 @@ interface ProjectCaseStudyModalProps {
   onClose: () => void
 }
 
-export function ProjectCaseStudyModal({ 
-  projectId, 
-  isOpen, 
-  onClose 
+export function ProjectCaseStudyModal({
+  projectId,
+  isOpen,
+  onClose
 }: ProjectCaseStudyModalProps) {
+  // Close modal when navigation links are clicked
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleNavClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      const anchor = target.closest('a[href^="#"]')
+      if (anchor) {
+        e.preventDefault()
+        const href = anchor.getAttribute('href')
+        onClose()
+        // Small delay to allow modal to close, then scroll to section
+        setTimeout(() => {
+          if (href) {
+            const element = document.querySelector(href)
+            element?.scrollIntoView({ behavior: 'smooth' })
+          }
+        }, 100)
+      }
+    }
+
+    document.addEventListener('click', handleNavClick)
+    return () => document.removeEventListener('click', handleNavClick)
+  }, [isOpen, onClose])
+
   if (!isOpen || !projectId) return null
 
   const renderCaseStudy = () => {
     switch (projectId) {
       case 'onboard-iq':
         return <OnboardIQCaseStudy onBack={onClose} />
-      
+
+      case 'rayni-platform':
+        return <RayniCaseStudy onBack={onClose} />
+
+      case 'blue-moon-telehealth':
+        return <BlueMoonCaseStudy onBack={onClose} />
+
       case 'ashley-furniture':
-        return <ComingSoonCaseStudy 
-          title="Ashley Furniture Financing Console"
-          description="+12% incremental approvals in 18-store pilot"
-          tags={['Retail', 'Fintech', 'UI/UX']}
-          onBack={onClose}
-        />
-      
+        return <AshleyCaseStudy onBack={onClose} />
+
       case 'aspen-dental':
-        return <ComingSoonCaseStudy 
-          title="Aspen Dental Patient Financing Portal"
-          description="Instant approvals at 1,100+ clinics"
-          tags={['Healthcare', 'Fintech', 'UI/UX']}
-          onBack={onClose}
-        />
-      
+        return <AspenCaseStudy onBack={onClose} />
+
       case 'dell-technologies':
-        return <ComingSoonCaseStudy 
-          title="Dell Technologies Dell Pay Waterfall"
-          description="Bread Pay → Waterfall API integration"
-          tags={['E-commerce', 'API', 'Frontend']}
-          onBack={onClose}
-        />
-      
+        return <DellCaseStudy onBack={onClose} />
+
       case 'helzberg-diamonds':
-        return <ComingSoonCaseStudy 
-          title="Helzberg Diamonds Digital Flex-Pay Kiosk"
-          description="Lease approvals +28% • App time -57%"
-          tags={['Retail', 'Fintech', 'UI/UX']}
-          onBack={onClose}
-        />
-      
+        return <HelzbergCaseStudy onBack={onClose} />
+
       case 'ifit-health':
-        return <ComingSoonCaseStudy 
-          title="iFit Health Spend Checkout"
-          description="8% of DTC revenue now HSA/FSA"
-          tags={['Health & Wellness', 'Fintech', 'UI/UX']}
-          onBack={onClose}
-        />
-      
+        return <IfitCaseStudy onBack={onClose} />
+
       default:
-        return <ComingSoonCaseStudy 
+        return <ComingSoonCaseStudy
           title="Case Study Coming Soon"
           description="This detailed case study is currently being prepared"
           tags={['Portfolio']}
@@ -81,33 +90,35 @@ export function ProjectCaseStudyModal({
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 bg-background z-[100] overflow-y-auto"
+        className="fixed inset-0 bg-background z-[200] overflow-y-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
-        {/* Fixed header with close button */}
-        <div className="sticky top-0 bg-background/80 backdrop-blur-sm border-b border-border/50 z-10">
-          <div className="container mx-auto px-6 py-4">
+        {/* Fixed header with close button - high z-index to stay above everything */}
+        <div className="sticky top-0 bg-background/95 backdrop-blur-xl border-b border-border z-[210] shadow-lg">
+          <div className="container mx-auto px-6 py-3">
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Button
-                  variant="ghost"
-                  onClick={() => {
-                    onClose()
-                    window.location.hash = ''
-                    window.scrollTo({ top: 0, behavior: 'smooth' })
-                  }}
-                  className="flex items-center gap-2"
-                  title="Go to top of portfolio"
-                >
-                  <Home className="w-4 h-4" />
-                  Home
-                </Button>
-              </div>
-              <Button variant="ghost" size="sm" onClick={onClose}>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  onClose()
+                  window.location.hash = ''
+                }}
+                className="flex items-center gap-2 font-medium"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Portfolio
+              </Button>
+              <Button
+                variant="default"
+                size="default"
+                onClick={onClose}
+                className="flex items-center gap-2 bg-destructive hover:bg-destructive/90 text-destructive-foreground"
+              >
                 <X className="w-4 h-4" />
+                Close
               </Button>
             </div>
           </div>
@@ -121,6 +132,23 @@ export function ProjectCaseStudyModal({
           transition={{ duration: 0.4, delay: 0.1 }}
         >
           {renderCaseStudy()}
+        </motion.div>
+
+        {/* Floating Back Button - Always visible */}
+        <motion.div
+          className="fixed bottom-6 left-6 z-[220]"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.5, type: 'spring' }}
+        >
+          <Button
+            onClick={onClose}
+            size="lg"
+            className="rounded-full shadow-xl bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-6 flex items-center gap-2"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Back to Portfolio
+          </Button>
         </motion.div>
       </motion.div>
     </AnimatePresence>
