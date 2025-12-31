@@ -122,6 +122,10 @@ export function BlueMoonCaseStudy({ onBack }: BlueMoonCaseStudyProps) {
         'Production Ready: Static export, Apache routing, tested and approved for deployment'
       ]
     },
+    videoDemo: {
+      src: '/videos/goldlink-demo.mp4',
+      title: 'Blue Moon Telehealth Platform Demo'
+    },
     nextSteps: {
       title: 'Building Healthcare Products?',
       description: 'Blue Moon demonstrates my ability to build HIPAA-compliant, accessibility-first healthcare platforms. Let\'s discuss how I can help with your healthcare technology needs.',

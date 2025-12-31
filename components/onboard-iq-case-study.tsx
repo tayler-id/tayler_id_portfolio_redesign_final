@@ -137,6 +137,10 @@ export function OnboardIQCaseStudy({ onBack }: OnboardIQCaseStudyProps) {
       action: () => setShowDemo(true),
       buttonText: '💻 Launch Interactive Demo'
     },
+    videoDemo: {
+      src: '/videos/onboard-iq-demo.mp4',
+      title: 'OnboardIQ Workflow Engine Demo'
+    },
     nextSteps: {
       title: 'Interested in Similar Results?',
       description: 'This project demonstrates my complete UX→UI→Frontend→Backend process for enterprise B2B platforms. Let\'s discuss how I can apply this approach to your complex business challenges.',
