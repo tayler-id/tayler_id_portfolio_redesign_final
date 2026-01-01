@@ -12,6 +12,7 @@ import { AspenCaseStudy } from './aspen-case-study'
 import { DellCaseStudy } from './dell-case-study'
 import { HelzbergCaseStudy } from './helzberg-case-study'
 import { IfitCaseStudy } from './ifit-case-study'
+import { DocDomainAgentCaseStudy } from './doc-domain-agent-case-study'
 
 interface ProjectCaseStudyModalProps {
   projectId: string | null
@@ -76,6 +77,9 @@ export function ProjectCaseStudyModal({
 
       case 'ifit-health':
         return <IfitCaseStudy onBack={onClose} />
+
+      case 'doc-domain-agent':
+        return <DocDomainAgentCaseStudy onBack={onClose} />
 
       default:
         return <ComingSoonCaseStudy

@@ -123,6 +123,26 @@ export function ProjectsSection() {
       demoUrl: 'https://rayni.ai'
     },
     {
+      id: 'doc-domain-agent',
+      title: 'Doc Domain Agent - Precision RAG System',
+      category: ['ai-ml', 'full-stack'],
+      status: 'live',
+      description: 'Zero-hallucination RAG platform for scientific instrumentation. Neo4j GraphRAG with LangGraph agents, human-in-the-loop gap detection, and deep-linking citations with bounding box verification.',
+      metrics: [
+        { icon: Clock, value: '<30s', label: 'Time to Answer' },
+        { icon: Zap, value: '<0.1%', label: 'Hallucination Rate' },
+        { icon: Layers, value: '758', label: 'Test Functions' }
+      ],
+      story: [
+        { icon: Search, phase: 'GraphRAG', description: 'Neo4j knowledge graph with native vector search. Device → Document → Chunk hierarchy with cross-encoder reranking.' },
+        { icon: Zap, phase: 'LangGraph Agent', description: '7-node stateful workflow: Intent Classification → Hybrid Retrieval → Gap Detection → BLUF Response Generation.' },
+        { icon: Code, phase: 'Zero-Hallucination', description: '3-layer gap detection (confidence/semantic/structural) triggers HITL interrupts rather than guessing.' },
+        { icon: Monitor, phase: 'Verification UI', description: 'Deep-linking citations with bounding box highlights. Click to verify any answer against source PDF.' }
+      ],
+      tags: ['Neo4j', 'LangGraph', 'GraphRAG'],
+      gradient: 'from-emerald-500 to-teal-600'
+    },
+    {
       id: 'blue-moon-telehealth',
       title: 'Blue Moon Senior Counseling - Telehealth Platform',
       category: ['full-stack', 'ui-ux'],

@@ -1,10 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import {
   TrendingUp,
   Clock,
-  Users,
   Search,
   Palette,
   Code,
@@ -13,14 +12,12 @@ import {
   Zap
 } from 'lucide-react'
 import { ProjectDetailTemplate } from './project-detail-template'
-import { ReactAppDemoTemplate } from './react-app-demo-template'
 
 interface OnboardIQCaseStudyProps {
   onBack?: () => void
 }
 
 export function OnboardIQCaseStudy({ onBack }: OnboardIQCaseStudyProps) {
-  const [showDemo, setShowDemo] = useState(false)
 
   // Project data
   const projectData = {
@@ -124,19 +121,6 @@ export function OnboardIQCaseStudy({ onBack }: OnboardIQCaseStudyProps) {
         'Animated Preview: Step-by-step execution timeline with GSAP animations and ToastManager feedback'
       ]
     },
-    demoConfig: {
-      available: true,
-      title: '🎯 Experience OnboardIQ Live',
-      description: 'See how I transformed complex manual processes into an elegant automated platform. Choose your perspective and explore the complete solution.',
-      features: [
-        'Real merchant onboarding flow',
-        'Multi-stakeholder dashboards',
-        'Custom animation framework',
-        'Enterprise constraint navigation'
-      ],
-      action: () => setShowDemo(true),
-      buttonText: '💻 Launch Interactive Demo'
-    },
     videoDemo: {
       src: '/videos/onboard-iq-demo.mp4?v=2',
       title: 'OnboardIQ Workflow Engine Demo'
@@ -159,92 +143,10 @@ export function OnboardIQCaseStudy({ onBack }: OnboardIQCaseStudyProps) {
     }
   }
 
-  // Demo configuration
-  const demoConfig = {
-    title: 'OnboardIQ Platform Demo',
-    subtitle: 'Interactive Enterprise B2B Solution',
-    description: 'Experience the complete OnboardIQ platform with working contact management, platform features matrix, and real-time filtering.',
-    demoUrl: 'http://localhost:3333',
-    defaultDevice: 'desktop' as const,
-    requiresServer: true,
-    serverStatus: 'online' as const,
-    features: [
-      {
-        icon: Users,
-        title: 'Contact Management',
-        description: 'Advanced filtering with 10 provider contacts'
-      },
-      {
-        icon: Database,
-        title: 'Features Matrix',
-        description: '33+ features across 4 categories'
-      },
-      {
-        icon: Zap,
-        title: 'Real-time Updates',
-        description: 'Live data synchronization and filtering'
-      },
-      {
-        icon: Monitor,
-        title: 'Multi-stakeholder Views',
-        description: 'Customized interfaces for different user types'
-      }
-    ],
-    techStack: [
-      {
-        category: 'Frontend',
-        technologies: [
-          { name: 'JavaScript', purpose: 'Interactive filtering and animations' },
-          { name: 'CSS3', purpose: 'Hardware-accelerated animations' },
-          { name: 'HTML5', purpose: 'Semantic structure' }
-        ]
-      },
-      {
-        category: 'Backend',
-        technologies: [
-          { name: 'Node.js', purpose: 'Server runtime' },
-          { name: 'Express', purpose: 'API framework' },
-          { name: 'PostgreSQL', purpose: 'Data persistence' }
-        ]
-      }
-    ],
-    credentials: {
-      title: 'Demo Access',
-      credentials: [
-        { label: 'Username', value: 'demo', type: 'username' as const },
-        { label: 'Password', value: 'demo', type: 'password' as const }
-      ],
-      instructions: [
-        'Use any username/password combination to access the demo',
-        'Explore the contact filtering and features matrix',
-        'Try different search terms and filters',
-        'Note the real-time performance optimizations'
-      ]
-    }
-  }
-
   return (
-    <div>
-      {/* Main Project Overview */}
-      <ProjectDetailTemplate
-        {...projectData}
-        onBack={onBack}
-      />
-
-      {/* Demo Modal */}
-      {showDemo && (
-        <ReactAppDemoTemplate
-          {...demoConfig}
-          onClose={() => setShowDemo(false)}
-          onOpenExternal={() => {
-            window.open('http://localhost:3333', '_blank')
-            setShowDemo(false)
-          }}
-          onShowSource={() => {
-            window.open('https://github.com/tayler-ramsay/onboard-iq', '_blank')
-          }}
-        />
-      )}
-    </div>
+    <ProjectDetailTemplate
+      {...projectData}
+      onBack={onBack}
+    />
   )
 }

@@ -55,21 +55,12 @@ export function FloatingCard({
         tilt && "transform-gpu",
         className
       )}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ 
-        opacity: 1, 
-        scale: 1,
-        ...getFloatAnimation()
-      }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{
-        opacity: { duration: 0.8, delay },
-        scale: { duration: 0.8, delay },
-        ...getFloatAnimation(),
-        duration,
-        repeat: Infinity,
-        repeatType: 'reverse',
-        ease: 'easeInOut',
-        delay: delay + 1,
+        duration: 0.6,
+        delay,
+        ease: 'easeOut',
       }}
       whileHover={
         tilt
