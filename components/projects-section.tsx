@@ -2,19 +2,20 @@
 
 import React, { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  Briefcase, 
-  ExternalLink, 
-  FileText, 
-  TrendingUp, 
-  Clock, 
-  Users, 
+import {
+  Briefcase,
+  ExternalLink,
+  FileText,
+  TrendingUp,
+  Clock,
+  Users,
   Palette,
   Code,
   Layers,
   Search,
   Monitor,
-  Zap
+  Zap,
+  Database
 } from 'lucide-react'
 import { ScrollReveal } from './animate-ui/scroll-reveal'
 import { FloatingCard } from './animate-ui/floating-card'
@@ -73,23 +74,23 @@ export function ProjectsSection() {
   const projects = [
     {
       id: 'onboard-iq',
-      title: 'OnboardIQ Automation Platform',
+      title: 'OnboardIQ Workflow Instance Platform',
       category: ['full-stack', 'ui-ux'],
       featured: true,
       status: 'live',
-      description: 'Complete UX→UI→Frontend→Backend development. Transformed 6-month manual processes into 2-3 month automated workflows through comprehensive stakeholder research and technical implementation.',
+      description: 'Enterprise workflow orchestration platform built on Kotlin/Spring Boot with ServiceKit. Launch, configure, monitor, and manage live workflow instances with cascading configuration, SLA tracking, and role-based assignments across 5 deployment environments.',
       metrics: [
         { icon: TrendingUp, value: '$2.1M', label: 'Revenue Impact' },
         { icon: Clock, value: '65%', label: 'Process Improvement' },
-        { icon: Users, value: '15+', label: 'Stakeholder Interviews' }
+        { icon: Database, value: '49', label: 'Flyway Migrations' }
       ],
       story: [
-        { icon: Search, phase: 'UX Research', description: '15+ stakeholder interviews revealed 6-month onboarding bottlenecks affecting $70/location SaaS revenue across 600+ merchant locations.' },
-        { icon: Palette, phase: 'UI Design', description: 'Enterprise design system with performance-optimized animations targeting 60fps for complex data interactions.' },
-        { icon: Code, phase: 'Frontend', description: 'JavaScript filtering system with Set-based O(1) performance, hardware-accelerated CSS animations, responsive architecture.' },
-        { icon: Monitor, phase: 'Backend', description: 'Node.js/Express API with PostgreSQL, authentication, and RESTful endpoints supporting real-time data operations.' }
+        { icon: Search, phase: 'Architecture', description: '4 core capabilities: Launch Workflow, Instance List with filters, Instance View with progress timeline, Instance Edit. Cascading config from workflow → version → step → instance.' },
+        { icon: Palette, phase: 'Enterprise UI', description: '35+ Pebble macro components with Tailwind CSS. Drag-drop workflow builder, card grid lists, animated execution timelines. ServiceKit brownfield compatibility.' },
+        { icon: Code, phase: 'Kotlin Backend', description: '25+ Controllers (Web + REST dual API), 12 Services, 20+ DAOs with JDBC Template. Role-based access, Google SSO + password auth, audit logging.' },
+        { icon: Monitor, phase: 'Database & CI/CD', description: 'PostgreSQL with UUID keys, 49 Flyway migrations, soft-delete support. GitLab Auto-DevOps to 5 environments: Test, UAT, Pentest, Demo, Production.' }
       ],
-      tags: ['B2B Platform', 'Full-Stack'],
+      tags: ['Kotlin/Spring Boot', 'Pebble', 'PostgreSQL'],
       gradient: 'from-blue-500 to-purple-600',
       image: '/assets/images/onboard-iq-hero.png'
     },
