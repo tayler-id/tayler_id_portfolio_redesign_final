@@ -197,14 +197,14 @@ export function AboutSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="relative overflow-hidden aspect-[4/5] max-w-md mx-auto rounded-2xl backdrop-blur-md bg-card/80 border border-border shadow-xl"
+              className="relative overflow-hidden aspect-[4/5] max-w-md mx-auto rounded-2xl backdrop-blur-md border border-border shadow-xl bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20"
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
               <Image
-                src="/assets/images/headshout.jpg"
+                src="/assets/images/headshot.png"
                 alt="Tayler Ramsay - Senior UX Designer"
                 fill
-                className="object-cover"
+                className="object-cover object-top"
               />
 
               {/* Overlay Content */}
