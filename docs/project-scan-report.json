@@ -1,0 +1,16 @@
+{
+  "workflow_version": "1.2.0",
+  "timestamps": {
+    "started": "2025-11-16T17:10:00Z",
+    "last_updated": "2025-11-16T17:10:00Z"
+  },
+  "mode": "initial_scan",
+  "scan_level": "exhaustive",
+  "project_root": "/Users/taylerramsay/Projects/tayler_id_portfolio_redesign_final",
+  "output_folder": "/Users/taylerramsay/Projects/tayler_id_portfolio_redesign_final/docs",
+  "completed_steps": [],
+  "current_step": "step_1",
+  "findings": {},
+  "outputs_generated": ["project-scan-report.json"],
+  "resume_instructions": "Starting from step 1"
+}

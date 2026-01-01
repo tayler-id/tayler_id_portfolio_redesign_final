@@ -90,7 +90,8 @@ export function ProjectsSection() {
         { icon: Monitor, phase: 'Backend', description: 'Node.js/Express API with PostgreSQL, authentication, and RESTful endpoints supporting real-time data operations.' }
       ],
       tags: ['B2B Platform', 'Full-Stack'],
-      gradient: 'from-blue-500 to-purple-600'
+      gradient: 'from-blue-500 to-purple-600',
+      image: '/assets/images/onboard-iq-hero.png'
     },
     {
       id: 'rayni-platform',
@@ -111,7 +112,8 @@ export function ProjectsSection() {
       ],
       tags: ['AI/ML', 'LangGraph', 'RAG'],
       gradient: 'from-violet-500 to-indigo-600',
-      demoUrl: 'https://rayni.ai'
+      demoUrl: 'https://rayni.ai',
+      image: '/assets/images/rayni-hero.png'
     },
     {
       id: 'doc-domain-agent',
@@ -131,7 +133,8 @@ export function ProjectsSection() {
         { icon: Monitor, phase: 'Verification UI', description: 'Deep-linking citations with bounding box highlights. Click to verify any answer against source PDF.' }
       ],
       tags: ['Neo4j', 'LangGraph', 'GraphRAG'],
-      gradient: 'from-emerald-500 to-teal-600'
+      gradient: 'from-emerald-500 to-teal-600',
+      image: '/assets/images/doc-domain-hero.png'
     },
     {
       id: 'blue-moon-telehealth',
@@ -152,7 +155,8 @@ export function ProjectsSection() {
       ],
       tags: ['Healthcare', 'WebRTC', 'Accessibility'],
       gradient: 'from-amber-500 to-orange-600',
-      demoUrl: 'https://bluemoonseniorcounseling.com'
+      demoUrl: 'https://bluemoonseniorcounseling.com',
+      image: '/assets/images/blue-moon-hero.png'
     },
     {
       id: 'ashley-furniture',
@@ -318,55 +322,32 @@ export function ProjectsSection() {
               <div className="grid lg:grid-cols-2 gap-0">
                 {/* Project Visual */}
                 <div className={cn(
-                  'relative aspect-video lg:aspect-auto bg-gradient-to-br p-8 flex items-center justify-center',
+                  'relative aspect-video lg:aspect-auto lg:min-h-[400px] bg-gradient-to-br overflow-hidden',
                   featuredProject.gradient
                 )}>
+                  {featuredProject.image && (
+                    <Image
+                      src={featuredProject.image}
+                      alt={featuredProject.title}
+                      fill
+                      className="object-cover"
+                    />
+                  )}
                   <div className="absolute inset-0 bg-black/20" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  
+
                   {/* Status Badge */}
                   {featuredProject.status === 'live' && (
-                    <div className="absolute top-6 left-6 flex items-center gap-2 px-3 py-2 bg-green-500/90 backdrop-blur-sm rounded-full text-white text-sm font-semibold">
+                    <div className="absolute top-6 left-6 flex items-center gap-2 px-3 py-2 bg-green-500/90 backdrop-blur-sm rounded-full text-white text-sm font-semibold z-10">
                       <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
                       Live Demo
                     </div>
                   )}
 
                   {/* Featured Badge */}
-                  <div className="absolute top-6 right-6 px-3 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-semibold border border-white/30">
+                  <div className="absolute top-6 right-6 px-3 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-semibold border border-white/30 z-10">
                     <Zap className="w-4 h-4 inline mr-1" />
                     Featured
-                  </div>
-
-                  {/* Project Mockup */}
-                  <div className="relative z-10 max-w-md mx-auto">
-                    <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
-                      <div className="space-y-4 text-white">
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center">
-                            <Monitor className="w-6 h-6" />
-                          </div>
-                          <div>
-                            <div className="font-semibold">OnboardIQ Platform</div>
-                            <div className="text-xs opacity-70">Enterprise B2B Solution</div>
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-3 gap-3 text-center">
-                          <div className="bg-white/10 rounded-lg p-2">
-                            <div className="text-xs">$2.1M</div>
-                            <div className="text-xs opacity-70">Revenue</div>
-                          </div>
-                          <div className="bg-white/10 rounded-lg p-2">
-                            <div className="text-xs">65%</div>
-                            <div className="text-xs opacity-70">Faster</div>
-                          </div>
-                          <div className="bg-white/10 rounded-lg p-2">
-                            <div className="text-xs">15+</div>
-                            <div className="text-xs opacity-70">Interviews</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
@@ -474,14 +455,23 @@ export function ProjectsSection() {
                     project.gradient || 'from-gray-400 to-gray-600'
                   )}>
                     {project.image ? (
-                      <div className="relative w-full h-full bg-white flex items-center justify-center p-6">
+                      project.image.includes('hero') ? (
                         <Image
                           src={project.image}
                           alt={project.title}
                           fill
-                          className="object-contain"
+                          className="object-cover"
                         />
-                      </div>
+                      ) : (
+                        <div className="relative w-full h-full bg-white flex items-center justify-center p-6">
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-contain"
+                          />
+                        </div>
+                      )
                     ) : (
                       <div className="text-white text-center">
                         <Monitor className="w-16 h-16 mx-auto mb-2 opacity-60" />
