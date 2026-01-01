@@ -56,9 +56,13 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          <PasswordProtection>
-            {children}
-          </PasswordProtection>
+          {process.env.NEXT_PUBLIC_PASSWORD_PROTECT === 'false' ? (
+            children
+          ) : (
+            <PasswordProtection>
+              {children}
+            </PasswordProtection>
+          )}
         </ThemeProvider>
         
         <script dangerouslySetInnerHTML={{
