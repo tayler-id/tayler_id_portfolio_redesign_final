@@ -25,7 +25,6 @@ import Image from 'next/image'
 import { ProjectCaseStudyModal } from './project-case-study-modal'
 
 export function ProjectsSection() {
-  const [activeFilter, setActiveFilter] = useState('all')
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null)
   const [showCaseStudy, setShowCaseStudy] = useState(false)
 
@@ -70,14 +69,6 @@ export function ProjectsSection() {
     window.addEventListener('popstate', handlePopState)
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
-
-  const filters = [
-    { id: 'all', label: 'All Projects', icon: Briefcase },
-    { id: 'ui-ux', label: 'UI/UX', icon: Palette },
-    { id: 'frontend', label: 'Frontend', icon: Code },
-    { id: 'full-stack', label: 'Full-Stack', icon: Layers },
-    { id: 'ai-ml', label: 'AI/ML', icon: Zap }
-  ]
 
   const projects = [
     {
@@ -260,10 +251,6 @@ export function ProjectsSection() {
     },
   ]
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category.includes(activeFilter))
-
   const featuredProject = projects.find(p => p.featured)
   const regularProjects = projects.filter(p => !p.featured)
 
@@ -324,33 +311,8 @@ export function ProjectsSection() {
           </div>
         </ScrollReveal>
 
-        {/* Project Filters */}
-        <ScrollReveal delay={0.2}>
-          <div className="flex justify-center mb-16 px-4">
-            <div className="flex gap-2 sm:gap-4 p-2 bg-background/50 backdrop-blur-sm rounded-2xl border border-border/50 overflow-x-auto max-w-full scrollbar-hide">
-              {filters.map((filter) => (
-                <motion.button
-                  key={filter.id}
-                  onClick={() => setActiveFilter(filter.id)}
-                  className={cn(
-                    'flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 whitespace-nowrap text-sm sm:text-base flex-shrink-0',
-                    activeFilter === filter.id
-                      ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
-                  )}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <filter.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  <span>{filter.label}</span>
-                </motion.button>
-              ))}
-            </div>
-          </div>
-        </ScrollReveal>
-
         {/* Featured Project */}
-        {featuredProject && (activeFilter === 'all' || featuredProject.category.includes(activeFilter)) && (
+        {featuredProject && (
           <ScrollReveal delay={0.4}>
             <FloatingCard className="mb-16 overflow-hidden bg-background/50 backdrop-blur-sm border border-border/50">
               <div className="grid lg:grid-cols-2 gap-0">
@@ -492,9 +454,7 @@ export function ProjectsSection() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
         >
           <AnimatePresence>
-            {filteredProjects
-              .filter(p => !p.featured)
-              .map((project, index) => (
+            {regularProjects.map((project, index) => (
               <motion.div
                 key={project.id}
                 variants={projectVariants}
