@@ -189,41 +189,38 @@ export function AboutSection() {
           </div>
 
           {/* Right Visual */}
-          <ScrollReveal direction="right" delay={0.3}>
-            <div className="relative">
-              {/* Main Image Card */}
-              <div 
-                ref={photoRef}
-                className={`transition-all duration-300 ${
-                  isPhotoSticky 
-                    ? 'fixed top-20 right-8 z-30 max-w-sm' 
-                    : 'relative'
-                }`}
-              >
-                <FloatingCard tilt className="relative overflow-hidden aspect-[4/5] max-w-md mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
-                <Image
-                  src="/assets/images/headshout.jpg"
-                  alt="Tayler Ramsay - Senior UX Designer"
-                  fill
-                  className="object-cover"
-                />
-                
-                {/* Overlay Content */}
-                <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                  <motion.div
-                    className="text-center text-white"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
-                      <Play className="w-8 h-8 ml-1" />
-                    </div>
-                    <span className="font-semibold text-lg">Watch My Story</span>
-                  </motion.div>
-                </div>
-                </FloatingCard>
+          <div className="relative">
+            {/* Main Image Card */}
+            <motion.div
+              ref={photoRef}
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="relative overflow-hidden aspect-[4/5] max-w-md mx-auto rounded-2xl backdrop-blur-md bg-card/80 border border-border shadow-xl"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+              <Image
+                src="/assets/images/headshout.jpg"
+                alt="Tayler Ramsay - Senior UX Designer"
+                fill
+                className="object-cover"
+              />
+
+              {/* Overlay Content */}
+              <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <motion.div
+                  className="text-center text-white"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
+                    <Play className="w-8 h-8 ml-1" />
+                  </div>
+                  <span className="font-semibold text-lg">Watch My Story</span>
+                </motion.div>
               </div>
+            </motion.div>
 
               {/* Floating Skill Cards */}
               <div className={`absolute inset-0 pointer-events-none ${isPhotoSticky ? 'hidden' : ''}`}>
@@ -271,8 +268,7 @@ export function AboutSection() {
                   </div>
                 </FloatingCard>
               </div>
-            </div>
-          </ScrollReveal>
+          </div>
         </div>
 
         {/* Skills Grid */}
