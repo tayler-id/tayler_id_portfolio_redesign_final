@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Briefcase, 
@@ -29,15 +29,47 @@ export function ProjectsSection() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null)
   const [showCaseStudy, setShowCaseStudy] = useState(false)
 
-  const openCaseStudy = (projectId: string) => {
+  const openCaseStudy = useCallback((projectId: string) => {
     setSelectedProjectId(projectId)
     setShowCaseStudy(true)
-  }
+    // Push state to browser history so back button closes modal
+    window.history.pushState({ caseStudy: projectId }, '', `#project/${projectId}`)
+  }, [])
 
-  const closeCaseStudy = () => {
+  const closeCaseStudy = useCallback(() => {
     setShowCaseStudy(false)
     setSelectedProjectId(null)
-  }
+    // Only push state if we're not already handling a popstate
+    if (window.location.hash.startsWith('#project/')) {
+      window.history.pushState({}, '', window.location.pathname)
+    }
+  }, [])
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      if (event.state?.caseStudy) {
+        // User navigated forward to a case study
+        setSelectedProjectId(event.state.caseStudy)
+        setShowCaseStudy(true)
+      } else {
+        // User pressed back - close the modal
+        setShowCaseStudy(false)
+        setSelectedProjectId(null)
+      }
+    }
+
+    // Check if URL has a project hash on mount
+    const hash = window.location.hash
+    if (hash.startsWith('#project/')) {
+      const projectId = hash.replace('#project/', '')
+      setSelectedProjectId(projectId)
+      setShowCaseStudy(true)
+    }
+
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
   const filters = [
     { id: 'all', label: 'All Projects', icon: Briefcase },
