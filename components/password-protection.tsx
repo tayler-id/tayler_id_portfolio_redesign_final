@@ -193,7 +193,14 @@ export function PasswordProtection({ children }: PasswordProtectionProps) {
               transition={{ delay: 1 }}
               className="text-center text-white/60 text-sm mt-6"
             >
-              Need access? Contact me for the password.
+              Need access?{' '}
+              <a
+                href="mailto:ramsay.tayler@gmail.com?subject=[tayler.id] Portfolio Access Request&body=Hi Tayler,%0D%0A%0D%0AI'd like to request access to your portfolio at tayler.id.%0D%0A%0D%0AName: %0D%0ACompany/Role: %0D%0AReason for access: %0D%0A%0D%0AThank you!"
+                className="text-white/90 hover:text-white underline underline-offset-2 transition-colors"
+              >
+                Contact me
+              </a>
+              {' '}for the password.
             </motion.p>
           </div>
         </motion.div>
