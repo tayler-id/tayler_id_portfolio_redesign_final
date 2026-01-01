@@ -174,7 +174,7 @@ export function ProjectsSection() {
         { icon: Code, phase: 'Development', description: 'Vue.js components with real-time Synchrony Bank API integration and instant credit decisioning.' }
       ],
       tags: ['Retail', 'Fintech', 'Vue.js'],
-      image: '/assets/Ashley_logo_2022.svg.png',
+      image: '/assets/images/ashley-hero.png',
       gradient: 'from-green-500 to-emerald-600'
     },
     {
@@ -193,7 +193,7 @@ export function ProjectsSection() {
         { icon: Code, phase: 'Frontend', description: 'React application with HIPAA-compliant form handling and multi-lender waterfall integration.' }
       ],
       tags: ['Healthcare', 'Fintech', 'React'],
-      image: '/assets/images/aspen-dental-logo-png_seeklogo-333502.png',
+      image: '/assets/images/aspen-hero.png',
       gradient: 'from-blue-500 to-indigo-600'
     },
     {
@@ -212,7 +212,7 @@ export function ProjectsSection() {
         { icon: Zap, phase: 'Performance', description: 'Implemented response caching and parallel API calls to maintain sub-2-second checkout experience.' }
       ],
       tags: ['E-commerce', 'API', 'TypeScript'],
-      image: '/assets/images/Dell_Logo.svg.png',
+      image: '/assets/images/dell-hero.png',
       gradient: 'from-cyan-500 to-blue-600'
     },
     {
@@ -231,7 +231,7 @@ export function ProjectsSection() {
         { icon: Code, phase: 'Implementation', description: 'Touch-optimized Vue.js app with large tap targets, progress indicators, and instant pre-qualification.' }
       ],
       tags: ['Retail', 'Fintech', 'Kiosk'],
-      image: '/assets/images/helzburg.svg',
+      image: '/assets/images/helzberg-hero.png',
       gradient: 'from-purple-500 to-pink-600'
     },
     {
@@ -250,7 +250,7 @@ export function ProjectsSection() {
         { icon: Code, phase: 'Integration', description: 'Health Spend API integration with real-time card BIN validation and automatic receipt generation.' }
       ],
       tags: ['Health & Wellness', 'Fintech', 'E-commerce'],
-      image: '/assets/images/ifit.svg',
+      image: '/assets/images/ifit-hero.png',
       gradient: 'from-orange-500 to-red-600'
     },
   ]
