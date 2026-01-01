@@ -38,7 +38,7 @@ export function AIAssistant() {
     const lowerMessage = userMessage.toLowerCase()
     
     if (lowerMessage.includes('experience') || lowerMessage.includes('years')) {
-      return "Tayler has 25+ years of experience in UX design and frontend development, specializing in AI-driven interfaces and scalable design systems."
+      return "Tayler has 20+ years bridging design and development. He currently builds production systems for a $16B+ FinTech platform acquired by Synchrony Bank, with expertise in Kotlin/Spring, React/Next.js, and AI/ML integration."
     }
     
     if (lowerMessage.includes('onboard') || lowerMessage.includes('project')) {

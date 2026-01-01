@@ -284,21 +284,21 @@ export function ProjectsSection() {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }} />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <ScrollReveal>
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 sm:mb-16">
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium text-sm mb-4"
+              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium text-xs sm:text-sm mb-4"
               whileHover={{ scale: 1.05 }}
             >
-              <Briefcase className="w-4 h-4" />
+              <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Portfolio
             </motion.div>
-            <h2 className="text-4xl lg:text-6xl font-bold font-display mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-display mb-3 sm:mb-4">
               Featured <span className="gradient-text">Projects</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
               Real-world solutions with measurable impact and exceptional user experiences
             </p>
           </div>
@@ -306,14 +306,14 @@ export function ProjectsSection() {
 
         {/* Project Filters */}
         <ScrollReveal delay={0.2}>
-          <div className="flex justify-center mb-16">
-            <div className="flex flex-wrap gap-4 p-2 bg-background/50 backdrop-blur-sm rounded-2xl border border-border/50">
+          <div className="flex justify-center mb-16 px-4">
+            <div className="flex gap-2 sm:gap-4 p-2 bg-background/50 backdrop-blur-sm rounded-2xl border border-border/50 overflow-x-auto max-w-full scrollbar-hide">
               {filters.map((filter) => (
                 <motion.button
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id)}
                   className={cn(
-                    'flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300',
+                    'flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 rounded-xl font-medium transition-all duration-300 whitespace-nowrap text-sm sm:text-base flex-shrink-0',
                     activeFilter === filter.id
                       ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
                       : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
@@ -321,7 +321,7 @@ export function ProjectsSection() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <filter.icon className="w-4 h-4" />
+                  <filter.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   <span>{filter.label}</span>
                 </motion.button>
               ))}
@@ -389,38 +389,38 @@ export function ProjectsSection() {
                 </div>
 
                 {/* Project Content */}
-                <div className="p-8">
-                  <div className="space-y-6">
+                <div className="p-4 sm:p-8">
+                  <div className="space-y-4 sm:space-y-6">
                     {/* Header */}
                     <div>
-                      <div className="flex items-center gap-2 mb-3">
+                      <div className="flex flex-wrap items-center gap-2 mb-3">
                         {featuredProject.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full border border-primary/20"
+                            className="px-2 sm:px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full border border-primary/20"
                           >
                             {tag}
                           </span>
                         ))}
                       </div>
-                      <h3 className="text-3xl font-bold font-display mb-4">
+                      <h3 className="text-2xl sm:text-3xl font-bold font-display mb-3 sm:mb-4">
                         {featuredProject.title}
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                         {featuredProject.description}
                       </p>
                     </div>
 
                     {/* Metrics */}
                     {featuredProject.metrics && (
-                      <div className="grid grid-cols-3 gap-4">
+                      <div className="grid grid-cols-3 gap-2 sm:gap-4">
                         {featuredProject.metrics.map((metric) => (
-                          <div key={metric.label} className="text-center p-4 rounded-xl bg-accent/50 border border-border/50">
-                            <div className="w-8 h-8 mx-auto mb-2 text-primary">
+                          <div key={metric.label} className="text-center p-2 sm:p-4 rounded-xl bg-accent/50 border border-border/50">
+                            <div className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-1 sm:mb-2 text-primary">
                               <metric.icon className="w-full h-full" />
                             </div>
-                            <div className="font-bold text-lg">{metric.value}</div>
-                            <div className="text-xs text-muted-foreground">{metric.label}</div>
+                            <div className="font-bold text-base sm:text-lg">{metric.value}</div>
+                            <div className="text-[10px] sm:text-xs text-muted-foreground">{metric.label}</div>
                           </div>
                         ))}
                       </div>
@@ -428,16 +428,16 @@ export function ProjectsSection() {
 
                     {/* Development Story */}
                     {featuredProject.story && (
-                      <div className="space-y-3">
-                        <h4 className="font-semibold text-lg">Development Journey</h4>
+                      <div className="space-y-2 sm:space-y-3">
+                        <h4 className="font-semibold text-base sm:text-lg">Development Journey</h4>
                         {featuredProject.story.map((phase, index) => (
-                          <div key={phase.phase} className="flex gap-3 p-3 rounded-lg bg-accent/30 border border-border/50">
-                            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <phase.icon className="w-4 h-4 text-primary" />
+                          <div key={phase.phase} className="flex gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg bg-accent/30 border border-border/50">
+                            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <phase.icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
                             </div>
-                            <div className="flex-1">
-                              <div className="font-medium text-sm mb-1">{phase.phase}</div>
-                              <div className="text-xs text-muted-foreground leading-relaxed">
+                            <div className="flex-1 min-w-0">
+                              <div className="font-medium text-xs sm:text-sm mb-0.5 sm:mb-1">{phase.phase}</div>
+                              <div className="text-[10px] sm:text-xs text-muted-foreground leading-relaxed">
                                 {phase.description}
                               </div>
                             </div>
@@ -469,7 +469,7 @@ export function ProjectsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
         >
           <AnimatePresence>
             {filteredProjects
@@ -519,31 +519,31 @@ export function ProjectsSection() {
                   </div>
 
                   {/* Project Content */}
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 mb-3">
+                  <div className="p-4 sm:p-6">
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-1 bg-accent text-accent-foreground text-xs font-medium rounded-full"
+                          className="px-2 py-0.5 sm:py-1 bg-accent text-accent-foreground text-[10px] sm:text-xs font-medium rounded-full"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
-                    
-                    <h3 className="text-xl font-bold font-display mb-3 group-hover:text-primary transition-colors">
+
+                    <h3 className="text-lg sm:text-xl font-bold font-display mb-2 sm:mb-3 group-hover:text-primary transition-colors line-clamp-2">
                       {project.title}
                     </h3>
-                    
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+
+                    <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3">
                       {project.description}
                     </p>
 
                     <div className="flex items-center justify-between">
-                      <Button 
-                        variant="ghost" 
+                      <Button
+                        variant="ghost"
                         size="sm"
-                        className="text-primary hover:text-primary/80 p-0 h-auto font-medium group-hover:translate-x-1 transition-transform"
+                        className="text-primary hover:text-primary/80 p-0 h-auto font-medium text-xs sm:text-sm group-hover:translate-x-1 transition-transform"
                         onClick={() => openCaseStudy(project.id)}
                       >
                         View Case Study
@@ -559,16 +559,16 @@ export function ProjectsSection() {
 
         {/* Call to Action */}
         <ScrollReveal delay={0.8}>
-          <div className="text-center mt-16">
-            <div className="max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold font-display mb-4">
+          <div className="text-center mt-12 sm:mt-16">
+            <div className="max-w-2xl mx-auto px-2">
+              <h3 className="text-xl sm:text-2xl font-bold font-display mb-3 sm:mb-4">
                 Ready to work together?
               </h3>
-              <p className="text-muted-foreground mb-8">
-                Let's discuss how I can help bring your next project to life with exceptional 
+              <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8">
+                Let's discuss how I can help bring your next project to life with exceptional
                 user experience and technical expertise.
               </p>
-              <MagneticButton 
+              <MagneticButton
                 onClick={() => {
                   document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
                 }}
