@@ -56,12 +56,12 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          {process.env.NEXT_PUBLIC_PASSWORD_PROTECT === 'false' ? (
-            children
-          ) : (
+          {process.env.NEXT_PUBLIC_PASSWORD_PROTECT === 'true' ? (
             <PasswordProtection>
               {children}
             </PasswordProtection>
+          ) : (
+            children
           )}
         </ThemeProvider>
         
