@@ -82,7 +82,7 @@ export function HeroSection() {
                   speed={80}
                   delay={500}
                 />
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
                   <span className="block text-foreground">Senior Full-Stack</span>
                   <span className="block gradient-text">UX Engineer</span>
                 </h1>

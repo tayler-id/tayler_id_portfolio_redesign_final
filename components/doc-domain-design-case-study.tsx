@@ -164,33 +164,57 @@ export function DocDomainDesignCaseStudy({ onBack }: DocDomainDesignCaseStudyPro
     wireframes: [
       {
         type: 'wireframe' as const,
-        title: 'Query Interface',
-        description: 'Clean input with query type detection and confidence preview'
+        title: 'Chat & Split View',
+        description: 'Primary interface with BLUF response format and split-screen citation view',
+        image: '/assets/doc-domain/wireframe-chat-split-view.png'
       },
       {
         type: 'wireframe' as const,
-        title: 'BLUF Response Card',
-        description: 'Structured answer with verdict, evidence, fix, and safety sections'
+        title: 'Citation Pop-over',
+        description: 'Document reference with page match percentage and source text',
+        image: '/assets/doc-domain/wireframe-citation-popover.png'
       },
       {
         type: 'wireframe' as const,
-        title: 'Citation with Bounding Box',
-        description: 'Source document view with highlighted text regions'
+        title: 'Detailed Response & Thought Process',
+        description: 'Expanded view showing AI reasoning steps alongside BLUF response',
+        image: '/assets/doc-domain/wireframe-detailed-response.png'
+      },
+      {
+        type: 'wireframe' as const,
+        title: 'Dashboard & List View',
+        description: 'Item management with approval status badges and document counts',
+        image: '/assets/doc-domain/wireframe-dashboard-list.png'
+      },
+      {
+        type: 'wireframe' as const,
+        title: 'Upload Interface',
+        description: 'Document upload modal with drag-and-drop and type selection',
+        image: '/assets/doc-domain/wireframe-upload-interface.png'
+      },
+      {
+        type: 'wireframe' as const,
+        title: 'Empty Chat State',
+        description: 'Onboarding state guiding users to start their first query',
+        image: '/assets/doc-domain/wireframe-empty-chat.png'
+      },
+      {
+        type: 'wireframe' as const,
+        title: 'Document List & Add Modal',
+        description: 'Item detail view with document management and processing status',
+        image: '/assets/doc-domain/wireframe-document-list-modal.png'
       },
       {
         type: 'flow' as const,
-        title: 'Gap Detection State',
-        description: 'UI state when confidence threshold isn\'t met'
+        title: 'Initial Query State',
+        description: 'Thought process visualization during query analysis',
+        image: '/assets/doc-domain/wireframe-initial-query.png'
       },
       {
         type: 'flow' as const,
-        title: 'Knowledge Graph View',
-        description: 'Neo4j visualization of document relationships'
-      },
-      {
-        type: 'component' as const,
-        title: 'Confidence Meter',
-        description: '3-layer confidence visualization with breakdown'
+        title: 'Citation Pop-over Variation',
+        description: 'Alternative citation display with inline evidence highlighting',
+        image: '/assets/doc-domain/wireframe-citation-variation.png'
       }
     ],
 
