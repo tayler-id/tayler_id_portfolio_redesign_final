@@ -147,13 +147,6 @@ export function Header() {
           </div>
         </div>
 
-        {/* Progress Bar */}
-        <motion.div
-          className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-primary to-purple-600"
-          style={{
-            width: useTransform(scrollY, [0, 2000], ['0%', '100%'])
-          }}
-        />
       </motion.header>
 
       {/* Mobile Menu */}

@@ -129,3 +129,17 @@ html {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
+
+/* Hide main header when modal is open */
+body.modal-open header:not([data-modal-header]) {
+  display: none !important;
+}
+
+body.modal-open .fixed.z-50:not([data-modal-header]) {
+  display: none !important;
+}
+
+/* Also hide scroll progress when modal is open */
+body.modal-open .fixed.z-40 {
+  display: none !important;
+}

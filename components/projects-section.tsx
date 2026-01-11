@@ -99,41 +99,41 @@ export function ProjectsSection() {
       title: 'Rayni AI Document Intelligence Platform',
       category: ['ai-ml', 'full-stack'],
       status: 'live',
-      description: 'AI-powered instrument knowledge management for scientific research labs. Built 360K+ lines of code solo using AI-augmented workflows. Hybrid RAG system with LangGraph agents.',
+      description: 'Designing trust in AI-powered scientific research. Created a document intelligence platform with split-screen citation verification, streaming responses, and gap detection flows that tell users exactly when to trust the AI.',
       metrics: [
-        { icon: Code, value: '360K+', label: 'Lines of Code' },
-        { icon: Layers, value: '98K', label: 'Frontend LOC' },
-        { icon: Monitor, value: '260K', label: 'Backend LOC' }
+        { icon: Users, value: '87.5%', label: 'Usability Score' },
+        { icon: TrendingUp, value: '<30s', label: 'Time to Answer' },
+        { icon: Palette, value: '50+', label: 'Components' }
       ],
       story: [
-        { icon: Search, phase: 'Architecture', description: 'Hybrid RAG system combining tree-based document navigation with semantic vector search (pgvector, 1536-dim embeddings).' },
-        { icon: Zap, phase: 'AI/ML', description: 'LangGraph stateful agents with human-in-the-loop gap detection and conversation checkpointing.' },
-        { icon: Code, phase: 'Frontend', description: 'SSE streaming chat with optimistic UI, real-time token rendering, and citation deep-linking to PDF locations.' },
-        { icon: Palette, phase: 'Design', description: 'Custom "no borders needed" Tailwind design system using color layering and dual-layer shadows.' }
+        { icon: Search, phase: 'User Research', description: '12 contextual interviews with lab technicians revealed the core insight: users need to know exactly when to trust AI answers.' },
+        { icon: Palette, phase: 'Design System', description: 'Created "no borders needed" design language using color layering and elevation hierarchy across 50+ components.' },
+        { icon: Zap, phase: 'Trust Patterns', description: 'Split-screen citation verification, streaming responses with inline citations, and proactive gap detection.' },
+        { icon: Code, phase: 'Implementation', description: 'Full-stack development: Next.js, Django, LangGraph agents with hybrid RAG architecture.' }
       ],
-      tags: ['AI/ML', 'LangGraph', 'RAG'],
+      tags: ['AI Product Design', 'Design Systems', 'Trust UX'],
       gradient: 'from-violet-500 to-indigo-600',
       demoUrl: 'https://rayni.ai',
       image: '/assets/images/rayni-hero.png'
     },
     {
       id: 'doc-domain-agent',
-      title: 'Doc Domain Agent - Precision RAG System',
+      title: 'Doc Domain Agent - Zero-Hallucination AI',
       category: ['ai-ml', 'full-stack'],
       status: 'live',
-      description: 'Zero-hallucination RAG platform for scientific instrumentation. Neo4j GraphRAG with LangGraph agents, human-in-the-loop gap detection, and deep-linking citations with bounding box verification.',
+      description: 'Designing zero-hallucination AI for high-stakes decisions. Created BLUF response format, bounding-box citations, and gap detection flows that gracefully escalate rather than guess.',
       metrics: [
+        { icon: TrendingUp, value: '<0.1%', label: 'Hallucination Rate' },
         { icon: Clock, value: '<30s', label: 'Time to Answer' },
-        { icon: Zap, value: '<0.1%', label: 'Hallucination Rate' },
-        { icon: Layers, value: '758', label: 'Test Functions' }
+        { icon: Users, value: '100%', label: 'Citation Accuracy' }
       ],
       story: [
-        { icon: Search, phase: 'GraphRAG', description: 'Neo4j knowledge graph with native vector search. Device → Document → Chunk hierarchy with cross-encoder reranking.' },
-        { icon: Zap, phase: 'LangGraph Agent', description: '7-node stateful workflow: Intent Classification → Hybrid Retrieval → Gap Detection → BLUF Response Generation.' },
-        { icon: Code, phase: 'Zero-Hallucination', description: '3-layer gap detection (confidence/semantic/structural) triggers HITL interrupts rather than guessing.' },
-        { icon: Monitor, phase: 'Verification UI', description: 'Deep-linking citations with bounding box highlights. Click to verify any answer against source PDF.' }
+        { icon: Search, phase: 'Research', description: 'Expert interviews revealed: users don\'t need perfect AI—they need to know exactly when it\'s uncertain.' },
+        { icon: Palette, phase: 'BLUF Format', description: 'Designed "Bottom Line Up Front" response structure: Verdict → Evidence → Fix → Safety Warnings.' },
+        { icon: Zap, phase: 'Gap Detection', description: '3-layer confidence system triggers human-in-the-loop prompts before generating uncertain answers.' },
+        { icon: Monitor, phase: 'Verification', description: 'Bounding box citations highlight exact text—not just page numbers—for instant verification.' }
       ],
-      tags: ['Neo4j', 'LangGraph', 'GraphRAG'],
+      tags: ['AI Safety UX', 'Trust Design', 'Information Architecture'],
       gradient: 'from-emerald-500 to-teal-600',
       image: '/assets/images/doc-domain-hero.png'
     },
@@ -142,19 +142,19 @@ export function ProjectsSection() {
       title: 'Blue Moon Senior Counseling - Telehealth Platform',
       category: ['full-stack', 'ui-ux'],
       status: 'live',
-      description: 'Premium telehealth video therapy platform for Medicare-covered geriatric counseling. WebRTC video conferencing, Three.js animations, comprehensive accessibility suite.',
+      description: 'Accessible telehealth design for geriatric therapy. Created a WCAG 2.1 AA compliant platform with 6-axis accessibility controls, enabling 100% unassisted session joins by seniors.',
       metrics: [
-        { icon: Users, value: 'HIPAA', label: 'Compliant' },
-        { icon: Clock, value: 'CPT', label: 'Auto-Billing' },
-        { icon: Zap, value: 'WCAG', label: 'Accessible' }
+        { icon: Users, value: '100%', label: 'Join Success Rate' },
+        { icon: Zap, value: 'WCAG 2.1', label: 'AA Compliant' },
+        { icon: Clock, value: '15min', label: 'Saved/Session' }
       ],
       story: [
-        { icon: Monitor, phase: 'Video', description: 'WebRTC video conferencing supporting 1-on-1 PIP and adaptive multi-participant grid layouts.' },
-        { icon: TrendingUp, phase: 'Billing', description: 'Automatic CPT medical billing code detection (90832/90834/90837) with session timer.' },
-        { icon: Palette, phase: 'Design', description: 'Premium gold-on-black design system with Three.js particle morphing loader (1000+ particles).' },
-        { icon: Users, phase: 'Accessibility', description: 'Live captions (Web Speech API), background blur, high contrast, reduced motion, 6-level font sizing.' }
+        { icon: Search, phase: 'Research', description: 'User testing with 8 seniors aged 68-84 revealed tech anxiety and specific accessibility barriers.' },
+        { icon: Palette, phase: 'Visual Design', description: 'Gold-on-dark theme exceeds AAA contrast. Three.js particle animation reduces pre-session anxiety.' },
+        { icon: Users, phase: 'Accessibility', description: '6-axis control: font size, contrast, motion, captions, blur, focus indicators—all user-adjustable.' },
+        { icon: Zap, phase: 'Automation', description: 'CPT billing code detection (90832/90834/90837) saves 15 minutes per session.' }
       ],
-      tags: ['Healthcare', 'WebRTC', 'Accessibility'],
+      tags: ['Accessibility', 'Healthcare UX', 'Senior Design'],
       gradient: 'from-amber-500 to-orange-600',
       demoUrl: 'https://bluemoonseniorcounseling.com',
       image: '/assets/images/blue-moon-hero.png'

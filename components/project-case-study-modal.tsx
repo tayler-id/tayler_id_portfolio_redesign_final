@@ -4,15 +4,15 @@ import React, { useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ArrowLeft, Home } from 'lucide-react'
 import { Button } from './ui/button'
-import { OnboardIQCaseStudy } from './onboard-iq-case-study'
-import { RayniCaseStudy } from './rayni-case-study'
-import { BlueMoonCaseStudy } from './blue-moon-case-study'
+import { OnboardIQDesignCaseStudy } from './onboard-iq-design-case-study'
+import { RayniDesignCaseStudy } from './rayni-design-case-study'
+import { BlueMoonDesignCaseStudy } from './blue-moon-design-case-study'
 import { AshleyCaseStudy } from './ashley-case-study'
 import { AspenCaseStudy } from './aspen-case-study'
 import { DellCaseStudy } from './dell-case-study'
 import { HelzbergCaseStudy } from './helzberg-case-study'
 import { IfitCaseStudy } from './ifit-case-study'
-import { DocDomainAgentCaseStudy } from './doc-domain-agent-case-study'
+import { DocDomainDesignCaseStudy } from './doc-domain-design-case-study'
 
 interface ProjectCaseStudyModalProps {
   projectId: string | null
@@ -25,6 +25,18 @@ export function ProjectCaseStudyModal({
   isOpen,
   onClose
 }: ProjectCaseStudyModalProps) {
+  // Hide main header when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('modal-open')
+    } else {
+      document.body.classList.remove('modal-open')
+    }
+    return () => {
+      document.body.classList.remove('modal-open')
+    }
+  }, [isOpen])
+
   // Close modal when navigation links are clicked
   useEffect(() => {
     if (!isOpen) return
@@ -55,13 +67,13 @@ export function ProjectCaseStudyModal({
   const renderCaseStudy = () => {
     switch (projectId) {
       case 'onboard-iq':
-        return <OnboardIQCaseStudy onBack={onClose} />
+        return <OnboardIQDesignCaseStudy onBack={onClose} />
 
       case 'rayni-platform':
-        return <RayniCaseStudy onBack={onClose} />
+        return <RayniDesignCaseStudy onBack={onClose} />
 
       case 'blue-moon-telehealth':
-        return <BlueMoonCaseStudy onBack={onClose} />
+        return <BlueMoonDesignCaseStudy onBack={onClose} />
 
       case 'ashley-furniture':
         return <AshleyCaseStudy onBack={onClose} />
@@ -79,7 +91,7 @@ export function ProjectCaseStudyModal({
         return <IfitCaseStudy onBack={onClose} />
 
       case 'doc-domain-agent':
-        return <DocDomainAgentCaseStudy onBack={onClose} />
+        return <DocDomainDesignCaseStudy onBack={onClose} />
 
       default:
         return <ComingSoonCaseStudy
@@ -94,40 +106,12 @@ export function ProjectCaseStudyModal({
   return (
     <AnimatePresence>
       <motion.div
-        className="fixed inset-0 bg-background z-[200] overflow-y-auto"
+        className="fixed inset-0 bg-background z-[9999] overflow-y-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.3 }}
       >
-        {/* Fixed header with close button - high z-index to stay above everything */}
-        <div className="sticky top-0 bg-background/95 backdrop-blur-xl border-b border-border z-[210] shadow-lg">
-          <div className="container mx-auto px-6 py-3">
-            <div className="flex items-center justify-between">
-              <Button
-                variant="outline"
-                onClick={() => {
-                  onClose()
-                  window.location.hash = ''
-                }}
-                className="flex items-center gap-2 font-medium"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Back to Portfolio
-              </Button>
-              <Button
-                variant="default"
-                size="default"
-                onClick={onClose}
-                className="flex items-center gap-2 bg-destructive hover:bg-destructive/90 text-destructive-foreground"
-              >
-                <X className="w-4 h-4" />
-                Close
-              </Button>
-            </div>
-          </div>
-        </div>
-
         {/* Case study content */}
         <motion.div
           initial={{ y: 50, opacity: 0 }}
@@ -140,7 +124,7 @@ export function ProjectCaseStudyModal({
 
         {/* Floating Back Button - Always visible */}
         <motion.div
-          className="fixed bottom-6 left-6 z-[220]"
+          className="fixed bottom-6 left-6 z-20"
           initial={{ scale: 0, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.5, type: 'spring' }}
