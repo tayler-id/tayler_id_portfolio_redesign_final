@@ -19,6 +19,7 @@ export function DocDomainDesignCaseStudy({ onBack }: DocDomainDesignCaseStudyPro
     tools: ['Figma', 'FigJam', 'React 19', 'FastAPI', 'Neo4j', 'Tailwind CSS'],
 
     // Hero
+    heroImage: '/assets/doc-domain/login-page.png',
     gradient: 'bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-700',
     status: 'live' as const,
 
@@ -234,6 +235,7 @@ export function DocDomainDesignCaseStudy({ onBack }: DocDomainDesignCaseStudyPro
         version: 'V1',
         title: 'Standard RAG',
         description: 'Initial approach used conventional vector search with page-level citations.',
+        image: '/assets/doc-domain/chat-empty.png',
         changes: [
           'Vector-only retrieval',
           'Page-number citations',
@@ -245,6 +247,7 @@ export function DocDomainDesignCaseStudy({ onBack }: DocDomainDesignCaseStudyPro
         version: 'V2',
         title: 'Hybrid Retrieval',
         description: 'Added graph augmentation and cross-encoder reranking for better accuracy.',
+        image: '/assets/doc-domain/bluf-response.png',
         changes: [
           'Neo4j graph relationships',
           'Cross-encoder reranking',
@@ -256,6 +259,7 @@ export function DocDomainDesignCaseStudy({ onBack }: DocDomainDesignCaseStudyPro
         version: 'V3 (Final)',
         title: 'Zero-Hallucination Design',
         description: 'Full gap detection system with HITL flows and bounding box precision.',
+        image: '/assets/doc-domain/split-view-bounding-box.png',
         changes: [
           '3-layer gap detection',
           'Bounding box citations',
@@ -303,33 +307,39 @@ export function DocDomainDesignCaseStudy({ onBack }: DocDomainDesignCaseStudyPro
       screens: [
         {
           type: 'mockup' as const,
-          title: 'Query Interface',
-          description: 'Clean search with query classification preview'
-        },
-        {
-          type: 'mockup' as const,
-          title: 'BLUF Response',
-          description: 'Structured answer: Verdict → Evidence → Fix → Safety'
+          title: 'BLUF Response with Citations',
+          description: 'Structured answer with inline citations and thought process visualization',
+          image: '/assets/doc-domain/bluf-citations.png'
         },
         {
           type: 'mockup' as const,
           title: 'Bounding Box Citation',
-          description: 'Source PDF with highlighted text regions'
+          description: 'Split-screen PDF viewer with highlighted source regions',
+          image: '/assets/doc-domain/split-view-bounding-box-light.png'
         },
         {
           type: 'mockup' as const,
-          title: 'Gap Detection',
-          description: 'Graceful escalation when confidence is insufficient'
+          title: 'Query Analysis',
+          description: 'Intent classification with confidence preview before response',
+          image: '/assets/doc-domain/chat-analyzing.png'
         },
         {
           type: 'mockup' as const,
-          title: 'Knowledge Graph',
-          description: 'Neo4j visualization of document relationships'
+          title: 'Item Dashboard',
+          description: 'Card grid with approval status and document counts',
+          image: '/assets/doc-domain/items-dashboard-light.png'
         },
         {
           type: 'mockup' as const,
-          title: 'Audit Trail',
-          description: 'Full request trace for compliance review'
+          title: 'Item Details',
+          description: 'Document list with processing status and quick actions',
+          image: '/assets/doc-domain/item-details-light.png'
+        },
+        {
+          type: 'mockup' as const,
+          title: 'Combinations',
+          description: 'Group related items for unified cross-document queries',
+          image: '/assets/doc-domain/combinations.png'
         }
       ],
       highlights: [
