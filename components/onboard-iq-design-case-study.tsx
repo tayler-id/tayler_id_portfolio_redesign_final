@@ -19,7 +19,7 @@ export function OnboardIQDesignCaseStudy({ onBack }: OnboardIQDesignCaseStudyPro
     tools: ['Figma', 'Pebble Templates', 'Kotlin', 'Spring Boot', 'Tailwind CSS', 'PostgreSQL'],
 
     // Hero
-    heroImage: '/assets/iq/workflow-instance-detail.png',
+    heroImage: '/assets/iq/login-page.png',
     gradient: 'bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-700',
     status: 'live' as const,
 
@@ -163,40 +163,46 @@ export function OnboardIQDesignCaseStudy({ onBack }: OnboardIQDesignCaseStudyPro
     // Wireframes
     wireframes: [
       {
-        type: 'mockup' as const,
+        type: 'wireframe' as const,
         title: 'Workflow Designer',
-        description: 'Drag-and-drop step builder with step library sidebar',
-        image: '/assets/iq/workflow-designer-4-steps.png'
+        description: 'Drag-drop step library with visual step sequencing and cascading defaults',
+        image: '/assets/iq/wireframe/wireframe-workflow-designer.png'
       },
       {
-        type: 'mockup' as const,
-        title: 'Workflow Management',
-        description: 'Card grid overview with Published status badges',
-        image: '/assets/iq/workflow-management-2.png'
+        type: 'wireframe' as const,
+        title: 'Workflow Instance Detail',
+        description: 'Real-time status tracking with SLA indicators, timeline, and audit trail',
+        image: '/assets/iq/wireframe/wireframe-instance-detail.png'
       },
       {
-        type: 'mockup' as const,
-        title: 'Instance Timeline',
-        description: 'Step-by-step execution view with activity log and notes',
-        image: '/assets/iq/instance-with-timeline.png'
-      },
-      {
-        type: 'mockup' as const,
-        title: 'Launch Wizard',
-        description: 'Multi-step workflow creation with SLA configuration',
-        image: '/assets/iq/launch-instance-config.png'
-      },
-      {
-        type: 'mockup' as const,
-        title: 'Data Collection',
-        description: 'Tabbed data entry with editable tables and bulk import',
-        image: '/assets/iq/collect-merchant-data.png'
-      },
-      {
-        type: 'mockup' as const,
+        type: 'wireframe' as const,
         title: 'Analytics Dashboard',
-        description: 'Lender performance comparison with charts and metrics',
-        image: '/assets/iq/lender-performance-analytics.png'
+        description: 'Workflow volume trends, completion charts, and bottleneck analysis',
+        image: '/assets/iq/wireframe/wireframe-analytics-dashboard.png'
+      },
+      {
+        type: 'wireframe' as const,
+        title: 'Task Queue / My Tasks',
+        description: 'At-a-glance workload with multi-dimensional filtering and priority indicators',
+        image: '/assets/iq/wireframe/wireframe-my-tasks.png'
+      },
+      {
+        type: 'wireframe' as const,
+        title: 'Platform Features Matrix',
+        description: 'Provider × Feature compatibility grid with status indicators',
+        image: '/assets/iq/wireframe/wireframe-features-matrix.png'
+      },
+      {
+        type: 'wireframe' as const,
+        title: 'Step Configuration Modal',
+        description: 'Cascading assignment logic with per-step SLA override and notifications',
+        image: '/assets/iq/wireframe/wireframe-step-config-modal.png'
+      },
+      {
+        type: 'wireframe' as const,
+        title: 'Activity Log / Audit Trail',
+        description: 'Chronological timeline with color-coded event types and filters',
+        image: '/assets/iq/wireframe/wireframe-activity-log.png'
       }
     ],
 
@@ -239,13 +245,14 @@ export function OnboardIQDesignCaseStudy({ onBack }: OnboardIQDesignCaseStudyPro
     iterations: [
       {
         version: 'V1',
-        title: 'Table-Based MVP',
-        description: 'Initial version used traditional data tables for workflow listing.',
+        title: 'Linear Step View',
+        description: 'First iteration focused on sequential step execution with activity tracking.',
+        image: '/assets/iq/workflow-steps-list.png',
         changes: [
-          'Basic data table with sorting/filtering',
-          'Modal-based detail views',
-          'Manual status updates',
-          'No SLA visualization'
+          'Vertical step list with status indicators',
+          'Collapsible activity and comments per step',
+          'Sidebar with timeline and context data',
+          'Action buttons for step transitions'
         ]
       },
       {
@@ -264,7 +271,7 @@ export function OnboardIQDesignCaseStudy({ onBack }: OnboardIQDesignCaseStudyPro
         version: 'V3',
         title: 'Config Inheritance',
         description: 'Added visual hierarchy for cascading configuration.',
-        image: '/assets/iq/workflow-designer-4-steps.png',
+        image: '/assets/iq/workflow-designer-named.png',
         changes: [
           'Inheritance indicators on all config fields',
           'Side-by-side diff view for overrides',
@@ -276,7 +283,7 @@ export function OnboardIQDesignCaseStudy({ onBack }: OnboardIQDesignCaseStudyPro
         version: 'V4 (Final)',
         title: 'Role-Based Views',
         description: 'Personalized dashboards based on user role and permissions.',
-        image: '/assets/iq/workflow-instance-detail.png',
+        image: '/assets/iq/workflow-instance-activity-log.png',
         changes: [
           'Role-aware default views',
           'Capacity management for assignments',
@@ -323,38 +330,38 @@ export function OnboardIQDesignCaseStudy({ onBack }: OnboardIQDesignCaseStudyPro
       screens: [
         {
           type: 'mockup' as const,
-          title: 'Workflow Dashboard',
-          description: 'Card grid with status indicators, progress bars, and quick filters',
-          image: '/assets/iq/workflow-instances-list.png'
+          title: 'All Tasks Dashboard',
+          description: 'Card grid with 7 tasks, status badges, SLA indicators, and priority filtering',
+          image: '/assets/iq/step-detail-view-2.png'
         },
         {
           type: 'mockup' as const,
-          title: 'Instance Detail',
-          description: '50% progress view with timeline, activity log, and step status',
-          image: '/assets/iq/workflow-instance-detail.png'
-        },
-        {
-          type: 'mockup' as const,
-          title: 'Workflow Designer',
-          description: 'Visual step builder with drag-drop from step library',
-          image: '/assets/iq/workflow-designer-named.png'
-        },
-        {
-          type: 'mockup' as const,
-          title: 'Data Entry Step',
-          description: 'Tabbed interface with Businesses, Domains, Locations, Devices tables',
-          image: '/assets/iq/collect-merchant-data.png'
+          title: 'Workflow Management',
+          description: 'Published workflows with Templates library and New Workflow creation',
+          image: '/assets/iq/workflow-management-2.png'
         },
         {
           type: 'mockup' as const,
           title: 'Platform Features Matrix',
-          description: '22 features × 45 providers comparison grid',
+          description: '22 features × 45 providers compatibility grid with status legend',
           image: '/assets/iq/platform-features-matrix.png'
         },
         {
           type: 'mockup' as const,
+          title: 'Import Contacts',
+          description: 'CSV upload wizard with template download and valid values guide',
+          image: '/assets/iq/data-table-view-3.png'
+        },
+        {
+          type: 'mockup' as const,
+          title: 'Instance Detail with Activity',
+          description: 'Complete workflow view with step timeline, context data, and activity log',
+          image: '/assets/iq/workflow-instance-activity-log.png'
+        },
+        {
+          type: 'mockup' as const,
           title: 'Analytics Dashboard',
-          description: 'Lender performance comparison with duration metrics',
+          description: 'Lender performance comparison with charts, metrics cards, and instance tracking',
           image: '/assets/iq/lender-performance-analytics.png'
         }
       ],

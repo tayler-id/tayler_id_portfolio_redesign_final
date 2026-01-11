@@ -1,8 +1,8 @@
 'use client'
 
-import React from 'react'
-import { motion } from 'framer-motion'
-import { ArrowLeft, ExternalLink, Users, Target, Lightbulb, Palette, Code, CheckCircle2, Quote, Play, Eye, MousePointer, Layers } from 'lucide-react'
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowLeft, ExternalLink, Users, Target, Lightbulb, Palette, Code, CheckCircle2, Quote, Play, Eye, MousePointer, Layers, X, ZoomIn } from 'lucide-react'
 import { ScrollReveal } from './animate-ui/scroll-reveal'
 import { MagneticButton } from './animate-ui/magnetic-button'
 import { FloatingCard } from './animate-ui/floating-card'
@@ -185,8 +185,74 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
     onBack
   } = props
 
+  // Image lightbox state
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string } | null>(null)
+
+  // Clickable image component
+  const ClickableImage = ({ src, alt, className = "" }: { src: string; alt: string; className?: string }) => (
+    <div
+      className={cn("relative cursor-pointer group", className)}
+      onClick={() => setLightboxImage({ src, alt })}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+      />
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 rounded-full p-3">
+          <ZoomIn className="w-6 h-6 text-gray-900" />
+        </div>
+      </div>
+    </div>
+  )
+
   return (
     <div className="min-h-screen bg-background">
+      {/* Image Lightbox Modal */}
+      <AnimatePresence>
+        {lightboxImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-8"
+            onClick={() => setLightboxImage(null)}
+          >
+            {/* Close button */}
+            <button
+              className="absolute top-4 right-4 z-10 p-2 bg-white/10 hover:bg-white/20 rounded-full transition-colors"
+              onClick={() => setLightboxImage(null)}
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+
+            {/* Image container */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full h-full max-w-7xl max-h-[90vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={lightboxImage.src}
+                alt={lightboxImage.alt}
+                fill
+                className="object-contain"
+                sizes="(max-width: 1280px) 100vw, 1280px"
+              />
+            </motion.div>
+
+            {/* Caption */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white/70 text-sm bg-black/50 px-4 py-2 rounded-full">
+              {lightboxImage.alt} • Click anywhere to close
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* Hero Section */}
       <section className={cn('relative overflow-hidden text-white', gradient)}>
         <div className="absolute inset-0 opacity-20">
@@ -279,11 +345,10 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
             >
               {heroImage ? (
                 <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/20">
-                  <Image
+                  <ClickableImage
                     src={heroImage}
                     alt={title}
-                    fill
-                    className="object-cover"
+                    className="absolute inset-0"
                   />
                 </div>
               ) : (
@@ -562,13 +627,12 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
                   {wireframes.map((wireframe, index) => (
                     <ScrollReveal key={wireframe.title} delay={index * 0.1}>
                       <FloatingCard className="bg-background/50 backdrop-blur-sm border border-border/50 overflow-hidden">
-                        <div className="aspect-video bg-muted/50 flex items-center justify-center border-b border-border/50 relative">
+                        <div className="aspect-video bg-muted/50 flex items-center justify-center border-b border-border/50 relative overflow-hidden">
                           {wireframe.image ? (
-                            <Image
+                            <ClickableImage
                               src={wireframe.image}
                               alt={wireframe.title}
-                              fill
-                              className="object-cover"
+                              className="absolute inset-0"
                             />
                           ) : (
                             <WireframePlaceholder type={wireframe.type} />
@@ -700,13 +764,12 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
                           </ul>
                         </div>
                       </div>
-                      <div className="aspect-video bg-muted/50 rounded-xl flex items-center justify-center relative">
+                      <div className="aspect-video bg-muted/50 rounded-xl flex items-center justify-center relative overflow-hidden">
                         {iteration.image ? (
-                          <Image
+                          <ClickableImage
                             src={iteration.image}
                             alt={iteration.title}
-                            fill
-                            className="object-cover rounded-xl"
+                            className="absolute inset-0 rounded-xl"
                           />
                         ) : (
                           <div className="text-center p-8">
@@ -799,13 +862,12 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
             {finalDesign.screens.map((screen, index) => (
               <ScrollReveal key={screen.title} delay={index * 0.1}>
                 <FloatingCard className="bg-background/50 backdrop-blur-sm border border-border/50 overflow-hidden">
-                  <div className="aspect-video bg-muted/50 flex items-center justify-center border-b border-border/50 relative">
+                  <div className="aspect-video bg-muted/50 flex items-center justify-center border-b border-border/50 relative overflow-hidden">
                     {screen.image ? (
-                      <Image
+                      <ClickableImage
                         src={screen.image}
                         alt={screen.title}
-                        fill
-                        className="object-cover"
+                        className="absolute inset-0"
                       />
                     ) : (
                       <MockupPlaceholder title={screen.title} />

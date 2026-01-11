@@ -19,6 +19,7 @@ export function RayniDesignCaseStudy({ onBack }: RayniDesignCaseStudyProps) {
     tools: ['Figma', 'FigJam', 'React', 'Next.js', 'Tailwind CSS', 'Framer Motion'],
 
     // Hero
+    heroImage: '/assets/rayni_ai/login-screen.png',
     gradient: 'bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-700',
     status: 'live' as const,
     liveUrl: 'https://rayni.ai',
@@ -165,32 +166,38 @@ export function RayniDesignCaseStudy({ onBack }: RayniDesignCaseStudyProps) {
       {
         type: 'wireframe' as const,
         title: 'Chat Interface',
-        description: 'Initial exploration of conversational UI with citation sidebar'
+        description: 'Reasoning display with inline citations and sources badge',
+        image: '/assets/rayni_ai/wireframe-1-chat-interface.png'
       },
       {
         type: 'wireframe' as const,
-        title: 'Document Library',
-        description: 'Hierarchical navigation for instrument → category → document'
+        title: 'Knowledge Store',
+        description: 'Folder tree navigation with document grid and processing status',
+        image: '/assets/rayni_ai/wireframe-2-knowledge-store.png'
       },
       {
         type: 'wireframe' as const,
         title: 'Citation Verification',
-        description: 'Split-screen view showing AI answer alongside source PDF'
+        description: 'Split-screen AI response with highlighted PDF source',
+        image: '/assets/rayni_ai/wireframe-3-citation-verification.png'
       },
       {
         type: 'wireframe' as const,
         title: 'Confidence Indicator',
-        description: 'Visual system for communicating AI certainty levels'
+        description: 'Traffic-light confidence pills with gap detection alerts',
+        image: '/assets/rayni_ai/wireframe-4-confidence-indicator.png'
       },
       {
-        type: 'flow' as const,
+        type: 'wireframe' as const,
         title: 'Document Upload',
-        description: 'Drag-drop upload with processing status and extraction preview'
+        description: 'New instrument form with drag-drop zone and step indicators',
+        image: '/assets/rayni_ai/wireframe-5-document-upload.png'
       },
       {
-        type: 'flow' as const,
-        title: 'Knowledge Graph',
-        description: 'Visual builder for connecting related instruments and documents'
+        type: 'wireframe' as const,
+        title: 'Instrument Combinations',
+        description: 'Combination cards with Open Canvas for knowledge graphs',
+        image: '/assets/rayni_ai/wireframe-6-instrument-combinations.png'
       }
     ],
 
@@ -235,6 +242,7 @@ export function RayniDesignCaseStudy({ onBack }: RayniDesignCaseStudyProps) {
         version: 'V1',
         title: 'Initial Concept',
         description: 'Standard chatbot interface with citations as footnotes at the bottom of responses.',
+        image: '/assets/rayni_ai/chat-processing.png',
         changes: [
           'Basic chat interface',
           'Citations as numbered footnotes',
@@ -246,6 +254,7 @@ export function RayniDesignCaseStudy({ onBack }: RayniDesignCaseStudyProps) {
         version: 'V2',
         title: 'Inline Citations',
         description: 'After testing showed users ignored footnotes, moved citations inline with clickable links.',
+        image: '/assets/rayni_ai/ai-response-with-citations.png',
         changes: [
           'Citations became clickable inline links',
           'Added confidence pill to each response',
@@ -257,6 +266,7 @@ export function RayniDesignCaseStudy({ onBack }: RayniDesignCaseStudyProps) {
         version: 'V3',
         title: 'Split-Screen Verification',
         description: 'User testing revealed 80% wanted to see the source immediately. Added side-by-side view.',
+        image: '/assets/rayni_ai/split-screen-pdf-verification.png',
         changes: [
           'Split-screen PDF viewer on citation click',
           'Highlight exact text in source document',
@@ -268,6 +278,7 @@ export function RayniDesignCaseStudy({ onBack }: RayniDesignCaseStudyProps) {
         version: 'V4 (Final)',
         title: 'Trust-First Design',
         description: 'Final iteration with streaming responses, proactive gap detection, and knowledge graphs.',
+        image: '/assets/rayni_ai/ai-reasoning-start.png',
         changes: [
           'SSE streaming with live citation injection',
           'Proactive "Ask for more documents" prompts',
@@ -314,33 +325,39 @@ export function RayniDesignCaseStudy({ onBack }: RayniDesignCaseStudyProps) {
       screens: [
         {
           type: 'mockup' as const,
-          title: 'Conversational Search',
-          description: 'AI chat with streaming responses, inline citations, and confidence indicators'
+          title: 'Chain of Thought Reasoning',
+          description: 'Transparent AI reasoning with step-by-step progress indicators',
+          image: '/assets/rayni_ai/ai-reasoning-new.png'
         },
         {
           type: 'mockup' as const,
           title: 'Citation Verification',
-          description: 'Split-screen view with AI answer and highlighted source PDF'
+          description: 'Split-screen view with AI answer and highlighted source PDF',
+          image: '/assets/rayni_ai/citation-verification-new.png'
         },
         {
           type: 'mockup' as const,
           title: 'Knowledge Store',
-          description: '5-layer filtering with hierarchical document navigation'
+          description: '5-layer filtering with hierarchical document navigation',
+          image: '/assets/rayni_ai/knowledge-store-new.png'
         },
         {
           type: 'mockup' as const,
-          title: 'Document Upload',
-          description: 'Drag-drop upload with AI extraction preview and progress'
+          title: 'Instruments Dashboard',
+          description: 'Card-based overview of all instruments with quick chat access',
+          image: '/assets/rayni_ai/instruments-dashboard-clean.png'
         },
         {
           type: 'mockup' as const,
           title: 'Knowledge Graph Builder',
-          description: 'Visual canvas for connecting instruments and documentation'
+          description: 'Visual canvas for connecting related instruments and documentation',
+          image: '/assets/rayni_ai/knowledge-graph-populated.png'
         },
         {
           type: 'mockup' as const,
-          title: 'Gap Detection',
-          description: 'Proactive prompts when AI lacks confidence in answer'
+          title: 'Users & Roles',
+          description: 'Team management with granular permission controls',
+          image: '/assets/rayni_ai/users-roles-management.png'
         }
       ],
       highlights: [
