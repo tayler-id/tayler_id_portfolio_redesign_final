@@ -278,7 +278,7 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
               className="relative"
             >
               {heroImage ? (
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border border-white/20">
+                <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/20">
                   <Image
                     src={heroImage}
                     alt={title}
@@ -287,7 +287,7 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
                   />
                 </div>
               ) : (
-                <div className="aspect-[4/3] rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+                <div className="aspect-video rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
                   <div className="text-center p-8">
                     <Layers className="w-16 h-16 mx-auto mb-4 opacity-50" />
                     <div className="text-lg opacity-70">Product Screenshots</div>
@@ -562,7 +562,7 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
                   {wireframes.map((wireframe, index) => (
                     <ScrollReveal key={wireframe.title} delay={index * 0.1}>
                       <FloatingCard className="bg-background/50 backdrop-blur-sm border border-border/50 overflow-hidden">
-                        <div className="aspect-[4/3] bg-muted/50 flex items-center justify-center border-b border-border/50">
+                        <div className="aspect-video bg-muted/50 flex items-center justify-center border-b border-border/50 relative">
                           {wireframe.image ? (
                             <Image
                               src={wireframe.image}
@@ -700,7 +700,7 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
                           </ul>
                         </div>
                       </div>
-                      <div className="aspect-[4/3] bg-muted/50 rounded-xl flex items-center justify-center">
+                      <div className="aspect-video bg-muted/50 rounded-xl flex items-center justify-center relative">
                         {iteration.image ? (
                           <Image
                             src={iteration.image}
@@ -799,7 +799,7 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
             {finalDesign.screens.map((screen, index) => (
               <ScrollReveal key={screen.title} delay={index * 0.1}>
                 <FloatingCard className="bg-background/50 backdrop-blur-sm border border-border/50 overflow-hidden">
-                  <div className="aspect-[4/3] bg-muted/50 flex items-center justify-center border-b border-border/50">
+                  <div className="aspect-video bg-muted/50 flex items-center justify-center border-b border-border/50 relative">
                     {screen.image ? (
                       <Image
                         src={screen.image}
@@ -872,7 +872,7 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
               {componentLibrary.components.map((component, index) => (
                 <ScrollReveal key={component.name} delay={index * 0.1}>
                   <FloatingCard className="bg-background/50 backdrop-blur-sm border border-border/50">
-                    <div className="aspect-[4/3] bg-muted/50 flex items-center justify-center border-b border-border/50">
+                    <div className="aspect-video bg-muted/50 flex items-center justify-center border-b border-border/50">
                       <ComponentPlaceholder name={component.name} />
                     </div>
                     <div className="p-4">

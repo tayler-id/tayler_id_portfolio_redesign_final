@@ -19,6 +19,7 @@ export function BlueMoonDesignCaseStudy({ onBack }: BlueMoonDesignCaseStudyProps
     tools: ['Figma', 'React', 'Next.js', 'Three.js', 'WebRTC', 'Tailwind CSS'],
 
     // Hero
+    heroImage: '/assets/Goldlink/video-session-clean.png',
     gradient: 'bg-gradient-to-br from-amber-500 via-orange-500 to-rose-600',
     status: 'live' as const,
     liveUrl: 'https://bluemoonseniorcounseling.com',
@@ -164,33 +165,39 @@ export function BlueMoonDesignCaseStudy({ onBack }: BlueMoonDesignCaseStudyProps
     wireframes: [
       {
         type: 'wireframe' as const,
-        title: 'Video Session',
-        description: 'Large faces, minimal chrome, essential controls only'
+        title: 'Pre-Session Mood Check',
+        description: 'Emoji-based mood capture with progressive disclosure',
+        image: '/assets/Goldlink/wireframe-1-mood-check.png'
+      },
+      {
+        type: 'wireframe' as const,
+        title: 'Session Preparation',
+        description: 'Environmental and technical readiness tooltips',
+        image: '/assets/Goldlink/wireframe-2-session-prep.png'
       },
       {
         type: 'wireframe' as const,
         title: 'Waiting Room',
-        description: 'Calming particle animation with clear status message'
+        description: 'Three.js calming animation with clear messaging',
+        image: '/assets/Goldlink/wireframe-3-waiting-room.png'
+      },
+      {
+        type: 'wireframe' as const,
+        title: 'Video Session',
+        description: 'Equal-sized tiles with 48px+ touch targets',
+        image: '/assets/Goldlink/wireframe-4-video-session.png'
+      },
+      {
+        type: 'wireframe' as const,
+        title: 'Session Timer',
+        description: 'Analog clock design with automatic CPT billing',
+        image: '/assets/Goldlink/wireframe-5-timer.png'
       },
       {
         type: 'wireframe' as const,
         title: 'Accessibility Panel',
-        description: 'Large visual sliders for font size, contrast, motion'
-      },
-      {
-        type: 'flow' as const,
-        title: 'Captions Overlay',
-        description: 'Live speech-to-text positioned for readability'
-      },
-      {
-        type: 'flow' as const,
-        title: 'CPT Timer',
-        description: 'Therapist-facing session duration tracking'
-      },
-      {
-        type: 'component' as const,
-        title: 'Join Button',
-        description: 'Oversized primary action with confirmation state'
+        description: '6 axes of control with real-time preview',
+        image: '/assets/Goldlink/wireframe-6-accessibility.png'
       }
     ],
 
@@ -234,35 +241,48 @@ export function BlueMoonDesignCaseStudy({ onBack }: BlueMoonDesignCaseStudyProps
       {
         version: 'V1',
         title: 'Standard Video UI',
-        description: 'Initial concept followed conventional video call patterns with white background.',
+        description: 'Initial concept followed conventional video call patterns.',
+        image: '/assets/Goldlink/video-session-two-way.png',
         changes: [
-          'Traditional light theme',
+          'Traditional video layout',
           'Standard button sizes',
-          'Complex navigation',
+          'Basic navigation',
           'Manual CPT tracking'
         ]
       },
       {
         version: 'V2',
-        title: 'Accessibility Pass',
-        description: 'After senior testing revealed barriers, redesigned for WCAG 2.1 AA compliance.',
+        title: 'Therapeutic Environment',
+        description: 'Introduced gold-on-dark branding and pre-session experience.',
+        image: '/assets/Goldlink/logo-full.png',
         changes: [
           'Introduced dark theme with gold accents',
-          'Enlarged all touch targets to 48px+',
-          'Simplified navigation to essential actions',
-          'Added live captions via Web Speech API'
+          'Pre-session mood check-in flow',
+          'Calming waiting room with lounge imagery',
+          'Session preparation tooltips'
         ]
       },
       {
-        version: 'V3 (Final)',
-        title: 'Premium Accessible',
-        description: 'Final iteration balancing accessibility requirements with premium visual design.',
+        version: 'V3',
+        title: 'Professional Tools',
+        description: 'Added therapist-specific features for session management.',
+        image: '/assets/Goldlink/timer-settings.png',
         changes: [
-          'Three.js particle waiting room animation',
-          'MediaPipe background blur option',
-          'Automatic CPT code detection',
+          'Analog session timer design',
+          'Session details sidebar with notes',
+          'Chat panel for text communication',
+          'Client mood history tracking'
+        ]
+      },
+      {
+        version: 'V4 (Final)',
+        title: 'Universal Accessibility',
+        description: 'Comprehensive accessibility controls for all users.',
+        image: '/assets/Goldlink/accessibility-cropped.png',
+        changes: [
           'Full accessibility suite with 6 control axes',
-          'Reduced motion mode',
+          'Live captions integration',
+          'High contrast and reduced motion modes',
           'Enhanced focus indicators'
         ]
       }
@@ -305,33 +325,39 @@ export function BlueMoonDesignCaseStudy({ onBack }: BlueMoonDesignCaseStudyProps
       screens: [
         {
           type: 'mockup' as const,
-          title: 'Video Session',
-          description: 'Full-screen video with PIP self-view and minimal controls'
+          title: 'Video Session with Controls',
+          description: 'Clean interface with toolbar for video, mic, chat, timer, and settings',
+          image: '/assets/Goldlink/video-session-toolbar.png'
         },
         {
           type: 'mockup' as const,
-          title: 'Waiting Room',
-          description: 'Three.js particle animation with calming countdown'
+          title: 'Mood Check-In',
+          description: 'Pre-session emotional state capture with emoji scale',
+          image: '/assets/Goldlink/mood-checkin-selected.png'
         },
         {
           type: 'mockup' as const,
-          title: 'Accessibility Panel',
-          description: 'Large visual controls for font, contrast, motion, captions'
+          title: 'Session Timer',
+          description: 'Analog clock design reduces time-pressure anxiety',
+          image: '/assets/Goldlink/timer-cropped.png'
         },
         {
           type: 'mockup' as const,
-          title: 'Live Captions',
-          description: 'Real-time speech-to-text overlay with positioning options'
+          title: 'Chat Panel',
+          description: 'Left sidebar for text communication and hearing accessibility',
+          image: '/assets/Goldlink/chat-panel-cropped.png'
         },
         {
           type: 'mockup' as const,
-          title: 'CPT Timer',
-          description: 'Therapist view with automatic billing code detection'
+          title: 'Session Details',
+          description: 'Right sidebar with client info, mood status, and session notes',
+          image: '/assets/Goldlink/session-details-cropped.png'
         },
         {
           type: 'mockup' as const,
-          title: 'High Contrast Mode',
-          description: 'Maximum visibility option for severe vision impairment'
+          title: 'Client Waiting Message',
+          description: 'Reassuring message while therapist prepares to join',
+          image: '/assets/Goldlink/therapist-joining-message.png'
         }
       ],
       highlights: [
