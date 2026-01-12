@@ -242,7 +242,7 @@ export function RayniDesignCaseStudy({ onBack }: RayniDesignCaseStudyProps) {
         version: 'V1',
         title: 'Initial Concept',
         description: 'Standard chatbot interface with citations as footnotes at the bottom of responses.',
-        image: '/assets/rayni_ai/chat-processing.png',
+        image: '/assets/rayni_ai/chat-typing-question.png',
         changes: [
           'Basic chat interface',
           'Citations as numbered footnotes',
@@ -254,7 +254,7 @@ export function RayniDesignCaseStudy({ onBack }: RayniDesignCaseStudyProps) {
         version: 'V2',
         title: 'Inline Citations',
         description: 'After testing showed users ignored footnotes, moved citations inline with clickable links.',
-        image: '/assets/rayni_ai/ai-response-with-citations.png',
+        image: '/assets/rayni_ai/ai-response-sources.png',
         changes: [
           'Citations became clickable inline links',
           'Added confidence pill to each response',
@@ -266,7 +266,7 @@ export function RayniDesignCaseStudy({ onBack }: RayniDesignCaseStudyProps) {
         version: 'V3',
         title: 'Split-Screen Verification',
         description: 'User testing revealed 80% wanted to see the source immediately. Added side-by-side view.',
-        image: '/assets/rayni_ai/split-screen-pdf-verification.png',
+        image: '/assets/rayni_ai/citation-verification-new.png',
         changes: [
           'Split-screen PDF viewer on citation click',
           'Highlight exact text in source document',
@@ -278,7 +278,7 @@ export function RayniDesignCaseStudy({ onBack }: RayniDesignCaseStudyProps) {
         version: 'V4 (Final)',
         title: 'Trust-First Design',
         description: 'Final iteration with streaming responses, proactive gap detection, and knowledge graphs.',
-        image: '/assets/rayni_ai/ai-reasoning-start.png',
+        image: '/assets/rayni_ai/ai-reasoning-new.png',
         changes: [
           'SSE streaming with live citation injection',
           'Proactive "Ask for more documents" prompts',
