@@ -24,8 +24,12 @@ import { Button } from './ui/button'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { ProjectCaseStudyModal } from './project-case-study-modal'
+import { useMotionPreference } from '@/hooks/use-reduced-motion'
 
 export function ProjectsSection() {
+  const motionPref = useMotionPreference()
+  const motionOff = motionPref === 'off'
+  const noAnimation = motionPref !== 'regular'
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null)
   const [showCaseStudy, setShowCaseStudy] = useState(false)
 
@@ -259,7 +263,11 @@ export function ProjectsSection() {
   const featuredProject = projects.find(p => p.featured)
   const regularProjects = projects.filter(p => !p.featured)
 
-  const containerVariants = {
+  // Animation variants - disabled when motion is reduced or off
+  const containerVariants = noAnimation ? {
+    hidden: { opacity: 1 },
+    visible: { opacity: 1 }
+  } : {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -269,7 +277,11 @@ export function ProjectsSection() {
     }
   }
 
-  const projectVariants = {
+  const projectVariants = noAnimation ? {
+    hidden: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: 0 },
+    exit: { opacity: 1, y: 0 }
+  } : {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
@@ -289,11 +301,17 @@ export function ProjectsSection() {
   }
 
   return (
-    <section id="projects" className="py-24 bg-muted/30 relative overflow-hidden">
+    <section id="projects" className="py-24 bg-muted/30 relative overflow-hidden" aria-labelledby="projects-heading">
       {/* Background Elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }} />
+      <div className="absolute inset-0 opacity-10" aria-hidden="true">
+        <div className={cn(
+          "absolute top-0 right-0 w-96 h-96 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full blur-3xl",
+          !noAnimation && "animate-pulse"
+        )} />
+        <div className={cn(
+          "absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full blur-3xl",
+          !noAnimation && "animate-pulse"
+        )} style={noAnimation ? {} : { animationDelay: '3s' }} />
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -307,7 +325,7 @@ export function ProjectsSection() {
               <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               Portfolio
             </motion.div>
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-bold font-display mb-3 sm:mb-4">
+            <h2 id="projects-heading" className="text-3xl sm:text-4xl lg:text-6xl font-bold font-display mb-3 sm:mb-4">
               Featured <span className="gradient-text">Projects</span>
             </h2>
             <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
@@ -440,9 +458,18 @@ export function ProjectsSection() {
               <motion.div
                 key={project.id}
                 variants={projectVariants}
-                layout
+                layout={!noAnimation}
                 className="group cursor-pointer"
                 onClick={() => openCaseStudy(project.id)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault()
+                    openCaseStudy(project.id)
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${project.title} case study`}
               >
                 <FloatingCard
                   className="h-full overflow-hidden bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300"

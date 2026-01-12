@@ -6,8 +6,11 @@ import { Mail, MessageCircle, Send, ArrowRight, CheckCircle, AlertCircle, Linked
 import { ScrollReveal } from './animate-ui/scroll-reveal'
 import { MagneticButton } from './animate-ui/magnetic-button'
 import { Button } from './ui/button'
+import { useMotionPreference } from '@/hooks/use-reduced-motion'
 
 export function ContactSection() {
+  const motionPref = useMotionPreference()
+  const noAnimation = motionPref !== 'regular'
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,7 +30,7 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
+
     try {
       // Submit to Netlify Forms
       const response = await fetch('/', {
@@ -41,7 +44,7 @@ export function ContactSection() {
           'message': formData.message,
         }).toString()
       })
-      
+
       if (response.ok) {
         setSubmitStatus('success')
         setFormData({ name: '', email: '', subject: '', message: '' })
@@ -53,8 +56,8 @@ export function ContactSection() {
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
-      // Reset status after 3 seconds
-      setTimeout(() => setSubmitStatus('idle'), 3000)
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus('idle'), 5000)
     }
   }
 
@@ -76,10 +79,10 @@ export function ContactSection() {
   ]
 
   return (
-    <section id="contact" className="py-24 relative overflow-hidden">
+    <section id="contact" className="py-24 relative overflow-hidden" aria-labelledby="contact-heading">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-blue-600/10 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5" aria-hidden="true" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-blue-600/10 rounded-full blur-3xl" aria-hidden="true" />
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -87,12 +90,12 @@ export function ContactSection() {
           <div className="text-center mb-16">
             <motion.div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium text-sm mb-4"
-              whileHover={{ scale: 1.05 }}
+              whileHover={noAnimation ? {} : { scale: 1.05 }}
             >
-              <Mail className="w-4 h-4" />
+              <Mail className="w-4 h-4" aria-hidden="true" />
               Contact
             </motion.div>
-            <h2 className="text-4xl lg:text-6xl font-bold font-display mb-4">
+            <h2 id="contact-heading" className="text-4xl lg:text-6xl font-bold font-display mb-4">
               Let's Work <span className="gradient-text">Together</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
@@ -108,7 +111,7 @@ export function ContactSection() {
               <div>
                 <h3 className="text-3xl font-bold font-display mb-4">Get in Touch</h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Interested in working together? I'm always open to discussing new projects, 
+                  Interested in working together? I'm always open to discussing new projects,
                   creative ideas, or opportunities to be part of your vision.
                 </p>
               </div>
@@ -118,34 +121,35 @@ export function ContactSection() {
                   <motion.a
                     key={method.title}
                     href={method.href}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={noAnimation ? {} : { opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.6 }}
-                    whileHover={{ x: 8, transition: { duration: 0.2 } }}
+                    transition={noAnimation ? {} : { delay: index * 0.1, duration: 0.6 }}
+                    whileHover={noAnimation ? {} : { x: 8, transition: { duration: 0.2 } }}
                     className="flex items-center gap-4 p-4 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all group"
+                    aria-label={`${method.title}: ${method.value}`}
                   >
                     <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-primary to-purple-600 flex items-center justify-center">
-                      <method.icon className="w-6 h-6 text-white" />
+                      <method.icon className="w-6 h-6 text-white" aria-hidden="true" />
                     </div>
                     <div className="flex-1">
                       <h4 className="font-semibold text-lg">{method.title}</h4>
                       <p className="text-primary font-medium">{method.value}</p>
                       <p className="text-sm text-muted-foreground">{method.description}</p>
                     </div>
-                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" aria-hidden="true" />
                   </motion.a>
                 ))}
               </div>
 
               {/* Availability Status */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={noAnimation ? {} : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
+                transition={noAnimation ? {} : { delay: 0.4, duration: 0.6 }}
                 className="p-4 rounded-xl bg-green-500/10 border border-green-500/20"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" aria-hidden="true" />
                   <span className="font-medium text-green-700 dark:text-green-400">
                     Available for new projects
                   </span>
@@ -157,82 +161,92 @@ export function ContactSection() {
           {/* Contact Form */}
           <ScrollReveal direction="right" delay={0.2}>
             <div className="bg-background/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8">
-              <form 
-                onSubmit={handleSubmit} 
+              <form
+                onSubmit={handleSubmit}
                 className="space-y-6"
                 name="contact"
                 method="POST"
                 data-netlify="true"
                 netlify-honeypot="bot-field"
+                aria-label="Contact form"
               >
                 {/* Hidden Netlify form field */}
                 <input type="hidden" name="form-name" value="contact" />
                 {/* Honeypot field for spam protection */}
-                <p style={{ display: 'none' }}>
-                  <label>Don't fill this out: <input name="bot-field" /></label>
-                </p>
+                <div className="hidden" aria-hidden="true">
+                  <label>
+                    Don't fill this out: <input name="bot-field" tabIndex={-1} />
+                  </label>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-sm font-medium text-foreground">
-                      Name *
+                      Name <span aria-hidden="true">*</span>
+                      <span className="sr-only">(required)</span>
                     </label>
-                    <motion.input
+                    <input
                       type="text"
                       id="name"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
                       required
+                      aria-required="true"
+                      autoComplete="name"
                       className="w-full px-4 py-3 bg-background/50 border border-border/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
-                      whileFocus={{ scale: 1.02 }}
                     />
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-sm font-medium text-foreground">
-                      Email *
+                      Email <span aria-hidden="true">*</span>
+                      <span className="sr-only">(required)</span>
                     </label>
-                    <motion.input
+                    <input
                       type="email"
                       id="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
                       required
+                      aria-required="true"
+                      autoComplete="email"
                       className="w-full px-4 py-3 bg-background/50 border border-border/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
-                      whileFocus={{ scale: 1.02 }}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label htmlFor="subject" className="text-sm font-medium text-foreground">
-                    Subject *
+                    Subject <span aria-hidden="true">*</span>
+                    <span className="sr-only">(required)</span>
                   </label>
-                  <motion.input
+                  <input
                     type="text"
                     id="subject"
                     name="subject"
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
+                    aria-required="true"
                     className="w-full px-4 py-3 bg-background/50 border border-border/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all"
-                    whileFocus={{ scale: 1.02 }}
                   />
                 </div>
 
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-sm font-medium text-foreground">
-                    Message *
+                    Message <span aria-hidden="true">*</span>
+                    <span className="sr-only">(required)</span>
                   </label>
-                  <motion.textarea
+                  <textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
                     required
+                    aria-required="true"
                     rows={5}
                     className="w-full px-4 py-3 bg-background/50 border border-border/50 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all resize-vertical"
-                    whileFocus={{ scale: 1.01 }}
                   />
                 </div>
 
@@ -241,47 +255,53 @@ export function ContactSection() {
                     type="submit"
                     disabled={isSubmitting}
                     className="flex-1 justify-center disabled:opacity-70 disabled:cursor-not-allowed"
+                    aria-label={isSubmitting ? 'Sending message...' : 'Send message'}
                   >
                     {isSubmitting ? (
                       <>
                         <motion.div
-                          animate={{ rotate: 360 }}
+                          animate={noAnimation ? {} : { rotate: 360 }}
                           transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
                           className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                          aria-hidden="true"
                         />
-                        Sending...
+                        <span aria-live="polite">Sending...</span>
                       </>
                     ) : (
                       <>
-                        <Send className="w-4 h-4" />
+                        <Send className="w-4 h-4" aria-hidden="true" />
                         Send Message
                       </>
                     )}
                   </MagneticButton>
                 </div>
 
-                {/* Status Messages */}
-                {submitStatus === 'success' && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="flex items-center gap-3 p-4 bg-green-500/10 border border-green-500/20 rounded-lg text-green-700 dark:text-green-400"
-                  >
-                    <CheckCircle className="w-5 h-5" />
-                    <span className="font-medium">Message sent successfully! I'll get back to you soon.</span>
-                  </motion.div>
-                )}
+                {/* Status Messages - Accessible live region */}
+                <div aria-live="polite" aria-atomic="true">
+                  {submitStatus === 'success' && (
+                    <motion.div
+                      initial={noAnimation ? {} : { opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="flex items-center gap-3 p-4 bg-green-500/10 border border-green-500/20 rounded-lg text-green-700 dark:text-green-400"
+                      role="status"
+                    >
+                      <CheckCircle className="w-5 h-5" aria-hidden="true" />
+                      <span className="font-medium">Message sent successfully! I'll get back to you soon.</span>
+                    </motion.div>
+                  )}
 
-                {submitStatus === 'error' && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-700 dark:text-red-400"
-                  >
-                    <AlertCircle className="w-5 h-5" />
-                    <span className="font-medium">Failed to send message. Please try again.</span>
-                  </motion.div>
-                )}
+                  {submitStatus === 'error' && (
+                    <motion.div
+                      initial={noAnimation ? {} : { opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-700 dark:text-red-400"
+                      role="alert"
+                    >
+                      <AlertCircle className="w-5 h-5" aria-hidden="true" />
+                      <span className="font-medium">Failed to send message. Please try again or email me directly.</span>
+                    </motion.div>
+                  )}
+                </div>
               </form>
             </div>
           </ScrollReveal>

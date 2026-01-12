@@ -53,7 +53,9 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
+          enableSystem={false}
+          storageKey="tayler-id-theme-v2"
           disableTransitionOnChange
         >
           {process.env.NEXT_PUBLIC_PASSWORD_PROTECT === 'true' ? (

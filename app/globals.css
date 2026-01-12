@@ -145,3 +145,152 @@ body.modal-open .fixed.z-50:not([data-modal-header]) {
 body.modal-open .fixed.z-40 {
   display: none !important;
 }
+
+/* Screen reader only - visually hidden but accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* When focused, make skip link visible */
+.sr-only:focus,
+.sr-only:focus-visible {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Reduced motion media query for CSS animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY SETTINGS
+   ======================================== */
+
+/* ----------------------------------------
+   MOTION: REDUCED
+   Minimizes animations but keeps subtle feedback
+   ---------------------------------------- */
+html.reduce-motion {
+  scroll-behavior: auto !important;
+}
+
+/* Disable CSS keyframe animations */
+html.reduce-motion .animate-pulse,
+html.reduce-motion .animate-bounce,
+html.reduce-motion .animate-spin {
+  animation: none !important;
+}
+
+/* Make CSS animations instant */
+html.reduce-motion *:not([style]) {
+  animation-duration: 0.001ms;
+  animation-iteration-count: 1;
+}
+
+/* ----------------------------------------
+   MOTION: OFF
+   Completely disables all motion
+   ---------------------------------------- */
+html.motion-off {
+  scroll-behavior: auto !important;
+}
+
+html.motion-off *,
+html.motion-off *::before,
+html.motion-off *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Ensure hover states still work visually without transitions */
+html.motion-off .animate-pulse,
+html.motion-off .animate-bounce,
+html.motion-off .animate-spin {
+  animation: none !important;
+}
+
+/* High Contrast Mode */
+html.high-contrast {
+  --foreground: 0 0% 0%;
+  --muted-foreground: 0 0% 20%;
+  --border: 0 0% 0%;
+}
+
+html.high-contrast.dark {
+  --foreground: 0 0% 100%;
+  --muted-foreground: 0 0% 85%;
+  --border: 0 0% 100%;
+}
+
+html.high-contrast .text-muted-foreground {
+  color: hsl(var(--foreground)) !important;
+}
+
+html.high-contrast .border-border\/50,
+html.high-contrast .border-border {
+  border-color: hsl(var(--foreground) / 0.5) !important;
+}
+
+/* Large Text Mode */
+html.large-text {
+  font-size: 120%;
+}
+
+html.large-text h1 {
+  font-size: 3.5rem !important;
+}
+
+html.large-text h2 {
+  font-size: 2.5rem !important;
+}
+
+html.large-text h3 {
+  font-size: 1.75rem !important;
+}
+
+html.large-text p,
+html.large-text span,
+html.large-text li {
+  font-size: 1.15rem !important;
+  line-height: 1.8 !important;
+}
+
+/* Enhanced Focus Indicators */
+html.enhanced-focus *:focus,
+html.enhanced-focus *:focus-visible {
+  outline: 3px solid hsl(var(--primary)) !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 6px hsl(var(--primary) / 0.3) !important;
+}
+
+html.enhanced-focus a:focus,
+html.enhanced-focus button:focus,
+html.enhanced-focus input:focus,
+html.enhanced-focus textarea:focus,
+html.enhanced-focus select:focus,
+html.enhanced-focus [tabindex]:focus {
+  outline: 3px solid hsl(var(--primary)) !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 0 6px hsl(var(--primary) / 0.3) !important;
+}

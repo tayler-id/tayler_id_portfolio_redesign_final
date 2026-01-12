@@ -2,13 +2,63 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
+import { useMotionPreference } from '@/hooks/use-reduced-motion'
 
 export function AnimatedBackground() {
+  const motionPref = useMotionPreference()
+
+  // Motion off: render static background only
+  if (motionPref === 'off') {
+    return (
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/10 to-pink-600/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-cyan-500/8 to-blue-600/8 rounded-full blur-2xl" />
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-background/50" />
+      </div>
+    )
+  }
+
+  // Motion reduced: same as off (static)
+  if (motionPref === 'reduced') {
+    return (
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/10 to-pink-600/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-cyan-500/8 to-blue-600/8 rounded-full blur-2xl" />
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-background/50" />
+      </div>
+    )
+  }
+
+  // Regular motion: full animations
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5" />
-      
+
       {/* Large Floating Blobs */}
       <motion.div
         className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl"
@@ -24,7 +74,7 @@ export function AnimatedBackground() {
           ease: "easeInOut"
         }}
       />
-      
+
       <motion.div
         className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/10 to-pink-600/10 rounded-full blur-3xl"
         animate={{
@@ -85,7 +135,7 @@ export function AnimatedBackground() {
       ))}
 
       {/* Grid Pattern Overlay */}
-      <div 
+      <div
         className="absolute inset-0 opacity-5"
         style={{
           backgroundImage: `

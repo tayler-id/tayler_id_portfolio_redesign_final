@@ -3,6 +3,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { useMotionPreference } from '@/hooks/use-reduced-motion'
 
 interface FloatingCardProps {
   children: React.ReactNode
@@ -23,46 +24,28 @@ export function FloatingCard({
   duration = 6,
   tilt = false,
 }: FloatingCardProps) {
-  const getFloatAnimation = () => {
-    switch (direction) {
-      case 'up':
-        return {
-          y: [0, -distance, 0],
-        }
-      case 'down':
-        return {
-          y: [0, distance, 0],
-        }
-      case 'left':
-        return {
-          x: [0, -distance, 0],
-        }
-      case 'right':
-        return {
-          x: [0, distance, 0],
-        }
-      default:
-        return {
-          y: [0, -distance, 0],
-        }
-    }
-  }
+  const motionPref = useMotionPreference()
+  const motionOff = motionPref === 'off'
+  const noAnimation = motionPref !== 'regular'
 
+  const baseClassName = cn(
+    "relative rounded-2xl backdrop-blur-md bg-card/80 border border-border shadow-xl",
+    tilt && !noAnimation && "transform-gpu",
+    className
+  )
+
+  // Use single motion.div to avoid remount issues when switching preferences
   return (
     <motion.div
-      className={cn(
-        "relative rounded-2xl backdrop-blur-md bg-card/80 border border-border shadow-xl",
-        tilt && "transform-gpu",
-        className
-      )}
-      initial={{ opacity: 0, y: 20 }}
+      className={baseClassName}
+      initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{
+      transition={noAnimation ? { duration: 0 } : {
         duration: 0.6,
         delay,
         ease: 'easeOut',
       }}
-      whileHover={
+      whileHover={noAnimation ? {} : (
         tilt
           ? {
               rotateX: 5,
@@ -74,8 +57,8 @@ export function FloatingCard({
               scale: 1.02,
               transition: { duration: 0.3 },
             }
-      }
-      style={tilt ? { transformStyle: 'preserve-3d' } : {}}
+      )}
+      style={tilt && !noAnimation ? { transformStyle: 'preserve-3d' } : {}}
     >
       {children}
     </motion.div>

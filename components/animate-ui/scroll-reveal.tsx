@@ -3,6 +3,7 @@
 import React from 'react'
 import { motion, useInView } from 'framer-motion'
 import { cn } from '@/lib/utils'
+import { useMotionPreference } from '@/hooks/use-reduced-motion'
 
 interface ScrollRevealProps {
   children: React.ReactNode
@@ -26,10 +27,14 @@ export function ScrollReveal({
   once = true,
 }: ScrollRevealProps) {
   const ref = React.useRef(null)
-  const isInView = useInView(ref, { 
+  const motionPref = useMotionPreference()
+  const isInView = useInView(ref, {
     once,
-    amount: threshold 
+    amount: threshold
   })
+
+  // Always visible and in final position when motion is reduced or off
+  const finalState = { opacity: 1, x: 0, y: 0 }
 
   const getInitialState = () => {
     switch (direction) {
@@ -48,34 +53,38 @@ export function ScrollReveal({
     }
   }
 
-  const getAnimateState = () => {
-    switch (direction) {
-      case 'up':
-        return { opacity: 1, y: 0 }
-      case 'down':
-        return { opacity: 1, y: 0 }
-      case 'left':
-        return { opacity: 1, x: 0 }
-      case 'right':
-        return { opacity: 1, x: 0 }
-      case 'fade':
-        return { opacity: 1 }
-      default:
-        return { opacity: 1, y: 0 }
+  // Track if element has been in view (persistent across preference changes)
+  const [hasBeenInView, setHasBeenInView] = React.useState(false)
+
+  React.useEffect(() => {
+    if (isInView && !hasBeenInView) {
+      setHasBeenInView(true)
     }
+  }, [isInView, hasBeenInView])
+
+  const shouldShow = isInView || hasBeenInView
+  const motionOff = motionPref === 'off'
+  const noAnimation = motionPref !== 'regular'
+
+  // Use a single component to avoid remount issues when switching preferences
+  // When motion is off or reduced, start and stay at finalState
+  // When regular motion, animate based on viewport
+  const currentInitial = noAnimation || shouldShow ? finalState : getInitialState()
+  const currentAnimate = noAnimation || shouldShow ? finalState : getInitialState()
+  const currentTransition = noAnimation ? { duration: 0 } : {
+    duration: shouldShow && !noAnimation ? duration : 0,
+    delay: shouldShow && !noAnimation ? delay : 0,
+    ease: "easeOut"
   }
 
   return (
     <motion.div
       ref={ref}
       className={cn(className)}
-      initial={getInitialState()}
-      animate={isInView ? getAnimateState() : getInitialState()}
-      transition={{
-        duration,
-        delay,
-        ease: "easeOut"
-      }}
+      initial={currentInitial}
+      animate={currentAnimate}
+      transition={currentTransition}
+      style={motionOff ? { transform: 'none' } : undefined}
     >
       {children}
     </motion.div>

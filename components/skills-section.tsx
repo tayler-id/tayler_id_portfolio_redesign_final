@@ -2,12 +2,12 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { 
-  Code, 
-  Palette, 
-  Zap, 
-  Monitor, 
-  Figma, 
+import {
+  Code,
+  Palette,
+  Zap,
+  Monitor,
+  Figma,
   Globe,
   Brain,
   Users,
@@ -19,8 +19,13 @@ import {
 import { ScrollReveal } from './animate-ui/scroll-reveal'
 import { FloatingCard } from './animate-ui/floating-card'
 import { cn } from '@/lib/utils'
+import { useMotionPreference } from '@/hooks/use-reduced-motion'
 
 export function SkillsSection() {
+  const motionPref = useMotionPreference()
+  const motionOff = motionPref === 'off'
+  const noAnimation = motionPref !== 'regular'
+
   const skillCategories = [
     {
       title: 'UX Design',
@@ -63,7 +68,10 @@ export function SkillsSection() {
     }
   ]
 
-  const containerVariants = {
+  const containerVariants = noAnimation ? {
+    hidden: { opacity: 1 },
+    visible: { opacity: 1 }
+  } : {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -73,7 +81,10 @@ export function SkillsSection() {
     }
   }
 
-  const cardVariants = {
+  const cardVariants = noAnimation ? {
+    hidden: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: 0 }
+  } : {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
@@ -97,7 +108,7 @@ export function SkillsSection() {
           <div className="text-center mb-16">
             <motion.div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium text-sm mb-4"
-              whileHover={{ scale: 1.05 }}
+              whileHover={noAnimation ? {} : { scale: 1.05 }}
             >
               <Code className="w-4 h-4" />
               Skills
@@ -111,7 +122,7 @@ export function SkillsSection() {
           </div>
         </ScrollReveal>
 
-        {/* Skills Grid */}
+        {/* Skills Grid - Single rendering path */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -125,7 +136,7 @@ export function SkillsSection() {
               variants={cardVariants}
               custom={categoryIndex}
             >
-              <FloatingCard 
+              <FloatingCard
                 className="h-full p-8 bg-background/50 backdrop-blur-sm border border-border/50"
                 delay={categoryIndex * 0.2}
                 distance={20}
@@ -149,9 +160,9 @@ export function SkillsSection() {
                   {category.skills.map((skill, skillIndex) => (
                     <motion.div
                       key={skill.name}
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={noAnimation ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      transition={{
+                      transition={noAnimation ? { duration: 0 } : {
                         delay: categoryIndex * 0.3 + skillIndex * 0.1,
                         duration: 0.6
                       }}
@@ -179,26 +190,28 @@ export function SkillsSection() {
                             'absolute left-0 top-0 h-full rounded-full bg-gradient-to-r',
                             category.color
                           )}
-                          initial={{ width: 0 }}
+                          initial={noAnimation ? { width: `${skill.level}%` } : { width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
-                          transition={{
+                          transition={noAnimation ? { duration: 0 } : {
                             delay: categoryIndex * 0.3 + skillIndex * 0.1 + 0.5,
                             duration: 1.5,
                             ease: 'easeOut'
                           }}
                         />
-                        
-                        {/* Animated Shimmer Effect */}
-                        <motion.div
-                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                          initial={{ x: '-100%' }}
-                          animate={{ x: '200%' }}
-                          transition={{
-                            delay: categoryIndex * 0.3 + skillIndex * 0.1 + 2,
-                            duration: 1.5,
-                            ease: 'easeInOut'
-                          }}
-                        />
+
+                        {/* Animated Shimmer Effect - only when regular motion */}
+                        {!noAnimation && (
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                            initial={{ x: '-100%' }}
+                            animate={{ x: '200%' }}
+                            transition={{
+                              delay: categoryIndex * 0.3 + skillIndex * 0.1 + 2,
+                              duration: 1.5,
+                              ease: 'easeInOut'
+                            }}
+                          />
+                        )}
                       </div>
                     </motion.div>
                   ))}
@@ -206,9 +219,9 @@ export function SkillsSection() {
 
                 {/* Category Stats */}
                 <motion.div
-                  initial={{ opacity: 0 }}
+                  initial={noAnimation ? { opacity: 1 } : { opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  transition={{
+                  transition={noAnimation ? { duration: 0 } : {
                     delay: categoryIndex * 0.3 + 1,
                     duration: 0.8
                   }}
@@ -232,7 +245,7 @@ export function SkillsSection() {
             <h3 className="text-2xl font-bold font-display mb-8">
               Additional Expertise
             </h3>
-            
+
             <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
               {[
                 'Design Systems',
@@ -248,18 +261,21 @@ export function SkillsSection() {
               ].map((skill, index) => (
                 <motion.div
                   key={skill}
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={noAnimation ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{
+                  transition={noAnimation ? { duration: 0 } : {
                     delay: index * 0.05,
                     duration: 0.5,
                     ease: 'easeOut'
                   }}
-                  whileHover={{ 
+                  whileHover={noAnimation ? {} : {
                     scale: 1.05,
                     boxShadow: '0 10px 25px rgba(59, 130, 246, 0.15)'
                   }}
-                  className="px-4 py-2 rounded-full bg-background border border-border/50 text-sm font-medium text-foreground hover:border-primary/30 transition-all cursor-pointer"
+                  className={cn(
+                    "px-4 py-2 rounded-full bg-background border border-border/50 text-sm font-medium text-foreground hover:border-primary/30 cursor-pointer",
+                    !noAnimation && "transition-all"
+                  )}
                 >
                   {skill}
                 </motion.div>

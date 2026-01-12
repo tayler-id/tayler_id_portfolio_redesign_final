@@ -11,6 +11,7 @@ import { Footer } from '@/components/footer'
 // import { AIAssistant } from '@/components/ai-assistant'
 import { AnimatedBackground } from '@/components/animated-background'
 import { ScrollProgress } from '@/components/scroll-progress'
+import { AccessibilityPanel } from '@/components/accessibility-panel'
 
 export default function HomePage() {
   useEffect(() => {
@@ -24,7 +25,7 @@ export default function HomePage() {
       <ScrollProgress />
       <Header />
       
-      <main className="relative z-10">
+      <main id="main-content" className="relative z-10" role="main">
         <HeroSection />
         <AboutSection />
         <SkillsSection />
@@ -34,6 +35,7 @@ export default function HomePage() {
       
       <Footer />
       {/* <AIAssistant /> */}
+      <AccessibilityPanel />
     </div>
   )
 }

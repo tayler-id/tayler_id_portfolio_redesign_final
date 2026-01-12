@@ -10,14 +10,22 @@ import { ScrollReveal } from './animate-ui/scroll-reveal'
 import { GradientBlob } from './animate-ui/gradient-blob'
 import { Button } from './ui/button'
 import Image from 'next/image'
+import { useMotionPreference } from '@/hooks/use-reduced-motion'
 
 export function HeroSection() {
+  const motionPref = useMotionPreference()
+  const motionOff = motionPref === 'off'
+  const noAnimation = motionPref !== 'regular'
+
   const handleScrollToSection = (sectionId: string) => {
     const element = document.querySelector(sectionId)
-    element?.scrollIntoView({ behavior: 'smooth' })
+    element?.scrollIntoView({ behavior: noAnimation ? 'auto' : 'smooth' })
   }
 
-  const containerVariants = {
+  const containerVariants = noAnimation ? {
+    hidden: { opacity: 1 },
+    visible: { opacity: 1 }
+  } : {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -28,7 +36,10 @@ export function HeroSection() {
     }
   }
 
-  const itemVariants = {
+  const itemVariants = noAnimation ? {
+    hidden: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: 0 }
+  } : {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
@@ -37,7 +48,10 @@ export function HeroSection() {
     }
   }
 
-  const statVariants = {
+  const statVariants = noAnimation ? {
+    hidden: { opacity: 1, scale: 1 },
+    visible: { opacity: 1, scale: 1 }
+  } : {
     hidden: { opacity: 0, scale: 0.8 },
     visible: {
       opacity: 1,
@@ -45,6 +59,12 @@ export function HeroSection() {
       transition: { duration: 0.6, ease: "easeOut" }
     }
   }
+
+  const stats = [
+    { icon: Calendar, number: "20+", label: "Years Experience" },
+    { icon: Rocket, number: "$16B+", label: "Platform Scale" },
+    { icon: Zap, number: "AI", label: "Native Developer" }
+  ]
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background/90 to-primary/5 pt-20">
@@ -64,7 +84,7 @@ export function HeroSection() {
 
       <div className="container relative z-10 px-6 mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Hero Text */}
+          {/* Hero Text - Single rendering path */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -102,17 +122,17 @@ export function HeroSection() {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
             >
-              <MagneticButton 
-                className="group" 
+              <MagneticButton
+                className="group"
                 onClick={() => handleScrollToSection('#projects')}
               >
                 <span>View My Work</span>
-                <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+                <ArrowDown className={`w-4 h-4 ${!noAnimation ? 'group-hover:translate-y-1 transition-transform' : ''}`} />
               </MagneticButton>
-              
-              <Button 
-                variant="outline" 
-                size="lg" 
+
+              <Button
+                variant="outline"
+                size="lg"
                 className="bg-background/50 backdrop-blur-sm"
                 onClick={() => handleScrollToSection('#contact')}
               >
@@ -121,16 +141,12 @@ export function HeroSection() {
               </Button>
             </motion.div>
 
-            {/* Animated Stats */}
+            {/* Stats */}
             <motion.div
               variants={containerVariants}
               className="flex flex-wrap gap-6 justify-center lg:justify-start"
             >
-              {[
-                { icon: Calendar, number: "20+", label: "Years Experience" },
-                { icon: Rocket, number: "$16B+", label: "Platform Scale" },
-                { icon: Zap, number: "AI", label: "Native Developer" }
-              ].map((stat, index) => (
+              {stats.map((stat) => (
                 <motion.div
                   key={stat.label}
                   variants={statVariants}
@@ -172,13 +188,13 @@ export function HeroSection() {
                       <p className="text-foreground/70 font-medium">Full-Stack UX Engineer</p>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                      <div className={`w-2 h-2 rounded-full bg-green-500 ${!noAnimation ? 'animate-pulse' : ''}`}></div>
                       <span className="text-foreground/90 text-sm">Available for projects</span>
                     </div>
-                    
+
                     <div className="grid grid-cols-3 gap-3">
                       {[
                         { skill: 'Design', label: 'UX/UI' },
@@ -198,7 +214,7 @@ export function HeroSection() {
               </FloatingCard>
 
               {/* Floating Badges */}
-              <FloatingCard 
+              <FloatingCard
                 className="absolute -top-4 -left-4 p-3"
                 delay={1.2}
                 direction="left"
@@ -206,12 +222,12 @@ export function HeroSection() {
                 duration={4}
               >
                 <div className="flex items-center gap-2 text-foreground">
-                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                  <div className={`w-2 h-2 rounded-full bg-green-500 ${!noAnimation ? 'animate-pulse' : ''}`}></div>
                   <span className="text-xs font-medium">Online</span>
                 </div>
               </FloatingCard>
 
-              <FloatingCard 
+              <FloatingCard
                 className="absolute -bottom-4 -right-4 p-3"
                 delay={1.6}
                 direction="right"
@@ -231,14 +247,14 @@ export function HeroSection() {
       {/* Scroll Indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        initial={{ opacity: 0, y: 20 }}
+        initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 0.8 }}
+        transition={noAnimation ? { duration: 0 } : { delay: 2, duration: 0.8 }}
       >
         <motion.div
           className="flex flex-col items-center gap-2 text-muted-foreground"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          animate={noAnimation ? {} : { y: [0, 8, 0] }}
+          transition={noAnimation ? {} : { duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
           <span className="text-xs font-medium">Scroll to explore</span>
           <ArrowDown className="w-4 h-4" />

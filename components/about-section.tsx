@@ -6,8 +6,12 @@ import { User, Briefcase, Code, Play, CheckCircle } from 'lucide-react'
 import { ScrollReveal } from './animate-ui/scroll-reveal'
 import { FloatingCard } from './animate-ui/floating-card'
 import Image from 'next/image'
+import { useMotionPreference } from '@/hooks/use-reduced-motion'
 
 export function AboutSection() {
+  const motionPref = useMotionPreference()
+  const motionOff = motionPref === 'off'
+  const noAnimation = motionPref !== 'regular'
   const [isPhotoSticky, setIsPhotoSticky] = useState(false)
   const timelineRef = useRef<HTMLDivElement>(null)
   const skillsRef = useRef<HTMLDivElement>(null)
@@ -19,11 +23,11 @@ export function AboutSection() {
 
       const timelineRect = timelineRef.current.getBoundingClientRect()
       const skillsRect = skillsRef.current.getBoundingClientRect()
-      
+
       // Make photo sticky when timeline is in view and before skills section
       const timelineInView = timelineRect.top < window.innerHeight && timelineRect.bottom > 0
       const skillsAboveViewport = skillsRect.top > window.innerHeight * 0.3
-      
+
       setIsPhotoSticky(timelineInView && skillsAboveViewport)
     }
 
@@ -87,8 +91,8 @@ export function AboutSection() {
     <section id="about" className="py-24 bg-muted/30 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className={`absolute top-1/4 left-0 w-96 h-96 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-3xl ${!noAnimation ? 'animate-pulse' : ''}`} />
+        <div className={`absolute bottom-1/4 right-0 w-96 h-96 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full blur-3xl ${!noAnimation ? 'animate-pulse' : ''}`} style={!noAnimation ? { animationDelay: '2s' } : {}} />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -97,7 +101,7 @@ export function AboutSection() {
           <div className="text-center mb-16">
             <motion.div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium text-sm mb-4"
-              whileHover={{ scale: 1.05 }}
+              whileHover={noAnimation ? {} : { scale: 1.05 }}
             >
               <User className="w-4 h-4" />
               About Me
@@ -147,9 +151,9 @@ export function AboutSection() {
                   {achievements.map((achievement, index) => (
                     <motion.div
                       key={achievement}
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={noAnimation ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                      transition={noAnimation ? { duration: 0 } : { delay: index * 0.1, duration: 0.5 }}
                       className="flex items-center gap-3 p-3 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50"
                     >
                       <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
@@ -168,9 +172,9 @@ export function AboutSection() {
                   {timelineItems.map((item, index) => (
                     <motion.div
                       key={item.year}
-                      initial={{ opacity: 0, x: -30 }}
+                      initial={noAnimation ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                       whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.2, duration: 0.6 }}
+                      transition={noAnimation ? { duration: 0 } : { delay: index * 0.2, duration: 0.6 }}
                       className="flex gap-4 p-4 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-colors"
                     >
                       <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${item.color} flex items-center justify-center flex-shrink-0`}>
@@ -193,10 +197,10 @@ export function AboutSection() {
             {/* Main Image Card */}
             <motion.div
               ref={photoRef}
-              initial={{ opacity: 0, x: 50 }}
+              initial={noAnimation ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={noAnimation ? { duration: 0 } : { duration: 0.6, delay: 0.3 }}
               className="relative overflow-hidden aspect-[4/5] max-w-md mx-auto rounded-2xl backdrop-blur-md border border-border shadow-xl bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20"
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
@@ -208,11 +212,11 @@ export function AboutSection() {
               />
 
               {/* Overlay Content */}
-              <div className="absolute inset-0 z-20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+              <div className={`absolute inset-0 z-20 flex items-center justify-center opacity-0 ${!noAnimation ? 'hover:opacity-100 transition-opacity duration-300' : ''}`}>
                 <motion.div
                   className="text-center text-white"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={noAnimation ? {} : { scale: 1.1 }}
+                  whileTap={noAnimation ? {} : { scale: 0.95 }}
                 >
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
                     <Play className="w-8 h-8 ml-1" />
@@ -225,7 +229,7 @@ export function AboutSection() {
               {/* Floating Skill Cards */}
               <div className={`absolute inset-0 pointer-events-none ${isPhotoSticky ? 'hidden' : ''}`}>
                 {/* Top Right */}
-                <FloatingCard 
+                <FloatingCard
                   className="absolute -top-4 -right-4 p-4 pointer-events-auto"
                   direction="right"
                   distance={15}
@@ -233,13 +237,13 @@ export function AboutSection() {
                   delay={1}
                 >
                   <div className="text-center text-foreground">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mx-auto mb-2 animate-pulse" />
+                    <div className={`w-2 h-2 bg-green-500 rounded-full mx-auto mb-2 ${!noAnimation ? 'animate-pulse' : ''}`} />
                     <div className="text-xs font-semibold">Available</div>
                   </div>
                 </FloatingCard>
 
                 {/* Bottom Left */}
-                <FloatingCard 
+                <FloatingCard
                   className="absolute -bottom-4 -left-4 p-4 pointer-events-auto"
                   direction="left"
                   distance={12}
@@ -253,7 +257,7 @@ export function AboutSection() {
                 </FloatingCard>
 
                 {/* Top Left - Skills Badge */}
-                <FloatingCard 
+                <FloatingCard
                   className="absolute top-1/4 -left-8 p-3 pointer-events-auto"
                   direction="up"
                   distance={10}
@@ -281,9 +285,9 @@ export function AboutSection() {
               {skills.map((skill, index) => (
                 <motion.div
                   key={skill.name}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  transition={noAnimation ? { duration: 0 } : { delay: index * 0.1, duration: 0.6 }}
                   className="p-6 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300 group"
                 >
                   <div className="flex items-center justify-between mb-3">
@@ -293,9 +297,9 @@ export function AboutSection() {
                   <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
                     <motion.div
                       className="h-full bg-gradient-to-r from-primary to-purple-600 rounded-full"
-                      initial={{ width: 0 }}
+                      initial={noAnimation ? { width: `${skill.level}%` } : { width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
-                      transition={{ delay: index * 0.1 + 0.5, duration: 1, ease: 'easeOut' }}
+                      transition={noAnimation ? { duration: 0 } : { delay: index * 0.1 + 0.5, duration: 1, ease: 'easeOut' }}
                     />
                   </div>
                 </motion.div>
