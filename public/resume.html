@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tayler Ramsay - Resume</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 10pt;
+            line-height: 1.4;
+            color: #1a1a1a;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.4in;
+        }
+        h1 { font-size: 22pt; font-weight: 700; margin-bottom: 2px; color: #000; }
+        .subtitle { font-size: 13pt; font-weight: 600; color: #333; margin-bottom: 4px; }
+        .contact { font-size: 9.5pt; color: #555; margin-bottom: 12px; }
+        .contact a { color: #0066cc; text-decoration: none; }
+        .contact .portfolio { font-weight: 600; }
+        h2 {
+            font-size: 10.5pt; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.5px; border-bottom: 2px solid #000;
+            padding-bottom: 2px; margin-top: 14px; margin-bottom: 6px;
+        }
+        h3 { font-size: 10pt; font-weight: 600; margin-bottom: 1px; }
+        .date { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 2px; }
+        .context { font-size: 9pt; color: #444; margin-bottom: 4px; }
+        .summary { margin-bottom: 6px; }
+        ul { padding-left: 15px; margin-bottom: 8px; }
+        li { margin-bottom: 3px; }
+        strong { font-weight: 600; }
+        .project-title { font-weight: 600; margin-top: 8px; margin-bottom: 1px; }
+        .project-context { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 3px; }
+        .pso { font-size: 9pt; color: #333; margin-bottom: 5px; line-height: 1.35; }
+        .competencies ul { list-style: none; padding-left: 0; }
+        .competencies li { margin-bottom: 3px; }
+        .earlier-experience { margin-bottom: 2px; font-size: 9.5pt; }
+        .skills-section p { margin-bottom: 3px; font-size: 9.5pt; }
+        .education p { margin-bottom: 2px; font-size: 9.5pt; }
+        .certifications { font-size: 9.5pt; }
+        .certifications p { margin-top: 4px; margin-bottom: 2px; }
+        @media print { body { padding: 0.25in; } }
+    </style>
+</head>
+<body>
+    <h1>TAYLER RAMSAY</h1>
+    <div class="subtitle">Senior Product Designer · Embedded Fintech &amp; 0-to-1</div>
+    <div class="contact">York County, PA · <a href="mailto:ramsay.tayler@gmail.com">ramsay.tayler@gmail.com</a> · 717-578-3243<br>linkedin.com/in/tayler-ramsay · <a href="https://tayler.id" class="portfolio">tayler.id</a> · github.com/tayler-id</div>
+
+    <h2>Summary</h2>
+    <p class="summary">Senior Product Designer with 20+ years shipping embedded fintech, telehealth, and AI products end to end. 7+ years at Synchrony Bank / Versatile Credit, where I scaled a financing platform from startup to 35 lending partners and 30,000+ merchants across retail, elective medical, and home improvement before its 2025 acquisition. Two 0-to-1 products shipped in the past 24 months: Rayni (AI document RAG in daily production at scientific labs) and OnboardIQ (flexible merchant onboarding workflow that cut partner setup from 5 days of cross-team meetings to 2 hours). High-fidelity prototyping that scales to engineering, accessibility-first practice, and a 12% conversion lift on 6M annual applications.</p>
+
+    <h2>Core Competencies</h2>
+    <div class="competencies">
+        <ul>
+            <li><strong>0-to-1 product design.</strong> Two products shipped from blank canvas in the past 24 months: Rayni and OnboardIQ. Discovery, IA, high fidelity, launch, and the iteration that comes after launch.</li>
+            <li><strong>Embedded fintech across partner channels.</strong> 7+ years scaling a financing product across 35 lending partners (Wells Fargo, Synchrony, GreenSky) and 30,000+ merchants in three verticals. Designed financing experiences that ship inside partner brand channels at scale.</li>
+            <li><strong>Engineering partnership for faster validation.</strong> Partner with backend engineers on data models, service layers, and APIs so design decisions are grounded in real constraints. Use working code prototypes when they accelerate user testing and shorten the handoff cycle.</li>
+            <li><strong>Accessibility-first practice.</strong> WCAG AA as a baseline, inclusive design across age, ability, and device. Color contrast, keyboard navigation, focus management, and screen reader compatibility built in from wireframe forward.</li>
+            <li><strong>Design system architecture.</strong> Built 3 design systems in the last 3 years across fintech, AI, and workflow products. Token systems, component libraries (50+ components), governance patterns, and Figma + Storybook documentation that cut design-to-dev handoff churn.</li>
+            <li><strong>Data driven and fast.</strong> I frame hypotheses, run A/B tests, instrument behavior, and ship the version that wins. 12% lift on 6M annual applications.</li>
+            <li><strong>Cross functional discipline.</strong> Sharpen PM requirements before tickets hit Jira. Document process so handoffs aren't tribal knowledge. Lead design reviews with external partners.</li>
+            <li><strong>AI tooling, daily.</strong> Claude Code, Codex, and Cursor in agent-orchestrated workflows. Research, failing test, guided implementation, small validated commits.</li>
+        </ul>
+    </div>
+
+    <h2>Experience</h2>
+
+    <h3>Senior Product Designer, Synchrony Bank / Versatile Credit (Acquired 2025)</h3>
+    <div class="date">Apr 2019 – Present · 7+ years · Mechanicsburg, PA</div>
+    <div class="context">Embedded financing platform processing $16B+ annually across 35 lending partners and 30,000+ merchants in three verticals (retail, elective medical, home improvement). I joined as an early hire and worked through the scale-up, the sales channel expansion, and the Synchrony acquisition.</div>
+
+    <div class="project-title">Multi-lender financing waterfall (consumer application flow)</div>
+    <div class="project-context">6M annual applications · 35 lending partners</div>
+    <p class="pso"><strong>Problem:</strong> Application abandonment across 6M annual applications was costing tens of millions in lost financing. Applicants gave up mid-flow. Partners lost margin and retailers lost sales.<br>
+    <strong>Solution:</strong> Re-architected the multi-lender waterfall flow with progressive disclosure, status clarity, and partner-tunable copy. Validated through A/B tests against control cohorts.<br>
+    <strong>Outcome:</strong> 12% increase in completion across 6M applications. The lift was a material data point in the Synchrony acquisition.</p>
+    <ul>
+        <li><strong>Designed across 35 partner channels.</strong> Built one financing experience that feels native inside Wells Fargo, Synchrony, GreenSky, and 32 other partner brands.</li>
+        <li><strong>Led design reviews with external partner stakeholders</strong> across 35 lending partners. Built the case for design decisions in front of risk, compliance, and brand teams at Wells Fargo, Synchrony, and others. Defended tradeoffs with research and funnel data.</li>
+        <li><strong>Ran the data driven loop daily.</strong> Hypothesis, experiment, instrumentation, ship. Partnered with analytics to read funnel data. Killed two flows that tested worse than control.</li>
+    </ul>
+
+    <div class="project-title">OnboardIQ, merchant onboarding workflow product (0-to-1)</div>
+    <div class="project-context">Codified the entire process for onboarding merchants onto the Versatile platform</div>
+    <p class="pso"><strong>Problem:</strong> Merchant onboarding ate a full cross functional team. 5 days of meetings per partner to gather configurations from sales, ops, risk, and the partner themselves. Six entity types, each with about 10 metadata fields, arrived from multiple sources via email and Slack threads. Tickets dropped, configs drifted, and stakeholders had no visibility into program status without booking a meeting.<br>
+    <strong>Solution:</strong> Designed OnboardIQ from blank canvas. A flexible workflow product that codified the full onboarding process into configurable, partner-aware steps. Unified the 6 entity types and 10 metadata fields into one guided funnel. Built audits and automation directly into the workflow so validation, status, and handoffs were surfaced inline instead of chased over Slack.<br>
+    <strong>Outcome:</strong> <strong>Onboarded 500 locations for an elective medical practice program in 2 hours. That work previously took 5 days of cross-team meetings.</strong> Now powers onboarding for 30,000+ merchants across three verticals (retail, elective medical, home improvement). Support ticket resolution dropped from 3 days to 3 hours. A recurring weekly coordination meeting was replaced by a 5 minute daily brief once audits and automation went live.</p>
+    <ul>
+        <li><strong>Owned product design end to end</strong> from discovery with sales, ops, risk, and merchants through workflow IA, high fidelity UI, and the iteration after launch.</li>
+        <li><strong>Designed configurable workflow primitives</strong> (steps, gates, branching paths) so new partner types onboard without re-designing the product.</li>
+        <li><strong>Unified onboarding data complexity:</strong> 6 entity types, 10 metadata fields each, flowing in from multiple partner sources, into one guided funnel that surfaces validation errors at the source instead of catching them three handoffs later.</li>
+        <li><strong>Built audits and automation into the workflow itself,</strong> giving stakeholders and program managers live program status without filing a support ticket. Killed the email and Slack thread chase that previously dropped onboarding work.</li>
+    </ul>
+
+    <h4 style="font-size: 9.5pt; font-weight: 600; margin-top: 8px; margin-bottom: 3px;">Cross-cutting at Versatile/Synchrony</h4>
+    <ul>
+        <li><strong>Partnered with backend engineers across the stack.</strong> Walked through data model and service layer changes alongside the Figma file. Used working prototypes (Vue, Tailwind) when they accelerated user testing and shortened the design to build cycle.</li>
+        <li><strong>Repositioned product strategy, design systems, and team rituals</strong> through startup, enterprise scaling, and acquisition phases.</li>
+        <li><strong>Sharpened PM requirements before sprint planning.</strong> In a Jira shop, tickets are only as good as the spec. Broke ambiguous asks into testable acceptance criteria, which cut mid-sprint reversals.</li>
+        <li><strong>Documented design process and rationale</strong> in shared spaces (Confluence, Figma) so external partners and new hires could follow decisions without a meeting.</li>
+        <li><strong>Mentored 2 junior designers</strong> through quarterly growth plans focused on enterprise UX and stakeholder communication. Both promoted to mid-level within 18 months.</li>
+    </ul>
+
+    <h3>Consulting Product Designer, Rayni</h3>
+    <div class="date">2024 – Present</div>
+    <div class="context">Designed and shipped Rayni 0-to-1 alongside OnboardIQ at Versatile/Synchrony. Deliberate experience building in AI products and high stakes RAG.</div>
+
+    <div class="project-title">Rayni Platform, AI document intelligence (rayni.ai)</div>
+    <div class="project-context">Scientific research labs · in daily production</div>
+    <p class="pso"><strong>Problem:</strong> Lab technicians couldn't trust AI answers without seeing the source documents. Existing tools provided answers without verification.<br>
+    <strong>Solution:</strong> Built a split-screen verification interface with citation deep-linking to exact PDF coordinates so users validate every response. Designed a gap-detection UX (85% confidence threshold) that asks for missing documents instead of guessing. The pattern was later extracted into Document Domain Agents, a domain-agnostic framework for high stakes RAG.<br>
+    <strong>Outcome:</strong> Cut document verification time by 60% versus manual PDF search. 92% user compliance with document upload prompts. 40% reduction in false-positive AI responses.</p>
+    <ul>
+        <li><strong>Led product design end to end</strong> from user research with lab technicians to high fidelity prototypes tested with 3 research facilities. Iterated through 3 design rounds based on usability testing.</li>
+        <li><strong>Facilitated stakeholder alignment workshops</strong> with engineering and product to define product vision and prioritize features against research findings.</li>
+        <li><strong>Established a design system with 50+ components</strong> (typography scale, color tokens, 8pt spacing grid) used across 3 product surfaces. Reduced design to dev handoff time by 40% through Figma documentation, Storybook, and governance.</li>
+    </ul>
+
+    <h2>Earlier Experience</h2>
+    <p class="earlier-experience"><strong>Product Designer, then Lead</strong>, Pavone Marketing Group (2017–2019). Led visual and interaction design for 5 responsive web apps. Promoted to lead client facing presentations.</p>
+    <p class="earlier-experience"><strong>UX/UI Designer</strong>, Glatfelter Paper (2017). Designed and shipped an intranet learning portal serving 2,500 employees.</p>
+    <p class="earlier-experience"><strong>Visual Designer, then Senior</strong>, Menasha Packaging (2013–2016). Promoted to senior. Led retail POP design and mentored junior designers.</p>
+    <p class="earlier-experience"><strong>Visual Designer</strong>, Quad/Graphics (2010–2013). Print advertising, direct mail, brand systems.</p>
+
+    <h2>Skills</h2>
+    <div class="skills-section">
+        <p><strong>Design:</strong> Interaction Design, Information Architecture, Wireframing, Prototyping (Figma + code), High Fidelity UI, Design Systems, Visual Design, Typography, Spacing Systems, Responsive &amp; Mobile-First</p>
+        <p><strong>Accessibility:</strong> WCAG 2.1 AA / AAA, Inclusive Design, Screen Reader Compatibility, Keyboard Navigation, Color Contrast, Focus Management, ARIA</p>
+        <p><strong>Research:</strong> User Interviews, Usability Testing, Personas, Journey Mapping, A/B Testing, Funnel Analysis, Competitive Analysis</p>
+        <p><strong>Engineering Partnership:</strong> Technical Feasibility Assessment, Data Model &amp; API Review, Code Prototyping (Vue, React, Tailwind), BE/FE Collaboration</p>
+        <p><strong>AI Tooling:</strong> Claude Code, Codex, Cursor; agent-orchestrated workflows (spec-driven, TDD-first)</p>
+        <p><strong>Process:</strong> Agile/Scrum, Jira, Confluence, OKR Alignment, Design Sprints, Design Critique, Workshop Facilitation</p>
+        <p><strong>Tools:</strong> Figma, FigJam, Sketch, Miro, Principle, ProtoPie, Adobe Creative Suite</p>
+        <p><strong>Domains:</strong> Embedded Fintech, Multi-Partner Platforms, Healthcare/Telehealth, AI/ML Products, Enterprise B2B</p>
+    </div>
+
+    <h2>Education</h2>
+    <div class="education">
+        <p><strong>B.A., Visual Communications</strong>, Collins College (2000–2003)</p>
+        <p><strong>A.A., Graphic Design</strong>, The Art Institute (1999–2000)</p>
+    </div>
+
+    <h2>Certifications</h2>
+    <div class="certifications">
+        <p><strong>Google UX Design Professional Certificate.</strong> 8-course program covering research, prototyping, Figma, and usability testing.</p>
+    </div>
+</body>
+</html>
