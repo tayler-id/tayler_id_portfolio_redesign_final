@@ -55,7 +55,7 @@ export default function RootLayout({
           attribute="class"
           defaultTheme="light"
           enableSystem={false}
-          storageKey="tayler-id-theme-v2"
+          storageKey="tayler-id-theme-v3"
           disableTransitionOnChange
         >
           {process.env.NEXT_PUBLIC_PASSWORD_PROTECT === 'true' ? (

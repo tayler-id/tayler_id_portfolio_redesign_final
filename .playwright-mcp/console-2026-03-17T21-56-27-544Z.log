@@ -1,0 +1,12 @@
+[     162ms] [WARNING] Failed to decode downloaded font: https://patrickheng.com/fonts/mr.woff2 @ https://patrickheng.com/_nuxt/0629cccb363df7731685.js:0
+[     162ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008821359 @ https://patrickheng.com/_nuxt/0629cccb363df7731685.js:0
+[     176ms] [WARNING] Failed to decode downloaded font: https://patrickheng.com/fonts/mr.woff2 @ https://patrickheng.com/about:7
+[     176ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008821359 @ https://patrickheng.com/about:7
+[     176ms] [WARNING] Failed to decode downloaded font: https://patrickheng.com/fonts/mr.woff2 @ https://patrickheng.com/about:7
+[     176ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008821359 @ https://patrickheng.com/about:7
+[     193ms] [WARNING] Failed to decode downloaded font: https://patrickheng.com/fonts/mr.woff2 @ https://patrickheng.com/_nuxt/8a7c7882825de7a785a8.js:1
+[     194ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008821359 @ https://patrickheng.com/_nuxt/8a7c7882825de7a785a8.js:1
+[     194ms] [WARNING] Failed to decode downloaded font: https://patrickheng.com/fonts/mr.woff2 @ https://patrickheng.com/_nuxt/8a7c7882825de7a785a8.js:1
+[     194ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008821359 @ https://patrickheng.com/_nuxt/8a7c7882825de7a785a8.js:1
+[     215ms] [WARNING] Failed to decode downloaded font: https://patrickheng.com/fonts/mr.woff2 @ https://patrickheng.com/about:0
+[     215ms] [WARNING] OTS parsing error: invalid sfntVersion: 1008821359 @ https://patrickheng.com/about:0

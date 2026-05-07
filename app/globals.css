@@ -103,12 +103,12 @@
   display: inline-block;
 }
 
-/* Logo mark — uses the alpha of logo-mark.png as a mask, so the
-   visible glyph takes on whatever background-color the element has. */
+/* Logo mark — uses the alpha of logo.png as a mask so the visible
+   glyph takes on whatever background-color the element has. */
 .logo-mark {
   background-color: hsl(var(--primary));
-  -webkit-mask: url('/assets/images/logo-mark.png') no-repeat center / contain;
-          mask: url('/assets/images/logo-mark.png') no-repeat center / contain;
+  -webkit-mask: url('/assets/images/logo.png') no-repeat center / contain;
+          mask: url('/assets/images/logo.png') no-repeat center / contain;
 }
 
 /* Smooth scrolling */

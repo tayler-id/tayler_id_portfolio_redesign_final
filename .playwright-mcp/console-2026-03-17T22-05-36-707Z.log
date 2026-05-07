@@ -1,0 +1,2 @@
+[     573ms] [ERROR] The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element. @ https://www.portalone.studio/:10
+[    1072ms] [ERROR] The Content Security Policy directive 'frame-ancestors' is ignored when delivered via a <meta> element. @ https://framerusercontent.com/sites/71IV0dWXJsGI7U31zJDrki/react.DyXWVLG5.mjs:7
