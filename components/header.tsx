@@ -81,7 +81,7 @@ export function Header() {
               aria-label="Tayler.id - Go to top"
             >
               <div className="logo-mark w-10 h-10" aria-hidden="true" />
-              <span className="font-display font-bold text-xl gradient-text">
+              <span className="font-display font-bold text-xl text-foreground">
                 tayler.id
               </span>
             </motion.a>

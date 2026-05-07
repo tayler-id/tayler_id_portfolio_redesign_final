@@ -32,7 +32,7 @@ export function Footer() {
             className="flex items-center gap-3"
           >
             <div className="logo-mark w-9 h-9" aria-label="Tayler Ramsay" role="img" />
-            <span className="font-display font-bold text-xl gradient-text">
+            <span className="font-display font-bold text-xl text-foreground">
               tayler.id
             </span>
           </motion.div>
