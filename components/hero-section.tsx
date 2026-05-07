@@ -188,15 +188,7 @@ export function HeroSection() {
               <FloatingCard tilt className="p-8 max-w-md mx-auto">
                 <div className="space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-20 h-20 rounded-full bg-primary flex items-center justify-center overflow-hidden">
-                      <Image
-                        src="/assets/images/logo.png"
-                        alt="Tayler Ramsay Logo"
-                        width={64}
-                        height={64}
-                        className="w-16 h-16 object-contain mix-blend-multiply"
-                      />
-                    </div>
+                    <div className="logo-mark w-20 h-20" aria-label="Tayler Ramsay" role="img" />
                     <div>
                       <h3 className="font-bold text-xl text-foreground">Tayler Ramsay</h3>
                       <p className="text-foreground/70 font-medium">Full-Stack UX Engineer</p>

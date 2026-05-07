@@ -80,14 +80,7 @@ export function Header() {
               whileTap={noAnimation ? {} : { scale: 0.95 }}
               aria-label="Tayler.id - Go to top"
             >
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center overflow-hidden">
-                <img
-                  src="/assets/images/logo.png"
-                  alt=""
-                  className="w-8 h-8 object-contain mix-blend-multiply"
-                  aria-hidden="true"
-                />
-              </div>
+              <div className="logo-mark w-10 h-10" aria-hidden="true" />
               <span className="font-display font-bold text-xl gradient-text">
                 tayler.id
               </span>

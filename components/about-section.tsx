@@ -251,7 +251,7 @@ export function AboutSection() {
                 >
                   <div className="flex items-center gap-2 text-foreground">
                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                      <Code className="w-4 h-4" />
+                      <Code className="w-4 h-4 text-primary-foreground" />
                     </div>
                     <span className="text-sm font-medium">Modern Frontend</span>
                   </div>

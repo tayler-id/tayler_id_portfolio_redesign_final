@@ -97,10 +97,18 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Accent text — single solid persimmon */
+/* Accent text — single solid color from the theme primary */
 .gradient-text {
   color: hsl(var(--primary));
   display: inline-block;
+}
+
+/* Logo mark — uses the alpha of logo-mark.png as a mask, so the
+   visible glyph takes on whatever background-color the element has. */
+.logo-mark {
+  background-color: hsl(var(--primary));
+  -webkit-mask: url('/assets/images/logo-mark.png') no-repeat center / contain;
+          mask: url('/assets/images/logo-mark.png') no-repeat center / contain;
 }
 
 /* Smooth scrolling */
