@@ -1,590 +1,244 @@
 'use client'
 
-import React, { useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import {
-  Briefcase,
-  ExternalLink,
-  FileText,
-  TrendingUp,
-  Clock,
-  Users,
-  Palette,
-  Code,
-  Layers,
-  Search,
-  Monitor,
-  Zap,
-  Database
-} from 'lucide-react'
-import { ScrollReveal } from './animate-ui/scroll-reveal'
-import { FloatingCard } from './animate-ui/floating-card'
-import { MagneticButton } from './animate-ui/magnetic-button'
-import { Button } from './ui/button'
-import { cn } from '@/lib/utils'
-import Image from 'next/image'
-import { ProjectCaseStudyModal } from './project-case-study-modal'
+import React from 'react'
+import { motion } from 'framer-motion'
+import { ArrowUpRight } from 'lucide-react'
 import { useMotionPreference } from '@/hooks/use-reduced-motion'
+
+interface SupportingMetric {
+  value: string
+  label: string
+}
+
+interface Project {
+  id: string
+  number: string
+  title: string
+  subtitle: string
+  heroStat: string
+  heroLabel: string
+  body: string
+  metrics: SupportingMetric[]
+  tags: string[]
+  externalUrl?: string
+}
+
+const projects: Project[] = [
+  {
+    id: 'onboard-iq',
+    number: '01',
+    title: 'OnboardIQ',
+    subtitle: 'Merchant onboarding workflow product. 0-to-1 at Versatile / Synchrony.',
+    heroStat: '5 days → 2 hours',
+    heroLabel: '500 locations onboarded in a single session for an elective medical practice program.',
+    body:
+      'Merchant onboarding ate a full cross-functional team. Five days of meetings per partner to gather configurations from sales, ops, risk, and the partner themselves. Six entity types, each with about ten metadata fields, arrived through email and Slack threads. Tickets dropped, configs drifted, and stakeholders had no visibility into program status without booking a meeting. I designed OnboardIQ from a blank canvas: a flexible workflow product that codified the entire process into configurable, partner-aware steps. Audits and automation went directly into the workflow, so validation, status, and handoffs were surfaced inline instead of chased over Slack.',
+    metrics: [
+      { value: '30,000+', label: 'Merchants onboarded' },
+      { value: '3', label: 'Verticals (retail, elective medical, home improvement)' },
+      { value: '3 days → 3 hours', label: 'Support ticket resolution' },
+    ],
+    tags: ['Workflow Product', 'Fintech', '0-to-1'],
+  },
+  {
+    id: 'rayni',
+    number: '02',
+    title: 'Rayni',
+    subtitle: 'AI document intelligence platform. In daily production at scientific research labs.',
+    heroStat: '60% faster',
+    heroLabel: 'document verification vs. manual PDF search.',
+    body:
+      'Lab technicians couldn\'t trust AI answers without seeing the source documents — existing tools gave answers without verification. I built a split-screen verification interface with citation deep-linking to exact PDF coordinates so users validate every response. Designed a gap-detection UX with an 85% confidence threshold that asks for missing documents instead of guessing. The pattern was later extracted into Document Domain Agents, a domain-agnostic framework for high-stakes RAG.',
+    metrics: [
+      { value: '92%', label: 'User compliance with upload prompts' },
+      { value: '40%', label: 'Reduction in false-positive responses' },
+      { value: '50+', label: 'Design system components' },
+    ],
+    tags: ['AI / RAG', 'In Production', '0-to-1'],
+  },
+  {
+    id: 'doc-domain-agent',
+    number: '03',
+    title: 'Document Domain Agents',
+    subtitle: 'Domain-agnostic, high-stakes RAG framework. Extracted from Rayni.',
+    heroStat: '85%',
+    heroLabel: 'confidence threshold for the "never guess" gating policy.',
+    body:
+      'Most RAG systems guess when they don\'t have enough information, creating dangerous false confidence in safety-critical contexts. Document Domain Agents is the framework I extracted from Rayni for any domain where AI accuracy is non-negotiable. The gap-detection UX turns AI limitations into collaborative moments — users upload missing documents instead of losing trust in the system. Verification is split-screen, BLUF formatting handles scannability, and confidence indicators are calibrated to domain risk.',
+    metrics: [
+      { value: '5', label: 'RAG platforms in competitive analysis' },
+      { value: '3', label: 'Iteration cycles before launch' },
+      { value: 'Any domain', label: 'Framework portability' },
+    ],
+    tags: ['AI Framework', 'Trust UX'],
+  },
+  {
+    id: 'mindpattern',
+    number: '04',
+    title: 'MindPattern',
+    subtitle: 'Autonomous AI research pipeline plus an MCP-powered chat with generative UI. Personal infrastructure I run every day.',
+    heroStat: '~47K lines · 13 agents',
+    heroLabel: 'Python pipeline runs daily at 7 AM. Gathers ~400 items from 8 sources, dispatches 13 research agents in parallel, synthesizes a 4,500-word newsletter, and posts to social.',
+    body:
+      'MindPattern is two systems wired together. The backend is a deterministic 12-phase Python pipeline that operates as a one-person media company on autopilot: preflight data collection across eight sources (RSS, Hacker News, arXiv, GitHub, Reddit, Twitter, YouTube, LinkedIn), parallel dispatch of thirteen specialist research agents, synthesis of 150+ findings, newsletter publishing, and platform-native social posting. A self-improving harness finds bugs in the pipeline, writes fixes using TDD, reviews its own PRs, and merges them. The public site is a chat interface built around generative UI — when the AI invokes MCP tools that return structured data, React components (finding cards, source tables, health dashboards, pattern lists, skill cards) render directly inside the conversation instead of plain text. Wrapped in a Wire Room intelligence-dossier aesthetic: JetBrains Mono everywhere, manila palette, stamp badges, grid-paper textures.',
+    metrics: [
+      { value: '12 phases · 8 sources', label: 'Daily autonomous run' },
+      { value: '9 MCP UI components', label: 'Generative UI in chat' },
+      { value: 'Self-improving harness', label: 'TDD agents write + merge their own PRs' },
+    ],
+    tags: ['Personal Project', 'Agentic Systems', 'MCP Generative UI'],
+    externalUrl: 'https://mindpattern.ai',
+  },
+]
 
 export function ProjectsSection() {
   const motionPref = useMotionPreference()
-  const motionOff = motionPref === 'off'
   const noAnimation = motionPref !== 'regular'
-  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null)
-  const [showCaseStudy, setShowCaseStudy] = useState(false)
-
-  const openCaseStudy = useCallback((projectId: string) => {
-    setSelectedProjectId(projectId)
-    setShowCaseStudy(true)
-    // Push state to browser history so back button closes modal
-    window.history.pushState({ caseStudy: projectId }, '', `#project/${projectId}`)
-  }, [])
-
-  const closeCaseStudy = useCallback(() => {
-    setShowCaseStudy(false)
-    setSelectedProjectId(null)
-    // Only push state if we're not already handling a popstate
-    if (window.location.hash.startsWith('#project/')) {
-      window.history.pushState({}, '', window.location.pathname)
-    }
-  }, [])
-
-  // Handle browser back/forward buttons
-  useEffect(() => {
-    const handlePopState = (event: PopStateEvent) => {
-      if (event.state?.caseStudy) {
-        // User navigated forward to a case study
-        setSelectedProjectId(event.state.caseStudy)
-        setShowCaseStudy(true)
-      } else {
-        // User pressed back - close the modal
-        setShowCaseStudy(false)
-        setSelectedProjectId(null)
-      }
-    }
-
-    // Check if URL has a project hash on mount
-    const hash = window.location.hash
-    if (hash.startsWith('#project/')) {
-      const projectId = hash.replace('#project/', '')
-      setSelectedProjectId(projectId)
-      setShowCaseStudy(true)
-    }
-
-    window.addEventListener('popstate', handlePopState)
-    return () => window.removeEventListener('popstate', handlePopState)
-  }, [])
-
-  const projects = [
-    {
-      id: 'onboard-iq',
-      title: 'OnboardIQ Workflow Instance Platform',
-      category: ['full-stack', 'ui-ux'],
-      featured: true,
-      status: 'live',
-      description: 'Enterprise workflow orchestration platform built on Kotlin/Spring Boot with ServiceKit. Launch, configure, monitor, and manage live workflow instances with cascading configuration, SLA tracking, and role-based assignments across 5 deployment environments.',
-      metrics: [
-        { icon: TrendingUp, value: '$2.1M', label: 'Revenue Impact' },
-        { icon: Clock, value: '65%', label: 'Process Improvement' },
-        { icon: Database, value: '49', label: 'Flyway Migrations' }
-      ],
-      story: [
-        { icon: Search, phase: 'Architecture', description: '4 core capabilities: Launch Workflow, Instance List with filters, Instance View with progress timeline, Instance Edit. Cascading config from workflow → version → step → instance.' },
-        { icon: Palette, phase: 'Enterprise UI', description: '35+ Pebble macro components with Tailwind CSS. Drag-drop workflow builder, card grid lists, animated execution timelines. ServiceKit brownfield compatibility.' },
-        { icon: Code, phase: 'Kotlin Backend', description: '25+ Controllers (Web + REST dual API), 12 Services, 20+ DAOs with JDBC Template. Role-based access, Google SSO + password auth, audit logging.' },
-        { icon: Monitor, phase: 'Database & CI/CD', description: 'PostgreSQL with UUID keys, 49 Flyway migrations, soft-delete support. GitLab Auto-DevOps to 5 environments: Test, UAT, Pentest, Demo, Production.' }
-      ],
-      tags: ['Kotlin/Spring Boot', 'Pebble', 'PostgreSQL'],
-      gradient: 'from-blue-500 to-purple-600',
-      image: '/assets/images/onboard-iq-hero.png'
-    },
-    {
-      id: 'rayni-platform',
-      title: 'Rayni AI Document Intelligence Platform',
-      category: ['ai-ml', 'full-stack'],
-      status: 'live',
-      description: 'Designing trust in AI-powered scientific research. Created a document intelligence platform with split-screen citation verification, streaming responses, and gap detection flows that tell users exactly when to trust the AI.',
-      metrics: [
-        { icon: Users, value: '87.5%', label: 'Usability Score' },
-        { icon: TrendingUp, value: '<30s', label: 'Time to Answer' },
-        { icon: Palette, value: '50+', label: 'Components' }
-      ],
-      story: [
-        { icon: Search, phase: 'User Research', description: '12 contextual interviews with lab technicians revealed the core insight: users need to know exactly when to trust AI answers.' },
-        { icon: Palette, phase: 'Design System', description: 'Created "no borders needed" design language using color layering and elevation hierarchy across 50+ components.' },
-        { icon: Zap, phase: 'Trust Patterns', description: 'Split-screen citation verification, streaming responses with inline citations, and proactive gap detection.' },
-        { icon: Code, phase: 'Implementation', description: 'Full-stack development: Next.js, Django, LangGraph agents with hybrid RAG architecture.' }
-      ],
-      tags: ['AI Product Design', 'Design Systems', 'Trust UX'],
-      gradient: 'from-violet-500 to-indigo-600',
-      demoUrl: 'https://rayni.ai',
-      image: '/assets/images/rayni-hero.png'
-    },
-    {
-      id: 'doc-domain-agent',
-      title: 'Doc Domain Agent - Zero-Hallucination AI',
-      category: ['ai-ml', 'full-stack'],
-      status: 'live',
-      description: 'Designing zero-hallucination AI for high-stakes decisions. Created BLUF response format, bounding-box citations, and gap detection flows that gracefully escalate rather than guess.',
-      metrics: [
-        { icon: TrendingUp, value: '<0.1%', label: 'Hallucination Rate' },
-        { icon: Clock, value: '<30s', label: 'Time to Answer' },
-        { icon: Users, value: '100%', label: 'Citation Accuracy' }
-      ],
-      story: [
-        { icon: Search, phase: 'Research', description: 'Expert interviews revealed: users don\'t need perfect AI—they need to know exactly when it\'s uncertain.' },
-        { icon: Palette, phase: 'BLUF Format', description: 'Designed "Bottom Line Up Front" response structure: Verdict → Evidence → Fix → Safety Warnings.' },
-        { icon: Zap, phase: 'Gap Detection', description: '3-layer confidence system triggers human-in-the-loop prompts before generating uncertain answers.' },
-        { icon: Monitor, phase: 'Verification', description: 'Bounding box citations highlight exact text—not just page numbers—for instant verification.' }
-      ],
-      tags: ['AI Safety UX', 'Trust Design', 'Information Architecture'],
-      gradient: 'from-emerald-500 to-teal-600',
-      image: '/assets/images/doc-domain-hero.png'
-    },
-    {
-      id: 'blue-moon-telehealth',
-      title: 'Blue Moon Senior Counseling - Telehealth Platform',
-      category: ['full-stack', 'ui-ux'],
-      status: 'live',
-      description: 'Accessible telehealth design for geriatric therapy. Created a WCAG 2.1 AA compliant platform with 6-axis accessibility controls, enabling 100% unassisted session joins by seniors.',
-      metrics: [
-        { icon: Users, value: '100%', label: 'Join Success Rate' },
-        { icon: Zap, value: 'WCAG 2.1', label: 'AA Compliant' },
-        { icon: Clock, value: '15min', label: 'Saved/Session' }
-      ],
-      story: [
-        { icon: Search, phase: 'Research', description: 'User testing with 8 seniors aged 68-84 revealed tech anxiety and specific accessibility barriers.' },
-        { icon: Palette, phase: 'Visual Design', description: 'Gold-on-dark theme exceeds AAA contrast. Three.js particle animation reduces pre-session anxiety.' },
-        { icon: Users, phase: 'Accessibility', description: '6-axis control: font size, contrast, motion, captions, blur, focus indicators—all user-adjustable.' },
-        { icon: Zap, phase: 'Automation', description: 'CPT billing code detection (90832/90834/90837) saves 15 minutes per session.' }
-      ],
-      tags: ['Accessibility', 'Healthcare UX', 'Senior Design'],
-      gradient: 'from-amber-500 to-orange-600',
-      demoUrl: 'https://bluemoonseniorcounseling.com',
-      image: '/assets/images/blue-moon-hero.png'
-    },
-    {
-      id: 'ashley-furniture',
-      title: 'Ashley Furniture Financing Console',
-      category: ['ui-ux', 'frontend'],
-      description: 'Redesigned in-store financing experience for sales associates. Led UX research with store managers to identify approval bottlenecks, then designed and built a streamlined console that increased approval rates.',
-      metrics: [
-        { icon: TrendingUp, value: '+12%', label: 'Approval Rate' },
-        { icon: Users, value: '18', label: 'Store Pilot' },
-        { icon: Clock, value: '-40%', label: 'App Time' }
-      ],
-      story: [
-        { icon: Search, phase: 'Research', description: 'Conducted contextual inquiry at 5 retail locations, shadowing sales associates through financing workflows.' },
-        { icon: Palette, phase: 'Design', description: 'Created progressive disclosure UI reducing cognitive load - associates see only relevant fields per customer segment.' },
-        { icon: Code, phase: 'Development', description: 'Vue.js components with real-time Synchrony Bank API integration and instant credit decisioning.' }
-      ],
-      tags: ['Retail', 'Fintech', 'Vue.js'],
-      image: '/assets/images/ashley-hero.png',
-      gradient: 'from-green-500 to-emerald-600'
-    },
-    {
-      id: 'aspen-dental',
-      title: 'Aspen Dental Patient Financing Portal',
-      category: ['ui-ux', 'frontend'],
-      description: 'Patient-facing financing portal deployed across 1,100+ dental clinics. Designed for anxious patients needing treatment financing - focused on clarity, trust signals, and instant decisioning.',
-      metrics: [
-        { icon: Users, value: '1,100+', label: 'Clinics' },
-        { icon: Clock, value: '<30s', label: 'Decision Time' },
-        { icon: TrendingUp, value: '+15%', label: 'Conversion' }
-      ],
-      story: [
-        { icon: Search, phase: 'UX Research', description: 'Interviewed dental office managers to understand patient anxiety points around unexpected treatment costs.' },
-        { icon: Palette, phase: 'UI Design', description: 'Calming color palette, clear cost breakdowns, and trust badges. Mobile-first for tablet use at chairside.' },
-        { icon: Code, phase: 'Frontend', description: 'React application with HIPAA-compliant form handling and multi-lender waterfall integration.' }
-      ],
-      tags: ['Healthcare', 'Fintech', 'React'],
-      image: '/assets/images/aspen-hero.png',
-      gradient: 'from-blue-500 to-indigo-600'
-    },
-    {
-      id: 'dell-technologies',
-      title: 'Dell Technologies Dell Pay Waterfall',
-      category: ['frontend', 'full-stack'],
-      description: 'Integrated Bread Pay into Dell\'s existing checkout as a waterfall financing option. Built the frontend integration layer connecting Dell\'s e-commerce platform to multiple lender APIs.',
-      metrics: [
-        { icon: Layers, value: '4', label: 'Lender APIs' },
-        { icon: Clock, value: '99.9%', label: 'Uptime' },
-        { icon: TrendingUp, value: '+$2M', label: 'Monthly Volume' }
-      ],
-      story: [
-        { icon: Code, phase: 'Architecture', description: 'Designed waterfall logic: primary lender → secondary → tertiary, with graceful degradation and retry handling.' },
-        { icon: Monitor, phase: 'Integration', description: 'Built adapter layer translating Dell checkout data to each lender\'s unique API schema requirements.' },
-        { icon: Zap, phase: 'Performance', description: 'Implemented response caching and parallel API calls to maintain sub-2-second checkout experience.' }
-      ],
-      tags: ['E-commerce', 'API', 'TypeScript'],
-      image: '/assets/images/dell-hero.png',
-      gradient: 'from-cyan-500 to-blue-600'
-    },
-    {
-      id: 'helzberg-diamonds',
-      title: 'Helzberg Diamonds Digital Flex-Pay Kiosk',
-      category: ['ui-ux', 'frontend'],
-      description: 'In-store kiosk enabling customers to self-serve financing applications. Reduced associate involvement while dramatically improving approval rates through optimized form flow.',
-      metrics: [
-        { icon: TrendingUp, value: '+28%', label: 'Lease Approvals' },
-        { icon: Clock, value: '-57%', label: 'App Time' },
-        { icon: Users, value: '200+', label: 'Stores' }
-      ],
-      story: [
-        { icon: Search, phase: 'Problem', description: 'Associates struggled explaining lease-to-own options. Customers abandoned due to complexity and stigma.' },
-        { icon: Palette, phase: 'Solution', description: 'Self-service kiosk with jewelry-appropriate luxury aesthetic. Private, judgment-free financing exploration.' },
-        { icon: Code, phase: 'Implementation', description: 'Touch-optimized Vue.js app with large tap targets, progress indicators, and instant pre-qualification.' }
-      ],
-      tags: ['Retail', 'Fintech', 'Kiosk'],
-      image: '/assets/images/helzberg-hero.png',
-      gradient: 'from-purple-500 to-pink-600'
-    },
-    {
-      id: 'ifit-health',
-      title: 'iFit Health Spend Checkout',
-      category: ['ui-ux', 'frontend'],
-      description: 'Added HSA/FSA payment option to iFit\'s direct-to-consumer checkout. Positioned fitness equipment as health expense, opening new customer segment.',
-      metrics: [
-        { icon: TrendingUp, value: '8%', label: 'DTC Revenue' },
-        { icon: Users, value: 'New', label: 'Customer Segment' },
-        { icon: Clock, value: 'Instant', label: 'Card Validation' }
-      ],
-      story: [
-        { icon: Search, phase: 'Opportunity', description: 'Identified that fitness equipment qualifies for HSA/FSA spending - untapped market for iFit\'s premium products.' },
-        { icon: Palette, phase: 'UX Design', description: 'Clear eligibility messaging, HSA/FSA card detection, and itemized receipts for reimbursement claims.' },
-        { icon: Code, phase: 'Integration', description: 'Health Spend API integration with real-time card BIN validation and automatic receipt generation.' }
-      ],
-      tags: ['Health & Wellness', 'Fintech', 'E-commerce'],
-      image: '/assets/images/ifit-hero.png',
-      gradient: 'from-orange-500 to-red-600'
-    },
-  ]
-
-  const featuredProject = projects.find(p => p.featured)
-  const regularProjects = projects.filter(p => !p.featured)
-
-  // Animation variants - disabled when motion is reduced or off
-  const containerVariants = noAnimation ? {
-    hidden: { opacity: 1 },
-    visible: { opacity: 1 }
-  } : {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  }
-
-  const projectVariants = noAnimation ? {
-    hidden: { opacity: 1, y: 0 },
-    visible: { opacity: 1, y: 0 },
-    exit: { opacity: 1, y: 0 }
-  } : {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut'
-      }
-    },
-    exit: {
-      opacity: 0,
-      y: -30,
-      transition: {
-        duration: 0.3
-      }
-    }
-  }
 
   return (
-    <section id="projects" className="py-24 bg-muted/30 relative overflow-hidden" aria-labelledby="projects-heading">
-      {/* Background Elements */}
-      <div className="absolute inset-0 opacity-10" aria-hidden="true">
-        <div className={cn(
-          "absolute top-0 right-0 w-96 h-96 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full blur-3xl",
-          !noAnimation && "animate-pulse"
-        )} />
-        <div className={cn(
-          "absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-full blur-3xl",
-          !noAnimation && "animate-pulse"
-        )} style={noAnimation ? {} : { animationDelay: '3s' }} />
-      </div>
-
+    <section
+      id="projects"
+      className="py-24 sm:py-32 relative"
+      aria-labelledby="projects-heading"
+    >
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
-        <ScrollReveal>
-          <div className="text-center mb-12 sm:mb-16">
-            <motion.div
-              className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium text-xs sm:text-sm mb-4"
-              whileHover={{ scale: 1.05 }}
-            >
-              <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              Portfolio
-            </motion.div>
-            <h2 id="projects-heading" className="text-3xl sm:text-4xl lg:text-6xl font-bold font-display mb-3 sm:mb-4">
-              Featured <span className="gradient-text">Projects</span>
-            </h2>
-            <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
-              Real-world solutions with measurable impact and exceptional user experiences
-            </p>
+        <div className="mb-20 sm:mb-28 max-w-3xl">
+          <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-5 font-mono">
+            Selected Work · Past 24 Months
           </div>
-        </ScrollReveal>
+          <h2
+            id="projects-heading"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tight mb-4"
+          >
+            Featured projects
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+            Fintech at scale, AI in production, and personal infrastructure for autonomous research.
+            Numbers are real, no synthetic personas.
+          </p>
+        </div>
 
-        {/* Featured Project */}
-        {featuredProject && (
-          <ScrollReveal delay={0.4}>
-            <FloatingCard className="mb-16 overflow-hidden bg-background/50 backdrop-blur-sm border border-border/50">
-              <div className="grid lg:grid-cols-2 gap-0">
-                {/* Project Visual */}
-                <div className={cn(
-                  'relative aspect-video lg:aspect-auto lg:min-h-[400px] bg-gradient-to-br overflow-hidden',
-                  featuredProject.gradient
-                )}>
-                  {featuredProject.image && (
-                    <Image
-                      src={featuredProject.image}
-                      alt={featuredProject.title}
-                      fill
-                      className="object-cover"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+        {/* Project entries */}
+        <div className="space-y-24 sm:space-y-32">
+          {projects.map((project) => (
+            <ProjectEntry
+              key={project.id}
+              project={project}
+              total={projects.length}
+              noAnimation={noAnimation}
+            />
+          ))}
+        </div>
 
-                  {/* Status Badge */}
-                  {featuredProject.status === 'live' && (
-                    <div className="absolute top-6 left-6 flex items-center gap-2 px-3 py-2 bg-green-500/90 backdrop-blur-sm rounded-full text-white text-sm font-semibold z-10">
-                      <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                      Live Demo
-                    </div>
-                  )}
+        {/* Footer CTA */}
+        <div className="mt-32 sm:mt-40 pt-12 border-t border-border/60 max-w-3xl">
+          <p className="text-base text-muted-foreground leading-relaxed">
+            Most of the products above aren\'t public. Reach out and I\'ll walk you through them in detail —
+            screen recordings, codebases, or a live ticket together.
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
 
-                  {/* Featured Badge */}
-                  <div className="absolute top-6 right-6 px-3 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-semibold border border-white/30 z-10">
-                    <Zap className="w-4 h-4 inline mr-1" />
-                    Featured
-                  </div>
-                </div>
+interface ProjectEntryProps {
+  project: Project
+  total: number
+  noAnimation: boolean
+}
 
-                {/* Project Content */}
-                <div className="p-4 sm:p-8">
-                  <div className="space-y-4 sm:space-y-6">
-                    {/* Header */}
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2 mb-3">
-                        {featuredProject.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 sm:px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full border border-primary/20"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <h3 className="text-2xl sm:text-3xl font-bold font-display mb-3 sm:mb-4">
-                        {featuredProject.title}
-                      </h3>
-                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-                        {featuredProject.description}
-                      </p>
-                    </div>
+function ProjectEntry({ project, total, noAnimation }: ProjectEntryProps) {
+  const initial = noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }
+  const animate = { opacity: 1, y: 0 }
 
-                    {/* Metrics */}
-                    {featuredProject.metrics && (
-                      <div className="grid grid-cols-3 gap-2 sm:gap-4">
-                        {featuredProject.metrics.map((metric) => (
-                          <div key={metric.label} className="text-center p-2 sm:p-4 rounded-xl bg-accent/50 border border-border/50">
-                            <div className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-1 sm:mb-2 text-primary">
-                              <metric.icon className="w-full h-full" />
-                            </div>
-                            <div className="font-bold text-base sm:text-lg">{metric.value}</div>
-                            <div className="text-[10px] sm:text-xs text-muted-foreground">{metric.label}</div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Development Story */}
-                    {featuredProject.story && (
-                      <div className="space-y-2 sm:space-y-3">
-                        <h4 className="font-semibold text-base sm:text-lg">Development Journey</h4>
-                        {featuredProject.story.map((phase, index) => (
-                          <div key={phase.phase} className="flex gap-2 sm:gap-3 p-2 sm:p-3 rounded-lg bg-accent/30 border border-border/50">
-                            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <phase.icon className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="font-medium text-xs sm:text-sm mb-0.5 sm:mb-1">{phase.phase}</div>
-                              <div className="text-[10px] sm:text-xs text-muted-foreground leading-relaxed">
-                                {phase.description}
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Actions */}
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <MagneticButton
-                        onClick={() => openCaseStudy(featuredProject.id)}
-                        className="flex-1 justify-center group"
-                      >
-                        <FileText className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        View Full Case Study
-                      </MagneticButton>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </FloatingCard>
-          </ScrollReveal>
-        )}
-
-        {/* Regular Projects Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
-        >
-          <AnimatePresence>
-            {regularProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                variants={projectVariants}
-                layout={!noAnimation}
-                className="group cursor-pointer"
-                onClick={() => openCaseStudy(project.id)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault()
-                    openCaseStudy(project.id)
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                aria-label={`View ${project.title} case study`}
-              >
-                <FloatingCard
-                  className="h-full overflow-hidden bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300"
-                  delay={index * 0.1}
-                  distance={15}
-                  duration={5 + index}
-                >
-                  {/* Project Image/Visual */}
-                  <div className={cn(
-                    'relative aspect-video bg-gradient-to-br flex items-center justify-center overflow-hidden',
-                    project.gradient || 'from-gray-400 to-gray-600'
-                  )}>
-                    {project.image ? (
-                      project.image.includes('hero') ? (
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="relative w-full h-full bg-white flex items-center justify-center p-6">
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            className="object-contain"
-                          />
-                        </div>
-                      )
-                    ) : (
-                      <div className="text-white text-center">
-                        <Monitor className="w-16 h-16 mx-auto mb-2 opacity-60" />
-                        <div className="text-sm font-medium opacity-80">Project Visual</div>
-                      </div>
-                    )}
-                    
-                    {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <div className="text-white text-center">
-                        <ExternalLink className="w-8 h-8 mx-auto mb-2" />
-                        <div className="text-sm font-medium">View Project</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Project Content */}
-                  <div className="p-4 sm:p-6">
-                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-0.5 sm:py-1 bg-accent text-accent-foreground text-[10px] sm:text-xs font-medium rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <h3 className="text-lg sm:text-xl font-bold font-display mb-2 sm:mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                      {project.title}
-                    </h3>
-
-                    <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3">
-                      {project.description}
-                    </p>
-
-                    <div className="flex items-center justify-between">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-primary hover:text-primary/80 p-0 h-auto font-medium text-xs sm:text-sm group-hover:translate-x-1 transition-transform"
-                        onClick={() => openCaseStudy(project.id)}
-                      >
-                        View Case Study
-                        <ExternalLink className="w-3 h-3 ml-1" />
-                      </Button>
-                    </div>
-                  </div>
-                </FloatingCard>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Call to Action */}
-        <ScrollReveal delay={0.8}>
-          <div className="text-center mt-12 sm:mt-16">
-            <div className="max-w-2xl mx-auto px-2">
-              <h3 className="text-xl sm:text-2xl font-bold font-display mb-3 sm:mb-4">
-                Ready to work together?
-              </h3>
-              <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8">
-                Let's discuss how I can help bring your next project to life with exceptional
-                user experience and technical expertise.
-              </p>
-              <MagneticButton
-                onClick={() => {
-                  document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
-                }}
-              >
-                Start a Project
-                <ExternalLink className="w-4 h-4" />
-              </MagneticButton>
-            </div>
-          </div>
-        </ScrollReveal>
+  return (
+    <motion.article
+      initial={initial}
+      whileInView={animate}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={noAnimation ? { duration: 0 } : { duration: 0.6, ease: 'easeOut' }}
+      className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-16"
+    >
+      {/* Number column */}
+      <div className="font-mono text-sm text-muted-foreground tracking-wider">
+        <div className="lg:sticky lg:top-32 flex lg:flex-col items-baseline lg:items-start gap-2">
+          <span className="text-foreground font-semibold">{project.number}</span>
+          <span className="opacity-60">/ {String(total).padStart(2, '0')}</span>
+        </div>
       </div>
 
-      {/* Project Case Study Modal */}
-      <ProjectCaseStudyModal 
-        projectId={selectedProjectId}
-        isOpen={showCaseStudy}
-        onClose={closeCaseStudy}
-      />
-    </section>
+      {/* Content column */}
+      <div className="space-y-10 max-w-3xl">
+        {/* Title block */}
+        <div className="space-y-3">
+          <h3 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tight leading-[1.05]">
+            {project.title}
+          </h3>
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
+            {project.subtitle}
+          </p>
+        </div>
+
+        {/* Hero stat */}
+        <motion.div
+          initial={noAnimation ? { opacity: 1 } : { opacity: 0, x: -16 }}
+          whileInView={noAnimation ? {} : { opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={noAnimation ? { duration: 0 } : { duration: 0.7, delay: 0.15, ease: 'easeOut' }}
+          className="border-l-2 border-primary pl-6 py-2"
+        >
+          <div className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tight text-primary leading-none">
+            {project.heroStat}
+          </div>
+          <div className="text-sm sm:text-base text-muted-foreground leading-relaxed mt-3 max-w-md">
+            {project.heroLabel}
+          </div>
+        </motion.div>
+
+        {/* Body */}
+        <p className="text-base sm:text-lg leading-relaxed text-foreground/90">
+          {project.body}
+        </p>
+
+        {/* Supporting metrics */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 py-6 border-y border-border/50">
+          {project.metrics.map((metric) => (
+            <div key={metric.label} className="space-y-1.5">
+              <div className="text-xl sm:text-2xl font-bold font-display tracking-tight">
+                {metric.value}
+              </div>
+              <div className="text-xs sm:text-sm text-muted-foreground leading-snug">
+                {metric.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Tags + optional external link */}
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-xs uppercase tracking-wider font-mono text-muted-foreground">
+            {project.tags.map((tag, idx) => (
+              <React.Fragment key={tag}>
+                {idx > 0 && <span aria-hidden="true">·</span>}
+                <span>{tag}</span>
+              </React.Fragment>
+            ))}
+          </div>
+          {project.externalUrl && (
+            <a
+              href={project.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-mono text-primary hover:text-primary/80 transition-colors group"
+            >
+              <span>Visit live</span>
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+          )}
+        </div>
+      </div>
+    </motion.article>
   )
 }

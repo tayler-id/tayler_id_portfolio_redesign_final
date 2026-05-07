@@ -12,6 +12,8 @@ backend/data/lancedb/
 
 # Environment files
 .env
+.env.local
+.env.*.local
 backend/.env
 
 # IDE/Editor specific
