@@ -32,7 +32,7 @@ export function Footer() {
             transition={noAnimation ? { duration: 0 } : { duration: 0.6 }}
             className="flex items-center gap-3"
           >
-            <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center overflow-hidden border border-border/40">
+            <div className="w-10 h-10 rounded-lg bg-card flex items-center justify-center overflow-hidden border border-border/40">
               <Image
                 src="/assets/images/logo.png"
                 alt="Tayler Ramsay"

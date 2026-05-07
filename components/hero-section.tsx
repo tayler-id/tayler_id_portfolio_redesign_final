@@ -188,7 +188,7 @@ export function HeroSection() {
               <FloatingCard tilt className="p-8 max-w-md mx-auto">
                 <div className="space-y-6">
                   <div className="flex items-center gap-4">
-                    <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-lg border-2 border-white/20 backdrop-blur-sm overflow-hidden">
+                    <div className="w-20 h-20 rounded-full bg-card flex items-center justify-center shadow-sm border border-border/40 overflow-hidden">
                       <Image
                         src="/assets/images/logo.png"
                         alt="Tayler Ramsay Logo"
