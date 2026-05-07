@@ -81,8 +81,8 @@ export function ContactSection() {
   return (
     <section id="contact" className="py-24 relative overflow-hidden" aria-labelledby="contact-heading">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5" aria-hidden="true" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-blue-600/10 rounded-full blur-3xl" aria-hidden="true" />
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5 pointer-events-none" aria-hidden="true" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-blue-600/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -117,28 +117,37 @@ export function ContactSection() {
               </div>
 
               <div className="space-y-4">
-                {contactMethods.map((method, index) => (
-                  <motion.a
-                    key={method.title}
-                    href={method.href}
-                    initial={noAnimation ? {} : { opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={noAnimation ? {} : { delay: index * 0.1, duration: 0.6 }}
-                    whileHover={noAnimation ? {} : { x: 8, transition: { duration: 0.2 } }}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all group"
-                    aria-label={`${method.title}: ${method.value}`}
-                  >
-                    <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-primary to-purple-600 flex items-center justify-center">
-                      <method.icon className="w-6 h-6 text-white" aria-hidden="true" />
-                    </div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-lg">{method.title}</h4>
-                      <p className="text-primary font-medium">{method.value}</p>
-                      <p className="text-sm text-muted-foreground">{method.description}</p>
-                    </div>
-                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" aria-hidden="true" />
-                  </motion.a>
-                ))}
+                {contactMethods.map((method, index) => {
+                  const isExternal = method.href.startsWith('http')
+                  return (
+                    <a
+                      key={method.title}
+                      href={method.href}
+                      target={isExternal ? '_blank' : undefined}
+                      rel={isExternal ? 'noopener noreferrer' : undefined}
+                      aria-label={`${method.title}: ${method.value}`}
+                      className="block"
+                    >
+                      <motion.div
+                        initial={noAnimation ? {} : { opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={noAnimation ? {} : { delay: index * 0.1, duration: 0.6 }}
+                        whileHover={noAnimation ? {} : { x: 8, transition: { duration: 0.2 } }}
+                        className="flex items-center gap-4 p-4 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all group cursor-pointer"
+                      >
+                        <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-primary to-purple-600 flex items-center justify-center">
+                          <method.icon className="w-6 h-6 text-white" aria-hidden="true" />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-lg">{method.title}</h4>
+                          <p className="text-primary font-medium">{method.value}</p>
+                          <p className="text-sm text-muted-foreground">{method.description}</p>
+                        </div>
+                        <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" aria-hidden="true" />
+                      </motion.div>
+                    </a>
+                  )
+                })}
               </div>
 
               {/* Availability Status */}
