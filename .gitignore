@@ -30,3 +30,15 @@ dist/
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local-only working dirs accidentally committed and now ignored
+redesign/
+docs/
+.agent/
+.agents/
+.claude/
+.codex/
+.cursor/
+.gemini/
+.opencode/
+.playwright-mcp/

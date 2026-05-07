@@ -33,6 +33,16 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "redesign",
+    "docs",
+    ".agent",
+    ".agents",
+    ".claude",
+    ".codex",
+    ".cursor",
+    ".gemini",
+    ".opencode",
+    ".playwright-mcp"
   ]
 }

@@ -1,7 +1,0 @@
-[     849ms] [WARNING]   WARN  [Statsig] Attempting to retrieve a StatsigClient but none was set. @ https://www.figma.com/_netlify/_next/static/chunks/3914-5d787a03443b4baf.js:4
-[     854ms] [WARNING]   WARN  [Statsig] Attempting to retrieve a StatsigClient but none was set. @ https://www.figma.com/_netlify/_next/static/chunks/3914-5d787a03443b4baf.js:4
-[     862ms] [WARNING]   WARN  [Statsig] Attempting to retrieve a StatsigClient but none was set. @ https://www.figma.com/_netlify/_next/static/chunks/3914-5d787a03443b4baf.js:4
-[    3643ms] [ERROR] Attestation check for Attribution Reporting on https://www.facebook.com failed. @ https://www.figma.com/typography/variable-fonts/:0
-[    8060ms] [WARNING] The resource https://www.figma.com/_netlify/_next/static/media/rive.ac4ff0e0.wasm was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://www.figma.com/typography/variable-fonts/:0
-[    8899ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://marketing.figma.com/typography/variable-fonts/?gpc_code=us_pa:0
-[    9126ms] [ERROR] Attestation check for Attribution Reporting on https://www.facebook.com failed. @ https://www.figma.com/typography/variable-fonts/:0

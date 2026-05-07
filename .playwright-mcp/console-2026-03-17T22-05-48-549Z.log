@@ -1,3 +1,0 @@
-[    2201ms] [WARNING] THREE.Texture: Property .encoding has been replaced by .colorSpace. @ https://olhalazarieva.com/static/js/main.f8e20006.js:1
-[    2354ms] [WARNING] THREE.Texture: Property .encoding has been replaced by .colorSpace. @ https://olhalazarieva.com/static/js/main.f8e20006.js:1
-[    7808ms] [WARNING] THREE.WebGLRenderer: Property .outputEncoding has been removed. Use .outputColorSpace instead. @ https://olhalazarieva.com/static/js/main.f8e20006.js:1
