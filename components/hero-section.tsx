@@ -102,9 +102,23 @@ export function HeroSection() {
                   speed={80}
                   delay={500}
                 />
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
-                  <span className="block text-foreground">Senior Full-Stack</span>
-                  <span className="block gradient-text">UX Engineer</span>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight overflow-hidden">
+                  <motion.span
+                    className="block text-foreground"
+                    initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: '100%' }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={noAnimation ? { duration: 0 } : { duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    Senior Full-Stack
+                  </motion.span>
+                  <motion.span
+                    className="block gradient-text"
+                    initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: '100%' }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={noAnimation ? { duration: 0 } : { duration: 0.8, delay: 1.25, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    UX Engineer
+                  </motion.span>
                 </h1>
               </div>
             </motion.div>

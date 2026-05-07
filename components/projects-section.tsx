@@ -66,25 +66,41 @@ const projects: Project[] = [
     body:
       'Most RAG systems guess when they don\'t have enough information, creating dangerous false confidence in safety-critical contexts. Document Domain Agents is the framework I extracted from Rayni for any domain where AI accuracy is non-negotiable. The gap-detection UX turns AI limitations into collaborative moments — users upload missing documents instead of losing trust in the system. Verification is split-screen, BLUF formatting handles scannability, and confidence indicators are calibrated to domain risk.',
     metrics: [
-      { value: '5', label: 'RAG platforms in competitive analysis' },
-      { value: '3', label: 'Iteration cycles before launch' },
-      { value: 'Any domain', label: 'Framework portability' },
+      { value: '11 nodes', label: 'LangGraph stateful agent workflow with checkpointing' },
+      { value: '3 layers', label: 'Vector search, graph augmentation, cross-encoder reranking' },
+      { value: 'BLUF', label: 'Verdict, evidence, fix, and safety warnings in every response' },
     ],
     tags: ['AI Framework', 'Trust UX'],
   },
   {
-    id: 'mindpattern',
+    id: 'qualified',
     number: '04',
+    title: 'Qualified',
+    subtitle: 'AI-powered financing sidecar. A Chrome side-panel extension that surfaces multi-lender financing while you shop, with rich interactive UI rendered inline in chat.',
+    heroStat: '3-lender waterfall · in chat',
+    heroLabel: 'Synchrony (prime), Fortiva (near-prime), Acima (lease-to-own). Every customer qualifies for something.',
+    body:
+      'Qualified is a Chrome extension that lives in the browser side panel while you shop. Tell it what you want — "a laptop under $1,000" — and it searches products, compares them side-by-side, and surfaces real financing options from three lenders the moment intent shows, not at checkout. Architecture: React side panel → Express server on Fly.io → Claude (sonnet-4-6) with eight tool definitions → tool execution → streamed back. The wedge is MCP Apps: an extension of Anthropic\'s Model Context Protocol where tools return interactive HTML UIs, not just text. Sandboxed iframes hydrate via postMessage to render comparison tables, payment calculators, product grids, and pre-filled application forms directly inside the conversation. Same multi-lender waterfall pattern as Versatile / Synchrony — reimagined as an agentic sidecar with generative UI.',
+    metrics: [
+      { value: '8 tools', label: 'Agent decides the flow, 7 return interactive MCP UI' },
+      { value: '3 lenders', label: 'Synchrony, Fortiva, Acima — prime to lease-to-own' },
+      { value: 'Sidecar', label: 'Sits next to any retail site, no checkout integration required' },
+    ],
+    tags: ['Chrome Extension', 'AI Sidecar', 'MCP Apps', 'Embedded Fintech'],
+  },
+  {
+    id: 'mindpattern',
+    number: '05',
     title: 'MindPattern',
     subtitle: 'Autonomous AI research pipeline plus an MCP-powered chat with generative UI. Personal infrastructure I run every day.',
-    heroStat: '~47K lines · 13 agents',
-    heroLabel: 'Python pipeline runs daily at 7 AM. Gathers ~400 items from 8 sources, dispatches 13 research agents in parallel, synthesizes a 4,500-word newsletter, and posts to social.',
+    heroStat: '13 agents · daily',
+    heroLabel: 'Python pipeline runs autonomously every morning. Gathers ~400 items from 8 sources, dispatches 13 research agents in parallel, synthesizes a 4,500-word newsletter, and posts to social.',
     body:
       'MindPattern is two systems wired together. The backend is a deterministic 12-phase Python pipeline that operates as a one-person media company on autopilot: preflight data collection across eight sources (RSS, Hacker News, arXiv, GitHub, Reddit, Twitter, YouTube, LinkedIn), parallel dispatch of thirteen specialist research agents, synthesis of 150+ findings, newsletter publishing, and platform-native social posting. A self-improving harness finds bugs in the pipeline, writes fixes using TDD, reviews its own PRs, and merges them. The public site is a chat interface built around generative UI — when the AI invokes MCP tools that return structured data, React components (finding cards, source tables, health dashboards, pattern lists, skill cards) render directly inside the conversation instead of plain text. Wrapped in a Wire Room intelligence-dossier aesthetic: JetBrains Mono everywhere, manila palette, stamp badges, grid-paper textures.',
     metrics: [
-      { value: '12 phases · 8 sources', label: 'Daily autonomous run' },
-      { value: '9 MCP UI components', label: 'Generative UI in chat' },
-      { value: 'Self-improving harness', label: 'TDD agents write + merge their own PRs' },
+      { value: '12 phases', label: 'Fully autonomous daily run across 8 sources' },
+      { value: '9 components', label: 'Generative UI rendered inline in chat' },
+      { value: 'Self-merging', label: 'TDD agents write, review, and ship their own PRs' },
     ],
     tags: ['Personal Project', 'Agentic Systems', 'MCP Generative UI'],
     externalUrl: 'https://mindpattern.ai',
@@ -205,8 +221,8 @@ function ProjectEntry({ project, total, noAnimation }: ProjectEntryProps) {
         {/* Supporting metrics */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 py-6 border-y border-border/50">
           {project.metrics.map((metric) => (
-            <div key={metric.label} className="space-y-1.5">
-              <div className="text-xl sm:text-2xl font-bold font-display tracking-tight">
+            <div key={metric.label} className="space-y-2">
+              <div className="text-2xl font-bold font-display tracking-tight leading-none whitespace-nowrap">
                 {metric.value}
               </div>
               <div className="text-xs sm:text-sm text-muted-foreground leading-snug">

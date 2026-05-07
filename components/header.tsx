@@ -132,10 +132,11 @@ export function Header() {
                 aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
               >
                 <motion.div
+                  className="relative h-[1.2rem] w-[1.2rem]"
                   animate={noAnimation ? {} : { rotate: theme === 'dark' ? 180 : 0 }}
                   transition={{ duration: 0.5, ease: 'easeInOut' }}
                 >
-                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" aria-hidden="true" />
+                  <Sun className="absolute inset-0 h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" aria-hidden="true" />
                   <Moon className="absolute inset-0 h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" aria-hidden="true" />
                 </motion.div>
               </Button>
