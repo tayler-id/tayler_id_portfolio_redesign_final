@@ -32,13 +32,13 @@ export function Footer() {
             transition={noAnimation ? { duration: 0 } : { duration: 0.6 }}
             className="flex items-center gap-3"
           >
-            <div className="w-10 h-10 rounded-lg bg-card flex items-center justify-center overflow-hidden border border-border/40">
+            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center overflow-hidden">
               <Image
                 src="/assets/images/logo.png"
                 alt="Tayler Ramsay"
                 width={32}
                 height={32}
-                className="w-8 h-8 object-contain"
+                className="w-8 h-8 object-contain mix-blend-multiply"
               />
             </div>
             <span className="font-display font-bold text-xl gradient-text">
