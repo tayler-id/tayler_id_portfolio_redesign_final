@@ -26,7 +26,7 @@ export function OnboardIQCaseStudy({ onBack }: OnboardIQCaseStudyProps) {
     description: 'Enterprise workflow orchestration platform built on Kotlin/Spring Boot with ServiceKit. Enables teams to launch, configure, monitor, and manage live workflow instances with cascading configuration, SLA tracking, and role-based assignments across 5 deployment environments.',
     category: 'Enterprise B2B Platform',
     status: 'live' as const,
-    gradient: 'bg-gradient-to-br from-blue-500 to-purple-600',
+    gradient: 'bg-primary',
     heroIcon: Monitor,
     metrics: [
       { icon: TrendingUp, value: '$2.1M', label: 'Revenue Impact' },

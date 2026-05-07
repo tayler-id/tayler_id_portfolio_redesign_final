@@ -106,7 +106,7 @@ export function AIAssistant() {
       >
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative w-14 h-14 bg-gradient-to-r from-primary to-purple-600 text-white rounded-full shadow-lg flex items-center justify-center"
+          className="relative w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center"
           whileHover={{ scale: 1.1, boxShadow: '0 10px 30px rgba(59, 130, 246, 0.4)' }}
           whileTap={{ scale: 0.95 }}
           animate={{ 
@@ -160,10 +160,10 @@ export function AIAssistant() {
             className="fixed bottom-24 right-6 w-80 h-96 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-2xl z-40 flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="p-4 border-b border-border/50 bg-gradient-to-r from-primary/10 to-purple-600/10">
+            <div className="p-4 border-b border-border/50 bg-gradient-to-r from-primary/10 to-primary/5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center">
+                  <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                     <Bot className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -187,7 +187,7 @@ export function AIAssistant() {
                   >
                     <div className={`flex items-start gap-2 max-w-[85%] ${message.isUser ? 'flex-row-reverse' : ''}`}>
                       {!message.isUser && (
-                        <div className="w-6 h-6 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                           <Bot className="w-3 h-3 text-white" />
                         </div>
                       )}
@@ -212,7 +212,7 @@ export function AIAssistant() {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex items-start gap-2"
                 >
-                  <div className="w-6 h-6 bg-gradient-to-r from-primary to-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                     <Bot className="w-3 h-3 text-white" />
                   </div>
                   <div className="bg-muted p-3 rounded-2xl">

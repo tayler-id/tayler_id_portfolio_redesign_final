@@ -15,7 +15,7 @@ export function HelzbergCaseStudy({ onBack }: HelzbergCaseStudyProps) {
     description: 'In-store kiosk enabling customers to self-serve financing applications. Achieved +28% lease approvals and -57% application time through privacy-focused, luxury-appropriate design.',
     category: 'Retail FinTech / Kiosk',
     status: 'live' as const,
-    gradient: 'bg-gradient-to-br from-purple-500 to-pink-600',
+    gradient: 'bg-gradient-to-br bg-primary',
     heroIcon: Gem,
     metrics: [
       { icon: TrendingUp, value: '+28%', label: 'Lease Approvals' },

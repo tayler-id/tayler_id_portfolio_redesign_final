@@ -16,7 +16,7 @@ interface GradientBlobProps {
 export function GradientBlob({
   className,
   size = 'md',
-  colors = ['from-blue-400', 'via-purple-500', 'to-pink-500'],
+  colors = ['from-primary/10', 'via-primary/5', 'to-transparent'],
   animated = true,
   blur = true,
 }: GradientBlobProps) {

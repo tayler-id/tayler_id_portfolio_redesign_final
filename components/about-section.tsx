@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { User, Briefcase, Code, Play, CheckCircle } from 'lucide-react'
+import { User, Briefcase, Code, CheckCircle } from 'lucide-react'
 import { ScrollReveal } from './animate-ui/scroll-reveal'
 import { FloatingCard } from './animate-ui/floating-card'
 import Image from 'next/image'
@@ -41,28 +41,28 @@ export function AboutSection() {
       role: 'Independent Consultant',
       company: 'Rayni Inc, Blue Moon Senior Counseling - AI platforms & telehealth systems',
       icon: Code,
-      color: 'from-violet-500 to-indigo-600'
+      color: 'bg-primary'
     },
     {
       year: '2019 - Present',
       role: 'Senior UX Engineer (Full-Stack)',
       company: 'Versatile Credit → Synchrony Bank - $16B+ FinTech platform, 120+ API endpoints',
       icon: Briefcase,
-      color: 'from-blue-500 to-purple-600'
+      color: 'bg-primary'
     },
     {
       year: '2017 - 2019',
       role: 'Frontend Developer',
       company: 'Pavone Marketing Group - Interactive web components & CI/CD workflows',
       icon: Code,
-      color: 'from-purple-500 to-pink-600'
+      color: 'bg-primary'
     },
     {
       year: '2010 - 2017',
       role: 'Designer / Developer',
       company: 'Quad Graphics, Menasha, Lebo Skin Care - Print, digital & web systems',
       icon: Briefcase,
-      color: 'from-orange-500 to-red-600'
+      color: 'bg-primary'
     }
   ]
 
@@ -91,8 +91,8 @@ export function AboutSection() {
     <section id="about" className="py-24 bg-muted/30 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-10">
-        <div className={`absolute top-1/4 left-0 w-96 h-96 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-3xl ${!noAnimation ? 'animate-pulse' : ''}`} />
-        <div className={`absolute bottom-1/4 right-0 w-96 h-96 bg-gradient-to-r from-purple-500 to-pink-600 rounded-full blur-3xl ${!noAnimation ? 'animate-pulse' : ''}`} style={!noAnimation ? { animationDelay: '2s' } : {}} />
+        <div className={`absolute top-1/4 left-0 w-96 h-96 bg-primary rounded-full blur-3xl ${!noAnimation ? 'animate-pulse' : ''}`} />
+        <div className={`absolute bottom-1/4 right-0 w-96 h-96 bg-primary rounded-full blur-3xl ${!noAnimation ? 'animate-pulse' : ''}`} style={!noAnimation ? { animationDelay: '2s' } : {}} />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -201,29 +201,14 @@ export function AboutSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={noAnimation ? { duration: 0 } : { duration: 0.6, delay: 0.3 }}
-              className="relative overflow-hidden aspect-[4/5] max-w-md mx-auto rounded-2xl backdrop-blur-md border border-border shadow-xl bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20"
+              className="relative overflow-hidden aspect-[4/5] max-w-md mx-auto rounded-2xl backdrop-blur-md border border-border shadow-xl bg-gradient-to-br from-primary/15 via-primary/10 to-primary/5"
             >
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10" />
               <Image
                 src="/assets/images/headshot.png"
                 alt="Tayler Ramsay - Senior UX Designer"
                 fill
                 className="object-cover object-top"
               />
-
-              {/* Overlay Content */}
-              <div className={`absolute inset-0 z-20 flex items-center justify-center opacity-0 ${!noAnimation ? 'hover:opacity-100 transition-opacity duration-300' : ''}`}>
-                <motion.div
-                  className="text-center text-white"
-                  whileHover={noAnimation ? {} : { scale: 1.1 }}
-                  whileTap={noAnimation ? {} : { scale: 0.95 }}
-                >
-                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
-                    <Play className="w-8 h-8 ml-1" />
-                  </div>
-                  <span className="font-semibold text-lg">Watch My Story</span>
-                </motion.div>
-              </div>
             </motion.div>
 
               {/* Floating Skill Cards */}
@@ -265,7 +250,7 @@ export function AboutSection() {
                   delay={2}
                 >
                   <div className="flex items-center gap-2 text-foreground">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                       <Code className="w-4 h-4" />
                     </div>
                     <span className="text-sm font-medium">Modern Frontend</span>
@@ -296,7 +281,7 @@ export function AboutSection() {
                   </div>
                   <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
                     <motion.div
-                      className="h-full bg-gradient-to-r from-primary to-purple-600 rounded-full"
+                      className="h-full bg-primary rounded-full"
                       initial={noAnimation ? { width: `${skill.level}%` } : { width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       transition={noAnimation ? { duration: 0 } : { delay: index * 0.1 + 0.5, duration: 1, ease: 'easeOut' }}

@@ -456,7 +456,7 @@ export function DesignCaseStudyTemplate(props: DesignCaseStudyProps) {
                     <FloatingCard key={persona.name} className="bg-background/50 backdrop-blur-sm border border-border/50">
                       <div className="p-6">
                         <div className="flex items-start gap-4 mb-6">
-                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-xl font-bold">
+                          <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white text-xl font-bold">
                             {persona.name.charAt(0)}
                           </div>
                           <div>

@@ -12,9 +12,9 @@ export function AnimatedBackground() {
     return (
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/10 to-pink-600/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-cyan-500/8 to-blue-600/8 rounded-full blur-2xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-primary/8 to-primary/4 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-primary/6 to-primary/3 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-primary/5 to-primary/3 rounded-full blur-2xl" />
         <div
           className="absolute inset-0 opacity-5"
           style={{
@@ -35,9 +35,9 @@ export function AnimatedBackground() {
     return (
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/10 to-pink-600/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-cyan-500/8 to-blue-600/8 rounded-full blur-2xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-primary/8 to-primary/4 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-primary/6 to-primary/3 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-primary/5 to-primary/3 rounded-full blur-2xl" />
         <div
           className="absolute inset-0 opacity-5"
           style={{
@@ -61,7 +61,7 @@ export function AnimatedBackground() {
 
       {/* Large Floating Blobs */}
       <motion.div
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl"
+        className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-primary/8 to-primary/4 rounded-full blur-3xl"
         animate={{
           scale: [1, 1.2, 1],
           x: [0, 50, 0],
@@ -76,7 +76,7 @@ export function AnimatedBackground() {
       />
 
       <motion.div
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/10 to-pink-600/10 rounded-full blur-3xl"
+        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-primary/6 to-primary/3 rounded-full blur-3xl"
         animate={{
           scale: [1.2, 1, 1.2],
           x: [0, -40, 0],
@@ -93,7 +93,7 @@ export function AnimatedBackground() {
 
       {/* Medium Blobs */}
       <motion.div
-        className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-cyan-500/8 to-blue-600/8 rounded-full blur-2xl"
+        className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-primary/5 to-primary/3 rounded-full blur-2xl"
         animate={{
           scale: [0.8, 1.3, 0.8],
           x: [-20, 30, -20],
