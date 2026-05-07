@@ -198,14 +198,20 @@ function ProjectEntry({ project, total, noAnimation }: ProjectEntryProps) {
         </div>
 
         {/* Hero stat */}
-        <div className="border-l-2 border-primary pl-6 py-2">
+        <motion.div
+          initial={noAnimation ? { opacity: 1, x: 0 } : { opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={noAnimation ? { duration: 0 } : { duration: 0.7, delay: 0.15, ease: 'easeOut' }}
+          className="border-l-2 border-primary pl-6 py-2"
+        >
           <div className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tight text-primary leading-none">
             {project.heroStat}
           </div>
           <div className="text-sm sm:text-base text-muted-foreground leading-relaxed mt-3 max-w-md">
             {project.heroLabel}
           </div>
-        </div>
+        </motion.div>
 
         {/* Body */}
         <p className="text-base sm:text-lg leading-relaxed text-foreground/90">

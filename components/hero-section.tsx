@@ -73,12 +73,12 @@ export function HeroSection() {
         <GradientBlob
           className="top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2"
           size="xl"
-          colors={['from-blue-400/20', 'via-purple-500/20', 'to-cyan-400/20']}
+          colors={['from-primary/8', 'via-primary/4', 'to-transparent']}
         />
         <GradientBlob
           className="bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2"
           size="lg"
-          colors={['from-purple-400/20', 'via-pink-500/20', 'to-orange-400/20']}
+          colors={['from-primary/5', 'via-primary/3', 'to-transparent']}
         />
       </div>
 
@@ -102,7 +102,7 @@ export function HeroSection() {
                   speed={80}
                   delay={500}
                 />
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight overflow-hidden">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.15] tracking-tight pb-2">
                   <motion.span
                     className="block text-foreground"
                     initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: '100%' }}
@@ -166,7 +166,7 @@ export function HeroSection() {
                   variants={statVariants}
                   className="flex items-center gap-3 p-4 rounded-2xl bg-card/80 backdrop-blur-sm border border-border"
                 >
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-primary to-purple-600 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
                     <stat.icon className="w-5 h-5 text-white" />
                   </div>
                   <div>

@@ -30,7 +30,7 @@ export function MagneticButton({
 
   const baseClassName = cn(
     "relative inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-medium",
-    "bg-gradient-to-r from-blue-500 to-purple-600 text-white",
+    "bg-primary text-white",
     disabled && "opacity-50 cursor-not-allowed",
     className
   )
@@ -91,7 +91,7 @@ export function MagneticButton({
       disabled={disabled}
       onClick={onClick}
       aria-label={ariaLabel}
-      className={cn(baseClassName, "hover:shadow-lg hover:shadow-blue-500/25")}
+      className={cn(baseClassName, "hover:shadow-lg hover:shadow-primary/25")}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
       animate={{

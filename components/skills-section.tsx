@@ -30,7 +30,7 @@ export function SkillsSection() {
     {
       title: 'UX Design',
       icon: Palette,
-      color: 'from-pink-500 to-rose-600',
+      color: 'bg-primary',
       skills: [
         { name: 'User Research & Testing', level: 95, icon: Search },
         { name: 'Information Architecture', level: 90, icon: Layers },
@@ -43,7 +43,7 @@ export function SkillsSection() {
     {
       title: 'Frontend Development',
       icon: Monitor,
-      color: 'from-blue-500 to-cyan-600',
+      color: 'bg-primary',
       skills: [
         { name: 'React/Next.js', level: 92, icon: Code },
         { name: 'TypeScript', level: 88, icon: Code },
@@ -56,7 +56,7 @@ export function SkillsSection() {
     {
       title: 'AI Integration',
       icon: Zap,
-      color: 'from-purple-500 to-indigo-600',
+      color: 'bg-primary',
       skills: [
         { name: 'AI-Driven UI/UX', level: 87, icon: Brain },
         { name: 'Conversational Interfaces', level: 82, icon: Users },
@@ -100,7 +100,7 @@ export function SkillsSection() {
     <section id="skills" className="py-24 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-primary/5" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-blue-500/10 to-purple-600/10 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-primary/8 to-primary/4 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}

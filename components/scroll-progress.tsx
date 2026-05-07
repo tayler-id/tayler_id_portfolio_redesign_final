@@ -25,7 +25,7 @@ export function ScrollProgress() {
     <>
       {/* Top Progress Bar - below header (z-40) */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-600 to-primary z-40 origin-left"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r bg-primary z-40 origin-left"
         style={{ scaleX }}
         role="progressbar"
         aria-valuenow={progress}
