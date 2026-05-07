@@ -38,62 +38,58 @@ export function AboutSection() {
   const timelineItems = [
     {
       year: '2024 - Present',
-      role: 'Independent Consultant',
-      company: 'Rayni Inc, Blue Moon Senior Counseling - AI platforms & telehealth systems',
+      role: 'Consulting Senior Product Designer · Rayni',
+      company: 'Three 0-to-1 products: Rayni (scientific lab RAG), Document Domain Agents framework, Qualified financing sidecar',
       icon: Code,
       color: 'bg-primary'
     },
     {
       year: '2019 - Present',
-      role: 'Senior UX Engineer (Full-Stack)',
-      company: 'Versatile Credit → Synchrony Bank - $16B+ FinTech platform, 120+ API endpoints',
+      role: 'Senior UX Engineer · Versatile Credit → Synchrony Bank',
+      company: '$16B+ fintech platform. 12% conversion lift on 6M annual applications. OnboardIQ: 30,000+ merchants across 3 verticals.',
       icon: Briefcase,
       color: 'bg-primary'
     },
     {
       year: '2017 - 2019',
-      role: 'Frontend Developer',
-      company: 'Pavone Marketing Group - Interactive web components & CI/CD workflows',
+      role: 'Frontend Developer · Pavone Marketing Group',
+      company: 'Interactive web components and CI/CD workflows for regulated industries',
       icon: Code,
       color: 'bg-primary'
     },
     {
       year: '2010 - 2017',
-      role: 'Designer / Developer',
-      company: 'Quad Graphics, Menasha, Lebo Skin Care - Print, digital & web systems',
+      role: 'Designer / Developer · Agency + Brand work',
+      company: 'Quad Graphics, Menasha, Lebo Skin Care — print, digital, and web systems',
       icon: Briefcase,
       color: 'bg-primary'
     }
   ]
 
   const skills = [
-    { name: 'React/Next.js', level: 95 },
-    { name: 'Vue.js', level: 95 },
-    { name: 'TypeScript', level: 92 },
-    { name: 'Kotlin/Spring Boot', level: 88 },
-    { name: 'Python/Django', level: 85 },
-    { name: 'LangGraph/RAG', level: 90 },
-    { name: 'PostgreSQL/pgvector', level: 88 },
-    { name: 'Figma', level: 98 },
+    { name: 'Product Design (0-to-1)', level: 95 },
     { name: 'Design Systems', level: 95 },
-    { name: 'WCAG Accessibility', level: 92 }
+    { name: 'Agent-Orchestrated Engineering', level: 92 },
+    { name: 'React / Next.js', level: 92 },
+    { name: 'Vue.js', level: 92 },
+    { name: 'TypeScript', level: 90 },
+    { name: 'Kotlin / Spring Boot', level: 85 },
+    { name: 'Python (RAG, LangGraph, MCP)', level: 85 },
+    { name: 'PostgreSQL / pgvector / Neo4j', level: 85 },
+    { name: 'Figma', level: 98 },
+    { name: 'Accessibility (WCAG)', level: 92 }
   ]
 
   const achievements = [
-    '$16B+ Annual Financing Platform (Synchrony Bank)',
-    '6M+ Applications Processed Annually',
-    '13,000+ Retail Locations Served',
-    'Design + Engineering: End-to-End Ownership',
-    'AI-Native: LangGraph, RAG, Vector Databases'
+    '$16B+ annual financing platform (Synchrony Bank)',
+    '12% conversion lift on 6M annual applications',
+    '30,000+ merchants onboarded across 3 verticals',
+    'Three 0-to-1 products shipped in the past 24 months',
+    'Two RAG architectures in production (pgvector + Neo4j GraphRAG)'
   ]
 
   return (
     <section id="about" className="py-24 bg-muted/30 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className={`absolute top-1/4 left-0 w-96 h-96 bg-primary rounded-full blur-3xl ${!noAnimation ? 'animate-pulse' : ''}`} />
-        <div className={`absolute bottom-1/4 right-0 w-96 h-96 bg-primary rounded-full blur-3xl ${!noAnimation ? 'animate-pulse' : ''}`} style={!noAnimation ? { animationDelay: '2s' } : {}} />
-      </div>
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -123,18 +119,22 @@ export function AboutSection() {
                 <h3 className="text-3xl font-bold font-display">Hi, I'm Tayler</h3>
                 <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                   <p>
-                    I'm a rare combination—a trained designer who can also architect enterprise
-                    systems. I don't hand off designs to engineers; I build them myself, from stakeholder
+                    I'm a Senior Product Designer who codes at production scale. I don't hand off
+                    designs to engineers; I orchestrate coding agents to ship them, from stakeholder
                     research through production deployment.
                   </p>
                   <p>
-                    Currently at Synchrony Bank (acquired Versatile Credit 2025), I own the UX and
-                    full-stack engineering for a $16B+ FinTech platform processing 6M applications
-                    annually across 13,000+ retail locations. I work with 35 lending partners including
-                    Wells Fargo, GreenSky, and Snap Finance.
+                    Currently at Synchrony Bank (acquired Versatile Credit in 2025), I lead UX and
+                    engineering for a $16B+ fintech platform serving 30,000+ merchants across retail,
+                    elective medical, and home improvement. I shipped a 12% conversion lift on
+                    6M annual applications and built OnboardIQ, the workflow product that reduced
+                    merchant onboarding from 5 days of cross-team meetings to 2 hours.
                   </p>
                   <p>
-                    I'm an AI-native developer—not just using AI tools, but building production AI systems.
+                    I run an agent-orchestrated, spec-driven, TDD-first practice. In the past 24 months
+                    I shipped three 0-to-1 products: Rayni (a RAG platform in daily use at scientific
+                    labs), Document Domain Agents (a domain-agnostic RAG framework), and Qualified
+                    (a financing sidecar built on MCP generative UI).
                     LangGraph agents, RAG pipelines with pgvector, and intelligent document processing.
                     I leverage Claude Code and systematic AI workflows to ship enterprise-scale projects
                     that would otherwise require full teams.
@@ -177,7 +177,7 @@ export function AboutSection() {
                       transition={noAnimation ? { duration: 0 } : { delay: index * 0.2, duration: 0.6 }}
                       className="flex gap-4 p-4 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-colors"
                     >
-                      <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${item.color} flex items-center justify-center flex-shrink-0`}>
+                      <div className={`w-12 h-12 rounded-lg ${item.color} flex items-center justify-center flex-shrink-0`}>
                         <item.icon className="w-6 h-6 text-white" />
                       </div>
                       <div>
@@ -201,7 +201,7 @@ export function AboutSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={noAnimation ? { duration: 0 } : { duration: 0.6, delay: 0.3 }}
-              className="relative overflow-hidden aspect-[4/5] max-w-md mx-auto rounded-2xl backdrop-blur-md border border-border shadow-xl bg-gradient-to-br from-primary/15 via-primary/10 to-primary/5"
+              className="relative overflow-hidden aspect-[4/5] max-w-md mx-auto rounded-2xl border border-border shadow-xl bg-muted"
             >
               <Image
                 src="/assets/images/headshot.png"
@@ -260,34 +260,20 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* Skills Grid */}
+        {/* Skills */}
         <ScrollReveal delay={0.6}>
           <div ref={skillsRef} className="mt-20">
-            <h4 className="text-2xl font-bold font-display text-center mb-12">
-              Core Skills & Expertise
+            <h4 className="text-2xl font-bold font-display text-center mb-10">
+              Core Skills
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {skills.map((skill, index) => (
-                <motion.div
+            <div className="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+              {skills.map((skill) => (
+                <span
                   key={skill.name}
-                  initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={noAnimation ? { duration: 0 } : { delay: index * 0.1, duration: 0.6 }}
-                  className="p-6 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300 group"
+                  className="px-4 py-2 rounded-full bg-background/60 backdrop-blur-sm border border-border/60 text-sm font-medium text-foreground/90"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <h5 className="font-semibold text-lg">{skill.name}</h5>
-                    <span className="text-sm text-muted-foreground">{skill.level}%</span>
-                  </div>
-                  <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-                    <motion.div
-                      className="h-full bg-primary rounded-full"
-                      initial={noAnimation ? { width: `${skill.level}%` } : { width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      transition={noAnimation ? { duration: 0 } : { delay: index * 0.1 + 0.5, duration: 1, ease: 'easeOut' }}
-                    />
-                  </div>
-                </motion.div>
+                  {skill.name}
+                </span>
               ))}
             </div>
           </div>
