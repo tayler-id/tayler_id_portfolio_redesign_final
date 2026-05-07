@@ -156,7 +156,7 @@ export function AboutSection() {
                       transition={noAnimation ? { duration: 0 } : { delay: index * 0.1, duration: 0.5 }}
                       className="flex items-center gap-3 p-3 rounded-lg bg-background/50 backdrop-blur-sm border border-border/50"
                     >
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                      <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
                       <span className="font-medium">{achievement}</span>
                     </motion.div>
                   ))}
@@ -222,7 +222,7 @@ export function AboutSection() {
                   delay={1}
                 >
                   <div className="text-center text-foreground">
-                    <div className={`w-2 h-2 bg-green-500 rounded-full mx-auto mb-2 ${!noAnimation ? 'animate-pulse' : ''}`} />
+                    <div className={`w-2 h-2 bg-primary rounded-full mx-auto mb-2 ${!noAnimation ? 'animate-pulse' : ''}`} />
                     <div className="text-xs font-semibold">Available</div>
                   </div>
                 </FloatingCard>

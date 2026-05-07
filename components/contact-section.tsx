@@ -155,11 +155,11 @@ export function ContactSection() {
                 initial={noAnimation ? {} : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={noAnimation ? {} : { delay: 0.4, duration: 0.6 }}
-                className="p-4 rounded-xl bg-green-500/10 border border-green-500/20"
+                className="p-4 rounded-xl bg-primary/10 border border-primary/20"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" aria-hidden="true" />
-                  <span className="font-medium text-green-700 dark:text-green-400">
+                  <div className="w-3 h-3 bg-primary rounded-full animate-pulse" aria-hidden="true" />
+                  <span className="font-medium text-primary">
                     Available for new projects
                   </span>
                 </div>
@@ -291,7 +291,7 @@ export function ContactSection() {
                     <motion.div
                       initial={noAnimation ? {} : { opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      className="flex items-center gap-3 p-4 bg-green-500/10 border border-green-500/20 rounded-lg text-green-700 dark:text-green-400"
+                      className="flex items-center gap-3 p-4 bg-primary/10 border border-primary/20 rounded-lg text-primary"
                       role="status"
                     >
                       <CheckCircle className="w-5 h-5" aria-hidden="true" />

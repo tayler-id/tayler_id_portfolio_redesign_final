@@ -205,7 +205,7 @@ export function HeroSection() {
 
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className={`w-2 h-2 rounded-full bg-green-500 ${!noAnimation ? 'animate-pulse' : ''}`}></div>
+                      <div className={`w-2 h-2 rounded-full bg-primary ${!noAnimation ? 'animate-pulse' : ''}`}></div>
                       <span className="text-foreground/90 text-sm">Available for projects</span>
                     </div>
 
@@ -236,7 +236,7 @@ export function HeroSection() {
                 duration={4}
               >
                 <div className="flex items-center gap-2 text-foreground">
-                  <div className={`w-2 h-2 rounded-full bg-green-500 ${!noAnimation ? 'animate-pulse' : ''}`}></div>
+                  <div className={`w-2 h-2 rounded-full bg-primary ${!noAnimation ? 'animate-pulse' : ''}`}></div>
                   <span className="text-xs font-medium">Online</span>
                 </div>
               </FloatingCard>

@@ -142,7 +142,7 @@ export function AIAssistant() {
 
           {/* Online Indicator */}
           <motion.div
-            className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"
+            className="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full border-2 border-white"
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           />
@@ -168,7 +168,7 @@ export function AIAssistant() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-sm">AI Assistant</h3>
-                    <p className="text-xs text-green-600 dark:text-green-400">Online</p>
+                    <p className="text-xs text-primary">Online</p>
                   </div>
                 </div>
               </div>
