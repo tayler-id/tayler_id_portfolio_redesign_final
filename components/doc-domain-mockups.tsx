@@ -4,6 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useMotionPreference } from '@/hooks/use-reduced-motion'
+import { ImageLightbox, type LightboxItem } from './image-lightbox'
 
 interface Mockup {
   id: string
@@ -75,7 +76,15 @@ export function DocDomainMockups() {
   const motionPref = useMotionPreference()
   const noAnimation = motionPref !== 'regular'
   const [activeId, setActiveId] = React.useState(mockups[0].id)
+  const [lightboxOpen, setLightboxOpen] = React.useState(false)
   const active = mockups.find((m) => m.id === activeId) ?? mockups[0]
+  const activeIndex = mockups.findIndex((m) => m.id === active.id)
+
+  const lightboxItems: LightboxItem[] = mockups.map((m) => ({
+    src: m.src,
+    label: m.label,
+    caption: m.caption,
+  }))
 
   return (
     <figure
@@ -115,11 +124,14 @@ export function DocDomainMockups() {
         </span>
       </div>
 
-      <div
+      <button
+        type="button"
         id={`doc-domain-mockup-panel-${active.id}`}
         role="tabpanel"
         aria-labelledby={`doc-domain-mockup-tab-${active.id}`}
-        className="relative rounded-lg overflow-hidden border border-border/60 shadow-sm"
+        aria-label={`Open enlarged view of ${active.label}`}
+        onClick={() => setLightboxOpen(true)}
+        className="relative block w-full text-left rounded-lg overflow-hidden border border-border/60 shadow-sm cursor-zoom-in transition-transform hover:scale-[1.005]"
         style={{ backgroundColor: '#f6f8f7' }}
       >
         <div className="relative aspect-[917/512]">
@@ -142,7 +154,7 @@ export function DocDomainMockups() {
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
+      </button>
 
       <figcaption
         id="doc-domain-mockups-caption"
@@ -153,6 +165,14 @@ export function DocDomainMockups() {
         </span>
         {active.caption}
       </figcaption>
+
+      <ImageLightbox
+        items={lightboxItems}
+        index={activeIndex}
+        open={lightboxOpen}
+        onIndexChange={(i) => setActiveId(mockups[i].id)}
+        onOpenChange={setLightboxOpen}
+      />
     </figure>
   )
 }

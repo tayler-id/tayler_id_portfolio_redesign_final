@@ -9,6 +9,7 @@ import { RayniMockups } from './rayni-mockups'
 import { QualifiedEvidence } from './qualified-evidence'
 import { DocDomainEvidence } from './doc-domain-evidence'
 import { DocDomainMockups } from './doc-domain-mockups'
+import { OnboardIqEvidence } from './onboard-iq-evidence'
 
 interface SupportingMetric {
   value: string
@@ -237,6 +238,7 @@ function ProjectEntry({ project, total, noAnimation }: ProjectEntryProps) {
           </>
         )}
         {project.id === 'qualified' && <QualifiedEvidence />}
+        {project.id === 'onboard-iq' && <OnboardIqEvidence />}
 
         {/* Supporting metrics */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 py-6 border-y border-border/50">

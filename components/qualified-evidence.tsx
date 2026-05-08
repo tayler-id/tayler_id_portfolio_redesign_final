@@ -4,6 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useMotionPreference } from '@/hooks/use-reduced-motion'
+import { ImageLightbox, type LightboxItem } from './image-lightbox'
 
 interface ModeShot {
   id: string
@@ -61,7 +62,15 @@ export function QualifiedEvidence() {
   const motionPref = useMotionPreference()
   const noAnimation = motionPref !== 'regular'
   const [activeId, setActiveId] = React.useState(shots[0].id)
+  const [lightboxOpen, setLightboxOpen] = React.useState(false)
   const active = shots.find((s) => s.id === activeId) ?? shots[0]
+  const activeIndex = shots.findIndex((s) => s.id === active.id)
+
+  const lightboxItems: LightboxItem[] = shots.map((s) => ({
+    src: s.src,
+    label: s.label,
+    caption: s.caption,
+  }))
 
   return (
     <figure
@@ -96,11 +105,14 @@ export function QualifiedEvidence() {
         })}
       </div>
 
-      <div
+      <button
+        type="button"
         id={`qualified-mode-panel-${active.id}`}
         role="tabpanel"
         aria-labelledby={`qualified-mode-tab-${active.id}`}
-        className="relative rounded-lg overflow-hidden border border-border/60 bg-card/40 shadow-sm"
+        aria-label={`Open enlarged view of ${active.label}`}
+        onClick={() => setLightboxOpen(true)}
+        className="relative block w-full text-left rounded-lg overflow-hidden border border-border/60 bg-card/40 shadow-sm cursor-zoom-in transition-transform hover:scale-[1.005]"
       >
         <div className="relative aspect-[3456/2234]">
           <AnimatePresence mode="wait">
@@ -123,7 +135,7 @@ export function QualifiedEvidence() {
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
+      </button>
 
       <figcaption
         id="qualified-tabs-caption"
@@ -134,6 +146,14 @@ export function QualifiedEvidence() {
         </span>
         {active.caption}
       </figcaption>
+
+      <ImageLightbox
+        items={lightboxItems}
+        index={activeIndex}
+        open={lightboxOpen}
+        onIndexChange={(i) => setActiveId(shots[i].id)}
+        onOpenChange={setLightboxOpen}
+      />
     </figure>
   )
 }

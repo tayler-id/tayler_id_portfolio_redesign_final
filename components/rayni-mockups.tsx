@@ -4,6 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useMotionPreference } from '@/hooks/use-reduced-motion'
+import { ImageLightbox, type LightboxItem } from './image-lightbox'
 
 interface Mockup {
   id: string
@@ -61,7 +62,15 @@ export function RayniMockups() {
   const motionPref = useMotionPreference()
   const noAnimation = motionPref !== 'regular'
   const [activeId, setActiveId] = React.useState(mockups[0].id)
+  const [lightboxOpen, setLightboxOpen] = React.useState(false)
   const active = mockups.find((m) => m.id === activeId) ?? mockups[0]
+  const activeIndex = mockups.findIndex((m) => m.id === active.id)
+
+  const lightboxItems: LightboxItem[] = mockups.map((m) => ({
+    src: m.src,
+    label: m.label,
+    caption: m.caption,
+  }))
 
   return (
     <figure
@@ -101,11 +110,14 @@ export function RayniMockups() {
         </span>
       </div>
 
-      <div
+      <button
+        type="button"
         id={`rayni-mockup-panel-${active.id}`}
         role="tabpanel"
         aria-labelledby={`rayni-mockup-tab-${active.id}`}
-        className="relative rounded-lg overflow-hidden border border-border/60 shadow-sm"
+        aria-label={`Open enlarged view of ${active.label}`}
+        onClick={() => setLightboxOpen(true)}
+        className="relative block w-full text-left rounded-lg overflow-hidden border border-border/60 shadow-sm cursor-zoom-in transition-transform hover:scale-[1.005]"
         style={{ backgroundColor: '#dddee2' }}
       >
         <div className="relative aspect-[16/10]">
@@ -128,7 +140,7 @@ export function RayniMockups() {
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
+      </button>
 
       <figcaption
         id="rayni-mockups-caption"
@@ -139,6 +151,14 @@ export function RayniMockups() {
         </span>
         {active.caption}
       </figcaption>
+
+      <ImageLightbox
+        items={lightboxItems}
+        index={activeIndex}
+        open={lightboxOpen}
+        onIndexChange={(i) => setActiveId(mockups[i].id)}
+        onOpenChange={setLightboxOpen}
+      />
     </figure>
   )
 }
