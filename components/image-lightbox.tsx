@@ -71,18 +71,6 @@ export function ImageLightbox({
           className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-sm"
           onClick={close}
         >
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation()
-              close()
-            }}
-            aria-label="Close"
-            className="absolute top-4 right-4 z-10 rounded-full p-2 text-foreground/80 hover:text-foreground hover:bg-foreground/10 transition-colors"
-          >
-            <X className="size-5" />
-          </button>
-
           {total > 1 && (
             <>
               <button
@@ -128,6 +116,17 @@ export function ImageLightbox({
                 className="object-contain"
                 priority
               />
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  close()
+                }}
+                aria-label="Close"
+                className="absolute top-2 right-2 z-10 rounded-full p-2 bg-background/80 backdrop-blur-sm text-foreground hover:bg-foreground/10 border border-border/60 shadow-md transition-colors"
+              >
+                <X className="size-5" />
+              </button>
             </motion.div>
             <div
               className="max-w-3xl text-center space-y-1"
