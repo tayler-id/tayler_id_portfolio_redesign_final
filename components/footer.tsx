@@ -11,7 +11,7 @@ export function Footer() {
 
   const socialLinks = [
     { icon: Linkedin, href: 'https://www.linkedin.com/in/tayler-ramsay/', label: 'LinkedIn', color: 'hover:text-primary' },
-    { icon: Github, href: 'https://github.com/tayler-id?tab=repositories', label: 'GitHub', color: 'hover:text-gray-400' },
+    { icon: Github, href: 'https://github.com/tayler-id?tab=repositories', label: 'GitHub', color: 'hover:text-primary' },
     { icon: Twitter, href: 'https://x.com/tayler_ramsay', label: 'Twitter', color: 'hover:text-primary' },
     { icon: Mail, href: 'mailto:ramsay.tayler@gmail.com', label: 'Email', color: 'hover:text-primary' }
   ]

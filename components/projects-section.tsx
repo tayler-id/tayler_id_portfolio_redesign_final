@@ -4,6 +4,11 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useMotionPreference } from '@/hooks/use-reduced-motion'
+import { RayniWorkspaceEvidence } from './rayni-workspace-evidence'
+import { RayniMockups } from './rayni-mockups'
+import { QualifiedEvidence } from './qualified-evidence'
+import { DocDomainEvidence } from './doc-domain-evidence'
+import { DocDomainMockups } from './doc-domain-mockups'
 
 interface SupportingMetric {
   value: string
@@ -77,13 +82,13 @@ const projects: Project[] = [
     number: '04',
     title: 'Qualified',
     subtitle: 'AI-powered financing sidecar. A Chrome side-panel extension that surfaces multi-lender financing while you shop, with rich interactive UI rendered inline in chat.',
-    heroStat: '3-lender waterfall · in chat',
-    heroLabel: 'Synchrony (prime), Fortiva (near-prime), Acima (lease-to-own). Every customer qualifies for something.',
+    heroStat: '5-lender waterfall · in chat',
+    heroLabel: 'Synchrony (prime), Fortiva (near-prime), Acima (lease-to-own), Affirm and Klarna BNPL. Every customer qualifies for something.',
     body:
-      'Qualified is a Chrome extension that lives in the browser side panel while you shop. Tell it what you want — "a laptop under $1,000" — and it searches products, compares them side-by-side, and surfaces real financing options from three lenders the moment intent shows, not at checkout. Architecture: React side panel → Express server on Fly.io → Claude (sonnet-4-6) with eight tool definitions → tool execution → streamed back. The wedge is MCP Apps: an extension of Anthropic\'s Model Context Protocol where tools return interactive HTML UIs, not just text. Sandboxed iframes hydrate via postMessage to render comparison tables, payment calculators, product grids, and pre-filled application forms directly inside the conversation. Same multi-lender waterfall pattern as Versatile / Synchrony — reimagined as an agentic sidecar with generative UI.',
+      'Qualified is a Chrome extension that lives in the browser side panel while you shop. Tell it what you want — "a laptop under $1,000" — and it searches products, compares them side-by-side, and surfaces real financing options from five lenders the moment intent shows, not at checkout. Architecture: React side panel → Express server on Fly.io → Claude (sonnet-4-6) with eight tool definitions → tool execution → streamed back. The wedge is MCP Apps: an extension of Anthropic\'s Model Context Protocol where tools return interactive HTML UIs, not just text. Sandboxed iframes hydrate via postMessage to render comparison tables, payment calculators, product grids, and pre-filled application forms directly inside the conversation. Same multi-lender waterfall pattern as Versatile / Synchrony — reimagined as an agentic sidecar with generative UI.',
     metrics: [
       { value: '8 tools', label: 'Agent decides the flow, 7 return interactive MCP UI' },
-      { value: '3 lenders', label: 'Synchrony, Fortiva, Acima — prime to lease-to-own' },
+      { value: '5 lenders', label: 'Synchrony, Fortiva, Acima, Affirm, Klarna — prime to BNPL' },
       { value: 'Sidecar', label: 'Sits next to any retail site, no checkout integration required' },
     ],
     tags: ['Chrome Extension', 'AI Sidecar', 'MCP Apps', 'Embedded Fintech'],
@@ -217,6 +222,21 @@ function ProjectEntry({ project, total, noAnimation }: ProjectEntryProps) {
         <p className="text-base sm:text-lg leading-relaxed text-foreground/90">
           {project.body}
         </p>
+
+        {/* Inline evidence */}
+        {project.id === 'rayni' && (
+          <>
+            <RayniWorkspaceEvidence />
+            <RayniMockups />
+          </>
+        )}
+        {project.id === 'doc-domain-agent' && (
+          <>
+            <DocDomainEvidence />
+            <DocDomainMockups />
+          </>
+        )}
+        {project.id === 'qualified' && <QualifiedEvidence />}
 
         {/* Supporting metrics */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 py-6 border-y border-border/50">
