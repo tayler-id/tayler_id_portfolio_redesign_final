@@ -12,7 +12,7 @@ export type LenderKey =
   | 'td-bank'
   | 'acima'
   | 'snap'
-  | 'genesis'
+  | 'concora'
 
 export type LenderState = 'pending' | 'approved' | 'declined' | 'skipped'
 
@@ -53,7 +53,7 @@ export const LENDERS: Lender[] = [
     name: 'TD Bank',
     shortName: 'TD Bank',
     brandColor: '#2A8138',
-    logo: null,
+    logo: { src: '/assets/versatile/apply/lender-logos/td-bank.png', width: 173, height: 77 },
     declineCopy:
       'TD Bank, N.A. was unable to approve your application at this time.',
     positionLabel: 'Tertiary',
@@ -63,7 +63,7 @@ export const LENDERS: Lender[] = [
     name: 'Acima Leasing',
     shortName: 'Acima',
     brandColor: '#0066CC',
-    logo: null,
+    logo: { src: '/assets/versatile/apply/lender-logos/acima.png', width: 194, height: 80 },
     declineCopy:
       'Acima was unable to approve your lease-purchase application at this time.',
     positionLabel: 'Tertiary',
@@ -73,19 +73,19 @@ export const LENDERS: Lender[] = [
     name: 'Snap Finance',
     shortName: 'Snap',
     brandColor: '#7C3AED',
-    logo: null,
+    logo: { src: '/assets/versatile/apply/lender-logos/snap.png', width: 171, height: 77 },
     declineCopy:
       'Snap Finance was unable to approve your application at this time.',
     positionLabel: 'Tertiary',
   },
   {
-    key: 'genesis',
-    name: 'Genesis Credit',
-    shortName: 'Genesis',
+    key: 'concora',
+    name: 'Concora Credit',
+    shortName: 'Concora',
     brandColor: '#1E3A8A',
-    logo: null,
+    logo: { src: '/assets/versatile/apply/lender-logos/concora.png', width: 300, height: 107 },
     declineCopy:
-      'Genesis Credit was unable to approve your application at this time.',
+      'Concora Credit was unable to approve your application at this time.',
     positionLabel: 'Tertiary',
   },
 ]

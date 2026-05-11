@@ -36,7 +36,7 @@ const lenderTiles = [
   { file: 'retail-desktop/lender-acima.png', label: 'Acima' },
   { file: 'retail-desktop/lender-progressive.png', label: 'Progressive' },
   { file: 'retail-desktop/lender-snap.png', label: 'Snap Finance' },
-  { file: 'retail-desktop/lender-genesis.png', label: 'Genesis' },
+  { file: 'retail-desktop/lender-concora.png', label: 'Concora' },
   { file: 'retail-desktop/lender-gaf.png', label: 'Great American Finance' },
 ]
 
