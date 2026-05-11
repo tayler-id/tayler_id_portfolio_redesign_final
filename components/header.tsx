@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTheme } from 'next-themes'
-import { Sun, Moon, Menu, X, User, Code, Briefcase, Mail, FileText } from 'lucide-react'
+import { Sun, Moon, Menu, X, User, Code, Briefcase, Mail } from 'lucide-react'
 import { Button } from './ui/button'
 import { cn } from '@/lib/utils'
 import { useMotionPreference } from '@/hooks/use-reduced-motion'
@@ -121,25 +121,6 @@ export function Header() {
                   />
                 </motion.a>
               ))}
-              <motion.a
-                href="/resume.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors relative group"
-                initial={noAnimation ? {} : { opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={noAnimation ? {} : { delay: navItems.length * 0.1 }}
-                whileHover={noAnimation ? {} : { y: -2 }}
-              >
-                <FileText className="w-4 h-4" aria-hidden="true" />
-                <span className="font-medium">Resume</span>
-                <motion.div
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
-                  initial={{ scaleX: 0 }}
-                  whileHover={noAnimation ? {} : { scaleX: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.a>
             </nav>
 
             {/* Header Actions */}
@@ -225,20 +206,6 @@ export function Header() {
                   <span className="font-medium text-lg">{item.label}</span>
                 </motion.a>
               ))}
-              <motion.a
-                href="/resume.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors p-3 rounded-lg hover:bg-accent/50"
-                initial={noAnimation ? {} : { opacity: 0, x: -20 }}
-                animate={{ opacity: isMenuOpen ? 1 : 0, x: isMenuOpen ? 0 : -20 }}
-                transition={noAnimation ? { duration: 0 } : { delay: navItems.length * 0.1, duration: 0.3 }}
-                whileTap={noAnimation ? {} : { scale: 0.95 }}
-              >
-                <FileText className="w-5 h-5" aria-hidden="true" />
-                <span className="font-medium text-lg">Resume</span>
-              </motion.a>
             </nav>
           </div>
         </div>
