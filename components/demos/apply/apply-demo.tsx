@@ -267,13 +267,13 @@ export function ApplyDemo({
                   {active && (
                     <motion.span
                       layoutId="apply-viewport-pill"
-                      className="absolute inset-0 -z-10 rounded-full"
+                      className="absolute inset-0 rounded-full"
                       style={{ background: 'var(--cta)' }}
                       transition={{ type: 'spring', stiffness: 360, damping: 30 }}
                     />
                   )}
-                  <Icon className="h-3.5 w-3.5" strokeWidth={2} />
-                  {label}
+                  <Icon className="relative h-3.5 w-3.5" strokeWidth={2} />
+                  <span className="relative">{label}</span>
                 </button>
               )
             })}
