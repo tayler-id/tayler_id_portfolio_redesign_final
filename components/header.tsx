@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useTheme } from 'next-themes'
 import { Sun, Moon, Menu, X, User, Code, Briefcase, Mail, FileText } from 'lucide-react'
@@ -15,6 +16,8 @@ export function Header() {
   const { scrollY } = useScroll()
   const motionPref = useMotionPreference()
   const noAnimation = motionPref !== 'regular'
+  const pathname = usePathname()
+  const router = useRouter()
 
   const headerOpacity = useTransform(scrollY, [0, 100], [0.8, 0.95])
   const headerBlur = useTransform(scrollY, [0, 100], [10, 20])
@@ -37,6 +40,12 @@ export function Header() {
 
   const handleNavClick = (href: string) => {
     setIsMenuOpen(false)
+    // Off the home page (case-study routes etc.) — navigate back to home with hash
+    // so the browser scrolls to the section after the page loads.
+    if (pathname !== '/') {
+      router.push(`/${href}`)
+      return
+    }
     const element = document.querySelector(href)
     element?.scrollIntoView({ behavior: noAnimation ? 'auto' : 'smooth' })
   }

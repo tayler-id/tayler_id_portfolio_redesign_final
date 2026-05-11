@@ -28,7 +28,7 @@ export function PillGroup({
   return (
     <div
       className={cn(
-        'flex flex-wrap items-center gap-1.5 rounded-[var(--radius-full)] border border-[var(--border)] bg-[var(--card-bg)]/60 p-1.5 backdrop-blur-sm',
+        'flex flex-wrap items-center gap-1.5 rounded-full border border-border bg-background/60 p-1.5 backdrop-blur-sm',
         className,
       )}
     >
@@ -40,15 +40,15 @@ export function PillGroup({
             type="button"
             onClick={() => onChange(item.key)}
             className={cn(
-              'relative rounded-[var(--radius-full)] px-4 py-1.5 text-[13px] font-medium tracking-tight transition-colors',
-              isActive ? 'text-[var(--text-inverse)]' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]',
+              'relative rounded-full px-4 py-1.5 text-[13px] font-medium tracking-tight transition-colors',
+              isActive ? 'text-background' : 'text-muted-foreground hover:text-foreground',
             )}
             aria-pressed={isActive}
           >
             {isActive && (
               <motion.span
                 layoutId={layoutGroupId}
-                className="absolute inset-0 rounded-[var(--radius-full)] bg-[var(--text-primary)]"
+                className="absolute inset-0 rounded-full bg-foreground"
                 transition={{ type: 'spring', stiffness: 380, damping: 30 }}
               />
             )}

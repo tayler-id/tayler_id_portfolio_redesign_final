@@ -220,12 +220,12 @@ export function ApplyDemo({
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex flex-col gap-1">
             <span
-              className="text-[11px] uppercase tracking-[0.18em] text-[var(--text-tertiary)]"
+              className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
               style={{ fontFamily: 'var(--font-mono)' }}
             >
               Interactive · {viewport === 'tablet' ? 'iPad' : 'Mobile'} · {currentStep.title}
             </span>
-            <h3 className="text-xl font-semibold text-[var(--text-primary)] tracking-tight">
+            <h3 className="text-xl font-semibold text-foreground tracking-tight">
               {verticalTagline[vertical]}
             </h3>
           </div>
@@ -242,12 +242,12 @@ export function ApplyDemo({
       {!hideViewportSwitcher && (
         <div className="flex items-center gap-2">
           <span
-            className="text-[11px] uppercase tracking-[0.18em] text-[var(--text-tertiary)]"
+            className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
             style={{ fontFamily: 'var(--font-mono)' }}
           >
             Viewport
           </span>
-          <div className="flex items-center gap-1 rounded-full border border-[var(--border)] bg-[var(--card-bg)] p-0.5">
+          <div className="flex items-center gap-1 rounded-full border border-border bg-background p-0.5">
             {(
               [
                 { key: 'tablet', label: 'iPad', Icon: Tablet },
@@ -264,7 +264,7 @@ export function ApplyDemo({
                     'relative flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-semibold transition-colors ' +
                     (active
                       ? 'text-[var(--cta-text)]'
-                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]')
+                      : 'text-muted-foreground hover:text-foreground')
                   }
                 >
                   {active && (
@@ -287,7 +287,7 @@ export function ApplyDemo({
       {/* Stage — device frame. merchantCtaStyle threads --cta / --cta-hover
           so the chrome's CTA button uses the merchant brand colour. */}
       <div
-        className="relative rounded-[var(--radius-xl)] bg-[var(--pad)]/40 p-6 sm:p-10 ring-1 ring-[var(--border)] overflow-hidden"
+        className="relative p-6 sm:p-10"
         style={merchantCtaStyle}
       >
         <AnimatePresence mode="wait" initial={false}>
@@ -373,7 +373,7 @@ export function ApplyDemo({
         </AnimatePresence>
       </div>
 
-      <p className="text-[13px] text-[var(--text-secondary)] leading-relaxed max-w-2xl">
+      <p className="text-[13px] text-muted-foreground leading-relaxed max-w-2xl">
         One application, themed for the active lender. When the primary lender declines, the gateway
         rolls the same applicant data to the next in priority. Switch merchant to change vertical,
         lender to change cascade position, or viewport for iPad vs mobile.

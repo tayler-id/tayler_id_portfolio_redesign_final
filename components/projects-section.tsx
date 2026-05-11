@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useMotionPreference } from '@/hooks/use-reduced-motion'
@@ -27,12 +28,31 @@ interface Project {
   metrics: SupportingMetric[]
   tags: string[]
   externalUrl?: string
+  internalHref?: string
 }
 
-const projects: Project[] = [
+const versatileProjects: Project[] = [
+  {
+    id: 'versatile-apply',
+    number: '01',
+    title: 'Versatile Apply',
+    subtitle: 'Consumer financing across 4 channels and 35+ lenders.',
+    heroStat: '+157%',
+    heroLabel:
+      'Near-prime approvals at Ashley Furniture. 6M annual applications. 3-min decision.',
+    body:
+      'A consumer applies for financing once. The merchant wants that one application to reach 35+ lenders — without 35 forms, 35 redirects, or 35 different compliance gauntlets. Every lender has a different gateway, different required fields, different regulatory language. The platform absorbs that variation with a single application contract themed per merchant and per lender — compliance text as a design-system token, not as content.',
+    metrics: [
+      { value: '12%', label: 'Conversion lift on 6M annual apps' },
+      { value: '35+', label: 'Lender integrations' },
+      { value: '3 verticals', label: 'Home improvement · retail · elective medical' },
+    ],
+    tags: ['Fintech', 'Multi-tenant', 'Design Systems'],
+    internalHref: '/work/versatile-apply',
+  },
   {
     id: 'onboard-iq',
-    number: '01',
+    number: '02',
     title: 'OnboardIQ',
     subtitle: 'Merchant onboarding workflow product. 0-to-1 at Versatile / Synchrony.',
     heroStat: '5 days → 2 hours',
@@ -46,9 +66,12 @@ const projects: Project[] = [
     ],
     tags: ['Workflow Product', 'Fintech', '0-to-1'],
   },
+]
+
+const otherProjects: Project[] = [
   {
     id: 'rayni',
-    number: '02',
+    number: '01',
     title: 'Rayni',
     subtitle: 'AI document intelligence platform. In daily production at scientific research labs.',
     heroStat: '60% faster',
@@ -64,7 +87,7 @@ const projects: Project[] = [
   },
   {
     id: 'doc-domain-agent',
-    number: '03',
+    number: '02',
     title: 'Document Domain Agents',
     subtitle: 'Domain-agnostic, high-stakes RAG framework. Extracted from Rayni.',
     heroStat: '85%',
@@ -80,7 +103,7 @@ const projects: Project[] = [
   },
   {
     id: 'qualified',
-    number: '04',
+    number: '03',
     title: 'Qualified',
     subtitle: 'AI-powered financing sidecar. A Chrome side-panel extension that surfaces multi-lender financing while you shop, with rich interactive UI rendered inline in chat.',
     heroStat: '5-lender waterfall · in chat',
@@ -96,7 +119,7 @@ const projects: Project[] = [
   },
   {
     id: 'mindpattern',
-    number: '05',
+    number: '04',
     title: 'MindPattern',
     subtitle: 'Autonomous AI research pipeline plus an MCP-powered chat with generative UI. Personal infrastructure I run every day.',
     heroStat: '13 agents · daily',
@@ -141,13 +164,57 @@ export function ProjectsSection() {
           </p>
         </div>
 
-        {/* Project entries */}
+        {/* Versatile Credit parent overview — frames Apply / Transact / OnboardIQ as one platform */}
+        <div className="mb-16 sm:mb-20 max-w-3xl border-l-2 border-primary pl-6 py-2">
+          <div className="text-xs uppercase tracking-[0.25em] text-primary mb-4 font-mono">
+            Versatile Credit · part of Synchrony (NYSE: SYF)
+          </div>
+          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tight mb-4 leading-[1.05]">
+            Versatile Credit
+          </h3>
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6">
+            One platform, three product surfaces. Lead designer across all three.
+          </p>
+          <p className="text-base sm:text-lg leading-relaxed text-foreground/90">
+            Versatile Credit is the consumer-financing platform behind $16B+ in financing annually,
+            6 million applications in 2024, and 13,000+ retail locations. The platform was recently
+            acquired by Synchrony (NYSE: SYF). I&apos;m the lead designer across all three of its
+            product surfaces &mdash; the consumer-facing applications, the merchant operator console,
+            and the internal tool Versatile uses to onboard new merchants. Three different audiences,
+            three different design languages, three different design systems &mdash; one designer
+            across all of them.
+          </p>
+        </div>
+
+        {/* Versatile sub-projects (Apply, OnboardIQ, future Transact) */}
         <div className="space-y-24 sm:space-y-32">
-          {projects.map((project) => (
+          {versatileProjects.map((project) => (
             <ProjectEntry
               key={project.id}
               project={project}
-              total={projects.length}
+              total={versatileProjects.length}
+              noAnimation={noAnimation}
+            />
+          ))}
+        </div>
+
+        {/* Section break — separates Versatile umbrella from standalone projects */}
+        <div className="mt-24 mb-20 sm:mt-32 sm:mb-24 pt-12 border-t border-border/60 max-w-3xl">
+          <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-4 font-mono">
+            Other selected work
+          </div>
+          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tight leading-[1.05]">
+            Outside Versatile
+          </h3>
+        </div>
+
+        {/* Standalone projects (Rayni, Doc Domain Agents, Qualified, MindPattern) */}
+        <div className="space-y-24 sm:space-y-32">
+          {otherProjects.map((project) => (
+            <ProjectEntry
+              key={project.id}
+              project={project}
+              total={otherProjects.length}
               noAnimation={noAnimation}
             />
           ))}
@@ -264,12 +331,21 @@ function ProjectEntry({ project, total, noAnimation }: ProjectEntryProps) {
               </React.Fragment>
             ))}
           </div>
+          {project.internalHref && (
+            <Link
+              href={project.internalHref}
+              className="ml-auto inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-mono text-primary hover:text-primary/80 transition-colors group"
+            >
+              <span>Read the case study</span>
+              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </Link>
+          )}
           {project.externalUrl && (
             <a
               href={project.externalUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-auto inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-mono text-primary hover:text-primary/80 transition-colors group"
+              className={`${project.internalHref ? '' : 'ml-auto '}inline-flex items-center gap-1.5 text-xs uppercase tracking-wider font-mono text-primary hover:text-primary/80 transition-colors group`}
             >
               <span>Visit live</span>
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
