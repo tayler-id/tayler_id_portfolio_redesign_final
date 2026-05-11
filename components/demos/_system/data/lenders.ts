@@ -7,6 +7,7 @@
  */
 
 export type LenderKey =
+  | 'synchrony'
   | 'wells-fargo'
   | 'fortiva'
   | 'td-bank'
@@ -28,6 +29,16 @@ export interface Lender {
 }
 
 export const LENDERS: Lender[] = [
+  {
+    key: 'synchrony',
+    name: 'Synchrony Bank',
+    shortName: 'Synchrony',
+    brandColor: '#F7A823',
+    logo: { src: '/assets/versatile/apply/lender-logos/synchrony.png', width: 137, height: 27 },
+    declineCopy:
+      'Synchrony is unable to approve your application at this time. You will receive a written notification in the mail within 7–10 business days regarding your application decision.',
+    positionLabel: 'Primary',
+  },
   {
     key: 'wells-fargo',
     name: 'Wells Fargo',
