@@ -106,7 +106,7 @@ export function ChromeMobile({
               <img
                 src={lender.logo.src}
                 alt={lender.name}
-                style={{ height: 18, width: 'auto', maxWidth: 110 }}
+                style={{ height: 28, width: 'auto', maxWidth: 150 }}
                 className="object-contain object-right shrink-0"
               />
             ) : (

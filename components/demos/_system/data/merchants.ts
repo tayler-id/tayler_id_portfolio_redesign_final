@@ -56,6 +56,7 @@ export const MERCHANTS: Merchant[] = [
     key: 'ashley',
     name: 'Ashley Furniture',
     vertical: 'retail',
+    logo: { src: '/assets/Ashley_logo_2022.svg.png', width: 160, height: 80 },
     brandColor: '#1f2937',
   },
   {

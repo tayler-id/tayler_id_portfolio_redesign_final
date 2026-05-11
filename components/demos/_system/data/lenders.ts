@@ -7,12 +7,13 @@
  */
 
 export type LenderKey =
+  | 'synchrony'
   | 'wells-fargo'
   | 'fortiva'
   | 'td-bank'
   | 'acima'
   | 'snap'
-  | 'genesis'
+  | 'concora'
   | 'sunlight'
   | 'carecredit'
   | 'sonrava'
@@ -31,6 +32,16 @@ export interface Lender {
 }
 
 export const LENDERS: Lender[] = [
+  {
+    key: 'synchrony',
+    name: 'Synchrony Bank',
+    shortName: 'Synchrony',
+    brandColor: '#F7A823',
+    logo: { src: '/assets/versatile/apply/lender-logos/synchrony.png', width: 137, height: 27 },
+    declineCopy:
+      'Synchrony is unable to approve your application at this time. You will receive a written notification in the mail within 7–10 business days regarding your application decision.',
+    positionLabel: 'Primary',
+  },
   {
     key: 'wells-fargo',
     name: 'Wells Fargo',
@@ -82,13 +93,13 @@ export const LENDERS: Lender[] = [
     positionLabel: 'Tertiary',
   },
   {
-    key: 'genesis',
-    name: 'Genesis Credit',
-    shortName: 'Genesis',
+    key: 'concora',
+    name: 'Concora Credit',
+    shortName: 'Concora',
     brandColor: '#1E3A8A',
-    logo: null,
+    logo: { src: '/assets/versatile/apply/lender-logos/concora.png', width: 300, height: 107 },
     declineCopy:
-      'Genesis Credit was unable to approve your application at this time.',
+      'Concora Credit was unable to approve your application at this time.',
     positionLabel: 'Tertiary',
   },
   {
@@ -138,7 +149,7 @@ export const VERTICAL_CASCADE: Record<
   'retail' | 'home-improvement' | 'elective-medical',
   LenderKey[]
 > = {
-  retail: ['wells-fargo', 'fortiva', 'td-bank', 'acima', 'snap', 'genesis'],
+  retail: ['synchrony', 'wells-fargo', 'fortiva', 'td-bank', 'acima', 'snap', 'concora'],
   'home-improvement': ['sunlight', 'wells-fargo', 'td-bank'],
-  'elective-medical': ['carecredit', 'sonrava', 'genesis'],
+  'elective-medical': ['carecredit', 'sonrava', 'concora'],
 }

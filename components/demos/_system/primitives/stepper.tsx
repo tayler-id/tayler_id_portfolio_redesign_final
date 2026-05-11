@@ -35,51 +35,63 @@ export function StepperVertical({ steps, active, size = 'md', className }: Stepp
         return (
           <li key={label} className="relative flex items-center gap-3" aria-current={isActive ? 'step' : undefined}>
             <span
-              className="relative z-10 flex shrink-0 items-center justify-center rounded-full font-semibold transition-colors"
-              style={{
-                width: s.node,
-                height: s.node,
-                fontSize: s.font,
-                ...(done
-                  ? { background: 'var(--cta)', color: 'var(--cta-text)' }
-                  : isActive
-                  ? {
-                      background: 'var(--card-bg)',
-                      color: 'var(--cta)',
-                      boxShadow: 'inset 0 0 0 2px var(--cta)',
-                    }
-                  : {
-                      background: 'var(--card-bg)',
-                      color: 'var(--text-tertiary)',
-                      boxShadow: 'inset 0 0 0 1px var(--border-strong)',
-                    }),
-              }}
+              className="relative shrink-0"
+              style={{ width: s.node, height: s.node }}
             >
-              {done ? <Check style={{ width: s.check, height: s.check }} strokeWidth={3} /> : idx + 1}
+              <span
+                className="absolute inset-0 z-10 flex items-center justify-center rounded-full font-semibold transition-colors"
+                style={{
+                  fontSize: s.font,
+                  ...(done
+                    ? {
+                        background: 'var(--card-bg)',
+                        color: 'var(--positive)',
+                        boxShadow: 'inset 0 0 0 2px var(--positive)',
+                      }
+                    : isActive
+                    ? {
+                        background: 'var(--card-bg)',
+                        color: 'var(--cta)',
+                        boxShadow: 'inset 0 0 0 2px var(--cta)',
+                      }
+                    : {
+                        background: 'var(--card-bg)',
+                        color: 'var(--text-tertiary)',
+                        boxShadow: 'inset 0 0 0 1px var(--border-strong)',
+                      }),
+                }}
+              >
+                {done ? <Check style={{ width: s.check, height: s.check }} strokeWidth={3} /> : idx + 1}
+              </span>
+              {!isLast && (
+                <span
+                  aria-hidden
+                  className="absolute"
+                  style={{
+                    left: '50%',
+                    top: '100%',
+                    transform: 'translateX(-50%)',
+                    width: 1,
+                    height: s.gap + s.node,
+                    background: done ? 'var(--positive)' : 'var(--border-strong)',
+                    transition: 'background 200ms ease',
+                  }}
+                />
+              )}
             </span>
             <span
-              className="font-medium tracking-tight"
+              className="font-semibold tracking-tight"
               style={{
                 fontSize: s.label,
-                color: done || isActive ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                color: done
+                  ? 'var(--positive)'
+                  : isActive
+                  ? 'var(--text-primary)'
+                  : 'var(--text-tertiary)',
               }}
             >
               {label}
             </span>
-            {!isLast && (
-              <span
-                aria-hidden
-                className="absolute"
-                style={{
-                  left: s.node / 2 - 0.5,
-                  top: s.node,
-                  width: 1,
-                  height: s.gap,
-                  background: done ? 'var(--cta)' : 'var(--border-strong)',
-                  transition: 'background 200ms ease',
-                }}
-              />
-            )}
           </li>
         )
       })}

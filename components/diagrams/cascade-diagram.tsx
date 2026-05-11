@@ -15,7 +15,7 @@ const lenders: Lender[] = [
   { name: 'Synchrony', tier: 'Primary', status: 'declined' },
   { name: 'Wells Fargo', tier: 'Primary', status: 'declined' },
   { name: 'Acima', tier: 'Secondary', status: 'approved' },
-  { name: 'Genesis', tier: 'Tertiary', status: 'skipped' },
+  { name: 'Concora', tier: 'Tertiary', status: 'skipped' },
   { name: 'AFF', tier: 'Tertiary', status: 'skipped' },
 ]
 

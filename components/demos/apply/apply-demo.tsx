@@ -149,7 +149,13 @@ export function ApplyDemo({
       case 'applicant':
         return <StepApplicant lender={lender} compact={compact} />
       case 'prequal':
-        return <StepPrequal lender={lender} compact={compact} />
+        return (
+          <StepPrequal
+            lender={lender}
+            merchantName={merchant.name}
+            compact={compact}
+          />
+        )
       case 'approved':
         return <StepApproved lender={lender} compact={compact} />
       case 'hi-personal':

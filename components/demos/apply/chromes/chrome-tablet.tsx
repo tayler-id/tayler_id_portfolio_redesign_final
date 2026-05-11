@@ -93,7 +93,7 @@ export function ChromeTablet({
               <img
                 src={lender.logo.src}
                 alt={lender.name}
-                style={{ height: 22, width: 'auto', maxWidth: 140 }}
+                style={{ height: 38, width: 'auto', maxWidth: 200 }}
                 className="object-contain object-right"
               />
             ) : (

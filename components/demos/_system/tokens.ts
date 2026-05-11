@@ -76,7 +76,7 @@ export const APPLY: ProjectTheme = {
   ctaText: '#ffffff',
   accent: '#116ff2',
 
-  positive: '#15803d',
+  positive: '#22c55e',
   positiveBg: '#f0fdf4',
   negative: '#b91c1c',
   negativeBg: '#fef2f2',
