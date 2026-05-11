@@ -1,8 +1,9 @@
 'use client'
 
 import React from 'react'
-import { ShowInput, FormSection, Checkbox } from '../../_system/primitives'
-import type { Lender } from '../../_system/data/lenders'
+import Image from 'next/image'
+import { AlertCircle } from 'lucide-react'
+import { getLender, type Lender } from '../../_system/data/lenders'
 import type { Merchant } from '../../_system/data/merchants'
 
 interface StepHIPersonalProps {
@@ -11,89 +12,154 @@ interface StepHIPersonalProps {
   compact?: boolean
 }
 
-/**
- * Home-improvement Step 1 — Personal / Address / Installation Address / Contact.
- *
- * Modeled on the West Shore Home × Sunlight Financial application form
- * (Figma board "Group 43") — the consumer's first screen after entering the
- * apply flow from the in-home sales appointment.
- */
 export function StepHIPersonal({ merchant, compact = false }: StepHIPersonalProps) {
   const accent = merchant.headlineColor ?? merchant.brandColor ?? 'var(--accent)'
+  const sunlight = getLender('sunlight')
+  const tdBank = getLender('td-bank')
+  const wellsFargo = getLender('wells-fargo')
 
   return (
     <div className="flex flex-col gap-5">
-      {/* Headline block — merchant-tone marketing line */}
-      <div className="flex flex-col gap-1.5">
-        <h3
-          className={
-            compact
-              ? 'text-[15px] font-extrabold uppercase tracking-tight'
-              : 'text-[20px] font-extrabold uppercase tracking-tight'
-          }
-          style={{ color: accent }}
-        >
-          To get started we need to learn more about you
-        </h3>
-        <p className="text-[12.5px] leading-[1.55] text-[var(--text-secondary)]">
-          Some of the information needed to apply has already been collected from our records. We&apos;ll
-          just need a few additional pieces of information to connect you with financing.
+      <div className="flex flex-col gap-2">
+        <p className="text-[13px] leading-[1.55] text-[var(--text-secondary)]">
+          <span className="font-bold text-[var(--text-primary)]">Great news!</span> You&apos;ve received
+          financing offers from two of our trusted lending partners, providing you with the flexibility to
+          choose the offer that best suits your needs.
+        </p>
+        <p className="text-[13px] leading-[1.55] text-[var(--text-secondary)]">
+          Choose the lender that works for you, and start your project with confidence!
         </p>
       </div>
 
-      <FormSection
-        title="Personal"
-        accentColor={accent}
-        rightNote="* Required Field"
-        bodyClassName={compact ? '' : 'grid-cols-2'}
-      >
-        <ShowInput label="First Name*" />
-        <ShowInput label="Last Name*" />
-        <ShowInput label="Date of Birth*" affordance="calendar" />
-        <ShowInput label="Social Security Number*" affordance="eye" />
-      </FormSection>
+      <div className={compact ? 'grid grid-cols-1 gap-3' : 'grid grid-cols-2 gap-3'}>
+        <OfferCard name="John Doe" lender={sunlight} approval="$12,000" accent={accent} selected />
+        <OfferCard name="John Doe" lender={tdBank} approval="$14,900" accent={accent} />
+      </div>
 
-      <FormSection title="Address" accentColor={accent}>
-        <ShowInput label="Street*" />
-        <p className="-mt-1 text-[10.5px] font-semibold text-[var(--text-tertiary)]">
-          PO Boxes are not accepted
-        </p>
-        <ShowInput label="Apt/Suite/Other" />
-        <div className={compact ? 'grid grid-cols-1 gap-3' : 'grid grid-cols-[1fr_1fr_140px] gap-3'}>
-          <ShowInput label="City*" />
-          <ShowInput label="State*" affordance="chevron" />
-          <ShowInput label="ZIP Code*" />
-        </div>
-        <div className={compact ? 'grid grid-cols-1 gap-3' : 'grid grid-cols-2 gap-3'}>
-          <ShowInput label="Housing*" affordance="chevron" />
-          <ShowInput label="Years at Current Residence*" />
-        </div>
-        <ShowInput label="Monthly Housing Payment Amount*" />
-      </FormSection>
+      <p className="text-[10.5px] text-center text-[var(--text-tertiary)]">
+        Offers may be contingent on Proof of Home Ownership or Proof of Income
+      </p>
 
-      <FormSection title="Installation Address" accentColor={accent}>
-        <Checkbox
-          checked
-          accentColor={merchant.ctaColor}
-          label="Installation address information is same as address information"
+      <SelectedOfferRow
+        lender={sunlight}
+        loanType="Installment Loan"
+        terms="60 month @ 8.99% APR"
+        subterms="with monthly loan payments of $199.23."
+        amount="$199/mo"
+        accent={accent}
+      />
+
+      <div className="flex items-start gap-2 rounded-md border border-[var(--border)] p-2.5 text-[11px] leading-[1.5] text-[var(--text-secondary)]">
+        <AlertCircle
+          className="mt-px h-4 w-4 flex-shrink-0 text-red-600"
+          strokeWidth={2.5}
         />
-      </FormSection>
-
-      <FormSection title="Contact" accentColor={accent}>
-        <Checkbox label="You, the applicant, agree and understand the following notice*" />
-        <p className="text-[11.5px] leading-[1.55] text-[var(--text-secondary)]">
-          By providing your contact information below, including any cellular or other phone numbers,
-          you agree to be contacted by any of the lenders who receive your information through this
-          the Merchant financing process via calls to cell phones, text messages or telephone calls,
-          including the use of artificial or pre-recorded message calls, as well as calls made via
-          automatic telephone dialing systems, or via e-mail.
+        <p>
+          Sorry, {wellsFargo.name}, was unable to pre-qualify you. You may proceed with the{' '}
+          {wellsFargo.shortName} Application. (If you tried to pre-qualify using an ITIN{' '}
+          <span style={{ color: accent }} className="underline">click here</span> to apply.) Completing
+          this application will result in a hard inquiry on your credit report.
         </p>
-        <div className={compact ? 'grid grid-cols-1 gap-3' : 'grid grid-cols-2 gap-3'}>
-          <ShowInput label="Home Phone*" />
-          <ShowInput label="Cell Phone*" />
+      </div>
+    </div>
+  )
+}
+
+function OfferCard({
+  name,
+  lender,
+  approval,
+  accent,
+  selected,
+}: {
+  name: string
+  lender: Lender
+  approval: string
+  accent: string
+  selected?: boolean
+}) {
+  return (
+    <div
+      className="flex flex-col gap-2 rounded-md px-3 py-3"
+      style={{
+        border: selected ? `2px solid ${accent}` : '1px solid var(--border)',
+      }}
+    >
+      <p className="text-[13px] font-bold" style={{ color: accent }}>
+        {name}
+      </p>
+      <p className="text-[11px] leading-tight text-[var(--text-secondary)]">
+        You have an offer from {lender.shortName}
+      </p>
+      {lender.logo && 'src' in lender.logo && (
+        <div className="flex items-center" style={{ height: 24 }}>
+          <Image
+            src={lender.logo.src}
+            alt={lender.name}
+            width={lender.logo.width}
+            height={lender.logo.height}
+            style={{ height: 20, width: 'auto', maxWidth: '100%' }}
+          />
         </div>
-        <ShowInput label="Email*" />
-      </FormSection>
+      )}
+      <div className="mt-1 flex flex-col items-center gap-0.5">
+        <p className="text-[10.5px] font-bold text-[var(--text-primary)]">Approval Amount</p>
+        <p className="text-[19px] font-extrabold tracking-tight" style={{ color: accent }}>
+          {approval}
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function SelectedOfferRow({
+  lender,
+  loanType,
+  terms,
+  subterms,
+  amount,
+  accent,
+}: {
+  lender: Lender
+  loanType: string
+  terms: string
+  subterms?: string
+  amount: string
+  accent: string
+}) {
+  return (
+    <div className="flex items-stretch overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card-bg)]">
+      <div className="w-1.5 flex-shrink-0" style={{ background: accent }} />
+      <div className="flex flex-1 items-center gap-3 px-3 py-2.5 min-w-0">
+        <div
+          className="h-3.5 w-3.5 flex-shrink-0 rounded-full"
+          style={{ border: `2px solid ${accent}` }}
+        />
+        {lender.logo && 'src' in lender.logo && (
+          <Image
+            src={lender.logo.src}
+            alt={lender.name}
+            width={lender.logo.width}
+            height={lender.logo.height}
+            style={{ height: 14, width: 'auto' }}
+          />
+        )}
+        <div className="flex min-w-0 flex-1 flex-col">
+          <p className="text-[11px] font-bold" style={{ color: accent }}>
+            {loanType}
+          </p>
+          <p className="text-[10.5px] leading-tight text-[var(--text-secondary)]">{terms}</p>
+          {subterms && (
+            <p className="text-[10.5px] leading-tight text-[var(--text-secondary)]">{subterms}</p>
+          )}
+        </div>
+      </div>
+      <div
+        className="flex flex-shrink-0 items-center justify-center px-3"
+        style={{ background: 'var(--neutral-bg)' }}
+      >
+        <p className="text-[12.5px] font-bold text-[var(--text-primary)]">{amount}</p>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, type MotionProps } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { useMotionPreference } from '@/hooks/use-reduced-motion'
 
@@ -26,7 +26,7 @@ export function CascadeDiagram() {
   const isInView = useInView(ref, { once: true, amount: 0.2 })
   const animate = noAnimation || isInView
 
-  const fade = (delay = 0): React.ComponentProps<typeof motion.div> => ({
+  const fade = (delay = 0): MotionProps => ({
     initial: noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 },
     animate: animate ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 },
     transition: noAnimation

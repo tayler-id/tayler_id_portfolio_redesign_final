@@ -6,37 +6,41 @@ import Link from 'next/link'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { ScrollReveal } from '@/components/animate-ui/scroll-reveal'
 import { CascadeDiagram } from '@/components/diagrams/cascade-diagram'
+import { ThreeVerticalsFlow } from '@/components/diagrams/three-verticals-flow'
 import { ApplyDemo } from '@/components/demos/apply'
 import { ApplyCongratsHero } from '@/components/case-studies/apply-congrats-hero'
+import { getMerchant, type MerchantKey } from '@/components/demos/_system/data/merchants'
 
 const ASSET_BASE = '/assets/versatile/apply'
-
-import type { MerchantKey } from '@/components/demos/_system/data/merchants'
 
 const verticals: {
   label: string
   sublabel: string
   merchant: MerchantKey
   note: string
+  viewport?: 'tablet' | 'mobile'
   /** Fallback static image for verticals whose interactive flow isn't built yet. */
   image?: string
 }[] = [
   {
-    label: 'Home Improvement',
-    sublabel: 'West Shore Home · Sunlight Financial',
-    merchant: 'wsh',
-    note: 'Consumer pre-qualified mid-visit. The decision moment lives inside the in-home appointment, not after it.',
-  },
-  {
     label: 'Retail',
     sublabel: 'City Furniture · Wells Fargo cascade',
     merchant: 'city-furniture',
+    viewport: 'tablet',
     note: 'In-store kiosk decision — the cascade rolls fall-through approvals until a lender accepts.',
+  },
+  {
+    label: 'Home Improvement',
+    sublabel: 'West Shore Home · Sunlight Financial',
+    merchant: 'wsh',
+    viewport: 'tablet',
+    note: 'Consumer pre-qualified mid-visit. The decision moment lives inside the in-home appointment, not after it.',
   },
   {
     label: 'Elective Medical',
     sublabel: 'Western Dental · CareCredit / Sonrava',
     merchant: 'western-dental',
+    viewport: 'tablet',
     note: 'Multi-lender choice on tablet and mobile. Patients pick the best offer in-chair.',
   },
 ]
@@ -48,14 +52,6 @@ const lenderTiles = [
   { file: 'retail-desktop/lender-snap.png', label: 'Snap Finance' },
   { file: 'retail-desktop/lender-concora.png', label: 'Concora' },
   { file: 'retail-desktop/lender-gaf.png', label: 'Great American Finance' },
-]
-
-// Phone screens for Panel 5b — single CITY Furniture / Synchrony progression
-// for a coherent flow story. Uniform light background, full-image fit.
-const mobilePhones = [
-  { file: 'retail-mobile/mobile-synchrony-welcome.png', caption: 'Step 01 · Welcome on consumer phone' },
-  { file: 'retail-mobile/mobile-synchrony-step.png', caption: 'Step 02 · Application form' },
-  { file: 'retail-mobile/mobile-synchrony-decision.png', caption: 'Step 03 · Disclosures + submit' },
 ]
 
 const tdComplete = [
@@ -238,9 +234,23 @@ export function VersatileApplyCaseStudy() {
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8 gap-y-12">
-            {verticals.map((v, i) => (
-              <ScrollReveal key={v.label} delay={0.05 + i * 0.05}>
+          <ScrollReveal delay={0.05}>
+            <div className="mb-14 sm:mb-16">
+              <ThreeVerticalsFlow />
+            </div>
+          </ScrollReveal>
+
+          {/* Row 1 — full-width feature tile (Retail) */}
+          <ScrollReveal delay={0.05}>
+            <div className="mx-auto mb-16 max-w-2xl">
+              <VerticalTile vertical={verticals[0]} />
+            </div>
+          </ScrollReveal>
+
+          {/* Row 2 — two-up (Home Improvement + Elective Medical) */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-16">
+            {verticals.slice(1).map((v, i) => (
+              <ScrollReveal key={v.label} delay={0.1 + i * 0.05}>
                 <VerticalTile vertical={v} />
               </ScrollReveal>
             ))}
@@ -312,18 +322,14 @@ export function VersatileApplyCaseStudy() {
             </div>
           </ScrollReveal>
 
-          {/* Mobile strip — single CITY Furniture / Synchrony progression, all uniform */}
-          <ScrollReveal delay={0.05}>
-            <div className="flex flex-wrap justify-center gap-8 sm:gap-10">
-              {mobilePhones.map((shot) => (
-                <PhoneTile
-                  key={shot.file}
-                  src={`${ASSET_BASE}/${shot.file}`}
-                  caption={shot.caption}
-                />
-              ))}
-            </div>
-          </ScrollReveal>
+          {/* Mobile strip — live ApplyDemo per vertical, mobile viewport, all in one row */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-6 gap-y-12">
+            {verticals.map((v, i) => (
+              <ScrollReveal key={`mobile-${v.merchant}`} delay={0.05 + i * 0.05}>
+                <MobileVerticalTile vertical={v} />
+              </ScrollReveal>
+            ))}
+          </div>
 
           {/* Patent — left-border note, no card box */}
           <ScrollReveal delay={0.2}>
@@ -631,9 +637,6 @@ function TDCompleteTile({ src, alt, label }: { src: string; alt: string; label: 
   )
 }
 
-/* Vertical tile (Panel 4) — interactive ApplyDemo locked to the vertical's
- * merchant, or a fallback static iPad render for verticals whose component
- * flow isn't built yet. */
 function VerticalTile({
   vertical,
 }: {
@@ -643,6 +646,7 @@ function VerticalTile({
     merchant: MerchantKey
     image?: string
     note: string
+    viewport?: 'tablet' | 'mobile'
   }
 }) {
   return (
@@ -660,15 +664,17 @@ function VerticalTile({
             hideLenderSwitcher
             hideViewportSwitcher
             hideDecline
-            defaultViewport="mobile"
+            defaultViewport={vertical.viewport ?? 'mobile'}
+            tabletOrientation="portrait"
           />
         </div>
       )}
-      <figcaption className="mt-5">
-        <div className="text-xl font-display font-bold tracking-tight text-foreground">
+
+      <figcaption className="mt-5 border-t border-border/60 pt-5">
+        <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-muted-foreground">
           {vertical.label}
         </div>
-        <div className="text-xs uppercase tracking-[0.25em] font-mono text-muted-foreground mt-1.5">
+        <div className="text-xl font-display font-bold tracking-tight text-foreground mt-2">
           {vertical.sublabel}
         </div>
         <p className="text-sm text-muted-foreground leading-relaxed mt-3">
@@ -679,27 +685,33 @@ function VerticalTile({
   )
 }
 
-/* Phone tile — uniform aspect, image fits fully (object-contain), padding bezel for clean corners */
-function PhoneTile({ src, caption }: { src: string; caption: string }) {
+function MobileVerticalTile({
+  vertical,
+}: {
+  vertical: {
+    label: string
+    sublabel: string
+    merchant: MerchantKey
+  }
+}) {
   return (
-    <figure className="flex flex-col gap-3 items-center" style={{ width: '200px' }}>
-      <div
-        className="w-full rounded-[2rem] bg-foreground/90 shadow-lg p-1.5"
-        style={{ aspectRatio: '9 / 19.5' }}
-      >
-        <div className="w-full h-full rounded-[1.6rem] overflow-hidden bg-white">
-          <Image
-            src={src}
-            alt={caption}
-            width={400}
-            height={866}
-            className="w-full h-full object-contain"
-            sizes="200px"
-          />
-        </div>
+    <figure className="flex flex-col">
+      <div className="flex justify-center">
+        <ApplyDemo
+          lockMerchant={vertical.merchant}
+          hideLenderSwitcher
+          hideViewportSwitcher
+          hideDecline
+          defaultViewport="mobile"
+        />
       </div>
-      <figcaption className="text-[11px] uppercase tracking-[0.25em] font-mono text-muted-foreground leading-snug text-center max-w-[200px]">
-        {caption}
+      <figcaption className="mt-5 border-t border-border/60 pt-5">
+        <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-muted-foreground">
+          {vertical.label} · Mobile
+        </div>
+        <div className="text-base font-display font-bold tracking-tight text-foreground mt-2">
+          {vertical.sublabel}
+        </div>
       </figcaption>
     </figure>
   )

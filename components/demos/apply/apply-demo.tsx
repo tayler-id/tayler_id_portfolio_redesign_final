@@ -77,6 +77,8 @@ interface ApplyDemoProps {
   /** Hide the viewport (iPad / Mobile) switcher. */
   hideViewportSwitcher?: boolean
   hideDecline?: boolean
+  /** Tablet orientation — landscape (default) or portrait. */
+  tabletOrientation?: 'landscape' | 'portrait'
 }
 
 export function ApplyDemo({
@@ -87,6 +89,7 @@ export function ApplyDemo({
   hideLenderSwitcher = false,
   hideViewportSwitcher = false,
   hideDecline,
+  tabletOrientation = 'landscape',
 }: ApplyDemoProps) {
   // Merchant state (locked when caller pins one)
   const initialMerchant = lockMerchant ?? defaultMerchant
@@ -296,9 +299,9 @@ export function ApplyDemo({
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
               className="mx-auto"
-              style={{ maxWidth: 980 }}
+              style={{ maxWidth: tabletOrientation === 'portrait' ? 620 : 980 }}
             >
-              <IPadFrame>
+              <IPadFrame orientation={tabletOrientation}>
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.div
                     key={`${activeMerchant}-${lender.key}-${currentStep.key}`}
@@ -320,6 +323,7 @@ export function ApplyDemo({
                       canBack={canBack}
                       canNext={canNext}
                       nextLabel={nextLabel}
+                      orientation={tabletOrientation}
                     >
                       {renderStepContent(false)}
                     </ChromeTablet>

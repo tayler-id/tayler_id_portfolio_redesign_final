@@ -9,17 +9,22 @@ interface DeviceFrameProps {
 }
 
 /**
- * iPad Pro 11" landscape bezel — 1194:834 ≈ 1.43:1.
- * Renders an inner safe area that fills the screen, sized off the parent.
- * Use inside a container with a fixed or fluid width.
+ * iPad Pro 11" bezel.
+ *  - landscape (default): 1194:834 ≈ 1.43:1
+ *  - portrait: 834:1194 ≈ 0.70:1 — taller frame for vertical form flows
  */
-export function IPadFrame({ children, className }: DeviceFrameProps) {
+export function IPadFrame({
+  children,
+  className,
+  orientation = 'landscape',
+}: DeviceFrameProps & { orientation?: 'landscape' | 'portrait' }) {
+  const ratio = orientation === 'portrait' ? '834 / 1194' : '1194 / 834'
   return (
     <div className={cn('relative w-full', className)}>
       <div
         className="relative w-full overflow-hidden rounded-[28px] bg-[#0b0d12] p-[10px]"
         style={{
-          aspectRatio: '1194 / 834',
+          aspectRatio: ratio,
           boxShadow:
             '0 1px 0 rgba(255,255,255,0.06) inset, 0 24px 64px -16px rgba(20,18,30,0.35), 0 8px 24px -8px rgba(20,18,30,0.18)',
         }}
