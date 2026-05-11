@@ -28,7 +28,7 @@ const verticals: {
     sublabel: 'City Furniture · Wells Fargo cascade',
     merchant: 'city-furniture',
     viewport: 'tablet',
-    note: 'In-store kiosk decision — the cascade rolls fall-through approvals until a lender accepts.',
+    note: 'In-store kiosk decision. The cascade rolls fall-through approvals until a lender accepts.',
   },
   {
     label: 'Home Improvement',
@@ -123,7 +123,7 @@ export function VersatileApplyCaseStudy() {
         <div className="container mx-auto px-4 sm:px-6">
           <ScrollReveal>
             <h2 id="apply-hero" className="sr-only">
-              Approval hero — one template, every lender
+              Approval hero, one template, every lender
             </h2>
             <ApplyCongratsHero merchant="ashley" />
           </ScrollReveal>
@@ -161,15 +161,15 @@ export function VersatileApplyCaseStudy() {
               id="apply-problem"
               className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tight mb-8"
             >
-              The problem &mdash; and how I approached it
+              The problem, and the approach
             </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={0.05}>
             <p className="text-lg leading-relaxed text-foreground/90 mb-6">
               A consumer applies for financing once. The merchant wants that one application to reach
-              35+ lenders &mdash; without 35 forms, 35 redirects, or 35 different compliance gauntlets.
-              Every lender has a different gateway, different required fields, different regulatory language.
+              35+ lenders without 35 forms, 35 redirects, or 35 different compliance gauntlets. Every
+              lender has a different gateway, different required fields, different regulatory language.
             </p>
           </ScrollReveal>
 
@@ -177,12 +177,11 @@ export function VersatileApplyCaseStudy() {
             <p className="text-lg leading-relaxed text-foreground/90 mb-10">
               The gateway exposed a single API, but every front-end flow had to absorb that lender&apos;s
               compliance copy, language, and field requirements. The wrong move was to treat compliance text
-              as content. The right move was to treat it as a design-system token &mdash; owned by the
-              lender&apos;s contract, surfaced at the right moment in the flow, replaced when a regulation
-              changed. <strong className="text-foreground">I owned that translation from the gateway contract
-              to the user-visible experience &mdash; across 35+ integrations.</strong> That decision &mdash;
-              compliance-as-token, not compliance-as-content &mdash; is why we ship lender variants in days
-              instead of weeks.
+              as content. The right move was to treat it as a design-system token, owned by the lender&apos;s
+              contract, surfaced at the right moment in the flow, and replaced when a regulation changed.
+              <strong className="text-foreground"> I owned that translation from the gateway contract to the
+              user-visible experience, across 35+ integrations.</strong> That single decision (compliance as
+              token, not as content) is why we ship lender variants in days instead of weeks.
             </p>
           </ScrollReveal>
 
@@ -211,7 +210,7 @@ export function VersatileApplyCaseStudy() {
               </h2>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                 Versatile Apply is the same product across home improvement, retail, and elective medical.
-                The lenders, compliance, and field requirements shift per vertical &mdash; the flow doesn&apos;t.
+                The lenders, compliance, and field requirements shift per vertical. The flow doesn&apos;t.
               </p>
             </div>
           </ScrollReveal>
@@ -263,9 +262,9 @@ export function VersatileApplyCaseStudy() {
                 One template, every lender
               </h2>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                Inside any vertical, the platform ships brand-correct experiences from one source of truth
-                &mdash; 35+ partner brand channels. Switch lenders below to see the same flow re-theme in
-                real time, and how the cascade falls forward when a primary declines.
+                Inside any vertical, the platform ships brand-correct experiences from one source of truth.
+                That source of truth powers 35+ partner brand channels. Switch lenders below to see the same
+                flow re-theme in real time, and how the cascade falls forward when a primary declines.
               </p>
             </div>
           </ScrollReveal>
@@ -299,7 +298,7 @@ export function VersatileApplyCaseStudy() {
               </h2>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                 Snap Sign sends the application from kiosk &rarr; consumer&apos;s own phone via QR or SMS.
-                The mobile experience isn&apos;t a port of the desktop &mdash; it&apos;s a peer surface.
+                The mobile experience isn&apos;t a port of the desktop. It&apos;s a peer surface.
               </p>
             </div>
           </ScrollReveal>
@@ -320,9 +319,9 @@ export function VersatileApplyCaseStudy() {
                 Patent
               </div>
               <p className="text-sm leading-relaxed text-foreground/80">
-                Snap Sign&trade; is patented (US 11,089,031) &mdash; the kiosk-to-mobile handoff lets a sales
-                associate pass an application to the customer&apos;s own device by QR or SMS, completing the
-                flow on the consumer&apos;s phone.
+                Snap Sign&trade; is patented (US 11,089,031). The kiosk-to-mobile handoff lets a sales
+                associate pass an application to the customer&apos;s own device by QR or SMS, completing
+                the flow on the consumer&apos;s phone.
               </p>
             </aside>
           </ScrollReveal>
@@ -345,10 +344,10 @@ export function VersatileApplyCaseStudy() {
               </h2>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
                 The white-label model goes further than theming. TD Bank&apos;s Commercial Online
-                Application ships on the Apply platform with a purpose-built TD design system &mdash; TD
-                green for headings and input outlines, orange for primary actions, the signature green
-                wave on every screen, binary tap cards for consent moments. The flow architecture is
-                shared. The chrome is unmistakably TD.
+                Application ships on the Apply platform with a purpose-built TD design system: TD green
+                for headings and input outlines, orange for primary actions, the signature green wave
+                on every screen, binary tap cards for consent moments. The flow architecture is shared.
+                The chrome is unmistakably TD.
               </p>
             </div>
           </ScrollReveal>
@@ -360,8 +359,8 @@ export function VersatileApplyCaseStudy() {
           <ScrollReveal delay={0.3}>
             <p className="mt-10 text-sm text-muted-foreground italic max-w-2xl leading-relaxed">
               Same gateway, same compliance harness, same cascade underneath. What changes at the surface
-              is a complete component vocabulary &mdash; the Versatile attribution lives only where it
-              must legally appear (vendor disclosure on the opening screen).
+              is a complete component vocabulary. The Versatile attribution lives only where it must
+              legally appear (vendor disclosure on the opening screen).
             </p>
           </ScrollReveal>
         </div>
@@ -434,7 +433,7 @@ export function VersatileApplyCaseStudy() {
             <ScrollReveal delay={0.1}>
               <Learning
                 eyebrow="What I'd do differently"
-                body="The merchant variation layer was built on top of the lender variation layer instead of as a peer dimension. If I were starting fresh, lender × merchant × channel would be three peer axes from day one — not nested."
+                body="The merchant variation layer was built on top of the lender variation layer instead of as a peer dimension. If I were starting fresh, lender × merchant × channel would be three peer axes from day one, not nested."
               />
             </ScrollReveal>
             <ScrollReveal delay={0.15}>
@@ -443,7 +442,7 @@ export function VersatileApplyCaseStudy() {
                 body={
                   <>
                     Kiosk conversion in retail outperformed mobile in the same merchants. The instinct to
-                    declare “mobile-first” is wrong here — when a customer is already in-store, a fixed
+                    declare “mobile-first” is wrong here. When a customer is already in-store, a fixed
                     kiosk converts better than handing them a QR code. Per Versatile&apos;s own COO:{' '}
                     <em>&ldquo;We ship as many kiosks today as we did 10 years ago.&rdquo;</em>
                   </>
@@ -456,14 +455,14 @@ export function VersatileApplyCaseStudy() {
           <ScrollReveal delay={0.05}>
             <div className="border-l-2 border-primary pl-6 py-2 max-w-3xl">
               <div className="text-xs uppercase tracking-[0.25em] text-primary mb-4 font-mono">
-                How it shipped &mdash; engineering sidenote
+                How it shipped · engineering sidenote
               </div>
               <p className="text-base sm:text-lg leading-relaxed text-foreground/90">
                 Ashley&apos;s flow rides on the Versatile Apply platform but was built with a Vue.js front
                 end against Synchrony&apos;s API contract. I owned the design <em>and</em> the front-end
-                implementation &mdash; pairing with backend engineers on the gateway shape, then shipping
-                the consumer UI alongside them. That direct ownership is why the compliance-as-token decision
-                actually held: I wasn&apos;t sketching it for a handoff, I was writing the components that
+                implementation. I paired with backend engineers on the gateway shape, then shipped the
+                consumer UI alongside them. That direct ownership is why the compliance-as-token decision
+                actually held: I wasn&apos;t sketching it for a handoff. I was writing the components that
                 consumed those tokens at render time.
               </p>
             </div>
@@ -605,7 +604,7 @@ function VerticalTile({
       {vertical.image ? (
         <IPadLandscape
           src={vertical.image}
-          alt={`${vertical.label} flow — ${vertical.sublabel}`}
+          alt={`${vertical.label} flow · ${vertical.sublabel}`}
           sizes="(max-width: 1024px) 100vw, 33vw"
         />
       ) : (

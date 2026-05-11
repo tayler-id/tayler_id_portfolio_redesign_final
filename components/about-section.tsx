@@ -60,7 +60,7 @@ export function AboutSection() {
     {
       year: '2010 - 2017',
       role: 'Designer / Developer · Agency + Brand work',
-      company: 'Quad Graphics, Menasha, Lebo Skin Care — print, digital, and web systems',
+      company: 'Quad Graphics, Menasha, Lebo Skin Care · print, digital, and web systems',
       icon: Briefcase,
       color: 'bg-primary'
     }

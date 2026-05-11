@@ -1,6 +1,6 @@
 'use client'
 
-import React, { CSSProperties, useMemo, useState } from 'react'
+import React, { CSSProperties, useEffect, useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Tablet, Smartphone } from 'lucide-react'
 
@@ -109,6 +109,21 @@ export function ApplyDemo({
   const [activeLender, setActiveLender] = useState<LenderKey>(startingLender)
   const [viewport, setViewport] = useState<Viewport>(defaultViewport)
   const [stepIndex, setStepIndex] = useState(0)
+
+  // Force mobile viewport on small screens — an iPad chrome doesn't fit.
+  const [isNarrow, setIsNarrow] = useState(false)
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return
+    const mql = window.matchMedia('(max-width: 640px)')
+    const sync = () => setIsNarrow(mql.matches)
+    sync()
+    mql.addEventListener('change', sync)
+    return () => mql.removeEventListener('change', sync)
+  }, [])
+  useEffect(() => {
+    if (isNarrow && viewport !== 'mobile') setViewport('mobile')
+  }, [isNarrow, viewport])
+  const effectiveViewport: Viewport = isNarrow ? 'mobile' : viewport
 
   // When merchant changes, snap lender to the new vertical's cascade.
   React.useEffect(() => {
@@ -223,7 +238,7 @@ export function ApplyDemo({
               className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
               style={{ fontFamily: 'var(--font-mono)' }}
             >
-              Interactive · {viewport === 'tablet' ? 'iPad' : 'Mobile'} · {currentStep.title}
+              Interactive · {effectiveViewport === 'tablet' ? 'iPad' : 'Mobile'} · {currentStep.title}
             </span>
             <h3 className="text-xl font-semibold text-foreground tracking-tight">
               {verticalTagline[vertical]}
@@ -238,8 +253,8 @@ export function ApplyDemo({
         </div>
       )}
 
-      {/* Viewport switcher */}
-      {!hideViewportSwitcher && (
+      {/* Viewport switcher — hidden on mobile where only the phone chrome fits. */}
+      {!hideViewportSwitcher && !isNarrow && (
         <div className="flex items-center gap-2">
           <span
             className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
@@ -291,7 +306,7 @@ export function ApplyDemo({
         style={merchantCtaStyle}
       >
         <AnimatePresence mode="wait" initial={false}>
-          {viewport === 'tablet' ? (
+          {effectiveViewport === 'tablet' ? (
             <motion.div
               key="tablet"
               initial={{ opacity: 0, y: 8 }}

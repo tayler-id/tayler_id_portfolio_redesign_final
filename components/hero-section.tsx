@@ -127,9 +127,9 @@ export function HeroSection() {
               variants={itemVariants}
               className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-2xl mx-auto lg:mx-0"
             >
-              Rare combination: trained designer who codes at production scale. I ship
-              enterprise systems from research through deployment—currently building the platform
-              processing $16B+ in annual financing at Synchrony Bank (acquired 2025).
+              Trained designer who codes at production scale. I take enterprise systems from
+              research through deployment. Right now I&apos;m building the platform that processes
+              $16B+ in annual financing at Synchrony Bank (acquired 2025).
             </motion.p>
 
             <motion.div

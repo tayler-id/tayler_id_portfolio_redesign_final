@@ -41,11 +41,11 @@ const versatileProjects: Project[] = [
     heroLabel:
       'Near-prime approvals at Ashley Furniture. 6M annual applications. 3-min decision.',
     body:
-      'A consumer applies for financing once. The merchant wants that one application to reach 35+ lenders — without 35 forms, 35 redirects, or 35 different compliance gauntlets. Every lender has a different gateway, different required fields, different regulatory language. The platform absorbs that variation with a single application contract themed per merchant and per lender — compliance text as a design-system token, not as content.',
+      'A consumer applies for financing once. The merchant wants that one application to reach 35+ lenders without 35 forms, 35 redirects, or 35 different compliance gauntlets. Every lender has its own gateway, fields, and regulatory language. The platform absorbs all of it with one application contract that themes per merchant and per lender. Compliance text becomes a design-system token, not content.',
     metrics: [
-      { value: '12%', label: 'Conversion lift on 6M annual apps' },
-      { value: '35+', label: 'Lender integrations' },
-      { value: '3 verticals', label: 'Home improvement · retail · elective medical' },
+      { value: '6M', label: 'Annual applications across 4 channels and 35+ lender integrations' },
+      { value: '+92%', label: 'Prime applicants at Ashley Furniture (paired with +157% near-prime)' },
+      { value: '3 min', label: 'Time-to-decision vs 10–15 min traditional' },
     ],
     tags: ['Fintech', 'Multi-tenant', 'Design Systems'],
     internalHref: '/work/versatile-apply',
@@ -77,7 +77,7 @@ const otherProjects: Project[] = [
     heroStat: '60% faster',
     heroLabel: 'document verification vs. manual PDF search.',
     body:
-      'Lab technicians couldn\'t trust AI answers without seeing the source documents — existing tools gave answers without verification. I built a split-screen verification interface with citation deep-linking to exact PDF coordinates so users validate every response. Designed a gap-detection UX with an 85% confidence threshold that asks for missing documents instead of guessing. The pattern was later extracted into Document Domain Agents, a domain-agnostic framework for high-stakes RAG.',
+      'Lab technicians couldn\'t trust AI answers without seeing the source documents. Existing tools gave answers but no verification. I built a split-screen verification interface with citation deep-linking to exact PDF coordinates so users could validate every response. The gap-detection UX uses an 85% confidence threshold: if the model isn\'t sure, it asks for the missing documents instead of guessing. The pattern was later extracted into Document Domain Agents, a domain-agnostic framework for high-stakes RAG.',
     metrics: [
       { value: '92%', label: 'User compliance with upload prompts' },
       { value: '40%', label: 'Reduction in false-positive responses' },
@@ -93,7 +93,7 @@ const otherProjects: Project[] = [
     heroStat: '85%',
     heroLabel: 'confidence threshold for the "never guess" gating policy.',
     body:
-      'Most RAG systems guess when they don\'t have enough information, creating dangerous false confidence in safety-critical contexts. Document Domain Agents is the framework I extracted from Rayni for any domain where AI accuracy is non-negotiable. The gap-detection UX turns AI limitations into collaborative moments — users upload missing documents instead of losing trust in the system. Verification is split-screen, BLUF formatting handles scannability, and confidence indicators are calibrated to domain risk.',
+      'Most RAG systems guess when they don\'t have enough information, which creates dangerous false confidence in safety-critical contexts. Document Domain Agents is the framework I extracted from Rayni for any domain where AI accuracy is non-negotiable. The gap-detection UX turns AI limitations into collaborative moments. When the system needs more, users upload the missing documents instead of losing trust in it. Verification is split-screen, BLUF formatting handles scannability, and confidence indicators are calibrated to domain risk.',
     metrics: [
       { value: '11 nodes', label: 'LangGraph stateful agent workflow with checkpointing' },
       { value: '3 layers', label: 'Vector search, graph augmentation, cross-encoder reranking' },
@@ -109,10 +109,10 @@ const otherProjects: Project[] = [
     heroStat: '5-lender waterfall · in chat',
     heroLabel: 'Synchrony (prime), Fortiva (near-prime), Acima (lease-to-own), Affirm and Klarna BNPL. Every customer qualifies for something.',
     body:
-      'Qualified is a Chrome extension that lives in the browser side panel while you shop. Tell it what you want — "a laptop under $1,000" — and it searches products, compares them side-by-side, and surfaces real financing options from five lenders the moment intent shows, not at checkout. Architecture: React side panel → Express server on Fly.io → Claude (sonnet-4-6) with eight tool definitions → tool execution → streamed back. The wedge is MCP Apps: an extension of Anthropic\'s Model Context Protocol where tools return interactive HTML UIs, not just text. Sandboxed iframes hydrate via postMessage to render comparison tables, payment calculators, product grids, and pre-filled application forms directly inside the conversation. Same multi-lender waterfall pattern as Versatile / Synchrony — reimagined as an agentic sidecar with generative UI.',
+      'Qualified is a Chrome extension that lives in the browser side panel while you shop. Tell it what you want (say, "a laptop under $1,000") and it searches products, compares them side-by-side, and surfaces real financing options from five lenders the moment intent shows, not at checkout. Architecture: React side panel → Express server on Fly.io → Claude (sonnet-4-6) with eight tool definitions → tool execution → streamed back. The wedge is MCP Apps, an extension of Anthropic\'s Model Context Protocol where tools return interactive HTML UIs instead of just text. Sandboxed iframes hydrate via postMessage to render comparison tables, payment calculators, product grids, and pre-filled application forms directly inside the conversation. Same multi-lender waterfall pattern as Versatile / Synchrony, reimagined as an agentic sidecar with generative UI.',
     metrics: [
       { value: '8 tools', label: 'Agent decides the flow, 7 return interactive MCP UI' },
-      { value: '5 lenders', label: 'Synchrony, Fortiva, Acima, Affirm, Klarna — prime to BNPL' },
+      { value: '5 lenders', label: 'Synchrony, Fortiva, Acima, Affirm, Klarna · prime to BNPL' },
       { value: 'Sidecar', label: 'Sits next to any retail site, no checkout integration required' },
     ],
     tags: ['Chrome Extension', 'AI Sidecar', 'MCP Apps', 'Embedded Fintech'],
@@ -125,7 +125,7 @@ const otherProjects: Project[] = [
     heroStat: '13 agents · daily',
     heroLabel: 'Python pipeline runs autonomously every morning. Gathers ~400 items from 8 sources, dispatches 13 research agents in parallel, synthesizes a 4,500-word newsletter, and posts to social.',
     body:
-      'MindPattern is two systems wired together. The backend is a deterministic 12-phase Python pipeline that operates as a one-person media company on autopilot: preflight data collection across eight sources (RSS, Hacker News, arXiv, GitHub, Reddit, Twitter, YouTube, LinkedIn), parallel dispatch of thirteen specialist research agents, synthesis of 150+ findings, newsletter publishing, and platform-native social posting. A self-improving harness finds bugs in the pipeline, writes fixes using TDD, reviews its own PRs, and merges them. The public site is a chat interface built around generative UI — when the AI invokes MCP tools that return structured data, React components (finding cards, source tables, health dashboards, pattern lists, skill cards) render directly inside the conversation instead of plain text. Wrapped in a Wire Room intelligence-dossier aesthetic: JetBrains Mono everywhere, manila palette, stamp badges, grid-paper textures.',
+      'MindPattern is two systems wired together. The backend is a deterministic 12-phase Python pipeline that operates as a one-person media company on autopilot: preflight data collection across eight sources (RSS, Hacker News, arXiv, GitHub, Reddit, Twitter, YouTube, LinkedIn), parallel dispatch of thirteen specialist research agents, synthesis of 150+ findings, newsletter publishing, and platform-native social posting. A self-improving harness finds bugs in the pipeline, writes fixes using TDD, reviews its own PRs, and merges them. The public site is a chat interface built around generative UI. When the AI invokes MCP tools that return structured data, React components render directly inside the conversation instead of plain text: finding cards, source tables, health dashboards, pattern lists, skill cards. Wrapped in a Wire Room intelligence-dossier aesthetic: JetBrains Mono everywhere, manila palette, stamp badges, grid-paper textures.',
     metrics: [
       { value: '12 phases', label: 'Fully autonomous daily run across 8 sources' },
       { value: '9 components', label: 'Generative UI rendered inline in chat' },
@@ -179,10 +179,10 @@ export function ProjectsSection() {
             Versatile Credit is the consumer-financing platform behind $16B+ in financing annually,
             6 million applications in 2024, and 13,000+ retail locations. The platform was recently
             acquired by Synchrony (NYSE: SYF). I&apos;m the lead designer across all three of its
-            product surfaces &mdash; the consumer-facing applications, the merchant operator console,
-            and the internal tool Versatile uses to onboard new merchants. Three different audiences,
-            three different design languages, three different design systems &mdash; one designer
-            across all of them.
+            product surfaces: the consumer-facing applications, the merchant operator console, and
+            the internal tool Versatile uses to onboard new merchants. Three different audiences.
+            Three different design languages. Three different design systems. One designer across
+            all of them.
           </p>
         </div>
 
@@ -223,8 +223,8 @@ export function ProjectsSection() {
         {/* Footer CTA */}
         <div className="mt-32 sm:mt-40 pt-12 border-t border-border/60 max-w-3xl">
           <p className="text-base text-muted-foreground leading-relaxed">
-            Most of the products above aren\'t public. Reach out and I\'ll walk you through them in detail —
-            screen recordings, codebases, or a live ticket together.
+            Most of the products above aren\'t public. Reach out and I\'ll walk you through them in
+            detail: screen recordings, codebases, or a live ticket together.
           </p>
         </div>
       </div>

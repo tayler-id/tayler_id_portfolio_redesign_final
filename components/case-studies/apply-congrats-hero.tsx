@@ -5,8 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Eye } from 'lucide-react'
 
 import { ThemeProvider } from '@/components/demos/_system/theme-provider'
-import { StepperVertical } from '@/components/demos/_system/primitives'
-import { IPadFrame } from '@/components/demos/_system/primitives/device-frame'
+import { StepperVertical, StepperHorizontal } from '@/components/demos/_system/primitives'
+import { IPadFrame, PhoneFrame } from '@/components/demos/_system/primitives/device-frame'
 import { getLender, type LenderKey } from '@/components/demos/_system/data/lenders'
 import { getMerchant, type MerchantKey } from '@/components/demos/_system/data/merchants'
 import { useMotionPreference } from '@/hooks/use-reduced-motion'
@@ -34,6 +34,16 @@ export function ApplyCongratsHero({ merchant = 'layers' }: ApplyCongratsHeroProp
   const noAnimation = motionPref !== 'regular'
   const [index, setIndex] = useState(0)
 
+  const [isNarrow, setIsNarrow] = useState(false)
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return
+    const mql = window.matchMedia('(max-width: 640px)')
+    const sync = () => setIsNarrow(mql.matches)
+    sync()
+    mql.addEventListener('change', sync)
+    return () => mql.removeEventListener('change', sync)
+  }, [])
+
   useEffect(() => {
     if (noAnimation) return
     const id = window.setInterval(() => {
@@ -45,6 +55,235 @@ export function ApplyCongratsHero({ merchant = 'layers' }: ApplyCongratsHeroProp
   const variant = VARIANTS[index]
   const lender = getLender(variant.key)
   const merchantMeta = getMerchant(merchant)
+
+  const merchantMark = (size: 'sm' | 'md') => {
+    const logoH = size === 'md' ? 44 : 32
+    const logomarkH = size === 'md' ? 28 : 22
+    const logotypeH = size === 'md' ? 16 : 13
+    if (merchantMeta.logo && 'src' in merchantMeta.logo) {
+      return (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={merchantMeta.logo.src}
+          alt={merchantMeta.name}
+          style={{ height: logoH, width: 'auto', maxWidth: 160 }}
+          className="object-contain object-left"
+        />
+      )
+    }
+    if (merchantMeta.logo && 'logomark' in merchantMeta.logo) {
+      return (
+        <div className="flex items-center gap-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={merchantMeta.logo.logomark}
+            alt=""
+            style={{ height: logomarkH, width: logomarkH }}
+            className="object-contain"
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={merchantMeta.logo.logotype}
+            alt={merchantMeta.name}
+            style={{ height: logotypeH, width: 'auto', maxWidth: 110 }}
+            className="object-contain object-left"
+          />
+        </div>
+      )
+    }
+    return (
+      <span
+        className="text-[15px] font-bold tracking-tight"
+        style={{ color: merchantMeta.brandColor ?? 'var(--text-primary)' }}
+      >
+        {merchantMeta.name}
+      </span>
+    )
+  }
+
+  if (isNarrow) {
+    return (
+      <ThemeProvider project="apply" className="flex flex-col gap-4">
+        <div className="mx-auto w-full" style={{ maxWidth: 360 }}>
+          <PhoneFrame>
+            <div className="flex h-full w-full flex-col bg-[var(--pad)] p-4">
+              <div className="flex items-center justify-between gap-3 pb-3">
+                {merchantMark('sm')}
+              </div>
+              <div className="pb-3">
+                <StepperHorizontal
+                  steps={['Info', 'Disclosures', 'Decision']}
+                  active={3}
+                />
+              </div>
+              <article className="flex min-h-0 flex-1 flex-col rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--card-bg)] p-4 shadow-[var(--shadow-md)]">
+                <header className="relative flex items-center justify-center pb-2 min-h-[32px]">
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.div
+                      key={lender.key}
+                      initial={noAnimation ? { opacity: 1 } : { opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={noAnimation ? { opacity: 1 } : { opacity: 0, y: -4 }}
+                      transition={{ duration: 0.4, ease: 'easeOut' }}
+                      className="flex items-center gap-2"
+                    >
+                      {lender.logo ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={lender.logo.src}
+                          alt={lender.name}
+                          style={{ height: 30, width: 'auto', maxWidth: 150 }}
+                          className="object-contain"
+                        />
+                      ) : (
+                        <span
+                          className="text-[14px] font-bold tracking-tight"
+                          style={{ color: lender.brandColor }}
+                        >
+                          {lender.shortName}
+                        </span>
+                      )}
+                      <span
+                        className="block h-5 w-px bg-[var(--border-strong)]/80"
+                        aria-hidden
+                      />
+                      <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-[var(--text-primary)]">
+                        Decision
+                      </span>
+                    </motion.div>
+                  </AnimatePresence>
+                </header>
+
+                <div className="flex flex-1 flex-col items-center justify-center gap-3 text-center px-1">
+                  <h2 className="text-[28px] font-medium tracking-tight leading-none text-[var(--text-primary)]">
+                    Congratulations!
+                  </h2>
+
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.p
+                      key={`subtitle-${lender.key}`}
+                      initial={noAnimation ? { opacity: 1 } : { opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={noAnimation ? { opacity: 1 } : { opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                      className="text-[11.5px] font-bold text-[var(--text-primary)] leading-snug"
+                    >
+                      You are now a {lender.name} card holder!
+                    </motion.p>
+                  </AnimatePresence>
+
+                  <div className="flex flex-col items-center gap-1 pt-1">
+                    <p className="text-[11px] font-bold text-[var(--text-primary)]">
+                      Account Credit Limit
+                    </p>
+                    <AnimatePresence mode="wait" initial={false}>
+                      <motion.p
+                        key={`amount-${lender.key}`}
+                        initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: -6 }}
+                        transition={{ duration: 0.35, ease: 'easeOut' }}
+                        className="text-[44px] font-bold tracking-tight leading-none"
+                        style={{ color: 'var(--positive)' }}
+                      >
+                        {variant.amount}
+                      </motion.p>
+                    </AnimatePresence>
+                  </div>
+
+                  <div className="flex flex-col items-center gap-1 pt-1">
+                    <span className="text-[10.5px] font-bold text-[var(--text-primary)] uppercase tracking-wide">
+                      Card Number
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <Eye
+                        className="h-3 w-3"
+                        style={{ color: 'var(--cta)' }}
+                        strokeWidth={2}
+                        aria-hidden
+                      />
+                      <AnimatePresence mode="wait" initial={false}>
+                        <motion.span
+                          key={`card-${lender.key}`}
+                          initial={noAnimation ? { opacity: 1 } : { opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={noAnimation ? { opacity: 1 } : { opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="text-[11.5px] tracking-[0.04em] text-[var(--text-primary)] tabular-nums"
+                        >
+                          **** **** ****{variant.cardLast4}
+                        </motion.span>
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                </div>
+
+                <footer className="flex items-center justify-center pt-2">
+                  <button
+                    type="button"
+                    tabIndex={-1}
+                    aria-hidden
+                    className="rounded-[var(--radius-md)] px-4 py-1.5 text-[11.5px] font-semibold text-[var(--cta-text)] shadow-[var(--shadow-sm)] pointer-events-none"
+                    style={{ background: 'var(--cta)' }}
+                  >
+                    I&rsquo;m Done
+                  </button>
+                </footer>
+              </article>
+            </div>
+          </PhoneFrame>
+        </div>
+
+        <div
+          className="mx-auto flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[10px] uppercase tracking-[0.18em] font-mono text-muted-foreground px-3"
+          aria-live="polite"
+        >
+          <span>Approved</span>
+          <span aria-hidden>·</span>
+          <button
+            type="button"
+            onClick={() => setIndex((index + VARIANTS.length - 1) % VARIANTS.length)}
+            className="text-foreground hover:text-primary transition-colors"
+            aria-label="Previous lender"
+          >
+            ‹
+          </button>
+          {VARIANTS.map((v, i) => {
+            const active = i === index
+            const l = getLender(v.key)
+            return (
+              <button
+                key={v.key}
+                type="button"
+                onClick={() => setIndex(i)}
+                className={
+                  'transition-colors ' +
+                  (active
+                    ? 'text-foreground font-bold'
+                    : 'text-muted-foreground hover:text-foreground')
+                }
+                aria-pressed={active}
+                aria-label={`Show ${l.shortName} approval`}
+                style={active ? { color: l.brandColor } : undefined}
+              >
+                {l.shortName}
+              </button>
+            )
+          })}
+          <button
+            type="button"
+            onClick={() => setIndex((index + 1) % VARIANTS.length)}
+            className="text-foreground hover:text-primary transition-colors"
+            aria-label="Next lender"
+          >
+            ›
+          </button>
+          <span aria-hidden>·</span>
+          <span>One template</span>
+        </div>
+      </ThemeProvider>
+    )
+  }
 
   return (
     <ThemeProvider project="apply" className="flex flex-col gap-4">

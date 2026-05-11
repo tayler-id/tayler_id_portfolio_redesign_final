@@ -32,8 +32,8 @@ export function StepHIPersonal({ merchant, compact = false }: StepHIPersonalProp
       </div>
 
       <div className={compact ? 'grid grid-cols-1 gap-3' : 'grid grid-cols-2 gap-3'}>
-        <OfferCard name="John Doe" lender={sunlight} approval="$12,000" accent={accent} selected />
-        <OfferCard name="John Doe" lender={tdBank} approval="$14,900" accent={accent} />
+        <OfferCard name="John Doe" lender={sunlight} approval="$12,000" accent={accent} selected compact={compact} />
+        <OfferCard name="John Doe" lender={tdBank} approval="$14,900" accent={accent} compact={compact} />
       </div>
 
       <p className="text-[10.5px] text-center text-[var(--text-tertiary)]">
@@ -47,6 +47,7 @@ export function StepHIPersonal({ merchant, compact = false }: StepHIPersonalProp
         subterms="with monthly loan payments of $199.23."
         amount="$199/mo"
         accent={accent}
+        compact={compact}
       />
 
       <div className="flex items-start gap-2 rounded-md border border-[var(--border)] p-2.5 text-[11px] leading-[1.5] text-[var(--text-secondary)]">
@@ -71,13 +72,17 @@ function OfferCard({
   approval,
   accent,
   selected,
+  compact = false,
 }: {
   name: string
   lender: Lender
   approval: string
   accent: string
   selected?: boolean
+  compact?: boolean
 }) {
+  const logoBoxH = compact ? 36 : 24
+  const logoH = compact ? 30 : 20
   return (
     <div
       className="flex flex-col gap-2 rounded-md px-3 py-3"
@@ -92,13 +97,13 @@ function OfferCard({
         You have an offer from {lender.shortName}
       </p>
       {lender.logo && 'src' in lender.logo && (
-        <div className="flex items-center" style={{ height: 24 }}>
+        <div className="flex items-center" style={{ height: logoBoxH }}>
           <Image
             src={lender.logo.src}
             alt={lender.name}
             width={lender.logo.width}
             height={lender.logo.height}
-            style={{ height: 20, width: 'auto', maxWidth: '100%' }}
+            style={{ height: logoH, width: 'auto', maxWidth: '100%' }}
           />
         </div>
       )}
@@ -119,6 +124,7 @@ function SelectedOfferRow({
   subterms,
   amount,
   accent,
+  compact = false,
 }: {
   lender: Lender
   loanType: string
@@ -126,7 +132,47 @@ function SelectedOfferRow({
   subterms?: string
   amount: string
   accent: string
+  compact?: boolean
 }) {
+  // On compact (phone) chrome, stack the amount below the info so the terms line
+  // stops getting squeezed to one word per line.
+  if (compact) {
+    return (
+      <div className="flex items-stretch overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card-bg)]">
+        <div className="w-1.5 flex-shrink-0" style={{ background: accent }} />
+        <div className="flex flex-1 flex-col gap-2 px-3 py-3 min-w-0">
+          <div className="flex items-center gap-2 min-w-0">
+            <div
+              className="h-3.5 w-3.5 flex-shrink-0 rounded-full"
+              style={{ border: `2px solid ${accent}` }}
+            />
+            {lender.logo && 'src' in lender.logo && (
+              <Image
+                src={lender.logo.src}
+                alt={lender.name}
+                width={lender.logo.width}
+                height={lender.logo.height}
+                style={{ height: 22, width: 'auto' }}
+              />
+            )}
+            <p className="text-[11px] font-bold flex-1 min-w-0 text-right" style={{ color: accent }}>
+              {loanType}
+            </p>
+            <p className="text-[13px] font-bold text-[var(--text-primary)] flex-shrink-0">
+              {amount}
+            </p>
+          </div>
+          <div className="flex flex-col gap-0.5">
+            <p className="text-[10.5px] leading-snug text-[var(--text-secondary)]">{terms}</p>
+            {subterms && (
+              <p className="text-[10.5px] leading-snug text-[var(--text-secondary)]">{subterms}</p>
+            )}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex items-stretch overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card-bg)]">
       <div className="w-1.5 flex-shrink-0" style={{ background: accent }} />
