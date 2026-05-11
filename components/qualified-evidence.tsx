@@ -19,7 +19,7 @@ const shots: ModeShot[] = [
     label: 'Welcome',
     src: '/assets/qualified/01-welcome-intro.png',
     caption:
-      'Side panel docks beside any retail site. No checkout integration required — Qualified rides along while you shop and asks what you are looking for.',
+      'Side panel docks beside any retail site. No checkout integration required. Qualified rides along while you shop and asks what you are looking for.',
   },
   {
     id: 'products',
@@ -33,21 +33,21 @@ const shots: ModeShot[] = [
     label: 'Detail',
     src: '/assets/qualified/05-product-detail-boswell.png',
     caption:
-      'Click any card and the detail tool returns specs, pricing, and a buying-options panel — rendered inside the conversation thread alongside the product page.',
+      'Click any card and the detail tool returns specs, pricing, and a buying-options panel, rendered inside the conversation thread alongside the product page.',
   },
   {
     id: 'waterfall',
     label: 'Lender waterfall',
     src: '/assets/qualified/07-lender-waterfall.png',
     caption:
-      'Synchrony (prime), Fortiva (near-prime), Acima (lease-to-own), plus Affirm and Klarna BNPL — every customer qualifies for something. Same waterfall pattern from Versatile / Synchrony, surfaced the moment intent shows.',
+      'Synchrony (prime), Fortiva (near-prime), Acima (lease-to-own), plus Affirm and Klarna BNPL. Every customer qualifies for something. Same waterfall pattern from Versatile / Synchrony, surfaced the moment intent shows.',
   },
   {
     id: 'calculator',
     label: 'Payment calculator',
     src: '/assets/qualified/09-payment-calculator.png',
     caption:
-      'Ask "show me how much I will be paying" and a calculator tool returns a month-by-month payment chart in chat — interactive, not a static answer.',
+      'Ask "show me how much I will be paying" and a calculator tool returns a month-by-month payment chart in chat. Interactive, not a static answer.',
   },
   {
     id: 'apply',
@@ -126,7 +126,7 @@ export function QualifiedEvidence() {
             >
               <Image
                 src={active.src}
-                alt={`Qualified — ${active.label}`}
+                alt={`Qualified · ${active.label}`}
                 fill
                 sizes="(min-width: 1024px) 768px, 100vw"
                 className="object-cover object-top"

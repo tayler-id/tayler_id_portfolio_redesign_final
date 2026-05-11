@@ -59,7 +59,7 @@ export function StepApproved({
         <p className="text-[12px] leading-relaxed text-[var(--text-secondary)]">
           At Dental Practice, we strive for your total satisfaction. The Patient Financing Promise
           allows you to cancel your financing within 9 days of offer acceptance. We will be
-          responsible for any treatment costs already incurred. That's our promise — we want to make
+          responsible for any treatment costs already incurred. That's our promise. We want to make
           sure you understand your offer before we finalize your application.
         </p>
       </section>

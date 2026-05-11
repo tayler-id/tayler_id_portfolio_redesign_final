@@ -18,7 +18,7 @@ const BRANCHES: Branch[] = [
     vertical: 'Home Improvement',
     channel: 'In-home tablet',
     lenders: 'Sunlight · Wells Fargo · TD Bank',
-    merchant: 'West Shore Home — locked stack',
+    merchant: 'West Shore Home · locked stack',
   },
   {
     key: 'retail',
@@ -56,7 +56,7 @@ export function ThreeVerticalsFlow() {
       ref={ref}
       className="w-full max-w-3xl mx-auto py-4"
       role="img"
-      aria-label="One application form forks into three verticals — Home Improvement, Retail, and Elective Medical — each with its own channel and signature lender stack"
+      aria-label="One application form forks into three verticals (Home Improvement, Retail, and Elective Medical), each with its own channel and signature lender stack"
     >
       <motion.div
         {...fade(0)}

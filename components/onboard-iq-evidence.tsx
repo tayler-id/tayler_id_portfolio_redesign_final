@@ -19,21 +19,21 @@ const shots: ModeShot[] = [
     label: 'Tasks',
     src: '/assets/onboardIQ/01-my-tasks.png',
     caption:
-      'Single inbox cuts across every running deployment. 107 active, 32 done, 22 in flight, 40 overdue — the same view that replaced the weekly coordination meeting with a 5-minute daily brief.',
+      'Single inbox cuts across every running deployment. 107 active, 32 done, 22 in flight, 40 overdue. The same view that replaced the weekly coordination meeting with a 5-minute daily brief.',
   },
   {
     id: 'instances',
     label: 'Instances',
     src: '/assets/onboardIQ/02-workflow-instances.png',
     caption:
-      'Every deployment is a workflow instance with progress, status, and SLA. The list scales — what used to be tracked across spreadsheets and Slack threads now lives in one place across 30,000+ merchants.',
+      'Every deployment is a workflow instance with progress, status, and SLA. The list scales. What used to be tracked across spreadsheets and Slack threads now lives in one place across 30,000+ merchants.',
   },
   {
     id: 'step',
     label: 'Step',
     src: '/assets/onboardIQ/03-active-step.png',
     caption:
-      'Open an instance: every step has owner, started, completed, duration, SLA. Activity log on the right traces who launched, who escalated, who signed off — audit-grade by default, not bolted on.',
+      'Open an instance: every step has owner, started, completed, duration, SLA. Activity log on the right traces who launched, who escalated, who signed off. Audit-grade by default, not bolted on.',
   },
   {
     id: 'form',
@@ -47,7 +47,7 @@ const shots: ModeShot[] = [
     label: 'Collect',
     src: '/assets/onboardIQ/05-collect-locations.png',
     caption:
-      'Collect Data step renders entities as editable tables with hierarchy on the left. Locations, devices, users, domains — the same shell, scoped to whichever entity the workflow needs at this step.',
+      'Collect Data step renders entities as editable tables with hierarchy on the left. Locations, devices, users, domains. Same shell, scoped to whichever entity the workflow needs at this step.',
   },
   {
     id: 'import',
@@ -61,7 +61,7 @@ const shots: ModeShot[] = [
     label: 'Designer',
     src: '/assets/onboardIQ/07-workflow-designer.png',
     caption:
-      'Workflow designer: step library on the left, canvas in the middle, per-step config on the right. Critical Path, Review Required, Sign-Off — operations primitives baked into every workflow without writing custom logic.',
+      'Workflow designer: step library on the left, canvas in the middle, per-step config on the right. Critical Path, Review Required, Sign-Off. Operations primitives baked into every workflow without writing custom logic.',
   },
   {
     id: 'compare',
@@ -75,7 +75,7 @@ const shots: ModeShot[] = [
     label: 'Roles',
     src: '/assets/onboardIQ/09-workflow-roles.png',
     caption:
-      'RBAC for the workflow itself. Default permissions per role, default sign-off and review users — a workflow is a contract, not a checklist, and the people side ships with the steps.',
+      'RBAC for the workflow itself. Default permissions per role, default sign-off and review users. A workflow is a contract, not a checklist, and the people side ships with the steps.',
   },
 ]
 
@@ -147,7 +147,7 @@ export function OnboardIqEvidence() {
             >
               <Image
                 src={active.src}
-                alt={`OnboardIQ — ${active.label}`}
+                alt={`OnboardIQ · ${active.label}`}
                 fill
                 sizes="(min-width: 1024px) 768px, 100vw"
                 className="object-cover object-top"

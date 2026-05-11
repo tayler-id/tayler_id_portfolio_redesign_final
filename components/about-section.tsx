@@ -102,11 +102,12 @@ export function AboutSection() {
               <User className="w-4 h-4" />
               About Me
             </motion.div>
-            <h2 className="text-4xl lg:text-6xl font-bold font-display mb-4">
-              Crafting Digital <span className="gradient-text">Experiences</span>
+            <h2 className="text-4xl lg:text-6xl font-bold font-display mb-4 tracking-tight leading-[1.05]">
+              I design the system and<br className="hidden sm:inline" /> write the code.
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Where design meets technology to create meaningful user experiences
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Most product designers stop at handoff. Most engineers don&apos;t read the research.
+              I do both, on the same project, for the same team.
             </p>
           </div>
         </ScrollReveal>
@@ -116,7 +117,6 @@ export function AboutSection() {
           <div className="space-y-8">
             <ScrollReveal direction="left">
               <div className="space-y-6">
-                <h3 className="text-3xl font-bold font-display">Hi, I'm Tayler</h3>
                 <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                   <p>
                     I'm a Senior Product Designer who codes at production scale. I don't hand off
@@ -126,7 +126,7 @@ export function AboutSection() {
                   <p>
                     Currently at Synchrony Bank (acquired Versatile Credit in 2025), I lead UX
                     design for a $16B+ fintech platform serving 30,000+ merchants across retail,
-                    elective medical, and home improvement — and because I'm full-stack, I ship
+                    elective medical, and home improvement. Because I&apos;m full-stack, I ship
                     the code myself. I drove a 12% conversion lift on 6M annual applications and
                     built OnboardIQ, the workflow product that reduced merchant onboarding from
                     5 days of cross-team meetings to 2 hours.

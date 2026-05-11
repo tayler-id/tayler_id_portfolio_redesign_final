@@ -28,19 +28,19 @@ import {
 export function TDBankCommercialFlow() {
   const screens: { caption: string; render: () => React.ReactNode }[] = [
     {
-      caption: 'Consent gate — authority to act on behalf of the business',
+      caption: 'Consent gate · authority to act on behalf of the business',
       render: () => <ConsentGateScreen />,
     },
     {
-      caption: 'Section overview — five steps before submit, with an active-step indicator',
+      caption: 'Section overview · five steps before submit, with an active-step indicator',
       render: () => <StepperScreen />,
     },
     {
-      caption: 'Business Information — green-outlined inputs, inline NAICS guidance',
+      caption: 'Business Information · green-outlined inputs, inline NAICS guidance',
       render: () => <BusinessFormScreen />,
     },
     {
-      caption: 'Account Terms & Conditions — closing affirmation + dual-button confirmation',
+      caption: 'Account Terms & Conditions · closing affirmation + dual-button confirmation',
       render: () => <TermsScreen />,
     },
   ]

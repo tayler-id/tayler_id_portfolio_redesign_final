@@ -4,7 +4,6 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowDown, MessageCircle, Calendar, Rocket, Zap } from 'lucide-react'
 import { MagneticButton } from './animate-ui/magnetic-button'
-import { TypewriterText } from './animate-ui/typewriter-text'
 import { FloatingCard } from './animate-ui/floating-card'
 import { ScrollReveal } from './animate-ui/scroll-reveal'
 import { GradientBlob } from './animate-ui/gradient-blob'
@@ -61,9 +60,9 @@ export function HeroSection() {
   }
 
   const stats = [
-    { icon: Calendar, number: "20+", label: "Years Experience" },
-    { icon: Rocket, number: "$16B+", label: "Platform Scale" },
-    { icon: Zap, number: "AI", label: "Native Developer" }
+    { icon: Calendar, number: "20+", label: "Years shipping" },
+    { icon: Rocket, number: "$16B+", label: "Annual financing scale" },
+    { icon: Zap, number: "6M", label: "Applications a year" }
   ]
 
   return (
@@ -92,32 +91,26 @@ export function HeroSection() {
             className="text-center lg:text-left"
           >
             <motion.div variants={itemVariants} className="mb-8">
-              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary font-medium text-sm mb-6">
-                ✨ Available for new projects
+              <span className="inline-block px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs uppercase tracking-[0.25em] font-mono mb-6">
+                Available · 2026
               </span>
               <div className="space-y-4">
-                <TypewriterText
-                  text="Hello, I'm Tayler"
-                  className="text-2xl text-foreground/80 font-medium"
-                  speed={80}
-                  delay={500}
-                />
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.15] tracking-tight pb-2">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight pb-2">
                   <motion.span
                     className="block text-foreground"
                     initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: '100%' }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={noAnimation ? { duration: 0 } : { duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                    transition={noAnimation ? { duration: 0 } : { duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    Senior Full-Stack
+                    Tayler Ramsay.
                   </motion.span>
                   <motion.span
                     className="block gradient-text"
                     initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: '100%' }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={noAnimation ? { duration: 0 } : { duration: 0.8, delay: 1.25, ease: [0.16, 1, 0.3, 1] }}
+                    transition={noAnimation ? { duration: 0 } : { duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    UX Engineer
+                    Designs and ships financing flows at $16B scale.
                   </motion.span>
                 </h1>
               </div>
@@ -127,9 +120,9 @@ export function HeroSection() {
               variants={itemVariants}
               className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-2xl mx-auto lg:mx-0"
             >
-              Trained designer who codes at production scale. I take enterprise systems from
-              research through deployment. Right now I&apos;m building the platform that processes
-              $16B+ in annual financing at Synchrony Bank (acquired 2025).
+              Senior Product Designer at Synchrony, leading UX on the platform that processes
+              6M consumer applications a year across 35+ lenders. I design the system, then write
+              the front-end that ships it.
             </motion.p>
 
             <motion.div
@@ -140,7 +133,7 @@ export function HeroSection() {
                 className="group"
                 onClick={() => handleScrollToSection('#projects')}
               >
-                <span>View My Work</span>
+                <span>See the Versatile Apply case study</span>
                 <ArrowDown className={`w-4 h-4 ${!noAnimation ? 'group-hover:translate-y-1 transition-transform' : ''}`} />
               </MagneticButton>
 
@@ -148,10 +141,12 @@ export function HeroSection() {
                 variant="outline"
                 size="lg"
                 className="bg-background/50 backdrop-blur-sm"
-                onClick={() => handleScrollToSection('#contact')}
+                asChild
               >
-                <MessageCircle className="w-4 h-4" />
-                Get in Touch
+                <a href="mailto:ramsay.tayler@gmail.com">
+                  <MessageCircle className="w-4 h-4" />
+                  Email me
+                </a>
               </Button>
             </motion.div>
 

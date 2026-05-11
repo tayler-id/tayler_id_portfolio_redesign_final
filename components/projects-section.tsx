@@ -239,10 +239,17 @@ export function ProjectsSection() {
 
         {/* Footer CTA */}
         <div className="mt-32 sm:mt-40 pt-12 border-t border-border/60 max-w-3xl">
-          <p className="text-base text-muted-foreground leading-relaxed">
-            Most of the products above aren\'t public. Reach out and I\'ll walk you through them in
-            detail: screen recordings, codebases, or a live ticket together.
+          <p className="text-base text-muted-foreground leading-relaxed mb-4">
+            Most of the work above isn&apos;t public. Email me and I&apos;ll walk you through it.
+            Screen recordings, codebases, or a live ticket together.
           </p>
+          <a
+            href="mailto:ramsay.tayler@gmail.com"
+            className="inline-flex items-center gap-2 text-base text-primary hover:text-primary/80 transition-colors font-medium"
+          >
+            <span>ramsay.tayler@gmail.com</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
         </div>
       </div>
     </section>

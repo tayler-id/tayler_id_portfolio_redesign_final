@@ -71,14 +71,14 @@ export function ContactSection() {
       title: 'Email',
       value: 'ramsay.tayler@gmail.com',
       href: 'mailto:ramsay.tayler@gmail.com',
-      description: 'Drop me a line anytime'
+      description: 'Best for project inquiries'
     },
     {
       icon: Linkedin,
       title: 'LinkedIn',
-      value: 'Connect with me',
+      value: 'linkedin.com/in/tayler-ramsay',
       href: 'https://www.linkedin.com/in/tayler-ramsay/',
-      description: 'Professional network'
+      description: 'Resume and recommendations'
     }
   ]
 
@@ -99,11 +99,11 @@ export function ContactSection() {
               <Mail className="w-4 h-4" aria-hidden="true" />
               Contact
             </motion.div>
-            <h2 id="contact-heading" className="text-4xl lg:text-6xl font-bold font-display mb-4">
-              Let's Work <span className="gradient-text">Together</span>
+            <h2 id="contact-heading" className="text-4xl lg:text-6xl font-bold font-display mb-4 tracking-tight leading-[1.05]">
+              The shortest path<br className="hidden sm:inline" /> is <span className="gradient-text">email.</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Ready to bring your ideas to life? Let's discuss your next project.
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              I read every message. The fastest move is a paragraph about what you&apos;re working on.
             </p>
           </div>
         </ScrollReveal>
@@ -113,10 +113,10 @@ export function ContactSection() {
           <ScrollReveal direction="left">
             <div className="space-y-8">
               <div>
-                <h3 className="text-3xl font-bold font-display mb-4">Get in Touch</h3>
+                <h3 className="text-3xl font-bold font-display mb-4 tracking-tight">Two ways in.</h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Interested in working together? I'm always open to discussing new projects,
-                  creative ideas, or opportunities to be part of your vision.
+                  Hiring for a design role that touches implementation, or building a product that
+                  needs the system designed and the front-end shipped? Email me.
                 </p>
               </div>
 

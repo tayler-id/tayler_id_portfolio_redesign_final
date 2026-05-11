@@ -26,7 +26,7 @@ const mockups: Mockup[] = [
     label: 'Knowledge',
     src: '/assets/rayni_ai/wireframe-2-knowledge-store.png',
     caption:
-      'Folder tree on the left, file grid on the right, processing chip on uploads in flight. The structure had to make a 50-instrument knowledge store legible — folders are the unit of scope.',
+      'Folder tree on the left, file grid on the right, processing chip on uploads in flight. The structure had to make a 50-instrument knowledge store legible. Folders are the unit of scope.',
   },
   {
     id: 'verify',
@@ -40,7 +40,7 @@ const mockups: Mockup[] = [
     label: 'Confidence',
     src: '/assets/rayni_ai/wireframe-4-confidence-indicator.png',
     caption:
-      'Color pills + percentage + caveat language. High (94%) shows a confident result; medium (72%) flags a verify nudge; low (41%) triggers gap detection — the agent asks for missing documents instead of guessing.',
+      'Color pills + percentage + caveat language. High (94%) shows a confident result; medium (72%) flags a verify nudge; low (41%) triggers gap detection. The agent asks for missing documents instead of guessing.',
   },
   {
     id: 'instrument',
@@ -132,7 +132,7 @@ export function RayniMockups() {
             >
               <Image
                 src={active.src}
-                alt={`Rayni mockup — ${active.label}`}
+                alt={`Rayni mockup · ${active.label}`}
                 fill
                 sizes="(min-width: 1024px) 768px, 100vw"
                 className="object-contain"

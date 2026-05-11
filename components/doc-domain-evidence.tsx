@@ -21,7 +21,7 @@ const shots: ModeShot[] = [
     id: 'empty',
     label: 'Empty',
     caption:
-      'Cold-start chat against a fresh corpus. The agent does nothing speculative — no canned suggestions, no inferred intent. Until a user asks, there is nothing to ground.',
+      'Cold-start chat against a fresh corpus. The agent does nothing speculative. No canned suggestions, no inferred intent. Until a user asks, there is nothing to ground.',
     dark: '/assets/doc-domain/chat-empty.png',
   },
   {
@@ -35,7 +35,7 @@ const shots: ModeShot[] = [
     id: 'citations',
     label: 'Citations',
     caption:
-      'Every claim carries a citation chip mapped to its source span. Expand the chip and the inline references resolve to the original document, page, and section — no hallucinated authority.',
+      'Every claim carries a citation chip mapped to its source span. Expand the chip and the inline references resolve to the original document, page, and section. No hallucinated authority.',
     dark: '/assets/doc-domain/bluf-citations-expanded.png',
   },
   {
@@ -49,7 +49,7 @@ const shots: ModeShot[] = [
     id: 'verify',
     label: 'Verify',
     caption:
-      'Click any citation and the answer splits into source view. The PDF renders with bounding boxes drawn on the exact span the model quoted — verification by direct comparison, not by trust.',
+      'Click any citation and the answer splits into source view. The PDF renders with bounding boxes drawn on the exact span the model quoted. Verification by direct comparison, not by trust.',
     dark: '/assets/doc-domain/split-view-bounding-box.png',
     light: '/assets/doc-domain/split-view-bounding-box-light.png',
   },
@@ -57,7 +57,7 @@ const shots: ModeShot[] = [
     id: 'upload',
     label: 'Upload',
     caption:
-      'Gap-detection drives upload. When confidence drops below 85%, the agent surfaces an upload prompt instead of guessing — turning AI limits into collaborative moments where the user fills the missing context.',
+      'Gap-detection drives upload. When confidence drops below 85%, the agent surfaces an upload prompt instead of guessing. AI limits become collaborative moments where the user fills the missing context.',
     dark: '/assets/doc-domain/add-documents-modal.png',
     light: '/assets/doc-domain/add-documents-modal-light.png',
   },
@@ -65,7 +65,7 @@ const shots: ModeShot[] = [
     id: 'dashboard',
     label: 'Dashboard',
     caption:
-      'Items dashboard groups every domain entity (instruments, contracts, claims — whatever the deployment is) with their indexed corpus. Same shell across domains; the agent is reused, not rebuilt.',
+      'Items dashboard groups every domain entity (instruments, contracts, claims, whatever the deployment is) with their indexed corpus. Same shell across domains; the agent is reused, not rebuilt.',
     dark: '/assets/doc-domain/items-dashboard.png',
     light: '/assets/doc-domain/items-dashboard-light.png',
   },
@@ -80,7 +80,7 @@ const shots: ModeShot[] = [
     id: 'admin',
     label: 'Admin',
     caption:
-      'RBAC-scoped admin view. Roles, access, and audit trail — the same primitives that ship in Rayni — surfaced here as the framework default, since high-stakes deployments need them on day one.',
+      'RBAC-scoped admin view. Roles, access, and audit trail (the same primitives that ship in Rayni) surfaced here as the framework default, since high-stakes deployments need them on day one.',
     dark: '/assets/doc-domain/admin-users.png',
   },
 ]
@@ -192,7 +192,7 @@ export function DocDomainEvidence() {
             >
               <Image
                 src={src}
-                alt={`Document Domain Agents — ${active.label} (${effectiveTheme})`}
+                alt={`Document Domain Agents · ${active.label} (${effectiveTheme})`}
                 fill
                 sizes="(min-width: 1024px) 768px, 100vw"
                 className="object-cover object-center"

@@ -19,7 +19,7 @@ const mockups: Mockup[] = [
     label: 'Empty',
     src: '/assets/doc-domain/wireframe-empty-chat.png',
     caption:
-      'Cold-start chat. Sidebar lists items, knowledge folders, and admin — no inferred questions, no demo prompts. The agent waits for a real query before doing anything.',
+      'Cold-start chat. Sidebar lists items, knowledge folders, and admin. No inferred questions, no demo prompts. The agent waits for a real query before doing anything.',
   },
   {
     id: 'query',
@@ -47,21 +47,21 @@ const mockups: Mockup[] = [
     label: 'Split',
     src: '/assets/doc-domain/wireframe-chat-split-view.png',
     caption:
-      'Chat on the left, source PDF on the right. The cited page renders with bounding boxes drawn on the exact span the model quoted — verification by direct comparison, not by trust.',
+      'Chat on the left, source PDF on the right. The cited page renders with bounding boxes drawn on the exact span the model quoted. Verification by direct comparison, not by trust.',
   },
   {
     id: 'docs-modal',
     label: 'Docs modal',
     src: '/assets/doc-domain/wireframe-document-list-modal.png',
     caption:
-      'Document list scoped to the active item. Add, remove, re-index — the corpus is editable in the same surface the agent reads from.',
+      'Document list scoped to the active item. Add, remove, re-index. The corpus is editable in the same surface the agent reads from.',
   },
   {
     id: 'upload',
     label: 'Upload',
     src: '/assets/doc-domain/wireframe-upload-interface.png',
     caption:
-      'Upload UI with drag-drop and progress chips. Triggered both from admin and inline from the gap-detection prompt — same component, two entry points.',
+      'Upload UI with drag-drop and progress chips. Triggered both from admin and inline from the gap-detection prompt. Same component, two entry points.',
   },
   {
     id: 'dashboard',
@@ -146,7 +146,7 @@ export function DocDomainMockups() {
             >
               <Image
                 src={active.src}
-                alt={`Document Domain Agents mockup — ${active.label}`}
+                alt={`Document Domain Agents mockup · ${active.label}`}
                 fill
                 sizes="(min-width: 1024px) 768px, 100vw"
                 className="object-contain"

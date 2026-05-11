@@ -29,7 +29,7 @@ const shots: ModeShot[] = [
     id: 'history',
     label: 'History',
     caption:
-      'Previous chats group under the selected instrument. Threads stay scoped — no cross-context bleed when you switch instruments.',
+      'Previous chats group under the selected instrument. Threads stay scoped: no cross-context bleed when you switch instruments.',
     dark: '/assets/rayni_ai/workspace/03-chat-history.png',
     light: '/assets/rayni_ai/workspace/Light/02-chat-history-light.png',
   },
@@ -45,7 +45,7 @@ const shots: ModeShot[] = [
     id: 'knowledge',
     label: 'Knowledge',
     caption:
-      'Per-instrument knowledge folders live as a context panel — Maintenance, Protocols, Manuals, Catalogs, Troubleshooting — with an upload-in-progress chip on indexed files.',
+      'Per-instrument knowledge folders live as a context panel (Maintenance, Protocols, Manuals, Catalogs, Troubleshooting), with an upload-in-progress chip on indexed files.',
     dark: '/assets/rayni_ai/workspace/06-knowledge-folders.png',
     light: '/assets/rayni_ai/workspace/Light/04-knowledge-folders-light.png',
   },
@@ -53,7 +53,7 @@ const shots: ModeShot[] = [
     id: 'combination',
     label: 'Canvas',
     caption:
-      'Build instrument workflows on a visual canvas. Same shell, Canvas tab in the context panel — chat with the whole pipeline at once.',
+      'Build instrument workflows on a visual canvas. Same shell, Canvas tab in the context panel. Chat with the whole pipeline at once.',
     dark: '/assets/rayni_ai/workspace/05-combo-canvas.png',
     light: '/assets/rayni_ai/workspace/Light/05-new-combination-light.png',
   },
@@ -61,7 +61,7 @@ const shots: ModeShot[] = [
     id: 'access',
     label: 'Access',
     caption:
-      'Role-based access control on a single matrix. Roles (User, Admin, Expert) gate what someone can do in the workspace; the matrix gates what they can see — toggling per-user access to each instrument and combination, in bulk. One source of truth for what every account can read, query, and edit.',
+      'Role-based access control on a single matrix. Roles (User, Admin, Expert) gate what someone can do in the workspace. The matrix gates what they can see, toggling per-user access to each instrument and combination, in bulk. One source of truth for what every account can read, query, and edit.',
     dark: '/assets/rayni_ai/workspace/09-user-management.png',
     light: '/assets/rayni_ai/workspace/Light/09-user-management-light.png',
   },
@@ -69,7 +69,7 @@ const shots: ModeShot[] = [
     id: 'access-detail',
     label: 'Per user',
     caption:
-      'Drill into one user and pick exactly which instruments and combinations they can reach. Same RBAC primitive, single-row view — used for narrow exceptions without breaking the bulk grid above.',
+      'Drill into one user and pick exactly which instruments and combinations they can reach. Same RBAC primitive, single-row view, used for narrow exceptions without breaking the bulk grid above.',
     dark: '/assets/rayni_ai/workspace/11-instrument-access.png',
     light: '/assets/rayni_ai/workspace/Light/11-instrument-access-light.png',
   },
@@ -182,7 +182,7 @@ export function RayniWorkspaceEvidence() {
             >
               <Image
                 src={src}
-                alt={`Rayni — ${active.label} mode (${effectiveTheme})`}
+                alt={`Rayni · ${active.label} mode (${effectiveTheme})`}
                 fill
                 sizes="(min-width: 1024px) 768px, 100vw"
                 className="object-cover object-center"

@@ -117,13 +117,13 @@ function renderChrome({
 
 const screens: WalkthroughScreen[] = [
   {
-    title: 'Multi-offer eligibility',
+    title: 'Form appears',
     eyebrow: 'Step 1 of 4',
     body: (
       <p>
-        Patient meets the application form on the West Shore Home in-home sales tablet. Sunlight
-        Financial&apos;s privacy policy floats over the form on first load — the homeowner reviews,
-        downloads, then dismisses to continue.
+        The eligibility form loads on the West Shore Home in-home sales tablet. Pre-qualification
+        copy and Sunlight Financial&apos;s disclosures live in the surface itself; the homeowner can
+        start typing immediately.
       </p>
     ),
     render: (compact) =>
@@ -132,6 +132,23 @@ const screens: WalkthroughScreen[] = [
         stepIndex: 0,
         stepTitle: 'You may be eligible for multiple offers',
         children: <StepHIEligibilityForm merchant={WSH} compact={compact} />,
+      }),
+  },
+  {
+    title: 'Privacy modal',
+    eyebrow: 'Step 2 of 4',
+    body: (
+      <p>
+        Sunlight Financial&apos;s privacy policy floats over the form. The homeowner reviews,
+        downloads if they want, then dismisses to continue. Compliance is a layer, not a barrier.
+      </p>
+    ),
+    render: (compact) =>
+      renderChrome({
+        compact,
+        stepIndex: 0,
+        stepTitle: 'You may be eligible for multiple offers',
+        children: <StepHIEligibilityForm merchant={WSH} filled compact={compact} />,
       }),
     overlay: () => (
       <ModalOverlay
@@ -142,23 +159,6 @@ const screens: WalkthroughScreen[] = [
         <PrivacyPolicyContent />
       </ModalOverlay>
     ),
-  },
-  {
-    title: 'Application — filled',
-    eyebrow: 'Step 2 of 4',
-    body: (
-      <p>
-        Modal dismissed. Cell phone populated, additional info and lender pre-qualification terms
-        appended. One form, one submit — the gateway fans the application out to multiple lenders.
-      </p>
-    ),
-    render: (compact) =>
-      renderChrome({
-        compact,
-        stepIndex: 1,
-        stepTitle: 'You may be eligible for multiple offers',
-        children: <StepHIEligibilityForm merchant={WSH} filled compact={compact} />,
-      }),
   },
   {
     title: 'Two offers returned',
@@ -172,8 +172,8 @@ const screens: WalkthroughScreen[] = [
     render: (compact) =>
       renderChrome({
         compact,
-        stepIndex: 2,
-        stepTitle: 'Great news — two offers',
+        stepIndex: 1,
+        stepTitle: 'Great news. Two offers.',
         children: <StepHIPersonal lender={SUNLIGHT} merchant={WSH} compact={compact} />,
       }),
   },
@@ -189,7 +189,7 @@ const screens: WalkthroughScreen[] = [
     render: (compact) =>
       renderChrome({
         compact,
-        stepIndex: 3,
+        stepIndex: 2,
         stepTitle: "Let's review your selection",
         children: <StepHIEligibility lender={SUNLIGHT} merchant={WSH} compact={compact} />,
       }),

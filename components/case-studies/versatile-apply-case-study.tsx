@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { ScrollReveal } from '@/components/animate-ui/scroll-reveal'
-import { CascadeDiagram } from '@/components/diagrams/cascade-diagram'
+import { CascadeFlowchart } from '@/components/diagrams/cascade-flowchart'
 import { ThreeVerticalsFlow } from '@/components/diagrams/three-verticals-flow'
 import { ApplyDemo } from '@/components/demos/apply'
 import { ApplyCongratsHero } from '@/components/case-studies/apply-congrats-hero'
@@ -103,14 +103,14 @@ export function VersatileApplyCaseStudy() {
             </div>
           </ScrollReveal>
 
-          {/* Cascade — no card wrapper, editorial */}
+          {/* Cascade — no card wrapper, editorial. Full-width to give the split layout room. */}
           <ScrollReveal delay={0.15}>
-            <div className="max-w-3xl">
-              <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-8 font-mono">
+            <div className="max-w-3xl mb-8">
+              <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground font-mono">
                 The Cascade
               </div>
-              <CascadeDiagram />
             </div>
+            <CascadeFlowchart />
           </ScrollReveal>
         </div>
       </section>
@@ -128,7 +128,7 @@ export function VersatileApplyCaseStudy() {
           <ScrollReveal delay={0.1}>
             <figure className="mt-10 sm:mt-14 max-w-3xl border-l-2 border-primary pl-6 py-2">
               <blockquote className="text-2xl sm:text-3xl font-display font-medium leading-snug tracking-tight text-foreground">
-                &ldquo;Congratulations, you&apos;re approved &mdash; that anxiety meter goes down,
+                &ldquo;Congratulations, you&apos;re approved. That anxiety meter goes down,
                 and now you&apos;re in the green.&rdquo;
               </blockquote>
               <figcaption className="mt-4 text-sm text-muted-foreground font-mono">
