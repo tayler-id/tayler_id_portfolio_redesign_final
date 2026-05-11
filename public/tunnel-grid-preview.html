@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Tunnel Grid Playground</title>
+<style>
+  html,body{margin:0;padding:0;height:100%;background:#0a0a0a;color:#a3e635;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .stage{display:grid;grid-template-rows:1fr auto;height:100%}
+  .frame{display:grid;place-items:center;padding:24px}
+  .frame svg{width:min(86vw,1100px);height:auto;display:block}
+  .panel{padding:8px 16px;color:#888;font-size:12px;border-top:1px solid #222;background:#0e0e0e}
+  .swatches{display:flex;gap:8px;padding:10px 16px;background:#111;flex-wrap:wrap;border-top:1px solid #222}
+  .swatches button{font:inherit;padding:6px 12px;background:#1a1a1a;color:#ccc;border:1px solid #333;border-radius:6px;cursor:pointer}
+  .swatches button:hover{background:#222}
+</style>
+</head>
+<body>
+  <div class="stage">
+    <div class="frame" id="frame">loading…</div>
+    <div>
+      <div class="panel" id="panel">color: #a3e635 · bg: #0a0a0a</div>
+      <div class="swatches">
+        <button data-c="#a3e635" data-bg="#0a0a0a">lime / dark</button>
+        <button data-c="#67e8f9" data-bg="#0a0a0a">cyan / dark</button>
+        <button data-c="#f472b6" data-bg="#0a0a0a">pink / dark</button>
+        <button data-c="#ffffff" data-bg="#0a0a0a">white / dark</button>
+        <button data-c="#111111" data-bg="#fafafa">ink / paper</button>
+        <button data-c="#0ea5e9" data-bg="#fafafa">sky / paper</button>
+      </div>
+    </div>
+  </div>
+<script>
+fetch('/assets/tunnel-grid.svg').then(r=>r.text()).then(t=>{
+  document.getElementById('frame').innerHTML = t;
+});
+document.querySelectorAll('.swatches button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.body.style.background=b.dataset.bg;
+    document.body.style.color=b.dataset.c;
+    document.getElementById('panel').textContent=`color: ${b.dataset.c} · bg: ${b.dataset.bg}`;
+  });
+});
+</script>
+</body>
+</html>

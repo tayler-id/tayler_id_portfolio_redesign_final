@@ -1,0 +1,31 @@
+Redaction report — 2026-05-10T22:03:39.499Z
+Source : /Users/taylerramsay/Desktop/portfolio/merchant
+Map    : /Users/taylerramsay/Desktop/portfolio/REDACTION_MAP.yaml
+Output : /Users/taylerramsay/Projects/tayler_id_portfolio_redesign_final/public/assets/versatile/merchant-portal
+
+OK    12.45.07  →  12-45-07.png  (1 boxes blurred, 3456x2234)
+OK    12.45.24  →  12-45-24.png  (1 boxes blurred, 3456x2234)
+OK    12.45.33  →  12-45-33.png  (1 boxes blurred, 3456x2234)
+OK    12.46.11  →  12-46-11.png  (1 boxes blurred, 3456x2234)
+OK    12.46.23  →  12-46-23.png  (1 boxes blurred, 3456x2234)
+OK    12.46.31  →  12-46-31.png  (1 boxes blurred, 3456x2234)
+OK    12.46.42  →  12-46-42.png  (1 boxes blurred, 3456x2234)
+OK    12.46.53  →  12-46-53.png  (2 boxes blurred, 3456x2234)
+OK    12.46.59  →  12-46-59.png  (3 boxes blurred, 3456x2234)
+OK    12.47.20  →  12-47-20.png  (2 boxes blurred, 3456x2234)
+OK    12.47.35  →  12-47-35.png  (2 boxes blurred, 3456x2234)
+OK    12.48.13  →  12-48-13.png  (3 boxes blurred, 3456x2234)
+OK    12.48.21  →  12-48-21.png  (3 boxes blurred, 3456x2234)
+OK    12.48.31  →  12-48-31.png  (4 boxes blurred, 3456x2234)
+OK    12.48.48  →  12-48-48.png  (2 boxes blurred, 3456x2234)
+OK    12.53.07  →  12-53-07.png  (3 boxes blurred, 3456x2234)
+OK    12.54.10  →  12-54-10.png  (4 boxes blurred, 3456x2234)
+OK    12.55.47  →  12-55-47.png  (1 boxes blurred, 3456x2234)
+OK    12.55.52  →  12-55-52.png  (1 boxes blurred, 3456x2234)
+OK    12.55.56  →  12-55-56.png  (1 boxes blurred, 3456x2234)
+OK    12.56.37  →  12-56-37.png  (2 boxes blurred, 3456x2234)
+OK    12.56.54  →  12-56-54.png  (3 boxes blurred, 3456x2234)
+OK    12.57.15  →  12-57-15.png  (3 boxes blurred, 3456x2234)
+OK    12.57.20  →  12-57-20.png  (3 boxes blurred, 3456x2234)
+OK    12.57.26  →  12-57-26.png  (4 boxes blurred, 3456x2234)
+OK    12.57.33  →  12-57-33.png  (4 boxes blurred, 3456x2234)

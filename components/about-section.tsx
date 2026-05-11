@@ -124,11 +124,12 @@ export function AboutSection() {
                     research through production deployment.
                   </p>
                   <p>
-                    Currently at Synchrony Bank (acquired Versatile Credit in 2025), I lead UX and
-                    engineering for a $16B+ fintech platform serving 30,000+ merchants across retail,
-                    elective medical, and home improvement. I shipped a 12% conversion lift on
-                    6M annual applications and built OnboardIQ, the workflow product that reduced
-                    merchant onboarding from 5 days of cross-team meetings to 2 hours.
+                    Currently at Synchrony Bank (acquired Versatile Credit in 2025), I lead UX
+                    design for a $16B+ fintech platform serving 30,000+ merchants across retail,
+                    elective medical, and home improvement — and because I'm full-stack, I ship
+                    the code myself. I drove a 12% conversion lift on 6M annual applications and
+                    built OnboardIQ, the workflow product that reduced merchant onboarding from
+                    5 days of cross-team meetings to 2 hours.
                   </p>
                   <p>
                     I run an agent-orchestrated, spec-driven, TDD-first practice. In the past 24 months
