@@ -38,12 +38,18 @@ export function ContactSection() {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
           'form-name': 'contact',
+          'bot-field': '',
           'name': formData.name,
           'email': formData.email,
           'subject': formData.subject,
           'message': formData.message,
         }).toString()
       })
+
+      if (!response.ok) {
+        const text = await response.text().catch(() => '')
+        console.error('Netlify Forms responded', response.status, response.statusText, text)
+      }
 
       if (response.ok) {
         setSubmitStatus('success')
