@@ -39,20 +39,37 @@ const versatileProjects: Project[] = [
     subtitle: 'Consumer financing across 4 channels and 35+ lenders.',
     heroStat: '+157%',
     heroLabel:
-      'Near-prime approvals at Ashley Furniture. 6M annual applications. 3-min decision.',
+      'Near-prime approvals across Versatile merchants with high platform adoption. 6M annual applications. 3-min decision.',
     body:
       'A consumer applies for financing once. The merchant wants that one application to reach 35+ lenders without 35 forms, 35 redirects, or 35 different compliance gauntlets. Every lender has its own gateway, fields, and regulatory language. The platform absorbs all of it with one application contract that themes per merchant and per lender. Compliance text becomes a design-system token, not content.',
     metrics: [
       { value: '6M', label: 'Annual applications across 4 channels and 35+ lender integrations' },
-      { value: '+92%', label: 'Prime applicants at Ashley Furniture (paired with +157% near-prime)' },
+      { value: '+92% / +157%', label: 'Prime applicants and near-prime approvals on Versatile merchants with high platform adoption' },
       { value: '3 min', label: 'Time-to-decision vs 10–15 min traditional' },
     ],
     tags: ['Fintech', 'Multi-tenant', 'Design Systems'],
     internalHref: '/work/versatile-apply',
   },
   {
-    id: 'onboard-iq',
+    id: 'versatile-transact-analytics',
     number: '02',
+    title: 'Versatile Transact + Analytics',
+    subtitle: 'Operator console and analytics surface. Themed per merchant, scoped per role.',
+    heroStat: '$43M+ / 7 days',
+    heroLabel:
+      'Financing managed in a single 7-day window on one elective medical partner\'s dashboard. 16,500+ payments processed in the same window.',
+    body:
+      'Apply is the surface a consumer sees once. Transact is the surface the merchant lives in. Three jobs on one console: Launch sends an application to a customer\'s device by QR, email, or Snap Sign; Track exposes the lender cascade per application with full audit log; Analytics surfaces 40+ metrics across 20 facets (approvals by age, by income band, by location, by lender). Same product themed across every merchant on the platform. Multi-tenant is not a CSS layer here. Each merchant\'s brand color is a token, each merchant\'s enabled lenders are a config, each location\'s role permissions scope what staff can see and do. Theming is a design system, not a stylesheet.',
+    metrics: [
+      { value: '$43M+ / 7 days', label: '16,500+ payments processed in a single window, one elective medical partner' },
+      { value: '40+ metrics', label: 'across 20 facets in Versatile Analytics' },
+      { value: '13,000+ locations', label: 'Brick-and-mortar retail running on the platform' },
+    ],
+    tags: ['Operator Tool', 'Multi-tenant', 'Analytics'],
+  },
+  {
+    id: 'onboard-iq',
+    number: '03',
     title: 'OnboardIQ',
     subtitle: 'Merchant onboarding workflow product. 0-to-1 at Versatile / Synchrony.',
     heroStat: '5 days → 2 hours',
@@ -201,10 +218,10 @@ export function ProjectsSection() {
         {/* Section break — separates Versatile umbrella from standalone projects */}
         <div className="mt-24 mb-20 sm:mt-32 sm:mb-24 pt-12 border-t border-border/60 max-w-3xl">
           <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-4 font-mono">
-            Other selected work
+            Consulting · outside of Versatile
           </div>
           <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tight leading-[1.05]">
-            Outside Versatile
+            Consulting work
           </h3>
         </div>
 

@@ -385,17 +385,17 @@ export function VersatileApplyCaseStudy() {
 
           <ScrollReveal delay={0.05}>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 py-6 border-y border-border/50 mb-12">
-              <StatBlock value="12%" label="conversion lift on 6M annual applications" />
-              <StatBlock value="+92%" label="prime applicants at Ashley Furniture" />
-              <StatBlock value="+157%" label="near-prime approvals at Ashley Furniture" />
+              <StatBlock value="12%" label="rise in applications from financially strong consumers, 2025 holiday season" />
+              <StatBlock value="+92% / +128%" label="prime and near-prime applicants across merchants with high platform adoption" />
+              <StatBlock value="+157%" label="near-prime approvals across merchants with high platform adoption" />
             </div>
           </ScrollReveal>
 
-          {/* Ashley detail — left-border accent, no card box */}
+          {/* Platform results — left-border accent, no card box */}
           <ScrollReveal delay={0.1}>
             <div className="border-l-2 border-primary pl-6 py-2 mb-12 max-w-3xl">
               <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-4 font-mono">
-                Ashley Furniture · Versatile cascade live
+                Versatile cascade · platform-wide results
               </div>
               <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
                 <MetricRow label="Prime applicants" value="+92%" />
@@ -403,7 +403,7 @@ export function VersatileApplyCaseStudy() {
                 <MetricRow label="Time-to-decision" value="3 min" sub="vs. 10–15 min traditional" />
               </dl>
               <p className="text-xs text-muted-foreground font-mono mt-6">
-                Source:{' '}
+                Footnoted &ldquo;Data Reflects Merchants with High Platform Adoption.&rdquo; Source:{' '}
                 <a
                   href="https://www.versatilecredit.com/blog/the-engagement-gap-why-your-credit-strategy-is-only-as-strong-as-your-consumer-connection"
                   target="_blank"
