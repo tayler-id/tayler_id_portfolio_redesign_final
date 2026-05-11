@@ -32,29 +32,28 @@ export function ContactSection() {
     setIsSubmitting(true)
 
     try {
-      // Submit to Netlify Forms
-      const response = await fetch('/', {
+      const response = await fetch('https://formspree.io/f/xbdwqbaw', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          'form-name': 'contact',
-          'bot-field': '',
-          'name': formData.name,
-          'email': formData.email,
-          'subject': formData.subject,
-          'message': formData.message,
-        }).toString()
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _replyto: formData.email,
+          _subject: formData.subject || `New message from ${formData.name}`,
+        }),
       })
-
-      if (!response.ok) {
-        const text = await response.text().catch(() => '')
-        console.error('Netlify Forms responded', response.status, response.statusText, text)
-      }
 
       if (response.ok) {
         setSubmitStatus('success')
         setFormData({ name: '', email: '', subject: '', message: '' })
       } else {
+        const body = await response.json().catch(() => null)
+        console.error('Formspree responded', response.status, response.statusText, body)
         throw new Error('Form submission failed')
       }
     } catch (error) {
@@ -62,7 +61,6 @@ export function ContactSection() {
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
-      // Reset status after 5 seconds
       setTimeout(() => setSubmitStatus('idle'), 5000)
     }
   }
@@ -179,21 +177,10 @@ export function ContactSection() {
               <form
                 onSubmit={handleSubmit}
                 className="space-y-6"
-                name="contact"
                 method="POST"
-                data-netlify="true"
-                netlify-honeypot="bot-field"
+                action="https://formspree.io/f/xbdwqbaw"
                 aria-label="Contact form"
               >
-                {/* Hidden Netlify form field */}
-                <input type="hidden" name="form-name" value="contact" />
-                {/* Honeypot field for spam protection */}
-                <div className="hidden" aria-hidden="true">
-                  <label>
-                    Don't fill this out: <input name="bot-field" tabIndex={-1} />
-                  </label>
-                </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-sm font-medium text-foreground">
