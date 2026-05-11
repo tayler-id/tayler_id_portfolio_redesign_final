@@ -3,6 +3,7 @@
 import React from 'react'
 import Image from 'next/image'
 import { AlertCircle } from 'lucide-react'
+import { SelectedOfferRow } from '../../_system/primitives'
 import { getLender, type Lender } from '../../_system/data/lenders'
 import type { Merchant } from '../../_system/data/merchants'
 
@@ -50,7 +51,7 @@ export function StepHIPersonal({ merchant, compact = false }: StepHIPersonalProp
         compact={compact}
       />
 
-      <div className="flex items-start gap-2 rounded-md border border-[var(--border)] p-2.5 text-[11px] leading-[1.5] text-[var(--text-secondary)]">
+      <div className="flex items-start gap-2 rounded-md border border-[var(--border)] p-2.5 text-[10.5px] leading-[1.5] text-[var(--text-secondary)]">
         <AlertCircle
           className="mt-px h-4 w-4 flex-shrink-0 text-red-600"
           strokeWidth={2.5}
@@ -81,35 +82,50 @@ function OfferCard({
   selected?: boolean
   compact?: boolean
 }) {
-  const logoBoxH = compact ? 36 : 24
-  const logoH = compact ? 30 : 20
+  const logoBoxH = compact ? 44 : 36
   return (
     <div
-      className="flex flex-col gap-2 rounded-md px-3 py-3"
+      className="flex flex-col gap-2 rounded-md bg-[var(--card-bg)] px-3.5 py-3.5"
       style={{
         border: selected ? `2px solid ${accent}` : '1px solid var(--border)',
       }}
     >
-      <p className="text-[13px] font-bold" style={{ color: accent }}>
+      <p className="text-[13.5px] font-bold leading-tight" style={{ color: accent }}>
         {name}
       </p>
-      <p className="text-[11px] leading-tight text-[var(--text-secondary)]">
-        You have an offer from {lender.shortName}
+      <p className="text-[11px] leading-[1.4] text-[var(--text-secondary)]">
+        You have an offer from{' '}
+        <span className="font-semibold text-[var(--text-primary)]">{lender.shortName}</span>
       </p>
       {lender.logo && 'src' in lender.logo && (
-        <div className="flex items-center" style={{ height: logoBoxH }}>
+        <div className="flex items-center justify-center" style={{ height: logoBoxH }}>
           <Image
             src={lender.logo.src}
             alt={lender.name}
             width={lender.logo.width}
             height={lender.logo.height}
-            style={{ height: logoH, width: 'auto', maxWidth: '100%' }}
+            style={{
+              maxHeight: logoBoxH,
+              maxWidth: '100%',
+              width: 'auto',
+              height: 'auto',
+              objectFit: 'contain',
+            }}
           />
         </div>
       )}
-      <div className="mt-1 flex flex-col items-center gap-0.5">
-        <p className="text-[10.5px] font-bold text-[var(--text-primary)]">Approval Amount</p>
-        <p className="text-[19px] font-extrabold tracking-tight" style={{ color: accent }}>
+      <div className="mt-1 flex flex-col items-center gap-0.5 border-t border-[var(--border)] pt-2.5">
+        <p className="text-[10.5px] font-bold uppercase tracking-wide text-[var(--text-primary)]">
+          Approval Amount
+        </p>
+        <p
+          className={
+            compact
+              ? 'text-[26px] font-extrabold tracking-tight'
+              : 'text-[22px] font-extrabold tracking-tight'
+          }
+          style={{ color: accent }}
+        >
           {approval}
         </p>
       </div>
@@ -117,95 +133,3 @@ function OfferCard({
   )
 }
 
-function SelectedOfferRow({
-  lender,
-  loanType,
-  terms,
-  subterms,
-  amount,
-  accent,
-  compact = false,
-}: {
-  lender: Lender
-  loanType: string
-  terms: string
-  subterms?: string
-  amount: string
-  accent: string
-  compact?: boolean
-}) {
-  // On compact (phone) chrome, stack the amount below the info so the terms line
-  // stops getting squeezed to one word per line.
-  if (compact) {
-    return (
-      <div className="flex items-stretch overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card-bg)]">
-        <div className="w-1.5 flex-shrink-0" style={{ background: accent }} />
-        <div className="flex flex-1 flex-col gap-2 px-3 py-3 min-w-0">
-          <div className="flex items-center gap-2 min-w-0">
-            <div
-              className="h-3.5 w-3.5 flex-shrink-0 rounded-full"
-              style={{ border: `2px solid ${accent}` }}
-            />
-            {lender.logo && 'src' in lender.logo && (
-              <Image
-                src={lender.logo.src}
-                alt={lender.name}
-                width={lender.logo.width}
-                height={lender.logo.height}
-                style={{ height: 22, width: 'auto' }}
-              />
-            )}
-            <p className="text-[11px] font-bold flex-1 min-w-0 text-right" style={{ color: accent }}>
-              {loanType}
-            </p>
-            <p className="text-[13px] font-bold text-[var(--text-primary)] flex-shrink-0">
-              {amount}
-            </p>
-          </div>
-          <div className="flex flex-col gap-0.5">
-            <p className="text-[10.5px] leading-snug text-[var(--text-secondary)]">{terms}</p>
-            {subterms && (
-              <p className="text-[10.5px] leading-snug text-[var(--text-secondary)]">{subterms}</p>
-            )}
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <div className="flex items-stretch overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card-bg)]">
-      <div className="w-1.5 flex-shrink-0" style={{ background: accent }} />
-      <div className="flex flex-1 items-center gap-3 px-3 py-2.5 min-w-0">
-        <div
-          className="h-3.5 w-3.5 flex-shrink-0 rounded-full"
-          style={{ border: `2px solid ${accent}` }}
-        />
-        {lender.logo && 'src' in lender.logo && (
-          <Image
-            src={lender.logo.src}
-            alt={lender.name}
-            width={lender.logo.width}
-            height={lender.logo.height}
-            style={{ height: 14, width: 'auto' }}
-          />
-        )}
-        <div className="flex min-w-0 flex-1 flex-col">
-          <p className="text-[11px] font-bold" style={{ color: accent }}>
-            {loanType}
-          </p>
-          <p className="text-[10.5px] leading-tight text-[var(--text-secondary)]">{terms}</p>
-          {subterms && (
-            <p className="text-[10.5px] leading-tight text-[var(--text-secondary)]">{subterms}</p>
-          )}
-        </div>
-      </div>
-      <div
-        className="flex flex-shrink-0 items-center justify-center px-3"
-        style={{ background: 'var(--neutral-bg)' }}
-      >
-        <p className="text-[12.5px] font-bold text-[var(--text-primary)]">{amount}</p>
-      </div>
-    </div>
-  )
-}

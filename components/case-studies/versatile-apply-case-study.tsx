@@ -11,6 +11,9 @@ import { ApplyDemo } from '@/components/demos/apply'
 import { ApplyCongratsHero } from '@/components/case-studies/apply-congrats-hero'
 import { getMerchant, type MerchantKey } from '@/components/demos/_system/data/merchants'
 import { TDBankCommercialFlow } from '@/components/case-studies/tdbank-commercial-flow'
+import { WesternDentalFlow } from '@/components/case-studies/western-dental-flow'
+import { WestShoreHomeFlow } from '@/components/case-studies/west-shore-home-flow'
+import { CityFurnitureFlow } from '@/components/case-studies/city-furniture-flow'
 
 const ASSET_BASE = '/assets/versatile/apply'
 
@@ -19,29 +22,23 @@ const verticals: {
   sublabel: string
   merchant: MerchantKey
   note: string
-  viewport?: 'tablet' | 'mobile'
-  /** Fallback static image for verticals whose interactive flow isn't built yet. */
-  image?: string
 }[] = [
   {
     label: 'Retail',
     sublabel: 'City Furniture · Wells Fargo cascade',
     merchant: 'city-furniture',
-    viewport: 'tablet',
     note: 'In-store kiosk decision. The cascade rolls fall-through approvals until a lender accepts.',
   },
   {
     label: 'Home Improvement',
     sublabel: 'West Shore Home · Sunlight Financial',
     merchant: 'wsh',
-    viewport: 'tablet',
     note: 'Consumer pre-qualified mid-visit. The decision moment lives inside the in-home appointment, not after it.',
   },
   {
     label: 'Elective Medical',
     sublabel: 'Western Dental · CareCredit / Sonrava',
     merchant: 'western-dental',
-    viewport: 'tablet',
     note: 'Multi-lender choice on tablet and mobile. Patients pick the best offer in-chair.',
   },
 ]
@@ -221,20 +218,60 @@ export function VersatileApplyCaseStudy() {
             </div>
           </ScrollReveal>
 
-          {/* Row 1 — full-width feature tile (Retail) */}
+          {/* Row 1 — Retail (landscape iPad, constrained to hero congrats width) */}
           <ScrollReveal delay={0.05}>
-            <div className="mx-auto mb-16 max-w-2xl">
-              <VerticalTile vertical={verticals[0]} />
+            <div className="mb-16 mx-auto w-full" style={{ maxWidth: 1024 }}>
+              <figure className="flex flex-col">
+                <CityFurnitureFlow showCaption={false} />
+                <figcaption className="mt-5 border-t border-border/60 pt-5">
+                  <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-muted-foreground">
+                    {verticals[0].label}
+                  </div>
+                  <div className="text-xl font-display font-bold tracking-tight text-foreground mt-2">
+                    {verticals[0].sublabel}
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+                    {verticals[0].note} Tap the chevron to advance.
+                  </p>
+                </figcaption>
+              </figure>
             </div>
           </ScrollReveal>
 
-          {/* Row 2 — two-up (Home Improvement + Elective Medical) */}
+          {/* Row 2 — Home Improvement + Elective Medical walkthroughs */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-16">
-            {verticals.slice(1).map((v, i) => (
-              <ScrollReveal key={v.label} delay={0.1 + i * 0.05}>
-                <VerticalTile vertical={v} />
-              </ScrollReveal>
-            ))}
+            <ScrollReveal delay={0.1}>
+              <figure className="flex flex-col">
+                <WestShoreHomeFlow showCaption={false} />
+                <figcaption className="mt-5 border-t border-border/60 pt-5">
+                  <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-muted-foreground">
+                    {verticals[1].label}
+                  </div>
+                  <div className="text-xl font-display font-bold tracking-tight text-foreground mt-2">
+                    {verticals[1].sublabel}
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+                    {verticals[1].note} Tap the chevron to advance.
+                  </p>
+                </figcaption>
+              </figure>
+            </ScrollReveal>
+            <ScrollReveal delay={0.15}>
+              <figure className="flex flex-col">
+                <WesternDentalFlow showCaption={false} />
+                <figcaption className="mt-5 border-t border-border/60 pt-5">
+                  <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-muted-foreground">
+                    {verticals[2].label}
+                  </div>
+                  <div className="text-xl font-display font-bold tracking-tight text-foreground mt-2">
+                    {verticals[2].sublabel}
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+                    {verticals[2].note} Tap the chevron to advance.
+                  </p>
+                </figcaption>
+              </figure>
+            </ScrollReveal>
           </div>
 
           <ScrollReveal delay={0.3}>
@@ -584,57 +621,6 @@ function LenderImageTile({ src, alt, label }: { src: string; alt: string; label:
   )
 }
 
-/* Vertical tile (Panel 4) — interactive ApplyDemo locked to the vertical's
- * merchant, or a fallback static iPad render for verticals whose component
- * flow isn't built yet. */
-function VerticalTile({
-  vertical,
-}: {
-  vertical: {
-    label: string
-    sublabel: string
-    merchant: MerchantKey
-    image?: string
-    note: string
-    viewport?: 'tablet' | 'mobile'
-  }
-}) {
-  return (
-    <figure className="flex flex-col">
-      {vertical.image ? (
-        <IPadLandscape
-          src={vertical.image}
-          alt={`${vertical.label} flow · ${vertical.sublabel}`}
-          sizes="(max-width: 1024px) 100vw, 33vw"
-        />
-      ) : (
-        <div className="flex justify-center">
-          <ApplyDemo
-            lockMerchant={vertical.merchant}
-            hideLenderSwitcher
-            hideViewportSwitcher
-            hideDecline
-            defaultViewport={vertical.viewport ?? 'mobile'}
-            tabletOrientation="portrait"
-          />
-        </div>
-      )}
-
-      <figcaption className="mt-5 border-t border-border/60 pt-5">
-        <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-muted-foreground">
-          {vertical.label}
-        </div>
-        <div className="text-xl font-display font-bold tracking-tight text-foreground mt-2">
-          {vertical.sublabel}
-        </div>
-        <p className="text-sm text-muted-foreground leading-relaxed mt-3">
-          {vertical.note}
-        </p>
-      </figcaption>
-    </figure>
-  )
-}
-
 function MobileVerticalTile({
   vertical,
 }: {
@@ -644,16 +630,33 @@ function MobileVerticalTile({
     merchant: MerchantKey
   }
 }) {
+  const FlowComponent =
+    vertical.merchant === 'city-furniture'
+      ? CityFurnitureFlow
+      : vertical.merchant === 'wsh'
+      ? WestShoreHomeFlow
+      : vertical.merchant === 'western-dental'
+      ? WesternDentalFlow
+      : null
+
   return (
     <figure className="flex flex-col">
       <div className="flex justify-center">
-        <ApplyDemo
-          lockMerchant={vertical.merchant}
-          hideLenderSwitcher
-          hideViewportSwitcher
-          hideDecline
-          defaultViewport="mobile"
-        />
+        {FlowComponent ? (
+          <FlowComponent
+            showCaption={false}
+            defaultViewport="mobile"
+            hideViewportSwitcher
+          />
+        ) : (
+          <ApplyDemo
+            lockMerchant={vertical.merchant}
+            hideLenderSwitcher
+            hideViewportSwitcher
+            hideDecline
+            defaultViewport="mobile"
+          />
+        )}
       </div>
       <figcaption className="mt-5 border-t border-border/60 pt-5">
         <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-muted-foreground">

@@ -122,27 +122,21 @@ export function ChromeMobile({
         </article>
       </main>
 
-      {/* Sticky bottom bar */}
-      <footer className="flex items-center justify-between gap-2 border-t border-[var(--border)] bg-[var(--card-bg)] px-3 py-3">
+      {/* Sticky bottom bar — matches iPad chrome footer (Back link + CTA pill). */}
+      <footer className="flex items-center justify-between gap-3 border-t border-[var(--border)] bg-[var(--card-bg)] px-4 py-3">
         <button
           type="button"
           onClick={onBack}
           disabled={!canBack}
-          className="text-[12px] font-semibold text-[var(--text-secondary)] disabled:opacity-30"
+          className="whitespace-nowrap text-[13px] font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)] disabled:opacity-30"
         >
           Back
         </button>
-        <span
-          className="inline-flex items-center rounded-full border border-[var(--border)] bg-[var(--pad)] px-2.5 py-1 text-[10.5px] uppercase tracking-[0.14em] text-[var(--text-tertiary)]"
-          style={{ fontFamily: 'var(--font-mono)' }}
-        >
-          Estimate payments
-        </span>
         <button
           type="button"
           onClick={onNext}
           disabled={!canNext}
-          className="rounded-full px-5 py-2 text-[12.5px] font-semibold text-[var(--cta-text)] shadow-[var(--shadow-sm)] transition-transform active:scale-[0.98] disabled:opacity-40"
+          className="whitespace-nowrap rounded-full px-5 py-2 text-[13px] font-semibold text-[var(--cta-text)] shadow-[var(--shadow-sm)] transition-transform active:scale-[0.98] disabled:opacity-40"
           style={{ background: 'var(--cta)' }}
         >
           {nextLabel}

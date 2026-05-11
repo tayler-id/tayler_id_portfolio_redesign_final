@@ -64,6 +64,11 @@ export const MERCHANTS: Merchant[] = [
     name: 'City Furniture',
     vertical: 'retail',
     brandColor: '#dc2626',
+    logo: {
+      src: '/assets/versatile/apply/merchant-logos/city-furniture.svg',
+      width: 240,
+      height: 56,
+    },
   },
   {
     key: 'wsh',

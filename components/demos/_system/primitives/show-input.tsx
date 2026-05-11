@@ -10,13 +10,19 @@ interface ShowInputProps {
   label: string
   affordance?: Affordance
   className?: string
-  size?: 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg'
 }
 
 const ICON: Record<Exclude<Affordance, 'none'>, LucideIcon> = {
   calendar: Calendar,
   eye: Eye,
   chevron: ChevronDown,
+}
+
+const SIZE_STYLES: Record<NonNullable<ShowInputProps['size']>, string> = {
+  sm: 'h-10 px-3 text-[12px]',
+  md: 'h-12 px-4 text-[15px]',
+  lg: 'h-14 px-4 text-base',
 }
 
 /**
@@ -34,9 +40,9 @@ export function ShowInput({
     <div
       role="presentation"
       className={cn(
-        'flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--card-bg)] px-4',
+        'flex items-center gap-2 rounded-[var(--radius-sm)] border border-[var(--border)] bg-[var(--card-bg)]',
         'shadow-[var(--shadow-xs)] transition-colors',
-        size === 'lg' ? 'h-14 text-base' : 'h-12 text-[15px]',
+        SIZE_STYLES[size],
         className,
       )}
     >

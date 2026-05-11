@@ -230,9 +230,11 @@ export function ApplyDemo({
         />
       )}
 
-      {/* Toolbar — lender switcher */}
+      {/* Toolbar — lender switcher. Pulled in with `flex-wrap` so the
+          lender pills sit next to the heading instead of getting pushed
+          to the far right and "hanging" off the column. */}
       {!hideLenderSwitcher && (
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
           <div className="flex flex-col gap-1">
             <span
               className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground"
