@@ -10,26 +10,35 @@ import { ApplyDemo } from '@/components/demos/apply'
 
 const ASSET_BASE = '/assets/versatile/apply'
 
-const verticals = [
+import type { MerchantKey } from '@/components/demos/_system/data/merchants'
+
+const verticals: {
+  label: string
+  sublabel: string
+  merchant: MerchantKey
+  note: string
+  /** Fallback static image for verticals whose interactive flow isn't built yet. */
+  image?: string
+}[] = [
   {
     label: 'Home Improvement',
-    sublabel: 'West Shore Home · TD Bank',
-    image: `${ASSET_BASE}/home-improvement/wsh-02-pre-qualified.png`,
+    sublabel: 'West Shore Home · Sunlight Financial',
+    merchant: 'wsh',
     note: 'Consumer pre-qualified mid-visit. The decision moment lives inside the in-home appointment, not after it.',
   },
   {
     label: 'Retail',
-    sublabel: 'City Furniture · Synchrony',
-    image: `${ASSET_BASE}/heroes/apply-hero-01-synchrony-decision-city-furniture.png`,
-    note: 'In-store kiosk decision — Synchrony approves the consumer at the cashwrap before they leave.',
+    sublabel: 'City Furniture · Wells Fargo cascade',
+    merchant: 'city-furniture',
+    note: 'In-store kiosk decision — the cascade rolls fall-through approvals until a lender accepts.',
   },
   {
     label: 'Elective Medical',
     sublabel: 'Western Dental · CareCredit / Sonrava',
-    image: `${ASSET_BASE}/elective-medical/wd-03-multi-lender-choice.png`,
+    merchant: 'western-dental',
     note: 'Multi-lender choice on tablet and mobile. Patients pick the best offer in-chair.',
   },
-] as const
+]
 
 const lenderTiles = [
   { file: 'retail-desktop/lender-td-disclosures.png', label: 'TD Bank · Disclosures' },
@@ -274,7 +283,7 @@ export function VersatileApplyCaseStudy() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-            <ApplyDemo defaultLender="fortiva" merchant="layers" />
+            <ApplyDemo defaultLender="fortiva" lockMerchant="layers" />
           </ScrollReveal>
 
           <ScrollReveal delay={0.3}>
@@ -626,24 +635,39 @@ function TDCompleteTile({ src, alt, label }: { src: string; alt: string; label: 
   )
 }
 
-/* Vertical tile (Panel 4) — iPad landscape device frame + label + note */
+/* Vertical tile (Panel 4) — interactive ApplyDemo locked to the vertical's
+ * merchant, or a fallback static iPad render for verticals whose component
+ * flow isn't built yet. */
 function VerticalTile({
   vertical,
 }: {
   vertical: {
     label: string
     sublabel: string
-    image: string
+    merchant: MerchantKey
+    image?: string
     note: string
   }
 }) {
   return (
     <figure className="flex flex-col">
-      <IPadLandscape
-        src={vertical.image}
-        alt={`${vertical.label} flow — ${vertical.sublabel}`}
-        sizes="(max-width: 1024px) 100vw, 33vw"
-      />
+      {vertical.image ? (
+        <IPadLandscape
+          src={vertical.image}
+          alt={`${vertical.label} flow — ${vertical.sublabel}`}
+          sizes="(max-width: 1024px) 100vw, 33vw"
+        />
+      ) : (
+        <div className="flex justify-center">
+          <ApplyDemo
+            lockMerchant={vertical.merchant}
+            hideLenderSwitcher
+            hideViewportSwitcher
+            hideDecline
+            defaultViewport="mobile"
+          />
+        </div>
+      )}
       <figcaption className="mt-5">
         <div className="text-xl font-display font-bold tracking-tight text-foreground">
           {vertical.label}

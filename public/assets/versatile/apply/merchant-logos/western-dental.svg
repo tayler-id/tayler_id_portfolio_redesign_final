@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 36" width="220" height="36" role="img" aria-label="Western Dental">
+  <!-- Tooth glyph -->
+  <g fill="#c1272d">
+    <path d="M10 6 C 6 6, 4 10, 4 14 C 4 18, 6 22, 8 25 L 9 30 C 9 32, 11 32, 12 30 L 13 24 L 14 24 L 15 30 C 15 32, 17 32, 17 30 L 18 25 C 20 22, 22 18, 22 14 C 22 10, 20 6, 16 6 C 14 6, 13 7, 13 7 C 13 7, 12 6, 10 6 Z" />
+  </g>
+  <!-- Wordmark -->
+  <text x="30" y="20" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#c1272d" letter-spacing="-0.2">WESTERN</text>
+  <text x="30" y="32" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="500" fill="#c1272d" letter-spacing="0.4">DENTAL</text>
+</svg>

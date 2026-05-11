@@ -8,7 +8,7 @@ import type { Lender } from '../../_system/data/lenders'
 interface ChromeTabletProps {
   merchant: MerchantKey
   activeStepIndex: number
-  stepLabels?: [string, string, string]
+  stepLabels?: string[]
   stepTitle: string
   lender: Lender
   declineSlot?: React.ReactNode
@@ -20,7 +20,7 @@ interface ChromeTabletProps {
   canNext?: boolean
 }
 
-const DEFAULT_LABELS: [string, string, string] = ['Applicant Info', 'Pre-qualified', 'Decision']
+const DEFAULT_LABELS: string[] = ['Applicant Info', 'Pre-qualified', 'Decision']
 
 export function ChromeTablet({
   merchant,
@@ -42,15 +42,24 @@ export function ChromeTablet({
       {/* Left rail: merchant logo (top) + stepper (vertically centered) */}
       <div className="flex w-[230px] shrink-0 flex-col pt-2 pr-4">
         <div className="flex items-center gap-2 select-none">
-          {m.logo ? (
+          {m.logo && 'src' in m.logo ? (
+            // Single combined wordmark
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={m.logo.src}
+              alt={m.name}
+              style={{ height: 44, width: 'auto', maxWidth: 200 }}
+              className="object-contain object-left"
+            />
+          ) : m.logo && 'logomark' in m.logo ? (
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={m.logo.logomark} alt="" style={{ height: 28, width: 28 }} className="object-contain" />
+              <img src={m.logo.logomark} alt="" style={{ height: 32, width: 32 }} className="object-contain" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={m.logo.logotype}
                 alt={m.name}
-                style={{ height: 16, width: 'auto', maxWidth: 100 }}
+                style={{ height: 18, width: 'auto', maxWidth: 110 }}
                 className="object-contain object-left"
               />
             </>
@@ -112,7 +121,7 @@ export function ChromeTablet({
               type="button"
               onClick={onNext}
               disabled={!canNext}
-              className="rounded-[var(--radius-md)] px-5 py-2 text-[13px] font-semibold text-[var(--cta-text)] shadow-[var(--shadow-sm)] transition-transform active:scale-[0.98] disabled:opacity-40"
+              className="rounded-full px-6 py-2 text-[13px] font-semibold text-[var(--cta-text)] shadow-[var(--shadow-sm)] transition-transform active:scale-[0.98] disabled:opacity-40"
               style={{ background: 'var(--cta)' }}
             >
               {nextLabel}

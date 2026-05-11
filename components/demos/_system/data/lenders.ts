@@ -13,6 +13,9 @@ export type LenderKey =
   | 'acima'
   | 'snap'
   | 'genesis'
+  | 'sunlight'
+  | 'carecredit'
+  | 'sonrava'
 
 export type LenderState = 'pending' | 'approved' | 'declined' | 'skipped'
 
@@ -53,7 +56,7 @@ export const LENDERS: Lender[] = [
     name: 'TD Bank',
     shortName: 'TD Bank',
     brandColor: '#2A8138',
-    logo: null,
+    logo: { src: '/assets/versatile/apply/lender-logos/td-bank.png', width: 173, height: 77 },
     declineCopy:
       'TD Bank, N.A. was unable to approve your application at this time.',
     positionLabel: 'Tertiary',
@@ -63,7 +66,7 @@ export const LENDERS: Lender[] = [
     name: 'Acima Leasing',
     shortName: 'Acima',
     brandColor: '#0066CC',
-    logo: null,
+    logo: { src: '/assets/versatile/apply/lender-logos/acima.png', width: 194, height: 80 },
     declineCopy:
       'Acima was unable to approve your lease-purchase application at this time.',
     positionLabel: 'Tertiary',
@@ -73,7 +76,7 @@ export const LENDERS: Lender[] = [
     name: 'Snap Finance',
     shortName: 'Snap',
     brandColor: '#7C3AED',
-    logo: null,
+    logo: { src: '/assets/versatile/apply/lender-logos/snap.png', width: 171, height: 77 },
     declineCopy:
       'Snap Finance was unable to approve your application at this time.',
     positionLabel: 'Tertiary',
@@ -88,8 +91,54 @@ export const LENDERS: Lender[] = [
       'Genesis Credit was unable to approve your application at this time.',
     positionLabel: 'Tertiary',
   },
+  {
+    key: 'sunlight',
+    name: 'Sunlight Financial',
+    shortName: 'Sunlight',
+    brandColor: '#1F3864',
+    logo: { src: '/assets/versatile/apply/lender-logos/sunlight.svg', width: 200, height: 36 },
+    declineCopy:
+      'Sunlight Financial was unable to approve your application at this time. Your information has been forwarded to the next lender in priority order.',
+    positionLabel: 'Primary',
+  },
+  {
+    key: 'carecredit',
+    name: 'CareCredit',
+    shortName: 'CareCredit',
+    brandColor: '#5A1E89',
+    logo: { src: '/assets/versatile/apply/lender-logos/carecredit.svg', width: 200, height: 36 },
+    declineCopy:
+      'CareCredit was unable to approve your application at this time. Your information has been forwarded to the next lender in priority order.',
+    positionLabel: 'Primary',
+  },
+  {
+    key: 'sonrava',
+    name: 'Sonrava',
+    shortName: 'Sonrava',
+    brandColor: '#0E7C66',
+    logo: { src: '/assets/versatile/apply/lender-logos/sonrava.svg', width: 200, height: 36 },
+    declineCopy:
+      'Sonrava was unable to approve your application at this time.',
+    positionLabel: 'Secondary',
+  },
 ]
 
 export function getLender(key: LenderKey): Lender {
   return LENDERS.find((l) => l.key === key) ?? LENDERS[0]
+}
+
+/**
+ * Per-vertical cascade order. The first key is the Primary; subsequent keys
+ * are presented in fall-through order when the primary declines.
+ *
+ * Real-world this is configured at the merchant level — same vertical can
+ * still differ from merchant to merchant. These are sensible demo defaults.
+ */
+export const VERTICAL_CASCADE: Record<
+  'retail' | 'home-improvement' | 'elective-medical',
+  LenderKey[]
+> = {
+  retail: ['wells-fargo', 'fortiva', 'td-bank', 'acima', 'snap', 'genesis'],
+  'home-improvement': ['sunlight', 'wells-fargo', 'td-bank'],
+  'elective-medical': ['carecredit', 'sonrava', 'genesis'],
 }

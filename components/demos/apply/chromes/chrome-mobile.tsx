@@ -9,7 +9,7 @@ import type { Lender } from '../../_system/data/lenders'
 interface ChromeMobileProps {
   merchant: MerchantKey
   activeStepIndex: number
-  stepLabels?: [string, string, string]
+  stepLabels?: string[]
   stepTitle: string
   lender: Lender
   declineSlot?: React.ReactNode
@@ -21,7 +21,7 @@ interface ChromeMobileProps {
   canNext?: boolean
 }
 
-const DEFAULT_LABELS: [string, string, string] = ['Applicant Info', 'Pre-qualified', 'Decision']
+const DEFAULT_LABELS: string[] = ['Applicant Info', 'Pre-qualified', 'Decision']
 
 export function ChromeMobile({
   merchant,
@@ -43,15 +43,23 @@ export function ChromeMobile({
       {/* Top bar: merchant + close X */}
       <header className="flex items-center justify-between px-4 pt-7 pb-3">
         <div className="flex items-center gap-1.5 select-none">
-          {m.logo ? (
+          {m.logo && 'src' in m.logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={m.logo.src}
+              alt={m.name}
+              style={{ height: 32, width: 'auto', maxWidth: 160 }}
+              className="object-contain object-left"
+            />
+          ) : m.logo && 'logomark' in m.logo ? (
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={m.logo.logomark} alt="" style={{ height: 22, width: 22 }} className="object-contain" />
+              <img src={m.logo.logomark} alt="" style={{ height: 26, width: 26 }} className="object-contain" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={m.logo.logotype}
                 alt={m.name}
-                style={{ height: 13, width: 'auto', maxWidth: 80 }}
+                style={{ height: 16, width: 'auto', maxWidth: 96 }}
                 className="object-contain object-left"
               />
             </>
@@ -134,7 +142,7 @@ export function ChromeMobile({
           type="button"
           onClick={onNext}
           disabled={!canNext}
-          className="rounded-[var(--radius-md)] px-4 py-2 text-[12.5px] font-semibold text-[var(--cta-text)] shadow-[var(--shadow-sm)] transition-transform active:scale-[0.98] disabled:opacity-40"
+          className="rounded-full px-5 py-2 text-[12.5px] font-semibold text-[var(--cta-text)] shadow-[var(--shadow-sm)] transition-transform active:scale-[0.98] disabled:opacity-40"
           style={{ background: 'var(--cta)' }}
         >
           {nextLabel}

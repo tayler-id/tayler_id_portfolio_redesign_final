@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 36" width="200" height="36" role="img" aria-label="Sonrava Health">
+  <!-- Mark — abstract arc -->
+  <g fill="#0E7C66">
+    <path d="M5 20 C 5 8, 13 4, 21 12 C 17 8, 11 10, 11 18 C 11 22, 15 26, 21 24 C 13 32, 5 28, 5 20 Z" />
+  </g>
+  <!-- Wordmark -->
+  <text x="34" y="22" font-family="Helvetica, Arial, sans-serif" font-size="17" font-weight="700" fill="#0E7C66" letter-spacing="-0.4">sonrava.</text>
+  <text x="34" y="32" font-family="Helvetica, Arial, sans-serif" font-size="6" font-weight="500" fill="#0E7C66" letter-spacing="2.4">HEALTH</text>
+</svg>

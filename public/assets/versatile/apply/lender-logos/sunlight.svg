@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 36" width="200" height="36" role="img" aria-label="Sunlight Financial">
+  <!-- Sun mark -->
+  <g fill="#F2A916">
+    <circle cx="18" cy="18" r="7" />
+    <g stroke="#F2A916" stroke-width="2" stroke-linecap="round">
+      <line x1="18" y1="3" x2="18" y2="7" />
+      <line x1="18" y1="29" x2="18" y2="33" />
+      <line x1="3" y1="18" x2="7" y2="18" />
+      <line x1="29" y1="18" x2="33" y2="18" />
+      <line x1="7.5" y1="7.5" x2="10.3" y2="10.3" />
+      <line x1="25.7" y1="25.7" x2="28.5" y2="28.5" />
+      <line x1="7.5" y1="28.5" x2="10.3" y2="25.7" />
+      <line x1="25.7" y1="10.3" x2="28.5" y2="7.5" />
+    </g>
+  </g>
+  <!-- Wordmark -->
+  <text x="44" y="25" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#1F3864" letter-spacing="-0.5">sunlight</text>
+  <text x="44" y="34" font-family="Helvetica, Arial, sans-serif" font-size="7" font-weight="500" fill="#1F3864" letter-spacing="2.2">FINANCIAL</text>
+</svg>
