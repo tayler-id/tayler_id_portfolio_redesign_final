@@ -21,6 +21,8 @@ export interface Merchant {
   // Logo shown in the merchant chrome bar. For now we ship Layers; others can
   // fall back to a styled wordmark + brand color until SVG assets land.
   logo?: { logomark: string; logotype: string } | null
+  // Combined single-image logo (used when logomark/logotype are not separable).
+  logoCombined?: { src: string; aspect: number } | null
   brandColor?: string
 }
 
@@ -39,6 +41,7 @@ export const MERCHANTS: Merchant[] = [
     key: 'ashley',
     name: 'Ashley Furniture',
     vertical: 'retail',
+    logoCombined: { src: '/assets/Ashley_logo_2022.svg.png', aspect: 512 / 256 },
     brandColor: '#1f2937',
   },
   {

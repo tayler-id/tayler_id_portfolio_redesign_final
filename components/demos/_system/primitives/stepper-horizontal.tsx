@@ -51,7 +51,11 @@ export function StepperHorizontal({
                   height: s.node,
                   fontSize: s.font,
                   ...(done
-                    ? { background: 'var(--cta)', color: 'var(--cta-text)' }
+                    ? {
+                        background: 'var(--card-bg)',
+                        color: 'var(--positive)',
+                        boxShadow: 'inset 0 0 0 2px var(--positive)',
+                      }
                     : isActive
                     ? {
                         background: 'var(--card-bg)',
@@ -69,10 +73,14 @@ export function StepperHorizontal({
               </span>
               {showLabels && (
                 <span
-                  className="block max-w-[88px] truncate text-center font-medium tracking-tight"
+                  className="block max-w-[88px] truncate text-center font-semibold tracking-tight"
                   style={{
                     fontSize: s.label,
-                    color: done || isActive ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                    color: done
+                      ? 'var(--positive)'
+                      : isActive
+                      ? 'var(--text-primary)'
+                      : 'var(--text-tertiary)',
                   }}
                 >
                   {label}
@@ -89,7 +97,7 @@ export function StepperHorizontal({
                   marginInline: 8,
                   flex: `1 1 ${s.connectorMin}px`,
                   minWidth: s.connectorMin,
-                  background: done ? 'var(--cta)' : 'var(--border-strong)',
+                  background: done ? 'var(--positive)' : 'var(--border-strong)',
                   transition: 'background 200ms ease',
                 }}
               />

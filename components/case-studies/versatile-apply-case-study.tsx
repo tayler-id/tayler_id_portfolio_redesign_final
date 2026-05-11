@@ -7,6 +7,7 @@ import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { ScrollReveal } from '@/components/animate-ui/scroll-reveal'
 import { CascadeDiagram } from '@/components/diagrams/cascade-diagram'
 import { ApplyDemo } from '@/components/demos/apply'
+import { ApplyCongratsHero } from '@/components/case-studies/apply-congrats-hero'
 
 const ASSET_BASE = '/assets/versatile/apply'
 
@@ -130,19 +131,14 @@ export function VersatileApplyCaseStudy() {
         </div>
       </section>
 
-      {/* PANEL 2 — Hero screenshot + quote */}
+      {/* PANEL 2 — Live congrats hero, cycles through 4 lenders */}
       <section className="py-16 sm:py-20" aria-labelledby="apply-hero">
         <div className="container mx-auto px-4 sm:px-6">
           <ScrollReveal>
-            <h2 id="apply-hero" className="sr-only">Hero screenshot</h2>
-            <ImagePlate
-              src={`${ASSET_BASE}/synchrony-decision-approved.png`}
-              alt="Synchrony Master decision screen showing approval"
-              caption="Synchrony Master · Decision · Approved"
-              width={1544}
-              height={868}
-              priority
-            />
+            <h2 id="apply-hero" className="sr-only">
+              Approval hero — one template, every lender
+            </h2>
+            <ApplyCongratsHero merchant="ashley" />
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>

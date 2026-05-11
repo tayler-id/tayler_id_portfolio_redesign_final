@@ -8,7 +8,7 @@ import { ThemeProvider } from '../_system/theme-provider'
 import { PillGroup } from '../_system/primitives'
 import { IPadFrame, PhoneFrame } from '../_system/primitives/device-frame'
 import { LENDERS, getLender, type LenderKey } from '../_system/data/lenders'
-import type { MerchantKey } from '../_system/data/merchants'
+import { getMerchant, type MerchantKey } from '../_system/data/merchants'
 
 import { DeclineCard } from './decline-card'
 import { ChromeTablet } from './chromes/chrome-tablet'
@@ -27,10 +27,10 @@ interface ApplyDemoProps {
   hideDecline?: boolean
 }
 
-const STEPS: { key: StepKey; title: string; tabletLabel: string }[] = [
-  { key: 'applicant', title: 'Applicant Info', tabletLabel: 'Applicant Info' },
-  { key: 'prequal', title: 'Pre-qualified', tabletLabel: 'Pre-qualified' },
-  { key: 'approved', title: 'Approved', tabletLabel: 'Decision' },
+const STEPS: { key: StepKey; title: string; tabletLabel: string; cardLabel: string }[] = [
+  { key: 'applicant', title: 'Applicant Info', tabletLabel: 'Applicant Info', cardLabel: 'Applicant Information' },
+  { key: 'prequal', title: 'Pre-qualified', tabletLabel: 'Pre-qualified', cardLabel: 'Offer' },
+  { key: 'approved', title: 'Approved', tabletLabel: 'Decision', cardLabel: 'Application Decision' },
 ]
 
 export function ApplyDemo({
@@ -62,12 +62,20 @@ export function ApplyDemo({
     setStepIndex(0)
   }
 
+  const merchantMeta = getMerchant(merchant)
+
   const renderStepContent = (compact: boolean) => {
     switch (currentStep.key) {
       case 'applicant':
         return <StepApplicant lender={lender} compact={compact} />
       case 'prequal':
-        return <StepPrequal lender={lender} compact={compact} />
+        return (
+          <StepPrequal
+            lender={lender}
+            merchantName={merchantMeta.name}
+            compact={compact}
+          />
+        )
       case 'approved':
         return <StepApproved lender={lender} compact={compact} />
     }
