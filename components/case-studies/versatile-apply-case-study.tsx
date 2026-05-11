@@ -10,6 +10,7 @@ import { ThreeVerticalsFlow } from '@/components/diagrams/three-verticals-flow'
 import { ApplyDemo } from '@/components/demos/apply'
 import { ApplyCongratsHero } from '@/components/case-studies/apply-congrats-hero'
 import { getMerchant, type MerchantKey } from '@/components/demos/_system/data/merchants'
+import { TDBankCommercialFlow } from '@/components/case-studies/tdbank-commercial-flow'
 
 const ASSET_BASE = '/assets/versatile/apply'
 
@@ -52,25 +53,6 @@ const lenderTiles = [
   { file: 'retail-desktop/lender-snap.png', label: 'Snap Finance' },
   { file: 'retail-desktop/lender-concora.png', label: 'Concora' },
   { file: 'retail-desktop/lender-gaf.png', label: 'Great American Finance' },
-]
-
-const tdComplete = [
-  {
-    file: 'td-complete/td-01-info-prior.png',
-    caption: 'Important Information Prior to Applying — TD-branded with Versatile vendor disclosure',
-  },
-  {
-    file: 'td-complete/td-02-business-info.png',
-    caption: 'Business Information — credit purpose, NAICS, ownership, gross annual revenue',
-  },
-  {
-    file: 'td-complete/td-03-personal-guarantor.png',
-    caption: 'Personal Guarantor step — partner-aware legal disclosure',
-  },
-  {
-    file: 'td-complete/td-04-acknowledge-submit.png',
-    caption: 'Acknowledge and Submit — closing certifications + e-signature',
-  },
 ]
 
 export function VersatileApplyCaseStudy() {
@@ -347,45 +329,39 @@ export function VersatileApplyCaseStudy() {
         </div>
       </section>
 
-      {/* PANEL 5c — TD Complete white-label */}
+      {/* PANEL 5c — TD Bank Commercial · custom design system */}
       <section className="py-16 sm:py-20" aria-labelledby="apply-tdcomplete">
         <div className="container mx-auto px-4 sm:px-6">
           <ScrollReveal>
             <div className="max-w-3xl mb-10">
               <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-5 font-mono">
-                05c / White label spotlight
+                05c / White label spotlight · TD Bank Commercial
               </div>
               <h2
                 id="apply-tdcomplete"
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-display tracking-tight mb-4"
               >
-                White label, end to end
+                A custom design system inside the platform
               </h2>
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-                Versatile&apos;s white-label model goes further than theming. TD Complete is a fully
-                white-labelled TD Bank consumer card application &mdash; built on the Apply platform, with
-                TD branding outside <em>and</em> in.
+                The white-label model goes further than theming. TD Bank&apos;s Commercial Online
+                Application ships on the Apply platform with a purpose-built TD design system &mdash; TD
+                green for headings and input outlines, orange for primary actions, the signature green
+                wave on every screen, binary tap cards for consent moments. The flow architecture is
+                shared. The chrome is unmistakably TD.
               </p>
             </div>
           </ScrollReveal>
 
-          {/* 4-screen grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-10">
-            {tdComplete.map((shot, i) => (
-              <ScrollReveal key={shot.file} delay={0.05 + i * 0.05}>
-                <TDCompleteTile
-                  src={`${ASSET_BASE}/${shot.file}`}
-                  alt={shot.caption}
-                  label={shot.caption}
-                />
-              </ScrollReveal>
-            ))}
-          </div>
+          <ScrollReveal delay={0.1}>
+            <TDBankCommercialFlow />
+          </ScrollReveal>
 
           <ScrollReveal delay={0.3}>
             <p className="mt-10 text-sm text-muted-foreground italic max-w-2xl leading-relaxed">
-              One Versatile platform, but the product brand on the surface is TD&apos;s. The Versatile
-              attribution lives only where it must legally appear (vendor disclosure on the opening screen).
+              Same gateway, same compliance harness, same cascade underneath. What changes at the surface
+              is a complete component vocabulary &mdash; the Versatile attribution lives only where it
+              must legally appear (vendor disclosure on the opening screen).
             </p>
           </ScrollReveal>
         </div>
@@ -609,34 +585,9 @@ function LenderImageTile({ src, alt, label }: { src: string; alt: string; label:
   )
 }
 
-/* TD Complete — iPad device frame using padding (not border) so corners stay clean */
-function TDCompleteTile({ src, alt, label }: { src: string; alt: string; label: string }) {
-  return (
-    <figure className="group flex flex-col items-center gap-4">
-      {/* Bezel via padding + bg-color (avoids rounded-corner spike artifacts) */}
-      <div
-        className="w-full max-w-md rounded-[1.75rem] bg-foreground/90 shadow-xl p-3 sm:p-3.5"
-        style={{ aspectRatio: '3 / 4' }}
-      >
-        {/* Inner screen — its own rounding, object-contain so image fits fully */}
-        <div className="w-full h-full rounded-[1.1rem] overflow-hidden bg-white flex items-center justify-center">
-          <Image
-            src={src}
-            alt={alt}
-            width={1100}
-            height={1467}
-            className="w-full h-full object-contain"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-        </div>
-      </div>
-      <figcaption className="text-[11px] uppercase tracking-[0.25em] font-mono text-muted-foreground leading-snug text-center max-w-xs">
-        {label}
-      </figcaption>
-    </figure>
-  )
-}
-
+/* Vertical tile (Panel 4) — interactive ApplyDemo locked to the vertical's
+ * merchant, or a fallback static iPad render for verticals whose component
+ * flow isn't built yet. */
 function VerticalTile({
   vertical,
 }: {

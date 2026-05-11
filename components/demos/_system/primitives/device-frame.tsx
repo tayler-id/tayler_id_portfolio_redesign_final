@@ -38,6 +38,31 @@ export function IPadFrame({
 }
 
 /**
+ * iPad Pro 11" PORTRAIT bezel — 834:1194 ≈ 1:1.43.
+ * Mirror of IPadFrame for designs authored in portrait (e.g. TD Commercial
+ * Online Application). Same bezel chrome so it sits next to landscape iPads
+ * in the same case-study panel without feeling like a foreign element.
+ */
+export function IPadPortraitFrame({ children, className }: DeviceFrameProps) {
+  return (
+    <div className={cn('relative w-full', className)}>
+      <div
+        className="relative w-full overflow-hidden rounded-[28px] bg-[#0b0d12] p-[10px]"
+        style={{
+          aspectRatio: '834 / 1194',
+          boxShadow:
+            '0 1px 0 rgba(255,255,255,0.06) inset, 0 24px 64px -16px rgba(20,18,30,0.35), 0 8px 24px -8px rgba(20,18,30,0.18)',
+        }}
+      >
+        <div className="absolute inset-[10px] rounded-[20px] overflow-hidden ring-1 ring-black/30">
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/**
  * iPhone 14-Pro-ish portrait bezel — 393:852 (19.5:9 with a 4px chin/forehead).
  * The screen has a dynamic-island slot. Inner content scrolls.
  */

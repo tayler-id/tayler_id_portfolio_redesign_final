@@ -8,7 +8,7 @@
  * Adding a new project: add a key to ProjectKey, fill in tokens below.
  */
 
-export type ProjectKey = 'apply' | 'transact' | 'onboardiq'
+export type ProjectKey = 'apply' | 'transact' | 'onboardiq' | 'tdbank'
 
 export interface ProjectTheme {
   // Surfaces
@@ -120,8 +120,34 @@ export const ONBOARDIQ: ProjectTheme = {
   accent: '#7c3aed',
 }
 
+// ─── TD Bank Commercial — white-label spotlight: TD green / TD orange / wave ──
+export const TDBANK: ProjectTheme = {
+  ...APPLY,
+  pad: '#F4F6F4',
+  cardBg: '#ffffff',
+  cardBgRaised: '#ffffff',
+  border: '#E5E7E9',
+  borderStrong: '#CFD2D4',
+
+  textPrimary: '#1A1A1A',
+  textSecondary: '#4A4F54',
+  textTertiary: '#8A8F94',
+  textInverse: '#FFFFFF',
+
+  cta: '#F39B36',
+  ctaHover: '#E27B17',
+  ctaText: '#FFFFFF',
+  accent: '#008A00',
+
+  positive: '#008A00',
+  positiveBg: '#E6F6E6',
+  negative: '#D6453E',
+  negativeBg: '#FCEAEA',
+}
+
 export const THEMES: Record<ProjectKey, ProjectTheme> = {
   apply: APPLY,
   transact: TRANSACT,
   onboardiq: ONBOARDIQ,
+  tdbank: TDBANK,
 }
