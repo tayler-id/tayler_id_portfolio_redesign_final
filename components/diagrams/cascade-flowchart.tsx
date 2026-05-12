@@ -1,23 +1,15 @@
 'use client'
 
 import React from 'react'
-import { useInView } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import { useMotionPreference } from '@/hooks/use-reduced-motion'
 import { getLender, type LenderKey } from '@/components/demos/_system/data/lenders'
 
 /**
- * The Cascade — annotated flowchart with sticky detail panel.
+ * The Cascade — annotated flowchart.
  *
- * Layout: chart on the left, detail panel on the right (sticky on desktop).
- * Hover any node in the chart, the panel updates. The chart fits in a
- * single viewport, so the panel and the hovered node are always visible
- * at the same time.
- *
- * Story: top zone is what the consumer sees (Apply). Middle zone is the
- * hidden back-end cascade (Gateway + 4 lender decision gates, 3 declined
- * branches falling off to "logged for compliance"). Bottom zone is what
- * the consumer sees again (Approved).
+ * Two matching bordered cards side-by-side. Chart on the left, detail aside
+ * on the right (sticky on desktop). Click any node to activate it; the aside
+ * updates. The chart is austere; the aside does the storytelling.
  */
 
 type Step = { key: LenderKey; declined: boolean }
@@ -29,53 +21,52 @@ const STEPS: Step[] = [
   { key: 'acima', declined: false },
 ]
 
-type NodeKey = LenderKey | 'apply' | 'gateway' | 'approved' | 'hidden' | null
+type NodeKey = LenderKey | 'apply' | 'gateway' | 'approved' | 'logged' | null
 
-/* --- Compact layout: 580 wide x 680 tall --- */
-const VIEW_W = 580
-const CENTER = 200 // center of node column (left of viewBox)
-const LOGGED_X = 360 // left edge of inline "→ logged" labels
+/* --- Compact layout --- */
+const VIEW_W = 560
+const CENTER = 210
 
 const APPLY_Y = 16
-const APPLY_H = 50
-const ZONE1_BOTTOM = 80
+const APPLY_H = 48
 
-const ZONE2_TOP = 90
-const GATEWAY_Y = 108
+const GATEWAY_Y = 92
 const GATEWAY_H = 52
+
 const DIAMOND_W = 170
-const DIAMOND_H = 64
-const GATE_START_Y = 196
-const GATE_GAP = 96
+const DIAMOND_H = 60
+const GATE_START_Y = 188
+const GATE_GAP = 92
+
+const LOGGED_X = 380
+const LOGGED_W = 150
+const LOGGED_H = 42
 
 const lastGateY = GATE_START_Y + (STEPS.length - 1) * GATE_GAP
-const ZONE2_BOTTOM = lastGateY + DIAMOND_H + 22
-
-const ZONE3_TOP = ZONE2_BOTTOM + 8
-const APPROVED_Y = ZONE3_TOP + 22
+const APPROVED_Y = lastGateY + DIAMOND_H + 56
 const APPROVED_H = 56
 
-const VIEW_H = APPROVED_Y + APPROVED_H + 24
+const VIEW_H = APPROVED_Y + APPROVED_H + 16
 
 export function CascadeFlowchart() {
-  const ref = React.useRef<HTMLDivElement>(null)
-  const motionPref = useMotionPreference()
-  const noAnimation = motionPref !== 'regular'
-  const isInView = useInView(ref, { once: true, amount: 0.1 })
-  const animate = noAnimation || isInView
-  const [hovered, setHovered] = React.useState<NodeKey>(null)
+  const [active, setActive] = React.useState<NodeKey>(null)
+
+  const select = (k: NodeKey) => (e: React.MouseEvent | React.KeyboardEvent) => {
+    e.stopPropagation()
+    setActive(k)
+  }
 
   return (
-    <div ref={ref} className="w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 lg:gap-12 items-start">
-        {/* CHART COLUMN */}
-        <div>
+    <div className="w-full" onClick={() => setActive(null)}>
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-6 lg:gap-8 items-start">
+        {/* CHART CARD */}
+        <div className="border border-border rounded-lg bg-card p-5 sm:p-7">
           <svg
             viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
             className="block w-full h-auto"
             style={{ maxWidth: VIEW_W, margin: '0 auto' }}
             role="img"
-            aria-label="The Cascade flowchart. Consumer-visible Apply terminal at top. Hidden back-end zone in the middle with the Versatile Apply gateway and four lender decision gates, three of which decline and route to a logged-for-compliance side path. Consumer-visible Approved terminal at the bottom."
+            aria-label="The Cascade flowchart. Click any node to read its detail."
           >
             <defs>
               <marker
@@ -113,63 +104,8 @@ export function CascadeFlowchart() {
               </marker>
             </defs>
 
-            {/* Back-end zone background */}
-            <rect
-              x={12}
-              y={ZONE2_TOP}
-              width={VIEW_W - 24}
-              height={ZONE2_BOTTOM - ZONE2_TOP}
-              rx={10}
-              className="fill-muted/20 stroke-border"
-              strokeWidth={1}
-              strokeDasharray="5 4"
-            />
-
-            {/* Zone labels */}
-            <text
-              x={CENTER}
-              y={11}
-              textAnchor="middle"
-              className="fill-foreground font-mono"
-              style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', fontWeight: 700 }}
-            >
-              Consumer · sees this
-            </text>
-            <text
-              x={20}
-              y={ZONE2_TOP + 14}
-              className="fill-muted-foreground font-mono"
-              style={{ fontSize: 9, letterSpacing: '0.25em', textTransform: 'uppercase' }}
-            >
-              Back-end · consumer never sees this
-            </text>
-            <text
-              x={CENTER}
-              y={ZONE3_TOP + 16}
-              textAnchor="middle"
-              className="fill-foreground font-mono"
-              style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', fontWeight: 700 }}
-            >
-              Consumer · sees this
-            </text>
-
-            {/* Submit connector (dashed) */}
-            <path
-              d={`M ${CENTER} ${APPLY_Y + APPLY_H} L ${CENTER} ${GATEWAY_Y}`}
-              className="stroke-foreground/40"
-              strokeWidth={1.5}
-              strokeDasharray="4 4"
-              fill="none"
-              markerEnd="url(#arr)"
-            />
-            <text
-              x={CENTER + 8}
-              y={(APPLY_Y + APPLY_H + GATEWAY_Y) / 2 + 4}
-              className="fill-muted-foreground font-mono"
-              style={{ fontSize: 9, letterSpacing: '0.2em', textTransform: 'uppercase' }}
-            >
-              submit
-            </text>
+            {/* Apply → Gateway */}
+            <Edge x1={CENTER} y1={APPLY_Y + APPLY_H} x2={CENTER} y2={GATEWAY_Y} />
 
             {/* Gateway → first gate */}
             <Edge
@@ -179,7 +115,7 @@ export function CascadeFlowchart() {
               y2={GATE_START_Y}
             />
 
-            {/* Cascade gates */}
+            {/* Cascade gates + branches */}
             {STEPS.map((step, i) => {
               const lender = getLender(step.key)
               const gateTop = GATE_START_Y + i * GATE_GAP
@@ -192,59 +128,27 @@ export function CascadeFlowchart() {
                 <g key={step.key}>
                   {/* No-branch vertical to next gate */}
                   {!isApproved && nextGateTop !== null && (
-                    <>
-                      <Edge
-                        x1={CENTER}
-                        y1={gateTop + DIAMOND_H}
-                        x2={CENTER}
-                        y2={nextGateTop}
-                      />
-                      <text
-                        x={CENTER + 6}
-                        y={gateTop + DIAMOND_H + (nextGateTop - gateTop - DIAMOND_H) / 2 + 4}
-                        className="fill-muted-foreground font-mono"
-                        style={{ fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase' }}
-                      >
-                        no
-                      </text>
-                    </>
+                    <Edge
+                      x1={CENTER}
+                      y1={gateTop + DIAMOND_H}
+                      x2={CENTER}
+                      y2={nextGateTop}
+                    />
                   )}
 
-                  {/* No-branch right-side: inline "→ logged" label */}
+                  {/* Side branch: declined → Logged box (only draw box for first instance) */}
                   {!isApproved && (
-                    <g
-                      onMouseEnter={() => setHovered('hidden')}
-                      onMouseLeave={() => setHovered((p) => (p === 'hidden' ? null : p))}
-                      style={{ cursor: 'help' }}
-                    >
-                      <path
-                        d={`M ${CENTER + DIAMOND_W / 2} ${cy} L ${LOGGED_X - 4} ${cy}`}
-                        className="stroke-muted-foreground/50"
-                        strokeWidth={1.25}
-                        strokeDasharray="4 4"
-                        fill="none"
-                        markerEnd="url(#arr-decline)"
-                      />
-                      <text
-                        x={CENTER + DIAMOND_W / 2 + 10}
-                        y={cy - 5}
-                        className="fill-muted-foreground font-mono"
-                        style={{ fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase' }}
-                      >
-                        no
-                      </text>
-                      <text
-                        x={LOGGED_X}
-                        y={cy + 4}
-                        className="fill-muted-foreground font-mono"
-                        style={{ fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase' }}
-                      >
-                        logged · hidden
-                      </text>
-                    </g>
+                    <path
+                      d={`M ${CENTER + DIAMOND_W / 2} ${cy} L ${LOGGED_X - 4} ${cy}`}
+                      className="stroke-muted-foreground/45"
+                      strokeWidth={1.25}
+                      strokeDasharray="4 4"
+                      fill="none"
+                      markerEnd="url(#arr-decline)"
+                    />
                   )}
 
-                  {/* Yes-branch (approval): drops through bottom of zone to Approved pill */}
+                  {/* Yes-branch (approval) */}
                   {isApproved && (
                     <>
                       <path
@@ -259,7 +163,7 @@ export function CascadeFlowchart() {
                         y={gateTop + DIAMOND_H + 16}
                         className="fill-primary font-mono"
                         style={{
-                          fontSize: 11,
+                          fontSize: 10,
                           letterSpacing: '0.2em',
                           textTransform: 'uppercase',
                           fontWeight: 700,
@@ -270,7 +174,7 @@ export function CascadeFlowchart() {
                     </>
                   )}
 
-                  {/* The diamond gate */}
+                  {/* Diamond gate */}
                   <DiamondGate
                     cx={CENTER}
                     cy={cy}
@@ -279,79 +183,82 @@ export function CascadeFlowchart() {
                     lenderKey={step.key}
                     lenderName={lender.shortName}
                     declined={step.declined}
-                    hovered={hovered}
-                    setHovered={setHovered}
+                    active={active}
+                    onSelect={select}
                   />
                 </g>
               )
             })}
 
+            {/* Single "no" label on the first decline edge (label by example, not on every arrow) */}
+            <text
+              x={LOGGED_X - 20}
+              y={GATE_START_Y + DIAMOND_H / 2 - 6}
+              textAnchor="end"
+              className="fill-muted-foreground font-mono"
+              style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase' }}
+            >
+              no
+            </text>
+
+            {/* Logged box — covers all four declines (single shared terminal) */}
+            <LoggedBox
+              x={LOGGED_X}
+              y={GATE_START_Y + DIAMOND_H / 2 - LOGGED_H / 2}
+              w={LOGGED_W}
+              h={(STEPS.length - 1) * GATE_GAP + LOGGED_H}
+              active={active}
+              onSelect={select}
+            />
+
+            {/* Top connector lines from each decline arrow into the shared logged box — already drawn above */}
+
             {/* APPLY pill */}
             <Pill
-              x={CENTER - 100}
+              x={CENTER - 90}
               y={APPLY_Y}
-              w={200}
+              w={180}
               h={APPLY_H}
               label="Apply"
               sub="1 form · 1 device"
               nodeKey="apply"
-              hovered={hovered}
-              setHovered={setHovered}
+              active={active}
+              onSelect={select}
             />
 
             {/* GATEWAY rect */}
             <ProcessNode
-              x={CENTER - 110}
+              x={CENTER - 100}
               y={GATEWAY_Y}
-              w={220}
+              w={200}
               h={GATEWAY_H}
               label="Versatile Apply gateway"
               sub="1 contract · 35+ lenders"
               nodeKey="gateway"
-              hovered={hovered}
-              setHovered={setHovered}
+              active={active}
+              onSelect={select}
             />
 
             {/* APPROVED pill */}
             <Pill
-              x={CENTER - 120}
+              x={CENTER - 110}
               y={APPROVED_Y}
-              w={240}
+              w={220}
               h={APPROVED_H}
               label="Approved"
               sub="single screen · ~3 min"
               nodeKey="approved"
               primary
-              hovered={hovered}
-              setHovered={setHovered}
+              active={active}
+              onSelect={select}
             />
           </svg>
-
-          {/* Legend beneath chart */}
-          <div className="flex flex-wrap gap-x-5 gap-y-2 mt-5 text-[10px] font-mono uppercase tracking-[0.2em] text-muted-foreground">
-            <LegendItem>
-              <span className="inline-block w-5 h-3 rounded-full border-2 border-foreground/60 bg-card" />
-              terminal
-            </LegendItem>
-            <LegendItem>
-              <span className="inline-block w-5 h-3 rounded-sm border-2 border-primary bg-card" />
-              process
-            </LegendItem>
-            <LegendItem>
-              <span className="inline-block w-3 h-3 rotate-45 border-2 border-foreground/50 bg-card" />
-              decision
-            </LegendItem>
-            <LegendItem>
-              <span className="inline-block w-5 h-3 rounded-sm border border-dashed border-border bg-muted/30" />
-              hidden zone
-            </LegendItem>
-          </div>
         </div>
 
-        {/* DETAIL PANEL (sticky on desktop) */}
-        <div className="lg:sticky lg:top-24">
-          <DetailPanel hovered={hovered} />
-        </div>
+        {/* ASIDE — sticky on desktop */}
+        <aside className="lg:sticky lg:top-24" onClick={(e) => e.stopPropagation()}>
+          <DetailCard active={active} setActive={setActive} />
+        </aside>
       </div>
     </div>
   )
@@ -366,12 +273,14 @@ function Edge({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: numb
       y1={y1}
       x2={x2}
       y2={y2}
-      className="stroke-foreground/60"
+      className="stroke-foreground/55"
       strokeWidth={1.5}
       markerEnd="url(#arr)"
     />
   )
 }
+
+type SelectFn = (k: NodeKey) => (e: React.MouseEvent | React.KeyboardEvent) => void
 
 interface NodeProps {
   x: number
@@ -381,8 +290,8 @@ interface NodeProps {
   label: string
   sub: string
   nodeKey: NodeKey
-  hovered: NodeKey
-  setHovered: React.Dispatch<React.SetStateAction<NodeKey>>
+  active: NodeKey
+  onSelect: SelectFn
 }
 
 function Pill({
@@ -394,15 +303,18 @@ function Pill({
   sub,
   nodeKey,
   primary = false,
-  hovered,
-  setHovered,
+  active,
+  onSelect,
 }: NodeProps & { primary?: boolean }) {
-  const isHovered = hovered === nodeKey
+  const isActive = active === nodeKey
   return (
     <g
-      onMouseEnter={() => setHovered(nodeKey)}
-      onMouseLeave={() => setHovered((p) => (p === nodeKey ? null : p))}
-      style={{ cursor: 'help' }}
+      onClick={onSelect(nodeKey)}
+      role="button"
+      tabIndex={0}
+      aria-pressed={isActive}
+      aria-label={`${label} — ${sub}`}
+      style={{ cursor: 'pointer' }}
     >
       <rect
         x={x}
@@ -413,25 +325,28 @@ function Pill({
         className={cn(
           'transition-colors',
           primary
-            ? cn('fill-primary stroke-primary', isHovered && 'fill-primary/90')
-            : cn('fill-card stroke-foreground/60', isHovered && 'stroke-foreground')
+            ? 'fill-primary stroke-primary'
+            : cn('fill-card stroke-foreground/55', isActive && 'stroke-primary')
         )}
-        strokeWidth={2}
+        strokeWidth={isActive ? 2.5 : 1.75}
       />
       <text
         x={x + w / 2}
         y={y + h / 2 - 1}
         textAnchor="middle"
         className={cn('font-display', primary ? 'fill-primary-foreground' : 'fill-foreground')}
-        style={{ fontSize: 15, fontWeight: 700, letterSpacing: '-0.01em' }}
+        style={{ fontSize: 14, fontWeight: 700, letterSpacing: '-0.01em' }}
       >
         {label}
       </text>
       <text
         x={x + w / 2}
-        y={y + h / 2 + 14}
+        y={y + h / 2 + 13}
         textAnchor="middle"
-        className={cn('font-mono', primary ? 'fill-primary-foreground/85' : 'fill-muted-foreground')}
+        className={cn(
+          'font-mono',
+          primary ? 'fill-primary-foreground/85' : 'fill-muted-foreground'
+        )}
         style={{ fontSize: 10, letterSpacing: '0.1em' }}
       >
         {sub}
@@ -448,15 +363,18 @@ function ProcessNode({
   label,
   sub,
   nodeKey,
-  hovered,
-  setHovered,
+  active,
+  onSelect,
 }: NodeProps) {
-  const isHovered = hovered === nodeKey
+  const isActive = active === nodeKey
   return (
     <g
-      onMouseEnter={() => setHovered(nodeKey)}
-      onMouseLeave={() => setHovered((p) => (p === nodeKey ? null : p))}
-      style={{ cursor: 'help' }}
+      onClick={onSelect(nodeKey)}
+      role="button"
+      tabIndex={0}
+      aria-pressed={isActive}
+      aria-label={`${label} — ${sub}`}
+      style={{ cursor: 'pointer' }}
     >
       <rect
         x={x}
@@ -465,10 +383,10 @@ function ProcessNode({
         height={h}
         rx={8}
         className={cn(
-          'fill-card stroke-primary transition-colors',
-          isHovered && 'fill-primary/5'
+          'fill-card transition-colors',
+          isActive ? 'stroke-primary' : 'stroke-foreground/55'
         )}
-        strokeWidth={2}
+        strokeWidth={isActive ? 2.5 : 1.75}
       />
       <text
         x={x + w / 2}
@@ -500,8 +418,8 @@ function DiamondGate({
   lenderKey,
   lenderName,
   declined,
-  hovered,
-  setHovered,
+  active,
+  onSelect,
 }: {
   cx: number
   cy: number
@@ -510,33 +428,33 @@ function DiamondGate({
   lenderKey: LenderKey
   lenderName: string
   declined: boolean
-  hovered: NodeKey
-  setHovered: React.Dispatch<React.SetStateAction<NodeKey>>
+  active: NodeKey
+  onSelect: SelectFn
 }) {
-  const isHovered = hovered === lenderKey
-  const isApproved = !declined
+  const isActive = active === lenderKey
   const path = `M ${cx},${cy - h / 2} L ${cx + w / 2},${cy} L ${cx},${cy + h / 2} L ${cx - w / 2},${cy} Z`
   return (
     <g
-      onMouseEnter={() => setHovered(lenderKey)}
-      onMouseLeave={() => setHovered((p) => (p === lenderKey ? null : p))}
-      style={{ cursor: 'help' }}
+      onClick={onSelect(lenderKey)}
+      role="button"
+      tabIndex={0}
+      aria-pressed={isActive}
+      aria-label={`${lenderName} approves?`}
+      style={{ cursor: 'pointer' }}
     >
       <path
         d={path}
         className={cn(
           'fill-card transition-all',
-          isApproved ? 'stroke-primary' : 'stroke-foreground/50',
-          declined && !isHovered && 'opacity-80',
-          isHovered && (isApproved ? 'fill-primary/5' : 'fill-muted/30')
+          isActive ? 'stroke-primary' : 'stroke-foreground/55'
         )}
-        strokeWidth={isApproved ? 2.5 : 1.75}
+        strokeWidth={isActive ? 2.5 : 1.75}
       />
       <text
         x={cx}
-        y={cy - 3}
+        y={cy - 2}
         textAnchor="middle"
-        className={cn('font-display', isApproved ? 'fill-primary' : 'fill-foreground')}
+        className="fill-foreground font-display"
         style={{ fontSize: 13, fontWeight: 700, letterSpacing: '-0.01em' }}
       >
         {lenderName}
@@ -554,32 +472,101 @@ function DiamondGate({
   )
 }
 
-function LegendItem({ children }: { children: React.ReactNode }) {
-  return <span className="inline-flex items-center gap-2">{children}</span>
+function LoggedBox({
+  x,
+  y,
+  w,
+  h,
+  active,
+  onSelect,
+}: {
+  x: number
+  y: number
+  w: number
+  h: number
+  active: NodeKey
+  onSelect: SelectFn
+}) {
+  const isActive = active === 'logged'
+  return (
+    <g
+      onClick={onSelect('logged')}
+      role="button"
+      tabIndex={0}
+      aria-pressed={isActive}
+      aria-label="Decline logged: 4 declines kept for compliance, never rendered to the consumer."
+      style={{ cursor: 'pointer' }}
+    >
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height={h}
+        rx={8}
+        className={cn(
+          'fill-muted/30 transition-colors',
+          isActive ? 'stroke-primary' : 'stroke-border'
+        )}
+        strokeWidth={isActive ? 2 : 1}
+        strokeDasharray="4 4"
+      />
+      <text
+        x={x + w / 2}
+        y={y + h / 2 - 4}
+        textAnchor="middle"
+        className="fill-muted-foreground font-display"
+        style={{ fontSize: 12, fontWeight: 700 }}
+      >
+        Logged
+      </text>
+      <text
+        x={x + w / 2}
+        y={y + h / 2 + 12}
+        textAnchor="middle"
+        className="fill-muted-foreground font-mono"
+        style={{ fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase' }}
+      >
+        hidden from consumer
+      </text>
+    </g>
+  )
 }
 
-/* ---------- Sticky detail panel ---------- */
+/* ---------- Detail aside ---------- */
 
-function DetailPanel({ hovered }: { hovered: NodeKey }) {
-  const content = describe(hovered)
-  const dim = hovered === null
+function DetailCard({
+  active,
+  setActive,
+}: {
+  active: NodeKey
+  setActive: React.Dispatch<React.SetStateAction<NodeKey>>
+}) {
+  const content = describe(active)
   return (
-    <aside
-      className={cn(
-        'border rounded-lg p-5 sm:p-6 transition-colors',
-        dim
-          ? 'border-dashed border-border bg-card/40'
-          : 'border-border bg-card shadow-sm'
-      )}
-    >
-      <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-muted-foreground mb-3">
-        {dim ? 'Hover any node →' : content.eyebrow}
+    <div className="border border-border rounded-lg bg-card p-5 sm:p-6">
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-muted-foreground">
+          {active === null ? 'Click a node →' : content.eyebrow}
+        </div>
+        {active !== null && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              setActive(null)
+            }}
+            className="text-[10px] uppercase tracking-[0.2em] font-mono text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Clear selection"
+          >
+            Clear
+          </button>
+        )}
       </div>
       <div className="text-lg sm:text-xl font-display font-bold tracking-tight text-foreground mb-3 leading-tight">
         {content.title}
       </div>
       <p className="text-sm text-muted-foreground leading-relaxed">{content.body}</p>
-    </aside>
+    </div>
   )
 }
 
@@ -589,7 +576,7 @@ function describe(k: NodeKey): { eyebrow: string; title: string; body: string } 
       eyebrow: 'The cascade · UX magic trick',
       title: 'One form in. One outcome out.',
       body:
-        'The consumer experiences a simple linear flow. Behind the scenes, the gateway attempts four lenders in priority order, logs three declines for compliance, and surfaces only the winning approval. Hover any node in the chart for detail.',
+        'Click any node in the chart. The consumer experiences a linear flow. Behind the scenes the gateway attempts four lenders in priority order, logs three declines for compliance, and surfaces only the approval.',
     }
   }
   if (k === 'apply') {
@@ -597,24 +584,24 @@ function describe(k: NodeKey): { eyebrow: string; title: string; body: string } 
       eyebrow: 'Step 01 · what the consumer does',
       title: 'Apply',
       body:
-        'One form, one device. Whether it is a kiosk, an in-home sales tablet, an in-chair tablet, or a phone, the application is captured once and submitted once.',
+        'One form, one device. Kiosk, in-home sales tablet, in-chair tablet, or phone. The application is captured once and submitted once.',
     }
   }
   if (k === 'gateway') {
     return {
-      eyebrow: 'Step 02 · back-end · the platform',
+      eyebrow: 'Step 02 · back-end · platform',
       title: 'Versatile Apply gateway',
       body:
         'One contract for 35+ lenders. The gateway normalizes fields, owns compliance language, and routes the application to the cascade in priority order. Adding a new lender is a contract mapping, not a new flow.',
     }
   }
-  if (k === 'hidden') {
+  if (k === 'logged') {
     const declineCount = STEPS.filter((s) => s.declined).length
     return {
       eyebrow: 'Compliance trail · never rendered',
       title: `${declineCount} declines logged`,
       body:
-        'Each declining lender returns a written-notification obligation. Those records live in the audit trail; none of the decline screens are shown to the consumer. The cascade peels them off, one by one, until an approval lands.',
+        'Each declining lender returns a written-notification obligation. Those records live in the audit trail; none of the decline screens are shown to the consumer.',
     }
   }
   if (k === 'approved') {
@@ -635,6 +622,6 @@ function describe(k: NodeKey): { eyebrow: string; title: string; body: string } 
     title: lender.name,
     body: declined
       ? lender.declineCopy
-      : `${lender.name} approves. The cascade stops here. Downstream lenders are skipped: their integrations are never called for this application.`,
+      : `${lender.name} approves. The cascade stops here. Downstream lenders are skipped.`,
   }
 }
