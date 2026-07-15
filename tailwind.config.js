@@ -58,7 +58,7 @@ module.exports = {
       },
       fontFamily: {
         display: ["Space Grotesk", "system-ui", "sans-serif"],
-        body: ["Inter", "system-ui", "sans-serif"],
+        body: ["Instrument Sans", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
       },
       fontSize: {
@@ -98,48 +98,6 @@ module.exports = {
           "0%": { transform: "scale(1)", opacity: 1 },
           "100%": { transform: "scale(0.95)", opacity: 0 },
         },
-        "bounce-in": {
-          "0%": { transform: "scale(0.3)", opacity: 0 },
-          "50%": { transform: "scale(1.05)" },
-          "70%": { transform: "scale(0.9)" },
-          "100%": { transform: "scale(1)", opacity: 1 },
-        },
-        "float": {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
-        },
-        "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px rgba(59, 130, 246, 0.4)" },
-          "50%": { boxShadow: "0 0 40px rgba(59, 130, 246, 0.8)" },
-        },
-        "gradient-x": {
-          "0%, 100%": {
-            "background-size": "200% 200%",
-            "background-position": "left center"
-          },
-          "50%": {
-            "background-size": "200% 200%",
-            "background-position": "right center"
-          },
-        },
-        "gradient-y": {
-          "0%, 100%": {
-            "background-size": "200% 200%",
-            "background-position": "center top"
-          },
-          "50%": {
-            "background-size": "200% 200%",
-            "background-position": "center bottom"
-          },
-        },
-        "shimmer": {
-          "0%": { transform: "translateX(-100%)" },
-          "100%": { transform: "translateX(100%)" },
-        },
-        "wiggle": {
-          "0%, 100%": { transform: "rotate(-3deg)" },
-          "50%": { transform: "rotate(3deg)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -150,14 +108,6 @@ module.exports = {
         "fade-out": "fade-out 0.5s ease-out",
         "scale-in": "scale-in 0.3s ease-out",
         "scale-out": "scale-out 0.3s ease-out",
-        "bounce-in": "bounce-in 0.6s ease-out",
-        "float": "float 6s ease-in-out infinite",
-        "float-delayed": "float 6s ease-in-out infinite -3s",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "gradient-x": "gradient-x 15s ease infinite",
-        "gradient-y": "gradient-y 15s ease infinite",
-        "shimmer": "shimmer 2s infinite",
-        "wiggle": "wiggle 1s ease-in-out infinite",
       },
       backdropBlur: {
         xs: '2px',

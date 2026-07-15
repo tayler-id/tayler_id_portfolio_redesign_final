@@ -1,12 +1,12 @@
 import './globals.css'
-import { Inter, Space_Grotesk, JetBrains_Mono, Poppins } from 'next/font/google'
+import { Instrument_Sans, Space_Grotesk, JetBrains_Mono, Poppins } from 'next/font/google'
 import { ThemeProvider } from '@/components/theme-provider'
 import { PasswordProtection } from '@/components/password-protection'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 
-const inter = Inter({
+const instrumentSans = Instrument_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-body',
   display: 'swap',
 })
 
@@ -48,7 +48,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  viewport: 'width=device-width, initial-scale=1',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
@@ -57,7 +61,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} ${poppins.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${instrumentSans.variable} ${spaceGrotesk.variable} ${jetBrainsMono.variable} ${poppins.variable}`} suppressHydrationWarning>
       <body className="font-body antialiased">
         <ThemeProvider
           attribute="class"

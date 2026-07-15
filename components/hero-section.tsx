@@ -2,18 +2,12 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ArrowDown, MessageCircle, Calendar, Rocket, Zap } from 'lucide-react'
-import { MagneticButton } from './animate-ui/magnetic-button'
-import { FloatingCard } from './animate-ui/floating-card'
-import { ScrollReveal } from './animate-ui/scroll-reveal'
-import { GradientBlob } from './animate-ui/gradient-blob'
+import { ArrowDown } from 'lucide-react'
 import { Button } from './ui/button'
-import Image from 'next/image'
 import { useMotionPreference } from '@/hooks/use-reduced-motion'
 
 export function HeroSection() {
   const motionPref = useMotionPreference()
-  const motionOff = motionPref === 'off'
   const noAnimation = motionPref !== 'regular'
 
   const handleScrollToSection = (sectionId: string) => {
@@ -21,6 +15,7 @@ export function HeroSection() {
     element?.scrollIntoView({ behavior: noAnimation ? 'auto' : 'smooth' })
   }
 
+  // One orchestrated entrance on first load; everything after this just is.
   const containerVariants = noAnimation ? {
     hidden: { opacity: 1 },
     visible: { opacity: 1 }
@@ -29,8 +24,8 @@ export function HeroSection() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        duration: 0.8
+        staggerChildren: 0.12,
+        duration: 0.6
       }
     }
   }
@@ -39,228 +34,74 @@ export function HeroSection() {
     hidden: { opacity: 1, y: 0 },
     visible: { opacity: 1, y: 0 }
   } : {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
-    }
-  }
-
-  const statVariants = noAnimation ? {
-    hidden: { opacity: 1, scale: 1 },
-    visible: { opacity: 1, scale: 1 }
-  } : {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
     }
   }
 
   const stats = [
-    { icon: Calendar, number: "20+", label: "Years shipping" },
-    { icon: Rocket, number: "$16B+", label: "Annual financing scale" },
-    { icon: Zap, number: "6M", label: "Applications a year" }
+    { number: '20+', label: 'Years shipping' },
+    { number: '$16B+', label: 'Annual financing scale' },
+    { number: '6M', label: 'Applications a year' }
   ]
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background/90 to-primary/5 pt-20">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <GradientBlob
-          className="top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2"
-          size="xl"
-          colors={['from-primary/8', 'via-primary/4', 'to-transparent']}
-        />
-        <GradientBlob
-          className="bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2"
-          size="lg"
-          colors={['from-primary/5', 'via-primary/3', 'to-transparent']}
-        />
-      </div>
+    <section id="hero" className="relative pt-40 pb-24 sm:pt-48 sm:pb-28">
+      <div className="container relative px-6 mx-auto">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-4xl"
+        >
+          <motion.p variants={itemVariants} className="text-sm text-muted-foreground mb-8">
+            Tayler Ramsay — Senior Product Designer at Synchrony. Available for 2026.
+          </motion.p>
 
-      <div className="container relative z-10 px-6 mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Hero Text - Single rendering path */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="text-center lg:text-left"
+          <motion.h1
+            variants={itemVariants}
+            className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.02] tracking-tight text-foreground mb-10"
           >
-            <motion.div variants={itemVariants} className="mb-8">
-              <span className="inline-block px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs uppercase tracking-[0.25em] font-mono mb-6">
-                Available · 2026
-              </span>
-              <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight pb-2">
-                  <motion.span
-                    className="block text-foreground"
-                    initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: '100%' }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={noAnimation ? { duration: 0 } : { duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    Tayler Ramsay.
-                  </motion.span>
-                  <motion.span
-                    className="block gradient-text"
-                    initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: '100%' }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={noAnimation ? { duration: 0 } : { duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    Designs and ships financing flows at $16B scale.
-                  </motion.span>
-                </h1>
-              </div>
-            </motion.div>
+            Designs and ships financing flows at $16B scale.
+          </motion.h1>
 
-            <motion.p
-              variants={itemVariants}
-              className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-2xl mx-auto lg:mx-0"
-            >
-              Senior Product Designer at Synchrony, leading UX on the platform that processes
-              6M consumer applications a year across 35+ lenders. I design the system, then write
-              the front-end that ships it.
-            </motion.p>
+          <motion.p
+            variants={itemVariants}
+            className="text-lg text-foreground/70 leading-relaxed mb-12 max-w-2xl"
+          >
+            Leading UX on the platform that processes 6M consumer applications a year
+            across 35+ lenders. I design the system, then write the front-end that ships it.
+          </motion.p>
 
-            <motion.div
-              variants={itemVariants}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
-            >
-              <MagneticButton
-                className="group"
-                onClick={() => handleScrollToSection('#projects')}
-              >
-                <span>See the Versatile Apply case study</span>
-                <ArrowDown className={`w-4 h-4 ${!noAnimation ? 'group-hover:translate-y-1 transition-transform' : ''}`} />
-              </MagneticButton>
-
-              <Button
-                variant="outline"
-                size="lg"
-                className="bg-background/50 backdrop-blur-sm"
-                asChild
-              >
-                <a href="mailto:ramsay.tayler@gmail.com">
-                  <MessageCircle className="w-4 h-4" />
-                  Email me
-                </a>
-              </Button>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              variants={containerVariants}
-              className="flex flex-wrap gap-6 justify-center lg:justify-start"
-            >
-              {stats.map((stat) => (
-                <motion.div
-                  key={stat.label}
-                  variants={statVariants}
-                  className="flex items-center gap-3 p-4 rounded-2xl bg-card/80 backdrop-blur-sm border border-border"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                    <stat.icon className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <div className="font-bold text-2xl font-display text-foreground">
-                      {stat.number}
-                    </div>
-                    <div className="text-sm text-muted-foreground font-medium">
-                      {stat.label}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 mb-20">
+            <Button size="lg" onClick={() => handleScrollToSection('#projects')} className="group">
+              <span>See the Versatile Apply case study</span>
+              <ArrowDown className={`w-4 h-4 ${!noAnimation ? 'group-hover:translate-y-0.5 transition-transform' : ''}`} aria-hidden="true" />
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <a href="mailto:ramsay.tayler@gmail.com">Email me</a>
+            </Button>
           </motion.div>
 
-          {/* Hero Visual */}
-          <ScrollReveal direction="right" delay={0.8}>
-            <div className="relative">
-              <FloatingCard tilt className="p-8 max-w-md mx-auto">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="logo-mark w-20 h-20" aria-label="Tayler Ramsay" role="img" />
-                    <div>
-                      <h3 className="font-bold text-xl text-foreground">Tayler Ramsay</h3>
-                      <p className="text-foreground/70 font-medium">Full-Stack UX Engineer</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className={`w-2 h-2 rounded-full bg-primary ${!noAnimation ? 'animate-pulse' : ''}`}></div>
-                      <span className="text-foreground/90 text-sm">Available for projects</span>
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-3">
-                      {[
-                        { skill: 'Design', label: 'UX/UI' },
-                        { skill: 'Code', label: 'Full-Stack' },
-                        { skill: 'AI/ML', label: 'LangGraph' }
-                      ].map((item) => (
-                        <div key={item.skill} className="text-center">
-                          <div className="w-14 h-14 mx-auto mb-2 rounded-lg bg-foreground/10 flex items-center justify-center border border-foreground/20">
-                            <span className="text-sm font-semibold text-foreground">{item.skill}</span>
-                          </div>
-                          <div className="text-xs text-muted-foreground font-medium">{item.label}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </FloatingCard>
-
-              {/* Floating Badges */}
-              <FloatingCard
-                className="absolute -top-4 -left-4 p-3"
-                delay={1.2}
-                direction="left"
-                distance={15}
-                duration={4}
-              >
-                <div className="flex items-center gap-2 text-foreground">
-                  <div className={`w-2 h-2 rounded-full bg-primary ${!noAnimation ? 'animate-pulse' : ''}`}></div>
-                  <span className="text-xs font-medium">Online</span>
-                </div>
-              </FloatingCard>
-
-              <FloatingCard
-                className="absolute -bottom-4 -right-4 p-3"
-                delay={1.6}
-                direction="right"
-                distance={12}
-                duration={5}
-              >
-                <div className="text-foreground text-center">
-                  <div className="font-bold text-lg">$2.1M</div>
-                  <div className="text-xs text-muted-foreground">Revenue Impact</div>
-                </div>
-              </FloatingCard>
-            </div>
-          </ScrollReveal>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        initial={noAnimation ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={noAnimation ? { duration: 0 } : { delay: 2, duration: 0.8 }}
-      >
-        <motion.div
-          className="flex flex-col items-center gap-2 text-muted-foreground"
-          animate={noAnimation ? {} : { y: [0, 8, 0] }}
-          transition={noAnimation ? {} : { duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <span className="text-xs font-medium">Scroll to explore</span>
-          <ArrowDown className="w-4 h-4" />
+          <motion.dl
+            variants={itemVariants}
+            className="flex flex-wrap gap-x-14 gap-y-6 border-t border-border pt-8"
+          >
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <dt className="sr-only">{stat.label}</dt>
+                <dd className="font-bold text-3xl font-display text-foreground [font-variant-numeric:tabular-nums]">
+                  {stat.number}
+                </dd>
+                <dd className="text-sm text-muted-foreground mt-1">{stat.label}</dd>
+              </div>
+            ))}
+          </motion.dl>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   )
 }
